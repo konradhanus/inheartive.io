@@ -1,15 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useRef, useState } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  Linking,
-} from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, TouchableOpacity, Linking } from 'react-native';
 
 import Checkmark from './icons/checkmark.svg';
 import Book from './icons/book.svg';
@@ -30,32 +21,26 @@ export const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle='dark-content' />
       <SafeAreaView>
         <ScrollView
           ref={(ref) => {
             scrollViewRef.current = ref;
           }}
-          contentInsetAdjustmentBehavior="automatic"
+          contentInsetAdjustmentBehavior='automatic'
           style={styles.scrollView}
         >
           <View style={styles.section}>
             <Text style={styles.textLg}>Hello there,</Text>
-            <Text style={[styles.textXL, styles.appTitleText]} testID="heading">
+            <Text style={[styles.textXL, styles.appTitleText]} testID='heading'>
               Welcome Mobile 👋
             </Text>
           </View>
           <View style={styles.section}>
             <View style={styles.hero}>
               <View style={styles.heroTitle}>
-                <Checkmark
-                  width={32}
-                  height={32}
-                  stroke="hsla(162, 47%, 50%, 1)"
-                />
-                <Text style={[styles.textLg, styles.heroTitleText]}>
-                  You're up and running
-                </Text>
+                <Checkmark width={32} height={32} stroke='hsla(162, 47%, 50%, 1)' />
+                <Text style={[styles.textLg, styles.heroTitleText]}>You're up and running</Text>
               </View>
               <TouchableOpacity
                 style={styles.whatsNextButton}
@@ -66,99 +51,69 @@ export const App = () => {
                   });
                 }}
               >
-                <Text style={[styles.textMd, styles.textCenter]}>
-                  What's next?
-                </Text>
+                <Text style={[styles.textMd, styles.textCenter]}>What's next?</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.section}>
             <View style={[styles.shadowBox]}>
-              <Text style={[styles.marginBottomMd, styles.textLg]}>
-                Learning materials
-              </Text>
+              <Text style={[styles.marginBottomMd, styles.textLg]}>Learning materials</Text>
               <TouchableOpacity
                 style={[styles.listItem, styles.learning]}
-                onPress={() =>
-                  Linking.openURL(
-                    'https://nx.dev/getting-started/intro?utm_source=nx-project'
-                  )
-                }
+                onPress={() => Linking.openURL('https://nx.dev/getting-started/intro?utm_source=nx-project')}
               >
-                <Book width={24} height={24} stroke="#000000" />
+                <Book width={24} height={24} stroke='#000000' />
                 <View style={styles.listItemTextContainer}>
                   <Text style={[styles.textMd]}>Documentation</Text>
-                  <Text style={[styles.text2XS, styles.textSubtle]}>
-                    Everything is in there
-                  </Text>
+                  <Text style={[styles.text2XS, styles.textSubtle]}>Everything is in there</Text>
                 </View>
-                <ChevronRight width={18} height={18} stroke="#000000" />
+                <ChevronRight width={18} height={18} stroke='#000000' />
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.listItem, styles.learning]}
-                onPress={() =>
-                  Linking.openURL('https://blog.nrwl.io/?utm_source=nx-project')
-                }
+                onPress={() => Linking.openURL('https://blog.nrwl.io/?utm_source=nx-project')}
               >
-                <Blog width={24} height={24} stroke="#000000" />
+                <Blog width={24} height={24} stroke='#000000' />
                 <View style={styles.listItemTextContainer}>
                   <Text style={[styles.textMd]}>Blog</Text>
-                  <Text style={[styles.text2XS, styles.textSubtle]}>
-                    Changelog, features & events
-                  </Text>
+                  <Text style={[styles.text2XS, styles.textSubtle]}>Changelog, features & events</Text>
                 </View>
-                <ChevronRight width={18} height={18} stroke="#000000" />
+                <ChevronRight width={18} height={18} stroke='#000000' />
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.listItem, styles.learning]}
-                onPress={() =>
-                  Linking.openURL(
-                    'https://www.youtube.com/c/Nrwl_io/videos?utm_source=nx-project'
-                  )
-                }
+                onPress={() => Linking.openURL('https://www.youtube.com/c/Nrwl_io/videos?utm_source=nx-project')}
               >
-                <YouTube width={24} height={24} fill="#000000" />
+                <YouTube width={24} height={24} fill='#000000' />
                 <View style={styles.listItemTextContainer}>
                   <Text style={[styles.textMd]}>Youtube channel</Text>
-                  <Text style={[styles.text2XS, styles.textSubtle]}>
-                    Nx Show, talks & tutorials
-                  </Text>
+                  <Text style={[styles.text2XS, styles.textSubtle]}>Nx Show, talks & tutorials</Text>
                 </View>
-                <ChevronRight width={18} height={18} stroke="#000000" />
+                <ChevronRight width={18} height={18} stroke='#000000' />
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.listItem, styles.learning]}
                 onPress={() =>
-                  Linking.openURL(
-                    'https://nx.dev/react-tutorial/01-create-application?utm_source=nx-project'
-                  )
+                  Linking.openURL('https://nx.dev/react-tutorial/01-create-application?utm_source=nx-project')
                 }
               >
-                <Pointer width={24} height={24} stroke="#000000" />
+                <Pointer width={24} height={24} stroke='#000000' />
                 <View style={styles.listItemTextContainer}>
                   <Text style={[styles.textMd]}>Interactive tutorials</Text>
-                  <Text style={[styles.text2XS, styles.textSubtle]}>
-                    Create an app, step by step
-                  </Text>
+                  <Text style={[styles.text2XS, styles.textSubtle]}>Create an app, step by step</Text>
                 </View>
-                <ChevronRight width={18} height={18} stroke="#000000" />
+                <ChevronRight width={18} height={18} stroke='#000000' />
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.listItem, styles.learning]}
-                onPress={() =>
-                  Linking.openURL(
-                    'https://nxplaybook.com/?utm_source=nx-project'
-                  )
-                }
+                onPress={() => Linking.openURL('https://nxplaybook.com/?utm_source=nx-project')}
               >
-                <Courses width={24} height={24} stroke="#000000" />
+                <Courses width={24} height={24} stroke='#000000' />
                 <View style={styles.listItemTextContainer}>
                   <Text style={[styles.textMd]}>Video courses</Text>
-                  <Text style={[styles.text2XS, styles.textSubtle]}>
-                    Nx custom courses
-                  </Text>
+                  <Text style={[styles.text2XS, styles.textSubtle]}>Nx custom courses</Text>
                 </View>
-                <ChevronRight width={18} height={18} stroke="#000000" />
+                <ChevronRight width={18} height={18} stroke='#000000' />
               </TouchableOpacity>
             </View>
           </View>
@@ -171,46 +126,22 @@ export const App = () => {
               }
             >
               <View style={[styles.listItem, styles.shadowBox]}>
-                <VSCode width={48} height={48} fill="rgba(0, 122, 204, 1)" />
+                <VSCode width={48} height={48} fill='rgba(0, 122, 204, 1)' />
                 <View style={styles.listItemTextContainer}>
-                  <Text
-                    style={[
-                      styles.textMd,
-                      styles.textBold,
-                      styles.marginBottomSm,
-                    ]}
-                  >
-                    Install Nx Console
-                  </Text>
-                  <Text style={[styles.textXS, styles.textLight]}>
-                    Plugin for VSCode
-                  </Text>
+                  <Text style={[styles.textMd, styles.textBold, styles.marginBottomSm]}>Install Nx Console</Text>
+                  <Text style={[styles.textXS, styles.textLight]}>Plugin for VSCode</Text>
                 </View>
               </View>
             </TouchableOpacity>
           </View>
           <View style={styles.section}>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://nx.app/?utm_source=nx-project')
-              }
-            >
+            <TouchableOpacity onPress={() => Linking.openURL('https://nx.app/?utm_source=nx-project')}>
               <View style={styles.shadowBox}>
                 <View style={[styles.listItem, styles.marginBottomMd]}>
                   <NxCloud width={48} height={48} />
                   <View style={styles.listItemTextContainer}>
-                    <Text
-                      style={[
-                        styles.textMd,
-                        styles.textBold,
-                        styles.marginBottomSm,
-                      ]}
-                    >
-                      Nx Cloud
-                    </Text>
-                    <Text style={[styles.textXS, styles.textLight]}>
-                      Enable faster CI & better DX
-                    </Text>
+                    <Text style={[styles.textMd, styles.textBold, styles.marginBottomSm]}>Nx Cloud</Text>
+                    <Text style={[styles.textXS, styles.textLight]}>Enable faster CI & better DX</Text>
                   </View>
                 </View>
                 <View style={styles.codeBlock}>
@@ -220,26 +151,12 @@ export const App = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.section}>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://nx.app/?utm_source=nx-project')
-              }
-            >
+            <TouchableOpacity onPress={() => Linking.openURL('https://nx.app/?utm_source=nx-project')}>
               <View style={[styles.listItem, styles.shadowBox]}>
-                <GitHub width={48} height={48} fill="#000000" />
+                <GitHub width={48} height={48} fill='#000000' />
                 <View style={styles.listItemTextContainer}>
-                  <Text
-                    style={[
-                      styles.textMd,
-                      styles.textBold,
-                      styles.marginBottomSm,
-                    ]}
-                  >
-                    Nx is open source
-                  </Text>
-                  <Text style={[styles.textXS, styles.textLight]}>
-                    Love Nx? Give us a star!
-                  </Text>
+                  <Text style={[styles.textMd, styles.textBold, styles.marginBottomSm]}>Nx is open source</Text>
+                  <Text style={[styles.textXS, styles.textLight]}>Love Nx? Give us a star!</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -252,100 +169,54 @@ export const App = () => {
             }}
           >
             <View style={styles.shadowBox}>
-              <Text style={[styles.textLg, styles.marginBottomMd]}>
-                Next steps
-              </Text>
-              <Text
-                style={[styles.textSm, styles.textLight, styles.marginBottomMd]}
-              >
+              <Text style={[styles.textLg, styles.marginBottomMd]}>Next steps</Text>
+              <Text style={[styles.textSm, styles.textLight, styles.marginBottomMd]}>
                 Here are some things you can do with Nx:
               </Text>
               <View style={styles.listItem}>
-                <Terminal width={24} height={24} stroke="#000000" />
+                <Terminal width={24} height={24} stroke='#000000' />
                 <View style={styles.listItemTextContainer}>
                   <Text style={styles.textSm}>Add UI library</Text>
                 </View>
               </View>
               <View style={[styles.codeBlock, styles.marginBottomLg]}>
-                <Text style={[styles.textXS, styles.monospace, styles.comment]}>
-                  # Generate UI lib
-                </Text>
-                <Text
-                  style={[
-                    styles.textXS,
-                    styles.monospace,
-                    styles.marginBottomMd,
-                  ]}
-                >
+                <Text style={[styles.textXS, styles.monospace, styles.comment]}># Generate UI lib</Text>
+                <Text style={[styles.textXS, styles.monospace, styles.marginBottomMd]}>
                   nx g @nrwl/react-native:lib ui
                 </Text>
-                <Text style={[styles.textXS, styles.monospace, styles.comment]}>
-                  # Add a component
-                </Text>
+                <Text style={[styles.textXS, styles.monospace, styles.comment]}># Add a component</Text>
                 <Text style={[styles.textXS, styles.monospace]}>nx g \</Text>
-                <Text style={[styles.textXS, styles.monospace]}>
-                  @nrwl/react-native:component \
-                </Text>
-                <Text style={[styles.textXS, styles.monospace]}>
-                  button --project ui
-                </Text>
+                <Text style={[styles.textXS, styles.monospace]}>@nrwl/react-native:component \</Text>
+                <Text style={[styles.textXS, styles.monospace]}>button --project ui</Text>
               </View>
               <View style={styles.listItem}>
-                <Terminal width={24} height={24} stroke="#000000" />
+                <Terminal width={24} height={24} stroke='#000000' />
                 <View style={styles.listItemTextContainer}>
-                  <Text style={styles.textSm}>
-                    View interactive project graph
-                  </Text>
+                  <Text style={styles.textSm}>View interactive project graph</Text>
                 </View>
               </View>
               <View style={[styles.codeBlock, styles.marginBottomLg]}>
                 <Text style={[styles.textXS, styles.monospace]}>nx graph</Text>
               </View>
               <View style={styles.listItem}>
-                <Terminal width={24} height={24} stroke="#000000" />
+                <Terminal width={24} height={24} stroke='#000000' />
                 <View style={styles.listItemTextContainer}>
                   <Text style={styles.textSm}>Run affected commands</Text>
                 </View>
               </View>
               <View style={styles.codeBlock}>
-                <Text style={[styles.textXS, styles.monospace, styles.comment]}>
-                  # See what's affected by changes
-                </Text>
-                <Text
-                  style={[
-                    styles.textXS,
-                    styles.monospace,
-                    styles.marginBottomMd,
-                  ]}
-                >
-                  nx affected:graph
-                </Text>
-                <Text style={[styles.textXS, styles.monospace, styles.comment]}>
-                  # run tests for current changes
-                </Text>
-                <Text
-                  style={[
-                    styles.textXS,
-                    styles.monospace,
-                    styles.marginBottomMd,
-                  ]}
-                >
-                  nx affected:text
-                </Text>
-                <Text style={[styles.textXS, styles.monospace, styles.comment]}>
-                  # run e2e tests for current
-                </Text>
-                <Text style={[styles.textXS, styles.monospace, styles.comment]}>
-                  # changes
-                </Text>
-                <Text style={[styles.textXS, styles.monospace]}>
-                  nx affected:e2e
-                </Text>
+                <Text style={[styles.textXS, styles.monospace, styles.comment]}># See what's affected by changes</Text>
+                <Text style={[styles.textXS, styles.monospace, styles.marginBottomMd]}>nx affected:graph</Text>
+                <Text style={[styles.textXS, styles.monospace, styles.comment]}># run tests for current changes</Text>
+                <Text style={[styles.textXS, styles.monospace, styles.marginBottomMd]}>nx affected:text</Text>
+                <Text style={[styles.textXS, styles.monospace, styles.comment]}># run e2e tests for current</Text>
+                <Text style={[styles.textXS, styles.monospace, styles.comment]}># changes</Text>
+                <Text style={[styles.textXS, styles.monospace]}>nx affected:e2e</Text>
               </View>
             </View>
             <View style={[styles.listItem, styles.love]}>
               <Text style={styles.textSubtle}>Carefully crafted with </Text>
-              <Heart width={24} height={24} fill="rgba(252, 165, 165, 1)" />
+              <Heart width={24} height={24} fill='rgba(252, 165, 165, 1)' />
             </View>
           </View>
         </ScrollView>

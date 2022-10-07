@@ -47,18 +47,19 @@
     "@typescript-eslint/parser": "^5.36.1",
     "babel-jest": "28.1.1",
     "detox": "19.12.1",
-    "eslint": "~8.15.0",
-    "eslint-config-prettier": "8.1.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsx-a11y": "6.6.1",
-    "eslint-plugin-react": "7.31.8",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "husky": ">=6",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
     "jest": "28.1.1",
     "jest-circus": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "jest-react-native": "18.0.0",
-    "lint-staged": ">=10",
+    "lint-staged": "^13.0.3",
     "metro": "0.72.2",
     "metro-babel-register": "0.72.2",
     "metro-react-native-babel-preset": "0.72.2",
@@ -76,11 +77,11 @@
   },
   "lint-staged": {
     "{apps,libs}/**/*.{js,jsx,ts,tsx}": [
-      "eslint",
+      "eslint --fix",
       "prettier --config .prettierrc --write"
     ],
     "*.md": [
-      "prettier --config .prettierrc --write"
+      "prettier --write --print-width 80 --prose-wrap always"
     ]
   }
 }
