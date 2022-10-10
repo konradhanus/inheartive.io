@@ -1,8 +1,12 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import {
   StyleSheet,
+  View,
 } from 'react-native';
 import { NativeBaseProvider, Box, Button, FormControl, Stack, Input, WarningOutlineIcon } from "native-base";
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
 
 export const App = () => {
 
