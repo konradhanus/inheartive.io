@@ -2,6 +2,21 @@
 
 # Inheartive
 
+## Run Storybook for React Native
+
+### on first terminal
+- `yarn install`
+- `yarn start`
+  
+### on second terminal
+- `yarn nx run-ios`
+- `yarn nx storybook mobile`
+
+on iOS simulator press
+`command + control + z`,
+select on context menu `toogle storybook`
+
+
 This project was generated using [Nx](https://nx.dev).
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
