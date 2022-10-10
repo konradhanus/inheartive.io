@@ -80,7 +80,6 @@
     "prettier": "^2.6.2",
     "react-native-config": "1.4.6",
     "react-native-storybook-loader": "^2.0.5",
-    "react-native-svg": "13.2.0",
     "react-native-svg": "12.1.1",
     "react-native-svg-transformer": "1.0.0",
     "react-test-renderer": "18.2.0",
