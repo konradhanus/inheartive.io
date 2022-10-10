@@ -22,6 +22,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
     "@nrwl/cli": "14.8.3",
@@ -48,6 +49,9 @@
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "babel-jest": "28.1.1",
+    "commitlint-config-jira": "^1.6.4",
+    "commitlint-plugin-function-rules": "^1.7.1",
+    "commitlint-plugin-jira-rules": "^1.6.4",
     "detox": "19.12.1",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
