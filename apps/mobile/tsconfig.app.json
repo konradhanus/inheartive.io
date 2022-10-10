@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
-    "comosite": true
+    "composite": true
   },
   "exclude": [
     "jest.config.ts",
