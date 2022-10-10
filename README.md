@@ -8,10 +8,15 @@ Prerequisites:
 
 - [Node.js](https://nodejs.org/) >= 16,
 - [Yarn v1](https://classic.yarnpkg.com/)
+- [Android Studio](https://developer.android.com/studio) _(to run Android
+  emulator)_
+- [XCode](https://developer.apple.com/xcode/) _(to run iOS simulator)_
 
 ```shell
 $ yarn install --frozen-lockfile
-$ yarn dev
+$ yarn start
+# in new terminal
+$ yarn start:android # or start:ios
 ```
 
 ## Usage
