@@ -1,7 +1,7 @@
 {
-  "name": "atoms-input-field",
+  "name": "ui-atoms",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/atoms/input-field/src",
+  "sourceRoot": "libs/ui/atoms/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,14 +9,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/atoms/input-field/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/ui/atoms/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/atoms/input-field"],
+      "outputs": ["coverage/libs/ui/atoms"],
       "options": {
-        "jestConfig": "libs/atoms/input-field/jest.config.ts",
+        "jestConfig": "libs/ui/atoms/jest.config.ts",
         "passWithNoTests": true
       }
     }
