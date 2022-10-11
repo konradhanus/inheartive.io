@@ -3,7 +3,7 @@ import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 
 import { NativeRouter, Route, Routes } from 'react-router-native';
-import { Homepage } from './pages/Homepage/Homepage';
+import { Homepage } from './pages/Homepage/Homepage2';
 import { SignIn } from './pages/SignIn/SignIn';
 
 export const App = () => {
