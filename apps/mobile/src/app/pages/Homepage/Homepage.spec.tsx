@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import Homepage from './Homepage2';
+import Homepage from './Homepage';
 
 describe('Homepage', () => {
   it('should render successfully', () => {
