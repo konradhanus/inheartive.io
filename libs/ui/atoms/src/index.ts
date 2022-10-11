@@ -1,3 +1,7 @@
+export * from './lib/Center/Center';
+export * from './lib/Container/Container';
+export * from './lib/Image/Image';
+export * from './lib/Icons/Icons';
 export * from './lib/Stack/Stack';
 export * from './lib/Box/Box';
 export * from './lib/FormControl/FormControl';
