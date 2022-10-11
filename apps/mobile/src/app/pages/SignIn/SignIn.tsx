@@ -2,7 +2,7 @@ import { SafeAreaView, Text } from 'react-native';
 import React from 'react';
 import { Link } from 'react-router-native';
 
-export function SignIn() {
+function SignIn() {
   return (
     <SafeAreaView>
       <Text>Welcome to SignIn!</Text>

@@ -4,7 +4,7 @@ import { NativeRouter, Route, Routes } from 'react-router-native';
 import { NativeBaseProvider } from 'native-base';
 
 import { Homepage } from './pages/Homepage/Homepage';
-import { SignIn } from './pages/SignIn/SignIn';
+import SignIn from './pages/SignIn';
 
 export const App = () => {
   return (
