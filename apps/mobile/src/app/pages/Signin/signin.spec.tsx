@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react-native';
 
-import SignIn from './sign-in';
+import SignIn from './SignIn';
 
 describe('SignIn', () => {
   it('should render successfully', () => {
