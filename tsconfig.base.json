@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@inheartive/ui/atoms": ["libs/ui/atoms/src/index.ts"]
+      "@inheartive/ui/atoms": ["libs/ui/atoms/src/index.ts"],
+      "@inheartive/ui/molecules": ["libs/ui/molecules/src/index.ts"],
+      "@inheartive/ui/organisms": ["libs/ui/organisms/src/index.ts"],
+      "@inheartive/ui/templates": ["libs/ui/templates/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
