@@ -10,6 +10,7 @@ export function Homepage() {
         <Box w='100%' maxWidth='300px'>
           <FormControl isRequired>
             <Stack mx='4'>
+              <Text testID='heading'>Welcome Mobile</Text>
               <FormControl.Label>Password</FormControl.Label>
               <Input type='password' defaultValue='12345' placeholder='password' />
               <FormControl.HelperText>Must be at least 6 characters.</FormControl.HelperText>
