@@ -1,5 +1,19 @@
 # inHEARTive
 
+### Detox for React Native
+
+#### pre requirements
+
+`brew tap wix/brew`
+
+`brew install applesimutils`
+
+Install Jest Globally `npm install -g jest`
+
+### How to run E2E test
+
+`yarn nx run-ios` `yarn nx test-ios mobile-e2e`
+
 ## Run Storybook for React Native
 
 ### on first terminal
