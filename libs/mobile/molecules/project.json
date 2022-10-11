@@ -1,0 +1,24 @@
+{
+  "name": "..-libs-molecules",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/molecules/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/molecules/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/molecules"],
+      "options": {
+        "jestConfig": "libs/molecules/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

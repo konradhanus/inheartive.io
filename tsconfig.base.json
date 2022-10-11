@@ -14,7 +14,22 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@inheartive/../../../../atoms/logo": [
+        "../../../atoms/logo/src/index.ts"
+      ],
+      "@inheartive/../../../atoms/logo": ["../../atoms/logo/src/index.ts"],
+      "@inheartive/../../../libs/atoms/logo": [
+        "../../libs/atoms/logo/src/index.ts"
+      ],
+      "@inheartive/../../libs/atoms/logo": ["../libs/atoms/logo/src/index.ts"],
+      "@inheartive/../libs/atoms": ["libs/atoms/src/index.ts"],
+      "@inheartive/../libs/molecules": ["libs/molecules/src/index.ts"],
+      "@inheartive//atoms/logo": ["libs/atoms/logo/src/index.ts"],
+      "@inheartive/atoms/button": ["libs/atoms/button/src/index.ts"],
+      "@inheartive/atoms/input-field": ["libs/atoms/input-field/src/index.ts"],
+      "@inheartive/mobile": ["libs/mobile/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
