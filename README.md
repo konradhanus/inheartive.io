@@ -1,6 +1,19 @@
 # inHEARTive
 
-_description will be added in future_
+## Run Storybook for React Native
+
+### on first terminal
+
+- `yarn install`
+- `yarn start`
+
+### on second terminal
+
+- `yarn nx run-ios`
+- `yarn nx storybook mobile`
+
+on iOS simulator press `command + control + z`, select on context menu
+`toogle storybook`
 
 ## Installation
 
@@ -22,6 +35,17 @@ $ yarn start:android # or start:ios
 ## Usage
 
 _will be added in future_
+
+### Storybook for React Native
+
+Run as described in **Installation** and in 2nd terminal run additional command:
+
+```shell
+yarn nx storybook mobile
+```
+
+on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
+`toogle storybook`.
 
 ## Support
 
