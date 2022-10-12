@@ -4,7 +4,11 @@ import type { StorybookConfig, Options } from '@storybook/core-common';
 const config: StorybookConfig = {
   ...rootMain,
 
-  stories: [...rootMain.stories, '../src/app/**/*.stories.mdx', '../src/app/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    ...rootMain.stories,
+    '../src/app/**/*.stories.mdx',
+    '../src/app/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
     ...(rootMain.addons || []),
     '@storybook/addon-ondevice-actions',
