@@ -1,0 +1,209 @@
+theme: light
+jwt_secret: bb7cSLUelJfHuUjtO503tVTr76B52VPlr8JtOxag4ygE4p5Gdj9EAWDoUWQJpEY0
+default_redirection_url: http://localhost:3000/
+default_2fa_method: ''
+
+server:
+  host: 0.0.0.0
+  port: 9091
+  path: ''
+  enable_pprof: false
+  enable_expvars: false
+  disable_healthcheck: false
+  tls:
+    key: ''
+    certificate: ''
+    client_certificates: [ ]
+  headers:
+    csp_template: ''
+
+log:
+  level: debug
+
+telemetry:
+  metrics:
+    enabled: false
+    address: tcp://0.0.0.0:9959
+
+totp:
+  disable: true
+  issuer: authelia.com
+  algorithm: sha1
+  digits: 6
+  period: 30
+  skew: 1
+  secret_size: 32
+
+webauthn:
+  disable: true
+  timeout: 60s
+  display_name: Authelia
+  attestation_conveyance_preference: indirect
+  user_verification: preferred
+
+duo_api:
+  disable: true
+  hostname: api-123456789.example.com
+  integration_key: ABCDEF
+  secret_key: 1234567890abcdefghifjkl
+  enable_self_enrollment: false
+
+ntp:
+  address: 'time.cloudflare.com:123'
+  version: 4
+  max_desync: 3s
+  disable_startup_check: false
+  disable_failure: false
+
+authentication_backend:
+  password_reset:
+    disable: false
+    custom_url: ''
+  refresh_interval: 5m
+  file:
+    path: /config/users.yml
+    password:
+      algorithm: argon2id
+      iterations: 1
+      key_length: 32
+      salt_length: 16
+      parallelism: 4
+      memory: 64
+
+password_policy:
+  standard:
+    enabled: false
+    min_length: 8
+    max_length: 0
+    require_uppercase: true
+    require_lowercase: true
+    require_number: true
+    require_special: true
+  zxcvbn:
+    enabled: false
+    min_score: 3
+
+access_control:
+  default_policy: deny
+  networks:
+    - name: internal
+      networks:
+        - 10.10.0.0/16
+        - 192.168.2.0/24
+    - name: VPN
+      networks: 10.9.0.0/16
+  rules:
+    - domain: 'public.example.com'
+      policy: bypass
+    - domain: 'singlefactor.example.com'
+      policy: one_factor
+
+session:
+  name: authelia_session
+  domain: localhost
+  same_site: none
+  secret: 9LwKAnGEPdJBtihHMGjx7uV33OoKP3CJpVss8BF656JLHtkQfUlzXqh9tKgS7nlL
+  expiration: 1h
+  inactivity: 5m
+  remember_me_duration: 1M
+
+regulation:
+  max_retries: 3
+  find_time: 2m
+  ban_time: 5m
+
+storage:
+  encryption_key: L1hiRg1gIe7tjXi40kctOPYLwuUBfPrA7s7RMv2FooYnpFJ8i5LCsYF7rXoy7A6t
+  local:
+    path: /config/db.sqlite3
+
+notifier:
+  disable_startup_check: true
+  smtp:
+    host: smtp_trap
+    port: 1025
+    timeout: 5s
+    username: ~
+    password: ~
+    sender: 'OIDC intive <oidc@intive.com>'
+    identifier: localhost
+    subject: '[OIDC] {title}'
+    startup_check_address: test@authelia.com
+    disable_require_tls: true
+    disable_html_emails: false
+    tls:
+      skip_verify: true
+      minimum_version: TLS1.2
+
+identity_providers:
+  oidc:
+    hmac_secret: pj8kHviskwEqiXEAE59UUvMBnSyXUv2IzhaXbC9vwMomW1Sll03L0EW82a7uBlTQ
+    issuer_private_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEogIBAAKCAQEAwKcQK3nZMaKcnr8UGJ9xmWJYc47dCpCwinTPnRhlcRUWmQ07
+      ZBEH+Gwk1Ot8y7XfRjU2JG8dnY+K91zbYsumxwRmnO0f5ZfBOPYW0dri1jFK5tF8
+      rbrbc9AFCKzIH5PAFSnkb0zkFAUeN2DwacPOf4yFbPVWqC1u0WSlCRadkHlQJ9In
+      Zz34TO68NAZKHlZ2h4XqE9fpveuEMZ72H5TUJ4+KTq67CjxjCaczjpUOeq+YQ3Uh
+      CJiaGEQafN4b7PBe4+m4Npe4RuoWRB5Z6d3m2jvicrPlqRplFFMCvv0l2WBvyZ1A
+      pSI0Q7FYOQ5AFXv1vQ3HZg0okYKn8PAtl6aytwIDAQABAoIBAFxlAy1Gr/LNIT5F
+      N9cjSPEeKHurbblucSzGHvghxiz4xzC6FtzECkWLYBK5qc1tOVrLlF7e5540RJqj
+      7xevwhm6s5fZZa3QHTw7UfBtgNLnKxwOJjSP5EXj4zYo34W9b6b2w3bZsp0jYz1+
+      AW9IGFY1x5vdAiWAPKCyGzCDpyetIWeOTNzQfedHkY2l6I5p/xdUaLW233AWEzAb
+      Y3akjy4K5Netsvk74/N3JgJbpVQzploh50LCAwDa2dxNbARnUiVUrGqgSNkQCfMS
+      rWymI9aDX+pS+bOArx+Ka9PMlt9fwvA7ScYnh33iZS5bkDoixewJQHh1OtfDYxSv
+      5f0VpMkCgYEA7CjBUN8xQDsJJjFdT6aGtiMv/91rl08hWkZtxczQc9A0PI22Krp7
+      mU0Gz1i5E04XNg5vrKZdmxdVdG4NXtUVR8THFHo4aW7tS66dSVsFh216gneg83dZ
+      sGk6Y4PJQA+V4d66g0jNQC1lVEDy70jnxdF6/Fs+zusy1uCbdGMYtf0CgYEA0NaU
+      i2kpX/Pxx7dsLPSFRWkaueNqGvmZCCxYlrpaUNx1cxXDJx0PkDLpu1LEoeqSztxh
+      DFHuMT30Vgihk9dQP8iOqp2i23gsM8gaVHeFoCFQ9va96fS+sFmJoOIDdHH13bI2
+      UE5WKWqB2BhSUi2VbtDsEH7ZCrnydCvkqVTHT8MCgYA/eJysbbBBARzuZOodVDZ0
+      kXR/IjWejyf5qWArf2avGdBQTg4d4c0CYM9pvwDPDXfzkWG2V2hlHJpdFo8FY+O6
+      TErtWAP9YlDovF+NracIxQXeNuTNStCSN1X4FR1r2ESCVmhujIyNqSXIxUQFx+Rz
+      KGATnzp8Rn59fhSJ7XBgyQKBgCICoCRoFu3ie4Cr9XkIxV99c3XMfG4yMeLr3e2G
+      IclDbfk1FRgcmnlAYWI5Y35/BjOcHk30Vdc9ILqWI0JBcXdBwUI189zMIF66etdA
+      s8lVQ6tEmb8tNZTgsBI8XJWtLX5SVJgVeeC60LSRmW56r/hhG+C/17bwe3TB5TZS
+      cTcjAoGAJGTdc3WW+s/haU5lHr82l/riubkBDNePWI3ET0AmjLQFej4/JcA1TDzy
+      jac/A04ilSJ9/H+4Apc8HfdzU/nKnknDE9X+aPN0Grb4v6SpkEE/I8/P715sR5Bo
+      RkE51m1PJxmnPhbf5vmyDd0vC1OHVhcmtvBKRK32JBgzcD4dLQg=
+      -----END RSA PRIVATE KEY-----
+    access_token_lifespan: 1h
+    authorize_code_lifespan: 1m
+    id_token_lifespan: 1h
+    refresh_token_lifespan: 90m
+    enable_client_debug_messages: false
+    enforce_pkce: public_clients_only
+    cors:
+      endpoints:
+        - authorization
+        - token
+        - revocation
+        - introspection
+      allowed_origins:
+        - http://localhost:3333
+      allowed_origins_from_client_redirect_uris: false
+    clients:
+      - id: 6fb87085-8125-4f5d-ba1c-c3b0f5aacf5c
+        description: inHEARTive
+        secret: jau6w7HDhT5gQ5vpRt7ooZipcIyzttEDt76ueaKx
+        sector_identifier: ''
+        public: false
+        authorization_policy: one_factor
+        pre_configured_consent_duration: ''
+        audience: [ ]
+        scopes:
+          - openid
+          - groups
+          - email
+          - profile
+        redirect_uris:
+          - http://localhost:3333/api/_auth/callback
+        grant_types:
+          - refresh_token
+          - authorization_code
+        response_types:
+          - code
+        response_modes:
+          - form_post
+          - query
+          - fragment
+        userinfo_signing_algorithm: none

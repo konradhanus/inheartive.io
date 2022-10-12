@@ -6,7 +6,9 @@ _description will be added in future_
 
 Prerequisites:
 
-- [Node.js](https://nodejs.org/) >= 16,
+- [Docker](https://www.docker.com/) with
+  [Compose](https://docs.docker.com/compose/)
+- [Node.js](https://nodejs.org/) >= 16
 - [Yarn v1](https://classic.yarnpkg.com/)
 - [Android Studio](https://developer.android.com/studio) _(to run Android
   emulator)_
@@ -14,6 +16,7 @@ Prerequisites:
 
 ```shell
 $ yarn install --frozen-lockfile
+$ docker compose up --detach
 $ yarn start
 # in new terminal
 $ yarn start:android # or start:ios
@@ -21,7 +24,12 @@ $ yarn start:android # or start:ios
 
 ## Usage
 
-_will be added in future_
+### Login to application
+
+Backend application have integration to external user provider. Locally it's
+[Authelia](https://www.authelia.com/) which is statically configured to serve
+users from YAML file. Currently available users are `user1@inheartive.com` and
+`user2@inheartive.com` with password `Password1`.
 
 ## Support
 

@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  oidc_provider:
+    image: authelia/authelia
+    volumes:
+    - ./docker/authelia:/config:rw
+    ports:
+    - '0.0.0.0:9091:9091/tcp'
+  smtp_trap:
+    image: mailhog/mailhog
+    ports:
+    - '0.0.0.0:1025:1025/tcp'
+    - '0.0.0.0:8025:8025/tcp'
