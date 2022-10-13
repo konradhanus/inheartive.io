@@ -1,9 +1,10 @@
 import { SafeAreaView, Text } from 'react-native';
 import React from 'react';
 import { Link } from 'react-router-native';
-import { LoginTemplate } from '@inheartive/ui/templates';
+import SignInTemplate from './SignInTemplate';
 
-function SignIn() {
+export function SignInPage() {
+  console.log('test test');
   return (
     <>
       <SafeAreaView>
@@ -12,9 +13,9 @@ function SignIn() {
           <Text>Back</Text>
         </Link>
       </SafeAreaView>
-      <LoginTemplate />
+      <SignInTemplate />
     </>
   );
 }
 
-export default SignIn;
+export default SignInPage;

@@ -2,26 +2,21 @@ import React from 'react';
 
 import { PixelRatio, StyleSheet } from 'react-native';
 
-import { Box, Center, Container, Image } from '@inheartive/ui/atoms';
+import { Box, Image } from '@inheartive/ui/atoms';
 import { LoginFormControl } from '@inheartive/ui/molecules';
 import { View } from 'native-base';
-import { LoginLogo } from '@inheartive/ui/assets';
+import logo from '../../assets/logo.jpg';
 
 /* eslint-disable-next-line */
 export interface LoginTemplateProps {}
 
-export function LoginTemplate(props: LoginTemplateProps) {
+export function SignInTemplate(props: LoginTemplateProps) {
+  console.log(logo);
   return (
     <View style={styles.container}>
-      <Image
-        source={{
-          uri: 'https://wallpaperaccess.com/full/317501.jpg',
-        }}
-        alt="Logo"
-        size="xl"
-      />
+      <Image source={{ uri: logo.default.src }} width={160} height={160} alt='Logo' />
 
-      <Box w="100%" mt="50">
+      <Box w='100%' mt='50'>
         <LoginFormControl />
       </Box>
     </View>
@@ -36,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginTemplate;
+export default SignInTemplate;

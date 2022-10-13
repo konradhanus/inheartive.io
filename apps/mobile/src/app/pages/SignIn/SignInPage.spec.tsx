@@ -1,11 +1,10 @@
-import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import Button from './Button';
+import { SignInPage } from './SignInPage';
 
-describe('Button', () => {
+describe('SignIn', () => {
   it('should render successfully', () => {
-    const { container } = render(<Button />);
+    const { container } = render(<SignInPage />);
     expect(container).toBeTruthy();
   });
 });

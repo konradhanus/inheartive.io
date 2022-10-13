@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 
-import SignIn from './SignIn';
+import SignInTemplate from './SignInTemplate';
 
-describe('SignIn', () => {
+describe('SignInTemplate', () => {
   it('should render successfully', () => {
-    const { container } = render(<SignIn />);
+    const { container } = render(<SignInTemplate />);
     expect(container).toBeTruthy();
   });
 });

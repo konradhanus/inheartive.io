@@ -4,6 +4,7 @@ import { Link } from 'react-router-native';
 import { Box, Button, FormControl, Stack, Input, WarningOutlineIcon } from 'native-base';
 
 export function Homepage() {
+  console.log('test test from homepage');
   return (
     <>
       <Box alignItems='center'>
