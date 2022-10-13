@@ -14,7 +14,7 @@ export function SignInTemplate(props: LoginTemplateProps) {
   console.log(logo);
   return (
     <View style={styles.container}>
-      <Image source={{ uri: logo.default.src }} width={160} height={160} alt='Logo' />
+      <Image source={logo} alt='Logo' />
 
       <Box w='100%' mt='50'>
         <LoginFormControl />
