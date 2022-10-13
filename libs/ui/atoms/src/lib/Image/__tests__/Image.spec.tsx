@@ -1,10 +1,11 @@
+import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import { SignInPage } from './SignInPage';
+import { Image } from '../Image';
 
-describe('SignIn', () => {
+describe('Image', () => {
   it('should render successfully', () => {
-    const { container } = render(<SignInPage />);
+    const { container } = render(<Image />);
     expect(container).toBeTruthy();
   });
 });

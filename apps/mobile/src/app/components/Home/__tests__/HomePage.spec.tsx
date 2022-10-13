@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import { Stack } from './Stack';
+import HomePage from '../HomePage';
 
-describe('Stack', () => {
+describe('Homepage', () => {
   it('should render successfully', () => {
-    const { container } = render(<Stack />);
+    const { container } = render(<HomePage />);
     expect(container).toBeTruthy();
   });
 });

@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import { FormControl } from './FormControl';
+import { Input } from '../Input';
 
-describe('FormControl', () => {
+describe('Input', () => {
   it('should render successfully', () => {
-    const { container } = render(<FormControl />);
+    const { container } = render(<Input />);
     expect(container).toBeTruthy();
   });
 });
