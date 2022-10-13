@@ -1,20 +1,16 @@
-import { SafeAreaView, Text } from 'react-native';
 import React from 'react';
-import { Link } from 'react-router-native';
+import { View, ScrollView, SafeAreaView } from 'react-native';
 import SignInTemplate from './SignInTemplate';
 
 export function SignInPage() {
-  console.log('test test');
   return (
-    <>
-      <SafeAreaView>
-        <Text>Welcome to SignIn!</Text>
-        <Link to='/'>
-          <Text>Back</Text>
-        </Link>
-      </SafeAreaView>
-      <SignInTemplate />
-    </>
+    <SafeAreaView>
+      <ScrollView>
+        <View>
+          <SignInTemplate />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { NativeBaseProvider, extendTheme, useColorMode } from 'native-base';
+import { NativeBaseProvider, extendTheme } from 'native-base';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import HomePage from './components/Home';
 import SignInPage from './components/SignIn/';
