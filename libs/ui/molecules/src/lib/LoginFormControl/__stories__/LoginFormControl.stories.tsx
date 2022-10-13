@@ -1,8 +1,6 @@
 //TODO - this stories is not visible in StoryBook
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
-import { LoginFormControl, LoginFormControlProps } from './LoginFormControl';
+import { LoginFormControl } from '../LoginFormControl';
 
-const props: LoginFormControlProps = {};
-
-storiesOf('LoginFormControl', module).add('Primary', () => <LoginFormControl {...props} />);
+storiesOf('LoginFormControl', module).add('Primary', () => <LoginFormControl />);
