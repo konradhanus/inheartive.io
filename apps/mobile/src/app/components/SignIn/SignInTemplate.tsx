@@ -5,13 +5,9 @@ import { PixelRatio, StyleSheet } from 'react-native';
 import { Box, Image } from '@inheartive/ui/atoms';
 import { LoginFormControl } from '@inheartive/ui/molecules';
 import { View } from 'native-base';
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/logo.png';
 
-/* eslint-disable-next-line */
-export interface LoginTemplateProps {}
-
-export function SignInTemplate(props: LoginTemplateProps) {
-  console.log(logo);
+export function SignInTemplate() {
   return (
     <View style={styles.container}>
       <Image source={logo} alt='Logo' />

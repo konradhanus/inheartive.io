@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { Link } from 'react-router-native';
 import { Box, Button, FormControl, Stack, Input, WarningOutlineIcon } from 'native-base';
 
-export function HomepageTemplate() {
+export function HomeTemplate() {
   return (
     <>
       <Box alignItems='center'>
@@ -30,4 +30,4 @@ export function HomepageTemplate() {
   );
 }
 
-export default HomepageTemplate;
+export default HomeTemplate;
