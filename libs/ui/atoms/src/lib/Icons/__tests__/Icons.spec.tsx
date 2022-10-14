@@ -1,14 +1,14 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, screen, getQueriesForElement } from '@testing-library/react-native';
 
-import { WarningOutlineIcon } from '../Icons';
+import { Icons } from '../Icons';
 import { NativeBaseProvider } from 'native-base';
 
 describe('Icons', () => {
-  it('should render successfully', () => {
+  it('should render successfully menu icon', () => {
     const { container } = render(
       <NativeBaseProvider>
-        <WarningOutlineIcon />
+        <Icons iconName='menu' />
       </NativeBaseProvider>
     );
     expect(container).toBeTruthy();
