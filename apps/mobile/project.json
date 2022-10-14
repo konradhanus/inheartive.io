@@ -36,10 +36,7 @@
     },
     "build-android": {
       "executor": "@nrwl/react-native:build-android",
-      "outputs": [
-        "apps/mobile/android/app/build/outputs/bundle",
-        "apps/mobile/android/app/build/outputs/apk"
-      ],
+      "outputs": ["apps/mobile/android/app/build/outputs/bundle", "apps/mobile/android/app/build/outputs/apk"],
       "options": {}
     },
     "bundle-android": {

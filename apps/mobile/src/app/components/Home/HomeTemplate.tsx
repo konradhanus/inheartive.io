@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { Link } from 'react-router-native';
 import { Box, Button, FormControl, Stack, Input, WarningOutlineIcon } from 'native-base';
 
-export function Homepage() {
+export function HomeTemplate() {
   return (
     <>
       <Box alignItems='center'>
@@ -25,10 +25,9 @@ export function Homepage() {
         <Link to='/signin'>
           <Text>Sign in</Text>
         </Link>
-        Sign in
       </Button>
     </>
   );
 }
 
-export default Homepage;
+export default HomeTemplate;

@@ -1,10 +1,11 @@
+import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import SignIn from './SignIn';
+import HomePage from '../HomePage';
 
-describe('SignIn', () => {
+describe('Homepage', () => {
   it('should render successfully', () => {
-    const { container } = render(<SignIn />);
+    const { container } = render(<HomePage />);
     expect(container).toBeTruthy();
   });
 });
