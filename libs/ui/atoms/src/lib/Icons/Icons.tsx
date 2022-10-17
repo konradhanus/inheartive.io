@@ -32,7 +32,10 @@ import {
   PlayIcon,
   FavouriteIcon,
   DeleteIcon,
+  Icon,
 } from 'native-base';
+
+import { AntDesign, MaterialIcons, Feather, FontAwesome, Ionicons } from '@expo/vector-icons';
 
 interface IIconProps {
   iconName:
@@ -65,8 +68,13 @@ interface IIconProps {
     | 'three-dots'
     | 'share'
     | 'play'
-    | 'favourite'
-    | 'delete';
+    | 'favorite'
+    | 'favorite-outline'
+    | 'delete'
+    | 'star'
+    | 'star-outline'
+    | 'home'
+    | 'plus-circle';
 }
 
 interface IIconObject {
@@ -201,6 +209,10 @@ const Icons = ({ iconName }: IIconProps) => {
     {
       icon: <DeleteIcon />,
       iconName: 'delete',
+    },
+    {
+      icon: <Icon as={MaterialIcons} name='favorite' />,
+      iconName: 'favorite',
     },
   ];
 

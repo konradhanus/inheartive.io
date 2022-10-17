@@ -18,6 +18,7 @@
     "react-router-native": "*",
     "styled-components": "*",
     "native-base": "*",
-    "react-native-safe-area-context": "*"
+    "react-native-safe-area-context": "*",
+    "@expo/vector-icons": "*"
   }
 }
