@@ -1,7 +1,6 @@
 import { Client, Issuer, Strategy, TokenSet, UserinfoResponse } from 'openid-client';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from './auth.service';
 import { OidcToken } from './model/oidc.token';
 
 export const buildOpenIdClient = async () => {
@@ -14,7 +13,7 @@ export const buildOpenIdClient = async () => {
 
 @Injectable()
 export class OidcStrategy extends PassportStrategy(Strategy, 'oidc') {
-  constructor(private readonly authService: AuthService, private client: Client) {
+  constructor(private client: Client) {
     super({
       client,
       params: {
