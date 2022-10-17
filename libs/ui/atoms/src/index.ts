@@ -1,4 +1,5 @@
 export * from './lib/Badge/Badge';
+export * from './lib/Badge/__stories__/Badge.stories';
 export * from './lib/Center/Center';
 export * from './lib/Container/Container';
 export * from './lib/Image/Image';

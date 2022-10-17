@@ -4,10 +4,10 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
-  require('../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories');
+  require('../apps/mobile/src/app/App.stories');
 }
 
-const stories = ['../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories'];
+const stories = ['../apps/mobile/src/app/App.stories'];
 
 module.exports = {
   loadStories,
