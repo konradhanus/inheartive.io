@@ -3,9 +3,15 @@
 //
 // https://github.com/elderfo/react-native-storybook-loader.git
 
-function loadStories() {}
+function loadStories() {
+  require('../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories');
+  require('../libs/ui/atoms/src/lib/Icons/__stories__/Icons.stories.tsx');
+}
 
-const stories = [];
+const stories = [
+  '../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories',
+  '../libs/ui/atoms/src/lib/Icons/__stories__/Icons.stories.tsx',
+];
 
 module.exports = {
   loadStories,
