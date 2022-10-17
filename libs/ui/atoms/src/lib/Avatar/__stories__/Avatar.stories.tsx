@@ -2,22 +2,10 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import Avatar from '../Avatar';
 import { NativeBaseProvider } from 'native-base';
-import { action } from '@storybook/addon-actions';
-
-export const task = {
-  id: '1',
-  title: 'Test Task',
-  state: 'TASK_INBOX',
-  updatedAt: new Date(2018, 0, 1, 9, 0),
-};
-
-export const actions = {
-  onPinTask: action('onClick'),
-};
 
 storiesOf('Avatar', module)
   .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
-  .add('Basic', () => <Avatar {...actions} />)
+  .add('Basic', () => <Avatar />)
   .add('Image', () => (
     <Avatar
       bg='green.500'
