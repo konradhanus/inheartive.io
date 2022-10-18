@@ -1,4 +1,3 @@
-//TODO - this stories is not visible in StoryBook
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { Icons } from '../Icons';
