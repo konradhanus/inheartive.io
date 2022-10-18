@@ -24,7 +24,7 @@ storiesOf('Badge', module)
       }
     </NativeBaseProvider>
   ))
-  .add('Base', () => <Badge>Basic</Badge>)
+  .add('Basic', () => <Badge>Basic</Badge>)
   .add('Color Scheme', () => (
     <>
       <Badge colorScheme='primary'>PRIMARY</Badge>
@@ -44,4 +44,39 @@ storiesOf('Badge', module)
       <Badge variant='outline'>OUTLINE</Badge>
       <Badge variant='subtle'>SUBTLE</Badge>
     </>
+  ))
+  .add('Rounded', () => (
+    <>
+      <Badge borderRadius={4} colorScheme='primary'>
+        Border radius 4
+      </Badge>
+      <Badge borderRadius={8} colorScheme='primary'>
+        Border radius 8
+      </Badge>
+      <Badge borderRadius={12} colorScheme='primary'>
+        Border radius 12
+      </Badge>
+      <Badge borderRadius={16} colorScheme='primary'>
+        Border radius 16
+      </Badge>
+    </>
+  ))
+  .add('Background', () => (
+    <>
+      <Badge bg={'primary.50'}>Primary 50</Badge>
+      <Badge bg={'primary.100'}>Primary 100</Badge>
+      <Badge bg={'primary.200'}>Primary 200</Badge>
+      <Badge bg={'primary.300'}>Primary 300</Badge>
+      <Badge bg={'primary.400'}>Primary 400</Badge>
+      <Badge bg={'primary.500'}>Primary 500</Badge>
+      <Badge bg={'primary.600'}>Primary 600</Badge>
+      <Badge bg={'primary.700'}>Primary 700</Badge>
+      <Badge bg={'primary.800'}>Primary 800</Badge>
+      <Badge bg={'primary.900'}>Primary 900</Badge>
+    </>
+  ))
+  .add('Example', () => (
+    <Badge bg={'primary.600'} variant='solid' borderRadius={12}>
+      Ends in: 02:30:45
+    </Badge>
   ));
