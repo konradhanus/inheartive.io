@@ -42,6 +42,7 @@ const iconsArray = [
   'home-outline',
   'favorite',
   'favorite-outline',
+  'plus-circle-outline',
 ];
 
 storiesOf('Icons', module)

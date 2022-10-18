@@ -36,6 +36,7 @@ import {
 
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 
 interface IIconProps {
   iconName:
@@ -73,7 +74,8 @@ interface IIconProps {
     | 'star'
     | 'star-outline'
     | 'home'
-    | 'home-outline';
+    | 'home-outline'
+    | 'plus-circle';
 }
 
 interface IIconObject {
@@ -82,7 +84,7 @@ interface IIconObject {
 }
 
 type IconType = IIconObject | undefined;
-
+const size = 17;
 const Icons = ({ iconName }: IIconProps) => {
   const icons: IIconObject[] = [
     {
@@ -210,28 +212,32 @@ const Icons = ({ iconName }: IIconProps) => {
       iconName: 'delete',
     },
     {
-      icon: <MaterialIcon name='star' size={22} />,
+      icon: <MaterialIcon name='star' size={size} />,
       iconName: 'star',
     },
     {
-      icon: <MaterialIcon name='star-outline' size={22} />,
+      icon: <MaterialIcon name='star-outline' size={size} />,
       iconName: 'star-outline',
     },
     {
-      icon: <Ionicons name='home' size={22} />,
+      icon: <Ionicons name='home' size={size} />,
       iconName: 'home',
     },
     {
-      icon: <Ionicons name='home-outline' size={22} />,
+      icon: <Ionicons name='home-outline' size={size} />,
       iconName: 'home-outline',
     },
     {
-      icon: <Ionicons name='ios-heart-outline' size={22} />,
+      icon: <Ionicons name='ios-heart-outline' size={size} />,
       iconName: 'favorite-outline',
     },
     {
-      icon: <Ionicons name='ios-heart-sharp' size={22} />,
+      icon: <Ionicons name='ios-heart-sharp' size={size} />,
       iconName: 'favorite',
+    },
+    {
+      icon: <Feather name='plus-circle' size={size} />,
+      iconName: 'plus-circle-outline',
     },
   ];
 
