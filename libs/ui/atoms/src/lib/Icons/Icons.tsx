@@ -34,6 +34,9 @@ import {
   DeleteIcon,
 } from 'native-base';
 
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 interface IIconProps {
   iconName:
     | 'add'
@@ -66,7 +69,11 @@ interface IIconProps {
     | 'share'
     | 'play'
     | 'favourite'
-    | 'delete';
+    | 'delete'
+    | 'star'
+    | 'star-outline'
+    | 'home'
+    | 'home-outline';
 }
 
 interface IIconObject {
@@ -201,6 +208,30 @@ const Icons = ({ iconName }: IIconProps) => {
     {
       icon: <DeleteIcon />,
       iconName: 'delete',
+    },
+    {
+      icon: <MaterialIcon name='star' size={22} />,
+      iconName: 'star',
+    },
+    {
+      icon: <MaterialIcon name='star-outline' size={22} />,
+      iconName: 'star-outline',
+    },
+    {
+      icon: <Ionicons name='home' size={22} />,
+      iconName: 'home',
+    },
+    {
+      icon: <Ionicons name='home-outline' size={22} />,
+      iconName: 'home-outline',
+    },
+    {
+      icon: <Ionicons name='ios-heart-outline' size={22} />,
+      iconName: 'favorite-outline',
+    },
+    {
+      icon: <Ionicons name='ios-heart-sharp' size={22} />,
+      iconName: 'favorite',
     },
   ];
 

@@ -36,6 +36,12 @@ const iconsArray = [
   'play',
   'favourite',
   'delete',
+  'star',
+  'star-outline',
+  'home',
+  'home-outline',
+  'favorite',
+  'favorite-outline',
 ];
 
 storiesOf('Icons', module)
