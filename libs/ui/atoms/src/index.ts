@@ -1,4 +1,5 @@
 export * from './lib/Badge/Badge';
+export * from './lib/Avatar';
 export * from './lib/Center/Center';
 export * from './lib/Container/Container';
 export * from './lib/Image/Image';
