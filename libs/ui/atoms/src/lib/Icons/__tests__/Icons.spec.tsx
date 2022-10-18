@@ -1,9 +1,8 @@
 import React from 'react';
-import { render, screen, getQueriesForElement } from '@testing-library/react-native';
-
-import { Icons } from '../Icons';
+import { render } from '@testing-library/react-native';
 import { NativeBaseProvider } from 'native-base';
 import each from 'jest-each';
+import { Icons } from '../Icons';
 
 describe('Icons', () => {
   each([
@@ -38,7 +37,7 @@ describe('Icons', () => {
     'play',
     'favourite',
     'delete',
-  ]).test('should render successfully menu icons', (iconName) => {
+  ]).test('should render successfully all icons', (iconName) => {
     const { container } = render(
       <NativeBaseProvider>
         <Icons iconName={iconName} />

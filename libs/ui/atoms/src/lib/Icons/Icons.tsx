@@ -1,5 +1,8 @@
 import React from 'react';
 
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {
   MoonIcon,
   SunIcon,
@@ -33,10 +36,6 @@ import {
   FavouriteIcon,
   DeleteIcon,
 } from 'native-base';
-
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
 
 interface IIconProps {
   iconName:
