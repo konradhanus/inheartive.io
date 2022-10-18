@@ -1,21 +1,47 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import { Badge } from '../Badge';
-import { NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider, VStack } from 'native-base';
 import { theme } from '@inheartive/ui/theme';
 
 storiesOf('Badge', module)
-  .addDecorator((story) => <NativeBaseProvider theme={theme}>{story()}</NativeBaseProvider>)
-  .add('Base', () => <Badge>NEW FEATURE</Badge>)
-  .add('colorScheme', () => (
+  .addDecorator((story) => (
+    <NativeBaseProvider theme={theme}>
+      {
+        <VStack
+          mt={4}
+          space={{
+            base: 4,
+            sm: 4,
+          }}
+          mx={{
+            base: 'auto',
+            md: 0,
+          }}
+        >
+          {story()}
+        </VStack>
+      }
+    </NativeBaseProvider>
+  ))
+  .add('Base', () => <Badge>Basic</Badge>)
+  .add('Color Scheme', () => (
     <>
-      <Badge colorScheme='success'>NEW FEATURE - SUCCESS</Badge>
-      <Badge colorScheme='danger'>NEW FEATURE - DANGER</Badge>
-      <Badge colorScheme='info'>INFO</Badge>
-      <Badge colorScheme='warning'>WARNING</Badge>
-      <Badge colorScheme='coolGray'>DARK</Badge>
-      <Badge colorScheme='fuchsia'>FUCHSIA</Badge>
       <Badge colorScheme='primary'>PRIMARY</Badge>
       <Badge colorScheme='secondary'>SECONDARY</Badge>
+
+      <Badge colorScheme='success'>SUCCESS</Badge>
+      <Badge colorScheme='info'>INFO</Badge>
+      <Badge colorScheme='warning'>WARNING</Badge>
+      <Badge colorScheme='danger'>DANGER</Badge>
+
+      <Badge colorScheme='fuchsia'>FUCHSIA</Badge>
+    </>
+  ))
+  .add('Variant', () => (
+    <>
+      <Badge variant='solid'>SOLID</Badge>
+      <Badge variant='outline'>OUTLINE</Badge>
+      <Badge variant='subtle'>SUBTLE</Badge>
     </>
   ));
