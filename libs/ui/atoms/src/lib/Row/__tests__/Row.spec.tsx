@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react-native';
 
-import { Avatar } from '../Avatar';
+import { Row } from '../Row';
 import { NativeBaseProvider } from 'native-base';
 
-describe('Avatar', () => {
+describe('Row', () => {
   it('should render successfully', () => {
     const { container } = render(
       <NativeBaseProvider>
-        <Avatar />
+        <Row />
       </NativeBaseProvider>
     );
     expect(container).toBeTruthy();

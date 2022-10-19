@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
-import Text from '../Text';
+import { Text } from '../Text';
 import { NativeBaseProvider } from 'native-base';
 
 storiesOf('Text', module)
