@@ -59,6 +59,38 @@ yarn nx storybook mobile
 on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
 `toogle storybook`.
 
+### Generate new files with Nx
+
+There are at least 2 options: 
+1. Install <b>Nx Console</b> for Visual Studio Code or other development environment and choose properly options from menu
+2. Write a command in <b>terminal</b>
+
+#### Generate Library
+
+1. Generate library in development environment:
+
+Go to main menu: GENERATE & RU TARGET -> generate -> <b> @nrwl/react-native:library </b>
+Write name and directory
+
+2. Run in terminal a command:
+
+```shell
+ $ nx generate @nrwl/react-native:library exampleLibrary --directory=ui/example
+```
+All library files will be generated in <b>libs</b> directory
+
+#### Generate Component
+
+1. Go to main menu: GENERATE & RU TARGET -> generate -> <b> @nrwl/react-native:component </b>
+Fill in the selected options
+
+2. In terminal run a command:
+
+```shell
+$ nx generate @nrwl/react-native:component ExampleComponent --project=mobile --directory=app --pascalCaseFiles
+```
+Two files will be generated: ExampleComponent.tsx file for component and ExampleComponent.spec.tsx for  tests in example-component directory 
+
 ## Support
 
 _will be added in future_
