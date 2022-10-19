@@ -1,7 +1,6 @@
-import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import Text from '../Text';
+import { Text } from '../Text';
 import { NativeBaseProvider } from 'native-base';
 
 describe('Text', () => {

@@ -1,2 +1,3 @@
-import { Text } from 'native-base';
-export default Text;
+import { Text, ITextProps } from 'native-base';
+
+export { Text, ITextProps };
