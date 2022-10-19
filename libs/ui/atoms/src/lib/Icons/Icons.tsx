@@ -37,44 +37,49 @@ import {
   DeleteIcon,
 } from 'native-base';
 
+enum IconsList {
+  add = 'add',
+  arrowBack = 'arrow-back',
+  arrowForward = 'arrow-forward',
+  arrowUp = 'arrow-up',
+  arrowDown = 'arrow-down',
+  check = 'check',
+  checkCircle = 'check-circle',
+  chevronDown = 'chevron-down',
+  chevronLeft = 'chevron-left',
+  chevronRight = 'chevron-right',
+  chevronUp = 'chevron-up',
+  circle = 'circle',
+  close = 'close',
+  smallClose = 'small-close',
+  menu = 'menu',
+  info = 'info',
+  infoOutline = 'info-outline',
+  minus = 'minus',
+  moon = 'moon',
+  question = 'question',
+  questionOutline = 'question-outline',
+  search = 'search',
+  sun = 'sun',
+  warning1 = 'warning-1',
+  warning2 = 'warning-2',
+  warningOutline = 'warning-outline',
+  threeDots = 'three-dots',
+  share = 'share',
+  play = 'play',
+  favourite = 'favourite',
+  delete = 'delete',
+  star = 'star',
+  starOutline = 'star-outline',
+  favorite = 'favorite',
+  favoriteOutline = 'favorite-outline',
+  home = 'home',
+  homeOutline = 'home-outline',
+  plusCircle = 'plus-circle',
+}
+
 interface IIconProps {
-  iconName:
-    | 'add'
-    | 'arrow-back'
-    | 'arrow-forward'
-    | 'arrow-up'
-    | 'arrow-down'
-    | 'check'
-    | 'check-circle'
-    | 'chevron-down'
-    | 'chevron-left'
-    | 'chevron-right'
-    | 'chevron-up'
-    | 'circle'
-    | 'close'
-    | 'small-close'
-    | 'menu'
-    | 'info'
-    | 'info-outline'
-    | 'minus'
-    | 'moon'
-    | 'question'
-    | 'question-outline'
-    | 'search'
-    | 'sun'
-    | 'warning-1'
-    | 'warning-2'
-    | 'warning-outline'
-    | 'three-dots'
-    | 'share'
-    | 'play'
-    | 'favourite'
-    | 'delete'
-    | 'star'
-    | 'star-outline'
-    | 'home'
-    | 'home-outline'
-    | 'plus-circle';
+  iconName: IconsList;
 }
 
 interface IIconObject {
@@ -236,13 +241,12 @@ const Icons = ({ iconName }: IIconProps) => {
     },
     {
       icon: <Feather name='plus-circle' size={size} />,
-      iconName: 'plus-circle-outline',
+      iconName: 'plus-circle',
     },
   ];
 
   const icon: IconType = icons.find((item) => item.iconName === iconName);
-
   return icon ? icon.icon : <></>;
 };
 
-export { Icons };
+export { Icons, IconsList };
