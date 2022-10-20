@@ -1,23 +1,8 @@
 # inHEARTive
 
-## Run Storybook for React Native
-
-### on first terminal
-
-- `yarn install`
-- `yarn start`
-
-### on second terminal
-
-- `yarn nx run-ios`
-- `yarn nx storybook mobile`
-
-on iOS simulator press `command + control + z`, select on context menu
-`toogle storybook`
-
 ## Installation
 
-Prerequisites:
+### Prerequisites:
 
 - [Node.js](https://nodejs.org/) >= 16,
 - [Yarn v1](https://classic.yarnpkg.com/)
@@ -25,11 +10,50 @@ Prerequisites:
   emulator)_
 - [XCode](https://developer.apple.com/xcode/) _(to run iOS simulator)_
 
+### Setting up the development environment
+
+https://reactnative.dev/docs/environment-setup
+
+In development environment create file: local.properties with path for sdk:
+
+![image](https://user-images.githubusercontent.com/101329582/196930246-106e6a46-4eb3-46e1-8ff4-13e06ec9fbf0.png)
+
+## Run inHEARTive
+
+### on first terminal
+
 ```shell
 $ yarn install --frozen-lockfile
 $ yarn start
-# in new terminal
-$ yarn start:android # or start:ios
+```
+### on second terminal  (iOS)
+
+```shell
+$ yarn start:ios # or yarn nx run-ios
+```
+
+### on second terminal  (android)
+
+```shell
+$ yarn start:android # or yarn nx run-android
+```
+
+### run storybook
+
+#### iOS
+- simulator press `command + control + z`, select on context menu
+`toogle storybook`
+
+#### android
+- simulator press `command + control + m`, select on context menu
+`toogle storybook`
+
+or 
+
+Run storybook from command line
+
+```shell
+$ yarn nx storybook mobile
 ```
 
 ## Usage
