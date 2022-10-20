@@ -1,7 +1,7 @@
 import { render } from '@inheartive/ui/testing';
 import { Icon, IconType } from '../Icon';
 
-describe('Icons', () => {
+describe('Icon', () => {
   it('should throw error if wrong enum value passed', () => {
     expect(() => render(<Icon name={IconType.add3} />)).toThrowError();
   });
