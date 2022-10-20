@@ -1,16 +1,14 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
-
+import { render } from '@inheartive/ui/testing';
 import { Badge } from '../Badge';
-import { NativeBaseProvider } from 'native-base';
+
+const text = 'Some text';
+const testID = 'badge';
 
 describe('Badge', () => {
   it('should render successfully', () => {
-    const { container } = render(
-      <NativeBaseProvider>
-        <Badge />
-      </NativeBaseProvider>
-    );
-    expect(container).toBeTruthy();
+    const { getByText, getByTestId } = render(<Badge testID={testID}>{text}</Badge>);
+
+    expect(getByTestId(testID)).toBeTruthy();
+    expect(getByText(text)).toBeTruthy();
   });
 });
