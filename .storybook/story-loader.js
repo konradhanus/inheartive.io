@@ -11,7 +11,7 @@ function loadStories() {
   require('../libs/ui/atoms/src/lib/Text/__stories__/Text.stories');
   require('../libs/ui/atoms/src/lib/TextLogo/__stories__/TextLogo.stories');
   require('../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories');
-  require('../libs/ui/atoms/src/lib/Icons/__stories__/Icons.stories');
+  require('../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories');
 }
 
 const stories = [
@@ -22,7 +22,7 @@ const stories = [
   '../libs/ui/atoms/src/lib/Text/__stories__/Text.stories',
   '../libs/ui/atoms/src/lib/TextLogo/__stories__/TextLogo.stories',
   '../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories',
-  '../libs/ui/atoms/src/lib/Icons/__stories__/Icons.stories',
+  '../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories',
 ];
 
 module.exports = {
