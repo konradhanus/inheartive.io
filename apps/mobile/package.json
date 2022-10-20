@@ -19,6 +19,7 @@
     "styled-components": "*",
     "native-base": "*",
     "react-native-safe-area-context": "*",
-    "@storybook/addon-actions": "*"
+    "jest-each": "*",
+    "react-native-vector-icons": "*"
   }
 }
