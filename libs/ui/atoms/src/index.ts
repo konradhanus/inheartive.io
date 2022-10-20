@@ -4,7 +4,7 @@ export * from './lib/Box';
 export * from './lib/Button';
 export * from './lib/Center';
 export * from './lib/Container';
-export * from './lib/Icons/Icons';
+export * from './lib/Icon';
 export * from './lib/Image';
 export * from './lib/Row';
 export * from './lib/Stack';
