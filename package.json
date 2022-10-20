@@ -51,6 +51,7 @@
     "@react-native-community/cli": "9.1.1",
     "@react-native-community/cli-platform-android": "9.1.0",
     "@react-native-community/cli-platform-ios": "9.1.0",
+    "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "~6.5.9",
     "@storybook/addon-ondevice-actions": "^6.0.1-beta.5",
     "@storybook/addon-ondevice-backgrounds": "^6.0.1-beta.5",
