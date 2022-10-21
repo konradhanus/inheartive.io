@@ -2216,7 +2216,7 @@
 
 "@nrwl/detox@14.8.6", "@nrwl/detox@^14.8.6":
   version "14.8.6"
-  resolved "https://registry.npmjs.org/@nrwl/detox/-/detox-14.8.6.tgz"
+  resolved "https://registry.yarnpkg.com/@nrwl/detox/-/detox-14.8.6.tgz#a75d2e4ac4b279f5aa3b1aa59c7f3edf0ae8c1a7"
   integrity sha512-OtbcaUGl+11Hn2AjiukgYDtSmd0BIRANTBnMOvgsI5JV/0QdgpTqW+nxQ3UfWTmXnPE7RY8X1D5txiUzFqQPlQ==
   dependencies:
     "@nrwl/devkit" "14.8.6"
@@ -2248,7 +2248,7 @@
 
 "@nrwl/eslint-plugin-nx@^14.8.6":
   version "14.8.6"
-  resolved "https://registry.npmjs.org/@nrwl/eslint-plugin-nx/-/eslint-plugin-nx-14.8.6.tgz"
+  resolved "https://registry.yarnpkg.com/@nrwl/eslint-plugin-nx/-/eslint-plugin-nx-14.8.6.tgz#66b4cb8497cfcdb3f8c7d92c7750c55fe8297969"
   integrity sha512-DRflOgv+hx072Oevg3mFEyB7BIuxuJzHEyJGReSnzsLAcXkTtlpIpp4hNF/oTDonhrcweFuufy2OFeBPbUyzDw==
   dependencies:
     "@nrwl/devkit" "14.8.6"
@@ -2313,19 +2313,7 @@
     source-map-support "0.5.19"
     tree-kill "1.2.2"
 
-"@nrwl/linter@14.8.6":
-  version "14.8.6"
-  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-14.8.6.tgz#677d3e99a014d73e633de4ebdb62051a1c9cb09e"
-  integrity sha512-Usqh17Q+BiZpownyMOC5TrDFkSSRazjTXmTFqUoLkfGI07qF8i7DB1hrqedE32mNv9V0N6LS3FaAb4plFPgPxA==
-  dependencies:
-    "@nrwl/devkit" "14.8.6"
-    "@nrwl/jest" "14.8.6"
-    "@phenomnomnominal/tsquery" "4.1.1"
-    nx "14.8.6"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
-
-"@nrwl/linter@^14.8.6":
+"@nrwl/linter@14.8.6", "@nrwl/linter@^14.8.6":
   version "14.8.6"
   resolved "https://registry.npmjs.org/@nrwl/linter/-/linter-14.8.6.tgz"
   integrity sha512-Usqh17Q+BiZpownyMOC5TrDFkSSRazjTXmTFqUoLkfGI07qF8i7DB1hrqedE32mNv9V0N6LS3FaAb4plFPgPxA==
@@ -2364,7 +2352,7 @@
 
 "@nrwl/react-native@^14.8.6":
   version "14.8.6"
-  resolved "https://registry.npmjs.org/@nrwl/react-native/-/react-native-14.8.6.tgz"
+  resolved "https://registry.yarnpkg.com/@nrwl/react-native/-/react-native-14.8.6.tgz#14ce87d581a14611207913e89465792e848abf1e"
   integrity sha512-oXzvOT5oiKAElj/3AvWYAO39O84MMd9oKZ2GRM8razzZEDv1XT0Pj33fmj9Tgzc5ovLAiQxf44FiSfHSclWGuw==
   dependencies:
     "@nrwl/detox" "14.8.6"
@@ -2385,7 +2373,7 @@
 
 "@nrwl/react@14.8.6":
   version "14.8.6"
-  resolved "https://registry.npmjs.org/@nrwl/react/-/react-14.8.6.tgz"
+  resolved "https://registry.yarnpkg.com/@nrwl/react/-/react-14.8.6.tgz#697c082c894d4e11a1c1bd520831ccd74309b4bc"
   integrity sha512-oFQF+c1dwDxs04f+AryJd3+ELq6RQOVXlfeI91Q5L9v8emPiSNYyE5p1BgeOTk5tX+aXqAMd0ioRk3BZ0NhKpw==
   dependencies:
     "@babel/core" "^7.15.0"
@@ -2415,7 +2403,7 @@
 
 "@nrwl/rollup@14.8.6":
   version "14.8.6"
-  resolved "https://registry.npmjs.org/@nrwl/rollup/-/rollup-14.8.6.tgz"
+  resolved "https://registry.yarnpkg.com/@nrwl/rollup/-/rollup-14.8.6.tgz#301a8bb2bde34f93f472001f3de6e3996a9c215f"
   integrity sha512-vK08nn0StMfQ3jCD6S1y7kicBMtUN78dFwWnMeiy4L90x1LVZUa91QUEgKVlNVOXDOi7h9AtlBWDntXqzWAcvg==
   dependencies:
     "@nrwl/devkit" "14.8.6"
@@ -2461,7 +2449,7 @@
 
 "@nrwl/web@14.8.6", "@nrwl/web@^14.8.6":
   version "14.8.6"
-  resolved "https://registry.npmjs.org/@nrwl/web/-/web-14.8.6.tgz"
+  resolved "https://registry.yarnpkg.com/@nrwl/web/-/web-14.8.6.tgz#ec6ccc5ad60cde8ce37f0d633ca14e76c64463e4"
   integrity sha512-zDFyokYmHZWhXV+WJLQl0A8JKDQIGBofSN7Tm8p6scEoUBpfKmdHETqM5EB3bQZzeBVztG4HylLb28LkQpRuIA==
   dependencies:
     "@babel/core" "^7.15.0"
@@ -2540,38 +2528,7 @@
     webpack-sources "^3.2.3"
     webpack-subresource-integrity "^5.1.0"
 
-"@nrwl/workspace@14.8.6":
-  version "14.8.6"
-  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-14.8.6.tgz#0a23319376a5c7d50626f8029bafe538be8f8547"
-  integrity sha512-a0qUpy2LhnH1SIgMhiuu1JVqiGOKF+Lku/0HZv3WSEUEhn5+fpLgdQDbLbZVACMtjsGL9eNrR9rD4rRm+lth+Q==
-  dependencies:
-    "@nrwl/devkit" "14.8.6"
-    "@nrwl/jest" "14.8.6"
-    "@nrwl/linter" "14.8.6"
-    "@parcel/watcher" "2.0.4"
-    chalk "4.1.0"
-    chokidar "^3.5.1"
-    cli-cursor "3.1.0"
-    cli-spinners "2.6.1"
-    dotenv "~10.0.0"
-    enquirer "~2.3.6"
-    figures "3.2.0"
-    flat "^5.0.2"
-    fs-extra "^10.1.0"
-    glob "7.1.4"
-    ignore "^5.0.4"
-    minimatch "3.0.5"
-    npm-run-path "^4.0.1"
-    nx "14.8.6"
-    open "^8.4.0"
-    rxjs "^6.5.4"
-    semver "7.3.4"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
-    yargs "^17.4.0"
-    yargs-parser "21.0.1"
-
-"@nrwl/workspace@^14.8.6":
+"@nrwl/workspace@14.8.6", "@nrwl/workspace@^14.8.6":
   version "14.8.6"
   resolved "https://registry.npmjs.org/@nrwl/workspace/-/workspace-14.8.6.tgz"
   integrity sha512-a0qUpy2LhnH1SIgMhiuu1JVqiGOKF+Lku/0HZv3WSEUEhn5+fpLgdQDbLbZVACMtjsGL9eNrR9rD4rRm+lth+Q==
@@ -3942,9 +3899,9 @@
     util-deprecate "^1.0.2"
 
 "@storybook/addon-essentials@^6.4.22":
-  version "6.4.22"
-  resolved "https://registry.npmjs.org/@storybook/addon-essentials/-/addon-essentials-6.4.22.tgz"
-  integrity sha512-GTv291fqvWq2wzm7MruBvCGuWaCUiuf7Ca3kzbQ/WqWtve7Y/1PDsqRNQLGZrQxkXU0clXCqY1XtkTrtA3WGFQ==
+  version "6.5.12"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-6.5.12.tgz#c492587e6e47221257dd1e18ca8c566a1f4dfc7a"
+  integrity sha512-4AAV0/mQPSk3V0Pie1NIqqgBgScUc0VtBEXDm8BgPeuDNVhPEupnaZgVt+I3GkzzPPo6JjdCsp2L11f3bBSEjw==
   dependencies:
     "@storybook/addon-actions" "6.4.22"
     "@storybook/addon-backgrounds" "6.4.22"
@@ -9004,7 +8961,7 @@ css-select@^4.1.3:
 
 css-select@^5.1.0:
   version "5.1.0"
-  resolved "https://registry.npmjs.org/css-select/-/css-select-5.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/css-select/-/css-select-5.1.0.tgz#b8ebd6554c3637ccc76688804ad3f6a6fdaea8a6"
   integrity sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==
   dependencies:
     boolbase "^1.0.0"
@@ -9563,7 +9520,7 @@ dom-serializer@^1.0.1:
 
 dom-serializer@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.npmjs.org/dom-serializer/-/dom-serializer-2.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-2.0.0.tgz#e41b802e1eedf9f6cae183ce5e622d789d7d8e53"
   integrity sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==
   dependencies:
     domelementtype "^2.3.0"
@@ -9601,7 +9558,7 @@ domhandler@^4.0.0, domhandler@^4.2.0, domhandler@^4.3.1:
 
 domhandler@^5.0.1, domhandler@^5.0.2:
   version "5.0.3"
-  resolved "https://registry.npmjs.org/domhandler/-/domhandler-5.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-5.0.3.tgz#cc385f7f751f1d1fc650c21374804254538c7d31"
   integrity sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==
   dependencies:
     domelementtype "^2.3.0"
@@ -9617,7 +9574,7 @@ domutils@^2.5.2, domutils@^2.8.0:
 
 domutils@^3.0.1:
   version "3.0.1"
-  resolved "https://registry.npmjs.org/domutils/-/domutils-3.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/domutils/-/domutils-3.0.1.tgz#696b3875238338cb186b6c0612bd4901c89a4f1c"
   integrity sha512-z08c1l761iKhDFtfXO04C7kTdPBLi41zwOZl00WS8b5eiaebNpY00HKbztwBq+e3vyqWNwWF3mP9YLUeqIrF+Q==
   dependencies:
     dom-serializer "^2.0.0"
@@ -9813,12 +9770,7 @@ entities@^2.0.0:
   resolved "https://registry.npmjs.org/entities/-/entities-2.2.0.tgz"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
-entities@^4.2.0:
-  version "4.4.0"
-  resolved "https://registry.npmjs.org/entities/-/entities-4.4.0.tgz"
-  integrity sha512-oYp7156SP8LkeGD0GF85ad1X9Ai79WtRsZ2gxJqtBuzH+98YUV6jkHEKlZkMbcrjJjIVJNIDP/3WL9wQkoPbWA==
-
-entities@^4.3.0:
+entities@^4.2.0, entities@^4.3.0:
   version "4.4.0"
   resolved "https://registry.npmjs.org/entities/-/entities-4.4.0.tgz"
   integrity sha512-oYp7156SP8LkeGD0GF85ad1X9Ai79WtRsZ2gxJqtBuzH+98YUV6jkHEKlZkMbcrjJjIVJNIDP/3WL9wQkoPbWA==
@@ -15390,48 +15342,7 @@ nwsapi@^2.2.0:
   resolved "https://registry.npmjs.org/nwsapi/-/nwsapi-2.2.2.tgz"
   integrity sha512-90yv+6538zuvUMnN+zCr8LuV6bPFdq50304114vJYJ8RDyK8D5O9Phpbd6SZWgI7PwzmmfN1upeOJlvybDSgCw==
 
-nx@14.8.6:
-  version "14.8.6"
-  resolved "https://registry.yarnpkg.com/nx/-/nx-14.8.6.tgz#50bdfde1638478c60d9646d1d23e984a09801d38"
-  integrity sha512-QLU3sip/g3JdNO8n5Nw2esN+0G26Jsy3u1LlrB9Giu4zf/+KsfN8CcXMbEVqOnPR1FkCS52xliaq7IBQfvvMQA==
-  dependencies:
-    "@nrwl/cli" "14.8.6"
-    "@nrwl/tao" "14.8.6"
-    "@parcel/watcher" "2.0.4"
-    "@yarnpkg/lockfile" "^1.1.0"
-    "@yarnpkg/parsers" "^3.0.0-rc.18"
-    "@zkochan/js-yaml" "0.0.6"
-    axios "^1.0.0"
-    chalk "4.1.0"
-    chokidar "^3.5.1"
-    cli-cursor "3.1.0"
-    cli-spinners "2.6.1"
-    cliui "^7.0.2"
-    dotenv "~10.0.0"
-    enquirer "~2.3.6"
-    fast-glob "3.2.7"
-    figures "3.2.0"
-    flat "^5.0.2"
-    fs-extra "^10.1.0"
-    glob "7.1.4"
-    ignore "^5.0.4"
-    js-yaml "4.1.0"
-    jsonc-parser "3.2.0"
-    minimatch "3.0.5"
-    npm-run-path "^4.0.1"
-    open "^8.4.0"
-    semver "7.3.4"
-    string-width "^4.2.3"
-    strong-log-transformer "^2.1.0"
-    tar-stream "~2.2.0"
-    tmp "~0.2.1"
-    tsconfig-paths "^3.9.0"
-    tslib "^2.3.0"
-    v8-compile-cache "2.3.0"
-    yargs "^17.4.0"
-    yargs-parser "21.0.1"
-
-"nx@>= 13.10 <= 15", nx@^14.8.6:
+nx@14.8.6, nx@^14.8.6:
   version "14.8.6"
   resolved "https://registry.npmjs.org/nx/-/nx-14.8.6.tgz"
   integrity sha512-QLU3sip/g3JdNO8n5Nw2esN+0G26Jsy3u1LlrB9Giu4zf/+KsfN8CcXMbEVqOnPR1FkCS52xliaq7IBQfvvMQA==
@@ -17004,7 +16915,7 @@ react-is@18.1.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.1.0.tgz"
   integrity sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==
 
-"react-is@>= 16.8.0", "react-is@^16.12.0 || ^17.0.0 || ^18.0.0":
+"react-is@^16.12.0 || ^17.0.0 || ^18.0.0":
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
@@ -17154,9 +17065,9 @@ react-native-svg-transformer@1.0.0:
     "@svgr/plugin-svgo" "^6.1.2"
     path-dirname "^1.0.2"
 
-react-native-svg@*, react-native-svg@>=12.0.0, react-native-svg@^12.4.4:
+react-native-svg@^12.4.4:
   version "12.4.4"
-  resolved "https://registry.npmjs.org/react-native-svg/-/react-native-svg-12.4.4.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.4.4.tgz#2ba684eaea9a7402fbbe0ed9737e77284631d00e"
   integrity sha512-LpcNlEVCURexqPAvQ9ne8KrPVfYz0wIDygwud8VMRmXLezysXzyQN/DTsjm1BO9lIfYp55WQsr3u3yW/vk6iiA==
   dependencies:
     css-select "^5.1.0"
@@ -17283,15 +17194,6 @@ react-syntax-highlighter@^13.5.3:
     lowlight "^1.14.0"
     prismjs "^1.21.0"
     refractor "^3.1.0"
-
-react-test-renderer@18.1.0, react-test-renderer@>=16.0.0:
-  version "18.1.0"
-  resolved "https://registry.npmjs.org/react-test-renderer/-/react-test-renderer-18.1.0.tgz"
-  integrity sha512-OfuueprJFW7h69GN+kr4Ywin7stcuqaYAt1g7airM5cUgP0BoF5G5CXsPGmXeDeEkncb2fqYNECO4y18sSqphg==
-  dependencies:
-    react-is "^18.1.0"
-    react-shallow-renderer "^16.15.0"
-    scheduler "^0.22.0"
 
 react-textarea-autosize@^8.3.0:
   version "8.3.4"
