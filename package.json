@@ -98,7 +98,6 @@
     "react-native-storybook-loader": "^2.0.5",
     "react-native-svg": "^12.4.4",
     "react-native-svg-transformer": "1.0.0",
-    "react-test-renderer": "18.1.0",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
     "tsc-files": "^1.1.3",
