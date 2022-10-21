@@ -1,11 +1,11 @@
 {
   "name": "mobile",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "@testing-library/jest-native": "4.0.12",
     "@testing-library/react-native": "11.1.0",
-    "react": "18.2.0",
+    "react": "18.1.0",
     "react-native": "0.70.1",
     "react-native-config": "1.4.6",
     "react-native-svg": "12.1.1",
