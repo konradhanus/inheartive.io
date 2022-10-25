@@ -1,6 +1,7 @@
 # data
 
-This library was generated with [Nx](https://nx.dev).
+This library is used to store information about data types and communication
+between frontend and backend sides.
 
 ## Running unit tests
 
