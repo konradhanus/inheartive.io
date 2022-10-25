@@ -6,7 +6,7 @@ import { Text, Row } from '@inheartive/ui/atoms';
 import { StyleSheet } from 'react-native';
 
 interface IAuctionHeartsProps {
-  price: number;
+  price: string;
 }
 
 function AuctionHearts(props: IAuctionHeartsProps) {
