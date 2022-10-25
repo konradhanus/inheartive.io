@@ -8,7 +8,8 @@
     "start:ios": "nx run-ios mobile",
     "build": "nx build",
     "test": "nx test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "graph": "nx graph -dep"
   },
   "private": true,
   "dependencies": {
