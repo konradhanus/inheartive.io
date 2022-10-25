@@ -6,10 +6,10 @@ import { CategoryFilter } from '../CategoryFilter';
 import { categoriesMock } from '@inheartive/data';
 import { mapCategoriesToSelect } from '../utils/mapCategoriesToSelect';
 
-storiesOf('CategoryFilter', module).add('Basic', () => (
-  <NativeBaseProvider>
+storiesOf('CategoryFilter', module)
+  .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
+  .add('Basic', () => (
     <Column mt={4} mx='auto'>
       <CategoryFilter items={mapCategoriesToSelect(categoriesMock)} />
     </Column>
-  </NativeBaseProvider>
-));
+  ));
