@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@inheartive/assets": ["apps/mobile/src/app/assets"],
       "@inheartive/data": ["libs/data/src/index.ts"],
       "@inheartive/ui/assets": ["libs/ui/assets/src/index.ts"],
+      "@inheartive/assets": ["apps/mobile/src/app/assets/index.ts"],
       "@inheartive/ui/atoms": ["libs/ui/atoms/src/index.ts"],
       "@inheartive/ui/molecules": ["libs/ui/molecules/src/index.ts"],
       "@inheartive/ui/organisms": ["libs/ui/organisms/src/index.ts"],

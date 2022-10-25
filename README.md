@@ -15,6 +15,10 @@
 on iOS simulator press `command + control + z`, select on context menu
 `toogle storybook`
 
+## Graph
+
+- `yarn graph`
+
 ## Installation
 
 Prerequisites:
