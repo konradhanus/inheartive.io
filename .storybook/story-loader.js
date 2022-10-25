@@ -13,6 +13,7 @@ function loadStories() {
   require('../libs/ui/atoms/src/lib/TextLogo/__stories__/TextLogo.stories');
   require('../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories');
   require('../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories');
+  require('../libs/ui/atoms/src/lib/Image/__stories__/Image.stories');
 }
 
 const stories = [
@@ -25,6 +26,7 @@ const stories = [
   '../libs/ui/atoms/src/lib/TextLogo/__stories__/TextLogo.stories',
   '../libs/ui/molecules/src/lib/LoginFormControl/__stories__/LoginFormControl.stories',
   '../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories',
+  '../libs/ui/atoms/src/lib/Image/__stories__/Image.stories',
 ];
 
 module.exports = {
