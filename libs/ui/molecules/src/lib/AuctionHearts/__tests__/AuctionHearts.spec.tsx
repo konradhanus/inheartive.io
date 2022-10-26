@@ -1,14 +1,14 @@
-import { render } from '@testing-library/react-native';
+import { render } from '@inheartive/ui/testing';
 import { AuctionHearts } from '../AuctionHearts';
-import { NativeBaseProvider } from 'native-base';
+
+const testID = 'auctionHeartsId';
+const quantity = 1000;
 
 describe('AuctionHearts', () => {
   it('should render successfully auction hearts', () => {
-    const { container } = render(
-      <NativeBaseProvider>
-        <AuctionHearts price='1000' />
-      </NativeBaseProvider>
-    );
-    expect(container).toBeTruthy();
+    const { getByText, getByTestId } = render(<AuctionHearts quantity={quantity} testID={testID} />);
+
+    expect(getByTestId(testID)).toBeTruthy();
+    expect(getByText(String(quantity))).toBeTruthy();
   });
 });

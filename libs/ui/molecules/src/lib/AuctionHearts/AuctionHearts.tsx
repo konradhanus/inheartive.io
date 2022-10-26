@@ -1,31 +1,29 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { Image } from '@inheartive/ui/atoms';
-import { vector } from '@inheartive/assets';
+import { auctionHeart } from '@inheartive/assets';
 import { Text, Row } from '@inheartive/ui/atoms';
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
+const TextStyled = styled(Text)`
+  top: -2;
+`;
 interface IAuctionHeartsProps {
-  price: number;
+  quantity: number;
+  testID?: string | undefined;
 }
 
 function AuctionHearts(props: IAuctionHeartsProps) {
-  const { price } = props;
+  const { quantity, testID } = props;
 
   return (
     <Row space={2} alignItems='center'>
-      <Image source={vector} alt='auction hearts' />
-      <Text fontSize='xl' style={styles.textStyle}>
-        {price}
-      </Text>
+      <Image source={auctionHeart} alt='auction hearts' />
+      <TextStyled fontSize='xl' testID={testID}>
+        {quantity}
+      </TextStyled>
     </Row>
   );
 }
-
-const styles = StyleSheet.create({
-  textStyle: {
-    top: -2,
-  },
-});
 
 export { AuctionHearts };
