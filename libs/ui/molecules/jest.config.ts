@@ -7,4 +7,5 @@ module.exports = {
   moduleNameMapper: {
     '.svg': '@nrwl/react-native/plugins/jest/svg-mock',
   },
+  transformIgnorePatterns: ['node_modules/(?!(@react-native|react-native|react-native-vector-icons)/)'],
 };
