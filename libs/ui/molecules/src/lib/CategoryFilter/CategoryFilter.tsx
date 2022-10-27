@@ -12,11 +12,11 @@ function CategoryFilter(props: ICategoryFilterProps) {
 
   return (
     <Row display={'flex'} alignItems={'center'}>
-      <Text>Category:</Text>
+      <Text width={70}>Category:</Text>
       <Select
         borderColor={'transparent'}
         selectedValue={selectedValue}
-        width={130}
+        width={170}
         accessibilityLabel='Category'
         color='black'
         size={16}
