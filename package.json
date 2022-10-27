@@ -8,7 +8,7 @@
     "start:ios": "nx run-ios mobile",
     "build": "nx build",
     "build:android": "nx build-android",
-    "build:ios": "nx build-ios",
+    "build:ios": "nx bundle-ios",
     "test": "nx test",
     "prepare": "husky install"
   },
