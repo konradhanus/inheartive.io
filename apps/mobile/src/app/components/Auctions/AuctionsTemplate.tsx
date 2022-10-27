@@ -1,34 +1,46 @@
 import React from 'react';
-import { PixelRatio, StyleSheet } from 'react-native';
-import { CategoryFilter, mapCategoriesToSelect } from '@inheartive/ui/molecules';
-import { View } from 'native-base';
-import { ICategory } from '@inheartive/data';
+import { View } from '@inheartive/ui/atoms';
+import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
+import { AuctionsList, FilterBar } from '@inheartive/ui/organisms';
 
 interface Props {
   categories: ICategory[];
   selectedCategoryID: string;
   onCategoryChange: (id: string) => void;
+  sortBy: SortKey;
+  onSortByChange: (sortBy: SortKey) => void;
+  sortDir: SortDirection;
+  onSortDirChange: (sortDir: SortDirection) => void;
+  auctions: IAuction[];
 }
 
 export function AuctionsTemplate(props: Props) {
-  const { categories, selectedCategoryID, onCategoryChange } = props;
+  const {
+    auctions,
+    categories,
+    selectedCategoryID,
+    onCategoryChange,
+    sortBy,
+    onSortByChange,
+    sortDir,
+    onSortDirChange,
+  } = props;
 
   return (
-    <View style={styles.container}>
-      <CategoryFilter
-        items={mapCategoriesToSelect(categories)}
-        selectedValue={selectedCategoryID}
-        onChange={onCategoryChange}
+    <View mt={100} px={10}>
+      <FilterBar
+        categories={categories}
+        selectedCategoryID={selectedCategoryID}
+        onCategoryChange={onCategoryChange}
+        sortBy={sortBy}
+        onSortByChange={onSortByChange}
+        sortDir={sortDir}
+        onSortDirChange={onSortDirChange}
       />
+
+      <AuctionsList auctions={auctions} />
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: PixelRatio.getPixelSizeForLayoutSize(16),
-    paddingTop: PixelRatio.getPixelSizeForLayoutSize(50),
-    height: '100%',
-  },
-});
 
 export default AuctionsTemplate;
