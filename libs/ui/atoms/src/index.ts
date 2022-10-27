@@ -9,6 +9,7 @@ export * from './lib/FormControl';
 export * from './lib/Icon';
 export * from './lib/Image';
 export * from './lib/Input';
+export * from './lib/Pressable';
 export * from './lib/Row';
 export * from './lib/Select';
 export * from './lib/Stack';
