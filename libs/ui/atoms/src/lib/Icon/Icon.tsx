@@ -3,6 +3,7 @@ import React from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import { colors } from '@inheartive/ui/theme';
 
 import {
   MoonIcon,
@@ -80,126 +81,131 @@ enum IconType {
 }
 
 interface IIconProps {
+  size?: number;
+  color?: string;
   name: IconType;
 }
 
-const size = 17;
-
 function Icon(props: IIconProps) {
+  const iconProperties = {
+    size: props.size || 17,
+    color: props.color || colors.primary[600],
+  };
+
   switch (props.name) {
     case 'add':
-      return <AddIcon />;
+      return <AddIcon {...iconProperties} />;
 
     case 'arrow-back':
-      return <ArrowBackIcon />;
+      return <ArrowBackIcon {...iconProperties} />;
 
     case 'arrow-forward':
-      return <ArrowForwardIcon />;
+      return <ArrowForwardIcon {...iconProperties} />;
 
     case 'arrow-up':
-      return <ArrowUpIcon />;
+      return <ArrowUpIcon {...iconProperties} />;
 
     case 'arrow-down':
-      return <ArrowDownIcon />;
+      return <ArrowDownIcon {...iconProperties} />;
 
     case 'check':
-      return <CheckIcon />;
+      return <CheckIcon {...iconProperties} />;
 
     case 'check-circle':
-      return <CheckCircleIcon />;
+      return <CheckCircleIcon {...iconProperties} />;
 
     case 'chevron-down':
-      return <ChevronDownIcon />;
+      return <ChevronDownIcon {...iconProperties} />;
 
     case 'chevron-left':
-      return <ChevronLeftIcon />;
+      return <ChevronLeftIcon {...iconProperties} />;
 
     case 'chevron-right':
-      return <ChevronRightIcon />;
+      return <ChevronRightIcon {...iconProperties} />;
 
     case 'chevron-up':
-      return <ChevronUpIcon />;
+      return <ChevronUpIcon {...iconProperties} />;
 
     case 'circle':
-      return <CircleIcon />;
+      return <CircleIcon {...iconProperties} />;
 
     case 'close':
-      return <CloseIcon />;
+      return <CloseIcon {...iconProperties} />;
 
     case 'small-close':
-      return <SmallCloseIcon />;
+      return <SmallCloseIcon {...iconProperties} />;
 
     case 'menu':
-      return <HamburgerIcon />;
+      return <HamburgerIcon {...iconProperties} />;
 
     case 'info':
-      return <InfoIcon />;
+      return <InfoIcon {...iconProperties} />;
 
     case 'info-outline':
-      return <InfoOutlineIcon />;
+      return <InfoOutlineIcon {...iconProperties} />;
 
     case 'minus':
-      return <MinusIcon />;
+      return <MinusIcon {...iconProperties} />;
 
     case 'moon':
-      return <MoonIcon />;
+      return <MoonIcon {...iconProperties} />;
 
     case 'question':
-      return <QuestionIcon />;
+      return <QuestionIcon {...iconProperties} />;
 
     case 'question-outline':
-      return <QuestionOutlineIcon />;
+      return <QuestionOutlineIcon {...iconProperties} />;
 
     case 'search':
-      return <SearchIcon />;
+      return <SearchIcon {...iconProperties} />;
 
     case 'sun':
-      return <SunIcon />;
+      return <SunIcon {...iconProperties} />;
 
     case 'warning-1':
-      return <WarningIcon />;
+      return <WarningIcon {...iconProperties} />;
 
     case 'warning-2':
-      return <WarningTwoIcon />;
+      return <WarningTwoIcon {...iconProperties} />;
 
     case 'warning-outline':
-      return <WarningOutlineIcon />;
+      return <WarningOutlineIcon {...iconProperties} />;
 
     case 'three-dots':
-      return <ThreeDotsIcon />;
+      return <ThreeDotsIcon {...iconProperties} />;
 
     case 'share':
-      return <ShareIcon />;
+      return <ShareIcon {...iconProperties} />;
 
     case 'play':
-      return <PlayIcon />;
+      return <PlayIcon {...iconProperties} />;
 
     case 'favourite':
-      return <FavouriteIcon />;
+      return <FavouriteIcon {...iconProperties} />;
 
     case 'delete':
-      return <DeleteIcon />;
+      return <DeleteIcon {...iconProperties} />;
 
     case 'star':
-      return <MaterialIcon name='star' size={size} />;
+      return <MaterialIcon name='star' {...iconProperties} />;
 
     case 'star-outline':
-      return <MaterialIcon name='star-outline' size={size} />;
+      return <MaterialIcon name='star-outline' {...iconProperties} />;
 
     case 'home':
-      return <Ionicons name='home' size={size} />;
+      return <Ionicons name='home' {...iconProperties} />;
 
     case 'home-outline':
-      return <Ionicons name='home-outline' size={size} />;
+      return <Ionicons name='home-outline' {...iconProperties} />;
 
     case 'favorite-outline':
-      return <Ionicons name='ios-heart-outline' size={size} />;
+      return <Ionicons name='ios-heart-outline' {...iconProperties} />;
 
     case 'favorite':
-      return <Ionicons name='ios-heart-sharp' size={size} />;
+      return <Ionicons name='ios-heart-sharp' {...iconProperties} />;
 
     case 'plus-circle':
-      return <Feather name='plus-circle' size={size} />;
+      return <Feather name='plus-circle' {...iconProperties} />;
 
     default:
       // eslint-disable-next-line no-throw-literal

@@ -1,8 +1,10 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { IconType, Icon } from '../Icon';
 import { NativeBaseProvider, View } from 'native-base';
 import { Row } from '@inheartive/ui/atoms';
+import { colors } from '@inheartive/ui/theme';
 
 storiesOf('Icon', module)
   .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
@@ -14,4 +16,9 @@ storiesOf('Icon', module)
         </View>
       ))}
     </Row>
+  ))
+  .add('Custom properties', () => (
+    <View>
+      <Icon name={IconType.favorite} size={200} color={colors.secondary[200]} />
+    </View>
   ));
