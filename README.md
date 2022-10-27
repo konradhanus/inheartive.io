@@ -63,6 +63,11 @@ yarn nx storybook mobile
 on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
 `toogle storybook`.
 
+### Troubleshoots
+
+`1. On ios is not work the keyboard `
+`- Solution for this problem is to press keys cmd + shift + k`
+
 ## Support
 
 _will be added in future_
