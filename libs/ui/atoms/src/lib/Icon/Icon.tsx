@@ -3,6 +3,7 @@ import React from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import { colors } from '@inheartive/ui/theme';
 
 import {
   MoonIcon,
@@ -80,23 +81,15 @@ enum IconType {
 }
 
 interface IIconProps {
-  size?: number | undefined;
-  color?: string | undefined;
-  backgroundColor?: string | undefined;
-  borderRadius?: number | undefined;
-  onPress?: void;
+  size?: number;
+  color?: string;
   name: IconType;
-  iconStyle?: object | undefined;
 }
 
 function Icon(props: IIconProps) {
   const iconProperties = {
-    size: props.size || 20,
-    color: props.color || '#009688',
-    backgroundColor: props.backgroundColor || '##007AFF',
-    borderRadius: props.borderRadius || 5,
-    onPress: props.onPress || undefined, // @TODO
-    iconStyle: props.iconStyle || { marginRight: 10 }, // @TODO
+    size: props.size || 17,
+    color: props.color || colors.primary[600],
   };
 
   switch (props.name) {
