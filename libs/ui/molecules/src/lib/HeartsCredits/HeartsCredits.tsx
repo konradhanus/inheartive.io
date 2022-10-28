@@ -1,9 +1,9 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React, { ComponentType } from 'react';
-import { Image } from '@inheartive/ui/atoms';
-import { heartCredit } from '@inheartive/assets';
+import { Icon, IconType } from '@inheartive/ui/atoms';
 import { Row } from '@inheartive/ui/atoms';
 import TextStyled from './TextStyled';
+import { colors } from '@inheartive/ui/theme';
 
 interface IHeartsCreditsProps {
   credit: number;
@@ -15,7 +15,7 @@ const HeartsCredits: ComponentType<IHeartsCreditsProps> = (props) => {
 
   return (
     <Row space={2} alignItems='center'>
-      <Image source={heartCredit} alt='hearts credits'></Image>
+      <Icon name={IconType.favorite} size={80} color={colors.primary[600]} />
       <TextStyled fontSize='xl' testID={testID} fontFamily='body' fontStyle='normal' fontWeight='400'>
         {credit}
       </TextStyled>
