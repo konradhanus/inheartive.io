@@ -65,8 +65,9 @@ on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
 
 ### Troubleshoots
 
-`1. On ios is not work the keyboard `
-`- Solution for this problem is to press keys cmd + shift + k`
+`1. The keyboard does not work on the IOS emulator.`
+
+- The solution to this problem is to press cmd + shift + k.
 
 ## Support
 
