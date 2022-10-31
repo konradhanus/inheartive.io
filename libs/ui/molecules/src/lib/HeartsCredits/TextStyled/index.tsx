@@ -3,12 +3,9 @@ import { Text } from '@inheartive/ui/atoms';
 
 const TextStyled = styled(Text)`
   color: #fff;
-  top: -4;
-  left: -80;
-  width: 65;
-  line-height: 100;
-  display: flex;
-  align-items: center;
+  max-height: 100%;
+  position: absolute;
+  width: 60px;
   text-align: center;
 `;
 
