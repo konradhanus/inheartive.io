@@ -16,3 +16,4 @@ export * from './lib/Stack';
 export * from './lib/Text';
 export * from './lib/TextLogo';
 export * from './lib/View';
+export * from './lib/HStack';
