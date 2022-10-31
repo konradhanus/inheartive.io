@@ -1,1 +1,1 @@
-require ('./src/index.native')
+require ('./apps/mobile/src/main.tsx')
