@@ -1,6 +1,8 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { storiesOf } from '@storybook/react-native';
 import { NativeBaseProvider } from 'native-base';
 import Dropdown from '../Dropdown';
+import { Avatar, Row } from '@inheartive/ui/atoms';
 
 const dropdownList = [
   {
@@ -24,6 +26,7 @@ const dropdownList = [
     route: 'Example',
   },
 ];
+
 storiesOf('Dropdown', module)
   .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
   .add('Basic', () => <Dropdown dropdownList={dropdownList} />);
