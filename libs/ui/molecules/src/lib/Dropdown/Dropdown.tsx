@@ -1,22 +1,35 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
-import { Box, HStack, Text } from '@inheartive/ui/atoms';
-import { type } from 'node:os';
+import { Select, Row, Avatar } from '@inheartive/ui/atoms';
 
 export interface IDropdownItem {
+  id: string | number;
   name: string;
   route: string;
 }
-export type IDropdownList = IDropdownItem[];
+export interface IDropdownProps {
+  dropdownList: IDropdownItem[];
+  selectedValue?: string;
+  onChange?: (itemValue: string) => void;
+}
 
-const Dropdown = (dropdownList: IDropdownList) => {
-  console.log(dropdownList);
+const Dropdown = ({ dropdownList, selectedValue, onChange }: IDropdownProps) => {
   return (
-    <HStack w={'100%'}>
-      {dropdownList.map((item: IDropdownItem) => (
-        <Text>{item.name}</Text>
-      ))}
-    </HStack>
+    <Row display={'flex'} alignItems={'center'}>
+      <Select
+        color='black'
+        size={16}
+        display='flex'
+        flexGrow={1}
+        width={170}
+        selectedValue={selectedValue}
+        onValueChange={(itemValue) => onChange && onChange(itemValue)}
+      >
+        {dropdownList.map((item: IDropdownItem, index) => (
+          <Select.Item key={index} label={item.name} value={item.route} />
+        ))}
+      </Select>
+    </Row>
   );
 };
 
