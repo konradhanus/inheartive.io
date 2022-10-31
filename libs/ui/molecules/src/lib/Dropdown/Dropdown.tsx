@@ -1,16 +1,16 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { Box, HStack, Text } from '@inheartive/ui/atoms';
+import { type } from 'node:os';
 
 export interface IDropdownItem {
   name: string;
   route: string;
 }
-export interface IDropdownList {
-  dropdownList: IDropdownItem[];
-}
+export type IDropdownList = IDropdownItem[];
 
-const Dropdown = ({ dropdownList }: IDropdownList) => {
+const Dropdown = (dropdownList: IDropdownList) => {
+  console.log(dropdownList);
   return (
     <HStack w={'100%'}>
       {dropdownList.map((item: IDropdownItem) => (
