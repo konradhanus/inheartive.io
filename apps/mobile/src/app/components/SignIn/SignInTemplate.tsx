@@ -3,10 +3,11 @@ import React from 'react';
 
 import { PixelRatio, StyleSheet } from 'react-native';
 
-import { Box, Image } from '@inheartive/ui/atoms';
+import { Box, Image, Text } from '@inheartive/ui/atoms';
 import { LoginFormControl } from '@inheartive/ui/molecules';
 import { View } from 'native-base';
 import { logo } from './../../assets/index';
+import { Link } from 'react-router-native';
 
 export function SignInTemplate() {
   return (
@@ -16,6 +17,12 @@ export function SignInTemplate() {
       <Box w='100%' mt='50'>
         <LoginFormControl />
       </Box>
+
+      <View mt={5}>
+        <Link to='/'>
+          <Text>Auctions</Text>
+        </Link>
+      </View>
     </View>
   );
 }

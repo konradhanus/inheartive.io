@@ -1,7 +1,8 @@
 import React from 'react';
-import { View } from '@inheartive/ui/atoms';
 import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
+import { Text, View } from '@inheartive/ui/atoms';
 import { AuctionsList, FilterBar } from '@inheartive/ui/organisms';
+import { Link } from 'react-router-native';
 
 interface Props {
   categories: ICategory[];
@@ -28,6 +29,12 @@ export function AuctionsTemplate(props: Props) {
 
   return (
     <View mt={100} px={10}>
+      <View mb={5}>
+        <Link to='/sign-in'>
+          <Text>Sign in</Text>
+        </Link>
+      </View>
+
       <FilterBar
         categories={categories}
         selectedCategoryID={selectedCategoryID}
