@@ -15,7 +15,7 @@ export interface IDropdownProps {
 
 const AvatarDropdown = ({ dropdownList, selectedValue, background }: IDropdownProps) => {
   const navigate = useNavigate();
-  const handleOnClick = useCallback(() => navigate('/', { replace: true }), [navigate]);
+  const handleOnClick = useCallback((routeName: string) => navigate(routeName, { replace: true }), [navigate]);
   const avatar = (
     <Avatar
       bg={background}
@@ -38,7 +38,7 @@ const AvatarDropdown = ({ dropdownList, selectedValue, background }: IDropdownPr
         padding='0'
       >
         {dropdownList.map((item: IDropdownItem, index) => (
-          <Select.Item onPress={handleOnClick} key={index} label={item.name} value={item.route} />
+          <Select.Item onPress={() => handleOnClick(item.route)} key={index} label={item.name} value={item.route} />
         ))}
       </Select>
     </Box>
