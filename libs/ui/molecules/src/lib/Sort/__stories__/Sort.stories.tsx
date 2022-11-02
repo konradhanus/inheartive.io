@@ -10,5 +10,6 @@ storiesOf('Sort', module)
   .add('Basic', () => (
     <Column mt={4} mx='auto'>
       <Sort sortBy={SortKey.Heartcoins} sortDir={SortDirection.ASC} />
+      <Sort sortBy={SortKey.CreatedDate} sortDir={SortDirection.DESC} />
     </Column>
   ));
