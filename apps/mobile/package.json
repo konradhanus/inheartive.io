@@ -12,14 +12,5 @@
     "styled-components": "*",
     "native-base": "*",
     "react-native-safe-area-context": "*"
-  },
-  "devDependencies": {
-    "@storybook/react-native": "*",
-    "@storybook/addon-ondevice-actions": "*",
-    "@storybook/addon-ondevice-backgrounds": "*",
-    "@storybook/addon-ondevice-controls": "*",
-    "@storybook/addon-ondevice-notes": "*",
-    "@testing-library/jest-native": "*",
-    "@testing-library/react-native": "*"
   }
 }
