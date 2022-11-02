@@ -2,14 +2,14 @@ import React from 'react';
 
 import { Column, NativeBaseProvider } from 'native-base';
 import { storiesOf } from '@storybook/react-native';
-import { FilterBar } from '../FilterBar';
+import { FilteringArea } from '../FilteringArea';
 import { categoriesMock, SortDirection, SortKey } from '@inheartive/data';
 
-storiesOf('FilterBar', module)
+storiesOf('FilteringArea', module)
   .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
   .add('Basic', () => (
     <Column mt={4} mx='auto'>
-      <FilterBar
+      <FilteringArea
         sortBy={SortKey.Heartcoins}
         sortDir={SortDirection.ASC}
         categories={categoriesMock}

@@ -1,12 +1,12 @@
 import { categoriesMock, SortDirection, SortKey } from '@inheartive/data';
 import { render } from '@inheartive/ui/testing';
 
-import { FilterBar } from '../FilterBar';
+import { FilteringArea } from '../FilteringArea';
 
-describe('FilterBar', () => {
+describe('FilteringArea', () => {
   it('should render successfully', () => {
     const { container } = render(
-      <FilterBar
+      <FilteringArea
         categories={categoriesMock}
         selectedCategoryID={categoriesMock[0].id}
         onCategoryChange={() => 0}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
-import { AuctionsList, FilterBar } from '@inheartive/ui/organisms';
+import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
 import { Link } from 'react-router-native';
 
 interface Props {
@@ -35,7 +35,7 @@ export function AuctionsTemplate(props: Props) {
         </Link>
       </View>
 
-      <FilterBar
+      <FilteringArea
         categories={categories}
         selectedCategoryID={selectedCategoryID}
         onCategoryChange={onCategoryChange}

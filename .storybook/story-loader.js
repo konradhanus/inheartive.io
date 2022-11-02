@@ -9,7 +9,7 @@ function loadStories() {
   require('../libs/ui/molecules/src/lib/HeartsCredits/__stories__/HeartsCredits.stories');
   require('../libs/ui/molecules/src/lib/CategoryFilter/__stories__/CategoryFilter.stories');
   require('../libs/ui/molecules/src/lib/Sort/__stories__/Sort.stories');
-  require('../libs/ui/organisms/src/lib/FilterBar/__stories__/FilterBar.stories');
+  require('../libs/ui/organisms/src/lib/FilteringArea/__stories__/FilteringArea.stories');
   require('../libs/ui/atoms/src/lib/Badge/__stories__/Badge.stories');
   require('../libs/ui/atoms/src/lib/Avatar/__stories__/Avatar.stories');
   require('../libs/ui/atoms/src/lib/Text/__stories__/Text.stories');
@@ -26,7 +26,7 @@ const stories = [
   '../libs/ui/molecules/src/lib/HeartsCredits/__stories__/HeartsCredits.stories',
   '../libs/ui/molecules/src/lib/CategoryFilter/__stories__/CategoryFilter.stories',
   '../libs/ui/molecules/src/lib/Sort/__stories__/Sort.stories',
-  '../libs/ui/organisms/src/lib/FilterBar/__stories__/FilterBar.stories',
+  '../libs/ui/organisms/src/lib/FilteringArea/__stories__/FilteringArea.stories',
   '../libs/ui/atoms/src/lib/Badge/__stories__/Badge.stories',
   '../libs/ui/atoms/src/lib/Avatar/__stories__/Avatar.stories',
   '../libs/ui/atoms/src/lib/Text/__stories__/Text.stories',
