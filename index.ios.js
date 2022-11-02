@@ -1,1 +1,1 @@
-require ('./apps/mobile/src/main.tsx')
+require ('./dist/apps/mobile/ios/main.jsbundle')
