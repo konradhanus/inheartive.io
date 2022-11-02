@@ -2,27 +2,25 @@
 import { storiesOf } from '@storybook/react-native';
 import { NativeBaseProvider } from 'native-base';
 import AvatarDropdown from '../AvatarDropdown';
+import { Link } from 'react-router-native';
+import { Text } from 'react-native';
 
 const dropdownList = [
   {
-    id: 1,
     name: 'Basic',
-    route: 'Example',
+    route: '/signin',
   },
   {
-    id: 2,
     name: 'Basic 1',
-    route: 'Example',
+    route: '/signin',
   },
   {
-    id: 3,
     name: 'Basic 2',
-    route: 'https://stackoverflow.com/questions/36638245/react-native-how-to-inspect-the-ui-elements',
+    route: '/signin',
   },
   {
-    id: 4,
     name: 'Basic 3',
-    route: 'Example',
+    route: '/signin',
   },
 ];
 

@@ -7,8 +7,24 @@ import { Box, Image } from '@inheartive/ui/atoms';
 import { LoginFormControl } from '@inheartive/ui/molecules';
 import { View } from 'native-base';
 import { logo } from './../../assets/index';
+import { AvatarDropdown } from '@inheartive/ui/molecules';
 
 export function SignInTemplate() {
+  const data = [
+    {
+      name: 'Link 1',
+      route: '/',
+    },
+    {
+      name: 'Link 2',
+      route: '/auctions',
+    },
+    {
+      name: 'Link 3',
+      route: '/signin',
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <Image source={logo} alt='Logo' />
@@ -16,6 +32,7 @@ export function SignInTemplate() {
       <Box w='100%' mt='50'>
         <LoginFormControl />
       </Box>
+      <AvatarDropdown dropdownList={data} />
     </View>
   );
 }

@@ -1,20 +1,21 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import React from 'react';
-import { Select, Box, Avatar, View } from '@inheartive/ui/atoms';
+import React, { useCallback } from 'react';
+import { Select, Box, Avatar } from '@inheartive/ui/atoms';
+import { useNavigate } from 'react-router';
 
 export interface IDropdownItem {
-  id: string | number;
   name: string;
   route: string;
 }
 export interface IDropdownProps {
   dropdownList: IDropdownItem[];
   selectedValue?: string;
-  onChange?: (itemValue: string) => void;
   background?: string;
 }
 
-const AvatarDropdown = ({ dropdownList, selectedValue, onChange, background }: IDropdownProps) => {
+const AvatarDropdown = ({ dropdownList, selectedValue, background }: IDropdownProps) => {
+  const navigate = useNavigate();
+  const handleOnClick = useCallback(() => navigate('/', { replace: true }), [navigate]);
   const avatar = (
     <Avatar
       bg={background}
@@ -33,16 +34,15 @@ const AvatarDropdown = ({ dropdownList, selectedValue, onChange, background }: I
         display='flex'
         flexGrow={1}
         selectedValue={selectedValue}
-        onValueChange={(itemValue) => onChange && onChange(itemValue)}
         dropdownIcon={avatar}
         padding='0'
       >
         {dropdownList.map((item: IDropdownItem, index) => (
-          <Select.Item key={index} label={item.name} value={item.route} />
+          <Select.Item onPress={handleOnClick} key={index} label={item.name} value={item.route} />
         ))}
       </Select>
     </Box>
   );
 };
 
-export default AvatarDropdown;
+export { AvatarDropdown };
