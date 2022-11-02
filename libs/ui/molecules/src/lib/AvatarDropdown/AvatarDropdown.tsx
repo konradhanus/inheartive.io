@@ -1,6 +1,6 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
-import { Select, Box, Avatar } from '@inheartive/ui/atoms';
+import { Select, Box, Avatar, View } from '@inheartive/ui/atoms';
 
 export interface IDropdownItem {
   id: string | number;
@@ -14,7 +14,7 @@ export interface IDropdownProps {
   background?: string;
 }
 
-const Dropdown = ({ dropdownList, selectedValue, onChange, background }: IDropdownProps) => {
+const AvatarDropdown = ({ dropdownList, selectedValue, onChange, background }: IDropdownProps) => {
   const avatar = (
     <Avatar
       bg={background}
@@ -30,12 +30,12 @@ const Dropdown = ({ dropdownList, selectedValue, onChange, background }: IDropdo
       <Select
         borderColor={'transparent'}
         color='black'
-        size={50}
         display='flex'
         flexGrow={1}
         selectedValue={selectedValue}
         onValueChange={(itemValue) => onChange && onChange(itemValue)}
         dropdownIcon={avatar}
+        padding='0'
       >
         {dropdownList.map((item: IDropdownItem, index) => (
           <Select.Item key={index} label={item.name} value={item.route} />
@@ -45,4 +45,4 @@ const Dropdown = ({ dropdownList, selectedValue, onChange, background }: IDropdo
   );
 };
 
-export default Dropdown;
+export default AvatarDropdown;

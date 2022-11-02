@@ -16,7 +16,7 @@ function loadStories() {
   require('../libs/ui/molecules/src/lib/AuctionHearts/__stories__/AuctionHearts.stories');
   require('../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories');
   require('../libs/ui/atoms/src/lib/Image/__stories__/Image.stories');
-  require('../libs/ui/molecules/src/lib/Dropdown/__stories__/Dropdown.stories');
+  require('../libs/ui/molecules/src/lib/AvatarDropdown/__stories__/AvatarDropdown.stories');
 }
 
 const stories = [
@@ -32,7 +32,7 @@ const stories = [
   '../libs/ui/molecules/src/lib/AuctionHearts/__stories__/AuctionHearts.stories',
   '../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories',
   '../libs/ui/atoms/src/lib/Image/__stories__/Image.stories',
-  '../libs/ui/molecules/src/lib/Dropdown/__stories__/Dropdown.stories',
+  '../libs/ui/molecules/src/lib/AvatarDropdown/__stories__/AvatarDropdown.stories',
 ];
 
 module.exports = {
