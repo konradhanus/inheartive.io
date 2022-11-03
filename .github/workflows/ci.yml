@@ -9,6 +9,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
-      - run: npm install -g yarn
       - run: yarn install
+      - run: npm install -g nx
       - run: nx run mobile:build-android
