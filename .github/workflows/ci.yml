@@ -1,5 +1,8 @@
 name: android-build
-on: [push]
+on:
+  push:
+    branches:
+      - relese
 jobs:
   build-android:
     runs-on: ubuntu-latest
@@ -12,4 +15,4 @@ jobs:
       - run: yarn install
       - run: npm install -g nx
       - run: nx build-android mobile
-      - run: "🎉 This job's status is ${{ job.status }}. 🎉"
+      - run: echo "🎉 This job's status is ${{ job.status }}. 🎉"
