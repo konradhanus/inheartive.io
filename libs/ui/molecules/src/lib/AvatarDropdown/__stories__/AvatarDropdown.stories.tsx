@@ -1,9 +1,8 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { storiesOf } from '@storybook/react-native';
 import { NativeBaseProvider } from 'native-base';
-import AvatarDropdown from '../AvatarDropdown';
-import { Link } from 'react-router-native';
-import { Text } from 'react-native';
+import { AvatarDropdown } from '../AvatarDropdown';
+import { NativeRouter } from 'react-router-native';
 
 const dropdownList = [
   {
@@ -25,5 +24,9 @@ const dropdownList = [
 ];
 
 storiesOf('Dropdown', module)
-  .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
+  .addDecorator((story) => (
+    <NativeBaseProvider>
+      <NativeRouter>{story()}</NativeRouter>
+    </NativeBaseProvider>
+  ))
   .add('Basic', () => <AvatarDropdown dropdownList={dropdownList} />);
