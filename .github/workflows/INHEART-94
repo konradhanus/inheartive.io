@@ -2,9 +2,11 @@ name: android-build
 run-name: ${{ github.actor }} is build android application 🚀
 on: [push]
 jobs:
-  build-android:
+  both-matrix:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     if: github.repository == 'konradhanus/inheartive.io'
-    runs-on: ubuntu-latest
     steps:
       - run:  echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - uses: actions/checkout@v3
@@ -14,4 +16,4 @@ jobs:
       - run: yarn install
       - run: npm install -g nx
       - run: nx run mobile:build-android
-      - run: echo "🎉 This job's status is ${{ job.status }}. 🎉"
+      - run: echo "🎉 This job's status is ${{ job.status }}. 🎉"    
