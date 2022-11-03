@@ -1,5 +1,4 @@
 name: android-build
-run-name: ${{ github.actor }} is build android application 🚀
 on: [push]
 jobs:
   both-matrix:
