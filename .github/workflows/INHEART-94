@@ -14,5 +14,4 @@ jobs:
           node-version: '14'
       - run: yarn install
       - run: npm install -g nx
-      - run: nx run mobile:build-android
-      - run: echo "🎉 This job's status is ${{ job.status }}. 🎉"    
+      - run: nx run mobile:build-android   
