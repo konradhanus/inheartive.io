@@ -13,7 +13,7 @@ interface Props {
   onSortDirChange: (sortDir: SortDirection) => void;
 }
 
-function FilterBar(props: Props) {
+function FilteringArea(props: Props) {
   const { onSortByChange, onSortDirChange, sortBy, sortDir, categories, selectedCategoryID, onCategoryChange } = props;
 
   return (
@@ -29,4 +29,4 @@ function FilterBar(props: Props) {
   );
 }
 
-export { FilterBar };
+export { FilteringArea };
