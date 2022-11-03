@@ -1,15 +1,12 @@
-name: CICDCDROM
-
-on:
-  pull_request: {}
-  workflow_dispatch: {}
-  push:
-    branches:
-      - main
-      - release
-
+name: example-workflow
+on: [push]
 jobs:
-  konrad:
-    name: My First Job
-     steps:
-      - name: Not on Monday or Wednesday
+  production-deploy:
+    if: github.repository == 'konradhanus/inheartive.io'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g react-native
