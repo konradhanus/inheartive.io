@@ -3,10 +3,9 @@ run-name: ${{ github.actor }} is build android application 🚀
 on:
   push:
     branches:
-      - relese
+      - 'relese'
 jobs:
   build-android:
-    if: github.repository == 'konradhanus/inheartive.io'
     runs-on: ubuntu-latest
     steps:
       - run:  "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
