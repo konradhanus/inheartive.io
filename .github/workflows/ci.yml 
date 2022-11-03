@@ -1,9 +1,6 @@
 name: android-build
 run-name: ${{ github.actor }} is build android application 🚀
-on:
-  push:
-    branches:
-      - 'relese'
+on: [push]
 jobs:
   build-android:
     runs-on: ubuntu-latest
