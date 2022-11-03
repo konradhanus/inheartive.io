@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     paddingTop: PixelRatio.getPixelSizeForLayoutSize(50),
     height: '100%',
     alignItems: 'center',
+    flex: 1,
   },
 });
 

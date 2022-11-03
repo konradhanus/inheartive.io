@@ -1,4 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
+
 import React from 'react';
 import HeartsCredits from '../../../../molecules/src/lib/HeartsCredits';
 import { colors } from 'libs/ui/theme/src/colors';
@@ -8,19 +9,23 @@ import { View } from 'react-native';
 export type IconNameType = 'homepage' | 'search' | 'heart' | 'plus' | 'star';
 
 export interface FooterMenuProps {
+  testID?: string;
   activeIcon: IconNameType;
   onChange: (iconName: IconNameType) => void;
-  testID?: string;
 }
 
-export const FooterMenu: React.ComponentType<FooterMenuProps> = ({ activeIcon, onChange, testID }) => {
+const FooterMenu: React.ComponentType<FooterMenuProps> = ({ testID, activeIcon, onChange }) => {
   const style = {
+    flex: 1,
     height: 60,
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: 'white',
   };
 
   const activeColor = colors.footer[800];
   const inActiveColor = colors.footer[50];
-  const iconColor = (iconName: IconNameType) => (activeIcon == iconName ? activeColor : inActiveColor);
+  const iconColor = (iconName: IconNameType) => (activeIcon === iconName ? activeColor : inActiveColor);
 
   return (
     <View style={style} testID={testID}>
@@ -44,3 +49,5 @@ export const FooterMenu: React.ComponentType<FooterMenuProps> = ({ activeIcon, o
     </View>
   );
 };
+
+export { FooterMenu };
