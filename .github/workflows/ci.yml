@@ -10,4 +10,4 @@ on:
 
 jobs:
   konrad:
-    - cd apps 
+    - cd apps
