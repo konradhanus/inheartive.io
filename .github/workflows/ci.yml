@@ -1,10 +1,8 @@
 name: example-workflow
-on:
-  push:
-    branches:
-      - release
+on: [push]
 jobs:
   build-android:
+    if: github.repository == 'konradhanus/inheartive.io'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
