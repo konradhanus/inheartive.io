@@ -1,4 +1,8 @@
+name: CICDCDROM
+
 on:
+  pull_request: {}
+  workflow_dispatch: {}
   push:
     branches:
       - main
@@ -8,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build Android
-    
+
    steps:
       - uses: actions/checkout@v2
         with:
