@@ -1,3 +1,10 @@
+on:
+  push:
+    branches:
+      - main
+      - release
+  pull_request:
+
 jobs:
   myjob:
     runs-on: ubuntu-latest
