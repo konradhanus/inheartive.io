@@ -11,3 +11,5 @@ on:
 jobs:
   konrad:
     name: My First Job
+     steps:
+      - name: Not on Monday or Wednesday
