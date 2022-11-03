@@ -25,7 +25,7 @@ export function SignInTemplate() {
 
       <View mt={5}>
         <Link to='/'>
-          <Text>Auctions</Text>
+          <Text>Auctions test</Text>
         </Link>
       </View>
     </KeyboardAwareScrollView>
