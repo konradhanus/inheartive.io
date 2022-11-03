@@ -6,7 +6,7 @@ jobs:
     if: github.repository == 'konradhanus/inheartive.io'
     runs-on: ubuntu-latest
     steps:
-      - run:  "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run:  echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -14,4 +14,4 @@ jobs:
       - run: yarn install
       - run: npm install -g nx
       - run: nx run mobile:build-android
-      - run: "🎉 This job's status is ${{ job.status }}. 🎉"
+      - run: echo "🎉 This job's status is ${{ job.status }}. 🎉"
