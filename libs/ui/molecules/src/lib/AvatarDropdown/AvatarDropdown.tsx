@@ -11,9 +11,10 @@ export interface IDropdownProps {
   dropdownList: IDropdownItem[];
   selectedValue?: string;
   background?: string;
+  testID?: string;
 }
 
-const AvatarDropdown = ({ dropdownList, selectedValue, background }: IDropdownProps) => {
+const AvatarDropdown = ({ dropdownList, selectedValue, background, testID }: IDropdownProps) => {
   const navigate = useNavigate();
   const handleOnClick = useCallback((routeName: string) => navigate(routeName, { replace: true }), [navigate]);
   const avatar = (
@@ -36,6 +37,7 @@ const AvatarDropdown = ({ dropdownList, selectedValue, background }: IDropdownPr
         selectedValue={selectedValue}
         dropdownIcon={avatar}
         padding='0'
+        testID={testID}
       >
         {dropdownList.map((item: IDropdownItem, index) => (
           <Select.Item onPress={() => handleOnClick(item.route)} key={index} label={item.name} value={item.route} />
