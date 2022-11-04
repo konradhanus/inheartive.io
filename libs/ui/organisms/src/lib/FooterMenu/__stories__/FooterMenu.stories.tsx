@@ -1,5 +1,5 @@
 import React from 'react';
-import { Column, NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 import { storiesOf } from '@storybook/react-native';
 import { FooterMenu, IconNameType } from '../FooterMenu';
 
@@ -12,9 +12,5 @@ storiesOf('FooterMenu', module)
       console.log('onChangeStoriesOfFooterMenu: ' + iconName);
     };
 
-    return (
-      <Column space={4} mt={4} mx='auto'>
-        <FooterMenu testID='storiesOfFooterMenu' activeIcon={iconName} onChange={onChange} />
-      </Column>
-    );
+    return <FooterMenu testID='storiesOfFooterMenu' activeIcon={iconName} onChange={onChange} />;
   });

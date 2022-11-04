@@ -5,6 +5,7 @@ import HeartsCredits from '../../../../molecules/src/lib/HeartsCredits';
 import { colors } from 'libs/ui/theme/src/colors';
 import { Icon, IconType, Pressable, Row } from '@inheartive/ui/atoms';
 import { View } from 'react-native';
+import { Box, HStack } from 'native-base';
 
 export type IconNameType = 'homepage' | 'search' | 'heart' | 'plus' | 'star';
 
@@ -15,21 +16,13 @@ export interface FooterMenuProps {
 }
 
 const FooterMenu: React.ComponentType<FooterMenuProps> = ({ testID, activeIcon, onChange }) => {
-  const style = {
-    flex: 1,
-    height: 60,
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: 'white',
-  };
-
   const activeColor = colors.footer[800];
   const inActiveColor = colors.footer[50];
   const iconColor = (iconName: IconNameType) => (activeIcon === iconName ? activeColor : inActiveColor);
 
   return (
-    <View style={style} testID={testID}>
-      <Row space={3} alignItems='center'>
+    <Box flex={1} safeAreaTop width='100%' alignSelf='flex-end' justifyContent='space-between'>
+      <HStack bg='white' safeAreaBottom justifyContent='space-between' px='4' alignItems='center'>
         <Pressable p={1} onPress={() => onChange('homepage')}>
           <Icon name={IconType.homeOutline} size={50} color={iconColor('homepage')} />
         </Pressable>
@@ -45,8 +38,8 @@ const FooterMenu: React.ComponentType<FooterMenuProps> = ({ testID, activeIcon, 
         <Pressable p={1} onPress={() => onChange('star')}>
           <Icon name={IconType.starOutline} size={50} color={iconColor('star')} />
         </Pressable>
-      </Row>
-    </View>
+      </HStack>
+    </Box>
   );
 };
 

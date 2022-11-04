@@ -10,6 +10,8 @@ import {
   SortKey,
 } from '@inheartive/data';
 
+import { FooterMenu, IconNameType } from '@inheartive/ui/organisms';
+
 export function AuctionsPage() {
   const [auctions, setAuctions] = useState<IAuction[]>([]);
 
@@ -37,16 +39,24 @@ export function AuctionsPage() {
   }, [sortBy, sortDir, selectedCategoryID]);
 
   return (
-    <AuctionsTemplate
-      categories={categories}
-      selectedCategoryID={selectedCategoryID}
-      onCategoryChange={(id) => setSelectedCategoryID(id)}
-      sortBy={sortBy}
-      onSortByChange={(sortBy) => setSortBy(sortBy)}
-      sortDir={sortDir}
-      onSortDirChange={(sortDir) => setSortDir(sortDir)}
-      auctions={auctions}
-    />
+    <>
+      <AuctionsTemplate
+        categories={categories}
+        selectedCategoryID={selectedCategoryID}
+        onCategoryChange={(id) => setSelectedCategoryID(id)}
+        sortBy={sortBy}
+        onSortByChange={(sortBy) => setSortBy(sortBy)}
+        sortDir={sortDir}
+        onSortDirChange={(sortDir) => setSortDir(sortDir)}
+        auctions={auctions}
+      />
+      <FooterMenu
+        activeIcon={'search'}
+        onChange={function (iconName: IconNameType): void {
+          console.log('Change to ' + iconName);
+        }}
+      />
+    </>
   );
 }
 
