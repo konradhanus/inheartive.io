@@ -15,10 +15,5 @@ jobs:
       - run: yarn install
       - run: npm install -g nx
       - run: nx build-android mobile
+      - run: yarn nx affected --target=build
       - run: echo "🎉 ${{ job.status }}. 🎉"
-      - name: Generate App APK
-        run: |
-          cd android && ./gradlew assembleRelease --no-daemon
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
