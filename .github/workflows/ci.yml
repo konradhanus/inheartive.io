@@ -15,5 +15,5 @@ jobs:
       - run: yarn install
       - run: npm install -g nx
       - run: nx build-android mobile
-      - run: yarn nx affected --target=build
+      - run: cd apps/mobile/android && ./gradlew assembleRelease --no-daemon
       - run: echo "🎉 ${{ job.status }}. 🎉"
