@@ -11,6 +11,7 @@ import {
 } from '@inheartive/data';
 
 import { FooterMenu, IconNameType } from '@inheartive/ui/organisms';
+import { ScrollView, View } from 'native-base';
 
 export function AuctionsPage() {
   const [auctions, setAuctions] = useState<IAuction[]>([]);
@@ -40,24 +41,26 @@ export function AuctionsPage() {
   }, [sortBy, sortDir, selectedCategoryID]);
 
   return (
-    <>
-      <AuctionsTemplate
-        categories={categories}
-        selectedCategoryID={selectedCategoryID}
-        onCategoryChange={(id) => setSelectedCategoryID(id)}
-        sortBy={sortBy}
-        onSortByChange={(sortBy) => setSortBy(sortBy)}
-        sortDir={sortDir}
-        onSortDirChange={(sortDir) => setSortDir(sortDir)}
-        auctions={auctions}
-      />
+    <View style={{ flex: 1 }}>
+      <ScrollView>
+        <AuctionsTemplate
+          categories={categories}
+          selectedCategoryID={selectedCategoryID}
+          onCategoryChange={(id) => setSelectedCategoryID(id)}
+          sortBy={sortBy}
+          onSortByChange={(sortBy) => setSortBy(sortBy)}
+          sortDir={sortDir}
+          onSortDirChange={(sortDir) => setSortDir(sortDir)}
+          auctions={auctions}
+        />
+      </ScrollView>
       <FooterMenu
         activeIcon={activeIcon}
         onChange={function (iconName: IconNameType): void {
           setActiveIcon(iconName);
         }}
       />
-    </>
+    </View>
   );
 }
 
