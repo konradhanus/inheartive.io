@@ -19,3 +19,6 @@ jobs:
       - name: Generate App APK
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
