@@ -3,8 +3,7 @@
 import React from 'react';
 import HeartsCredits from '../../../../molecules/src/lib/HeartsCredits';
 import { colors } from 'libs/ui/theme/src/colors';
-import { Icon, IconType, Pressable, Row } from '@inheartive/ui/atoms';
-import { View } from 'react-native';
+import { Icon, IconType, Pressable } from '@inheartive/ui/atoms';
 import { Box, HStack } from 'native-base';
 
 export type IconNameType = 'homepage' | 'search' | 'heart' | 'plus' | 'star';

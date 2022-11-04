@@ -20,6 +20,7 @@ export function AuctionsPage() {
 
   const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpirationDate);
   const [sortDir, setSortDir] = useState<SortDirection>(SortDirection.ASC);
+  const [activeIcon, setActiveIcon] = useState<IconNameType>('search');
 
   useEffect(() => {
     // TODO: Categories API call
@@ -51,9 +52,9 @@ export function AuctionsPage() {
         auctions={auctions}
       />
       <FooterMenu
-        activeIcon={'search'}
+        activeIcon={activeIcon}
         onChange={function (iconName: IconNameType): void {
-          console.log('Change to ' + iconName);
+          setActiveIcon(iconName);
         }}
       />
     </>
