@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 
 export interface IDropdownItem {
   name: string;
-  route: string;
+  route?: string;
 }
 export interface IDropdownProps {
   dropdownList: IDropdownItem[];

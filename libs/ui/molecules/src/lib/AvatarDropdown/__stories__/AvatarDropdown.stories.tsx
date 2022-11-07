@@ -3,25 +3,7 @@ import { storiesOf } from '@storybook/react-native';
 import { NativeBaseProvider } from 'native-base';
 import { AvatarDropdown } from '../AvatarDropdown';
 import { NativeRouter } from 'react-router-native';
-
-const dropdownList = [
-  {
-    name: 'Basic',
-    route: '/signin',
-  },
-  {
-    name: 'Basic 1',
-    route: '/signin',
-  },
-  {
-    name: 'Basic 2',
-    route: '/signin',
-  },
-  {
-    name: 'Basic 3',
-    route: '/signin',
-  },
-];
+import { dropdownItemsMock } from '@inheartive/data';
 
 storiesOf('Dropdown', module)
   .addDecorator((story) => (
@@ -29,4 +11,4 @@ storiesOf('Dropdown', module)
       <NativeRouter>{story()}</NativeRouter>
     </NativeBaseProvider>
   ))
-  .add('Basic', () => <AvatarDropdown dropdownList={dropdownList} />);
+  .add('Basic', () => <AvatarDropdown dropdownList={dropdownItemsMock} />);
