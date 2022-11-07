@@ -1,112 +1,112 @@
-#  build-android:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-#      # Setup build
-#      - uses: actions/checkout@v3
-#      - uses: actions/setup-node@v3
-#        with:
-#          node-version: '14'
-#      - run: yarn install
-#      - run: npm install -g nx
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      # Setup build
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: yarn install
+      - run: npm install -g nx
+
+      - name: Building App
+        id: building_app
+        run: nx build-android mobile
+      - name: Sign App Bundle
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: apps/mobile/android/app/build/outputs/apk/release
+          # ANDROID_SIGNING_KEY: The base64 encoded signing key used to sign your app
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          # ANDROID_ALIAS: The alias of your signing key
+          alias: ${{ secrets.ANDROID_ALIAS }}
+          # ANDROID_KEY_STORE_PASSWORD: The password to your signing Keystore
+          keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          # ANDROID_KEY_PASSWORD: The private key password for your signing Keystore
+          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+      ## Distribute  App to google play alpha track
+      - name: Upload App to Google Play
+        uses: r0adkll/upload-google-play@v1
+        with:
+          # ANDROID_SERVICE_ACCOUNT_JSON_TEXT: Private key for Google Play APi Bitrise Deploy
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_TEXT }}
+          packageName: com.test.test
+          releaseFiles: apps/mobile/android/app/build/outputs/bundle/release/*.aab
+          track: alpha
+          status: completed
+          inAppUpdatePriority: 2
+      - run: echo "🎉 ${{ job.status }}. 🎉"
+
+#  name: build-ios
+#  on:
+#    push:
+#      branches:
+#        - relese
+#  jobs:
+#    build-android:
+#      runs-on: macOS-latest
+#      steps:
+#        - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#        # Setup build
+#        - name: Check out Git repository
+#        - uses: actions/checkout@v3
+#            -
+#        - name: Get yarn cache directory path
+#            id: yarn-cache-dir-path
+#            run: echo "::set-output name=dir::$(yarn cache dir)"
+#            with:
+#              path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+#              key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+#              restore-keys: |
+#                ${{ runner.os }}-yarn-
 #
-#      - name: Building App
-#        id: building_app
-#        run: nx build-android mobile
-#      - name: Sign App Bundle
-#        id: sign_app
-#        uses: r0adkll/sign-android-release@v1
-#        with:
-#          releaseDirectory: apps/mobile/android/app/build/outputs/apk/release
-#          # ANDROID_SIGNING_KEY: The base64 encoded signing key used to sign your app
-#          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
-#          # ANDROID_ALIAS: The alias of your signing key
-#          alias: ${{ secrets.ANDROID_ALIAS }}
-#          # ANDROID_KEY_STORE_PASSWORD: The password to your signing Keystore
-#          keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
-#          # ANDROID_KEY_PASSWORD: The private key password for your signing Keystore
-#          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+#        - name: Install dependencies
+#          run: yarn install --frozen-lockfile --network-timeout 300000
 #
-#      ## Distribute  App to google play alpha track
-#      - name: Upload App to Google Play
-#        uses: r0adkll/upload-google-play@v1
-#        with:
-#          # ANDROID_SERVICE_ACCOUNT_JSON_TEXT: Private key for Google Play APi Bitrise Deploy
-#          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_TEXT }}
-#          packageName: com.test.test
-#          releaseFiles: apps/mobile/android/app/build/outputs/bundle/release/*.aab
-#          track: alpha
-#          status: completed
-#          inAppUpdatePriority: 2
-#      - run: echo "🎉 ${{ job.status }}. 🎉"
+#        - name: Setup Ruby (bundle)
+#            uses: ruby/setup-ruby@v1
+#            with:
+#              ruby-version: 2.6
+#              bundler-cache: true
 #
-  name: build-ios
-  on:
-    push:
-      branches:
-        - relese
-  jobs:
-    build-android:
-      runs-on: macOS-latest
-      steps:
-        - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-        # Setup build
-        - name: Check out Git repository
-        - uses: actions/checkout@v3
-            -
-        - name: Get yarn cache directory path
-            id: yarn-cache-dir-path
-            run: echo "::set-output name=dir::$(yarn cache dir)"
-            with:
-              path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-              key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-              restore-keys: |
-                ${{ runner.os }}-yarn-
-
-        - name: Install dependencies
-          run: yarn install --frozen-lockfile --network-timeout 300000
-
-        - name: Setup Ruby (bundle)
-            uses: ruby/setup-ruby@v1
-            with:
-              ruby-version: 2.6
-              bundler-cache: true
-
-        - name: Restore Pods cache
-            uses: actions/cache@v2
-            with:
-              path: |
-                ios/Pods
-                ~/Library/Caches/CocoaPods
-                ~/.cocoapods
-              key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
-              restore-keys: |
-                ${{ runner.os }}-pods-
-
-        - name: Install Pods
-          run: cd ios && pod install --repo-update && cd ..
-
-        - name: Build IOS App
-          uses: yukiarrr/ios-build-action@v1.4.0
-          with:
-            project-path: ios/MyApp.xcodeproj
-#            IOS_P12_BASE64 - key and certificate
-            p12-base64: ${{ secrets.IOS_P12_BASE64 }}
-#            IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
-            mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
-            code-signing-identity: 'iPhone Distribution'
-#            IOS_TEAM_ID : your apple team id
-            team-id: ${{ secrets.IOS_TEAM_ID }}
-#            IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
-            certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-            workspace-path: ios/MyApp.xcworkspace
-            scheme: MyApp
-
-            - name: 'Upload app to TestFlight'
-                uses: apple-actions/upload-testflight-build@v1
-                with:
-                  app-path: 'output.ipa'
-                  issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-                  api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
-                  api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
-        - run: echo "🎉 ${{ job.status }}. 🎉"
+#        - name: Restore Pods cache
+#            uses: actions/cache@v2
+#            with:
+#              path: |
+#                ios/Pods
+#                ~/Library/Caches/CocoaPods
+#                ~/.cocoapods
+#              key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+#              restore-keys: |
+#                ${{ runner.os }}-pods-
+#
+#        - name: Install Pods
+#          run: cd ios && pod install --repo-update && cd ..
+#
+#        - name: Build IOS App
+#          uses: yukiarrr/ios-build-action@v1.4.0
+#          with:
+#            project-path: ios/MyApp.xcodeproj
+##            IOS_P12_BASE64 - key and certificate
+#            p12-base64: ${{ secrets.IOS_P12_BASE64 }}
+##            IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
+#            mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+#            code-signing-identity: 'iPhone Distribution'
+##            IOS_TEAM_ID : your apple team id
+#            team-id: ${{ secrets.IOS_TEAM_ID }}
+##            IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
+#            certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+#            workspace-path: ios/MyApp.xcworkspace
+#            scheme: MyApp
+#
+#            - name: 'Upload app to TestFlight'
+#                uses: apple-actions/upload-testflight-build@v1
+#                with:
+#                  app-path: 'output.ipa'
+#                  issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#                  api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+#                  api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+#        - run: echo "🎉 ${{ job.status }}. 🎉"
