@@ -1,6 +1,6 @@
-import { IDropdown } from './dropdown';
+import { IDropdownItem } from './dropdown';
 
-export const dropdownItemsMock: IDropdown[] = [
+export const dropdownItemsMock: IDropdownItem[] = [
   {
     name: 'Basic',
     route: '/signin',
