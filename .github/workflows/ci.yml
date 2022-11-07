@@ -1,3 +1,9 @@
+name: build-android
+on:
+  push:
+    branches:
+      - relese
+jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
@@ -17,7 +23,7 @@
         id: sign_app
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: apps/mobile/android/app/build/outputs/apk/release
+          releaseDirectory: apps/mobile/android/app/build/outputs/bundle/release
           # ANDROID_SIGNING_KEY: The base64 encoded signing key used to sign your app
           signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
           # ANDROID_ALIAS: The alias of your signing key
