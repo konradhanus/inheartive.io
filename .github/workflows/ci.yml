@@ -27,7 +27,7 @@ jobs:
           # ANDROID_SIGNING_KEY: The base64 encoded signing key used to sign your app
           signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
           # ANDROID_ALIAS: The alias of your signing key
-          alias: ${{ secrets.ANDROID_ALIAS }} 
+          alias: ${{ secrets.ANDROID_ALIAS }}
           # ANDROID_KEY_STORE_PASSWORD: The password to your signing Keystore
           keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
           # ANDROID_KEY_PASSWORD: The private key password for your signing Keystore
@@ -44,4 +44,4 @@ jobs:
           track: alpha
           status: completed
           inAppUpdatePriority: 2
-            - run: echo "🎉 ${{ job.status }}. 🎉"
+      - run: echo "🎉 ${{ job.status }}. 🎉"
