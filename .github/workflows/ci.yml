@@ -8,12 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      # Setup build
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
       - run: yarn install
       - run: npm install -g nx
-      - run: nx build-android mobile
-      - run: cd apps/mobile/android && ./gradlew assembleRelease --no-daemon
-      - run: echo "🎉 ${{ job.status }}. 🎉"
+
+      - name: Building App
+        id: building_app
+        run: nx build-android mobile
