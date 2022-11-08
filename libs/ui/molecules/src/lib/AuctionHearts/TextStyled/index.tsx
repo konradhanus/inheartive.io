@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { Text } from '@inheartive/ui/atoms';
 
 const TextStyled = styled(Text)`
-  top: -2;
+  vertical-align: middle;
 `;
 
 export default TextStyled;
