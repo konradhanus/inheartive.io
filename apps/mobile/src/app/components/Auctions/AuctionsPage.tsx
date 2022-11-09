@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React, { useEffect, useState } from 'react';
 import AuctionsTemplate from './AuctionsTemplate';
 import {
@@ -10,8 +11,8 @@ import {
   SortKey,
 } from '@inheartive/data';
 
-import { FooterMenu, IconNameType } from '@inheartive/ui/organisms';
 import { ScrollView, View } from 'native-base';
+import { IconNameType } from '@inheartive/ui/organisms';
 
 export function AuctionsPage() {
   const [auctions, setAuctions] = useState<IAuction[]>([]);
@@ -21,7 +22,7 @@ export function AuctionsPage() {
 
   const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpirationDate);
   const [sortDir, setSortDir] = useState<SortDirection>(SortDirection.ASC);
-  const [activeIcon, setActiveIcon] = useState<IconNameType>('search');
+  const [activeIcon, setActiveIcon] = useState<IconNameType>(IconNameType.search);
 
   useEffect(() => {
     // TODO: Categories API call
@@ -52,14 +53,9 @@ export function AuctionsPage() {
           sortDir={sortDir}
           onSortDirChange={(sortDir) => setSortDir(sortDir)}
           auctions={auctions}
+          activeIcon={activeIcon}
         />
       </ScrollView>
-      <FooterMenu
-        activeIcon={activeIcon}
-        onChange={function (iconName: IconNameType): void {
-          setActiveIcon(iconName);
-        }}
-      />
     </View>
   );
 }

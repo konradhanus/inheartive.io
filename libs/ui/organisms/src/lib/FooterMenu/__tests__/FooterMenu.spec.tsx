@@ -1,16 +1,14 @@
 import { render } from '@inheartive/ui/testing';
-import { FooterMenu, IconNameType } from '../FooterMenu';
-
-const testID = 'FooterMenuId';
-const quantity = 1000;
+import { FooterMenu } from '../FooterMenu';
+import { IconNameType } from '../FooterMenuTypes';
 
 describe('FooterMenu', () => {
+  const testID = 'FooterMenuId';
+
   it('should render successfully footer menu', () => {
-    const { getByText, getByTestId } = render(
-      <FooterMenu testID={testID} activeIcon={'search'} onChange={() => console.log('FooterMenu - test')} />
-    );
+    const activeIcon = IconNameType.star;
+    const { getByTestId } = render(<FooterMenu testID={testID} activeIcon={activeIcon} />);
 
     expect(getByTestId(testID)).toBeTruthy();
-    expect(getByText(String(quantity))).toBeTruthy();
   });
 });

@@ -1,7 +1,8 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
-import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
+import { AuctionsList, FilteringArea, FooterMenu, IconNameType } from '@inheartive/ui/organisms';
 import { Link } from 'react-router-native';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
   sortDir: SortDirection;
   onSortDirChange: (sortDir: SortDirection) => void;
   auctions: IAuction[];
+  activeIcon: IconNameType;
 }
 
 export function AuctionsTemplate(props: Props) {
@@ -25,6 +27,7 @@ export function AuctionsTemplate(props: Props) {
     onSortByChange,
     sortDir,
     onSortDirChange,
+    activeIcon,
   } = props;
 
   return (
@@ -46,6 +49,7 @@ export function AuctionsTemplate(props: Props) {
       />
 
       <AuctionsList auctions={auctions} />
+      <FooterMenu activeIcon={activeIcon} />
     </View>
   );
 }
