@@ -10,7 +10,7 @@
     "resolveJsonModule": true
   },
   "files": ["../../node_modules/@nrwl/react-native/typings/svg.d.ts"],
-  "include": [],
+  "include": ["libs/ui/**/src/index.ts", "libs/ui/**/src/lib/**/*.tsx"],
   "references": [
     {
       "path": "./tsconfig.app.json"
