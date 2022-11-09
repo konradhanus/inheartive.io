@@ -7,13 +7,13 @@ import { Link } from 'react-router-native';
 
 interface Props {
   auction: IAuction;
-  linkPatternWithId: string;
+  linkPatternWithId?: string;
 }
 
 function AuctionCard(props: Props) {
   const { id, author, title, heartcoins, imageSrc, expirationDate } = props.auction;
 
-  const link = props.linkPatternWithId.replace(':id', id);
+  const link = props.linkPatternWithId ? props.linkPatternWithId.replace(':id', id) : undefined;
 
   return (
     <View>
@@ -37,10 +37,15 @@ function AuctionCard(props: Props) {
           </Badge>
         </View>
       </ImageBackground>
+
       <View py={1} px={3}>
-        <Link to={link}>
+        {link ? (
+          <Link to={link}>
+            <Text fontSize={16}>{title}</Text>
+          </Link>
+        ) : (
           <Text fontSize={16}>{title}</Text>
-        </Link>
+        )}
       </View>
     </View>
   );

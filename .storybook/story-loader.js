@@ -19,6 +19,7 @@ function loadStories() {
   require('../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories');
   require('../libs/ui/atoms/src/lib/Image/__stories__/Image.stories');
   require('../libs/ui/atoms/src/lib/ImageBackground/__stories__/ImageBackground.stories');
+  require('../libs/ui/organisms/src/lib/AuctionCard/__stories__/AuctionCard.stories');
 }
 
 const stories = [
@@ -37,6 +38,7 @@ const stories = [
   '../libs/ui/atoms/src/lib/Icon/__stories__/Icon.stories',
   '../libs/ui/atoms/src/lib/Image/__stories__/Image.stories',
   '../libs/ui/atoms/src/lib/ImageBackground/__stories__/ImageBackground.stories',
+  '../libs/ui/organisms/src/lib/AuctionCard/__stories__/AuctionCard.stories',
 ];
 
 module.exports = {
