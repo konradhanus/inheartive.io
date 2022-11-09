@@ -3,6 +3,7 @@ import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
 import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
 import { Link } from 'react-router-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Props {
   categories: ICategory[];
@@ -16,6 +17,8 @@ interface Props {
 }
 
 export function AuctionsTemplate(props: Props) {
+  const insets = useSafeAreaInsets();
+
   const {
     auctions,
     categories,
@@ -28,7 +31,7 @@ export function AuctionsTemplate(props: Props) {
   } = props;
 
   return (
-    <View mt={100} px={10}>
+    <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
       <View mb={5}>
         <Link to='/sign-in'>
           <Text>Sign in</Text>
@@ -45,7 +48,7 @@ export function AuctionsTemplate(props: Props) {
         onSortDirChange={onSortDirChange}
       />
 
-      <AuctionsList auctions={auctions} />
+      <AuctionsList auctions={auctions} linkPatternWithId='/auctions/:id' />
     </View>
   );
 }
