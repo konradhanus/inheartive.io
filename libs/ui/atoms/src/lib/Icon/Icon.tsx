@@ -38,6 +38,7 @@ import {
   FavouriteIcon,
   DeleteIcon,
 } from 'native-base';
+import { InterfaceIconProps } from 'native-base/src/components/primitives/Icon/types';
 
 enum IconType {
   add = 'add',
@@ -80,9 +81,7 @@ enum IconType {
   plusCircle = 'plus-circle',
 }
 
-interface IIconProps {
-  size?: number;
-  color?: string;
+interface IIconProps extends InterfaceIconProps {
   name: IconType;
 }
 
@@ -90,6 +89,7 @@ function Icon(props: IIconProps) {
   const iconProperties = {
     size: props.size || 17,
     color: props.color || colors.primary[600],
+    testID: props.testID,
   };
 
   switch (props.name) {
