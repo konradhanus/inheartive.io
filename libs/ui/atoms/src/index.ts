@@ -8,6 +8,7 @@ export * from './lib/Container';
 export * from './lib/FormControl';
 export * from './lib/Icon';
 export * from './lib/Image';
+export * from './lib/ImageBackground';
 export * from './lib/Input';
 export * from './lib/Pressable';
 export * from './lib/Row';

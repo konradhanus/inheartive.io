@@ -1,9 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
-
 import { PixelRatio, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
 import { Box, Image, Text } from '@inheartive/ui/atoms';
 import { LoginFormControl } from '@inheartive/ui/molecules';
 import { View } from 'native-base';
