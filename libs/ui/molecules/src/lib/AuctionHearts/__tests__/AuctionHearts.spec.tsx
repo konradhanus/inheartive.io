@@ -1,14 +1,12 @@
 import { render } from '@inheartive/ui/testing';
 import { AuctionHearts } from '../AuctionHearts';
 
-const testID = 'auctionHeartsId';
 const quantity = 1000;
 
 describe('AuctionHearts', () => {
-  it('should render successfully auction hearts', () => {
-    const { getByText, getByTestId } = render(<AuctionHearts quantity={quantity} testID={testID} />);
+  it('should render with proper quantity', () => {
+    const { getByText } = render(<AuctionHearts quantity={quantity} />);
 
-    expect(getByTestId(testID)).toBeTruthy();
-    expect(getByText(String(quantity))).toBeTruthy();
+    expect(getByText(`${quantity}`)).toBeTruthy();
   });
 });
