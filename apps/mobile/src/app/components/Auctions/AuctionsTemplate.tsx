@@ -2,7 +2,7 @@
 import React from 'react';
 import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
-import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
+import { AuctionsList, FilteringArea, FooterMenu, IconNameType } from '@inheartive/ui/organisms';
 import { Link } from 'react-router-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -15,6 +15,7 @@ interface Props {
   sortDir: SortDirection;
   onSortDirChange: (sortDir: SortDirection) => void;
   auctions: IAuction[];
+  activeIcon: IconNameType;
 }
 
 export function AuctionsTemplate(props: Props) {
@@ -29,6 +30,7 @@ export function AuctionsTemplate(props: Props) {
     onSortByChange,
     sortDir,
     onSortDirChange,
+    activeIcon,
   } = props;
 
   return (
@@ -48,8 +50,8 @@ export function AuctionsTemplate(props: Props) {
         sortDir={sortDir}
         onSortDirChange={onSortDirChange}
       />
-
       <AuctionsList auctions={auctions} linkPatternWithId='/auctions/:id' />
+      <FooterMenu activeIcon={activeIcon} />
     </View>
   );
 }

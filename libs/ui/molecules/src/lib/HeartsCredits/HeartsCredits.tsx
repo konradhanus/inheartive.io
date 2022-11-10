@@ -7,16 +7,22 @@ import { colors } from '@inheartive/ui/theme';
 
 interface IHeartsCreditsProps {
   credit: number;
-  testID?: string | undefined;
+  size: number;
+  testID?: string;
 }
 
 const HeartsCredits: ComponentType<IHeartsCreditsProps> = (props) => {
-  const { credit, testID } = props;
+  const { credit, size, testID } = props;
+
+  const style = {
+    height: 60,
+    width: 60,
+  };
 
   return (
-    <Row space={2} alignItems='center'>
-      <Icon name={IconType.favorite} size={80} color={colors.primary[600]} />
-      <TextStyled fontSize='xl' testID={testID} fontFamily='body' fontStyle='normal' fontWeight='400'>
+    <Row space={2} alignItems='center' style={style}>
+      <Icon name={IconType.favorite} size={size} color={colors.primary[600]} />
+      <TextStyled fontSize='lg' testID={testID} fontFamily='body' fontStyle='normal' fontWeight='400'>
         {credit}
       </TextStyled>
     </Row>
