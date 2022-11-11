@@ -15,12 +15,15 @@
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/mapped-types": "^1.2.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/typeorm": "^9.0.1",
     "@react-native-community/masked-view": "^0.1.11",
     "native-base": "^3.4.17",
+    "pg": "^8.8.0",
     "react": "18.2.0",
-    "react-is": "18.2.0",
     "react-dom": "18.2.0",
+    "react-is": "18.2.0",
     "react-native": "0.70.1",
     "react-native-gesture-handler": "^2.7.0",
     "react-native-reanimated": "^2.10.0",
@@ -32,7 +35,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
     "styled-components": "5.3.5",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "typeorm": "^0.3.10"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
