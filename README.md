@@ -23,6 +23,8 @@ on iOS simulator press `command + control + z`, select on context menu
 
 ### Prerequisites:
 
+- [Docker](https://www.docker.com/) with
+  [Compose](https://docs.docker.com/compose/)
 - [Node.js](https://nodejs.org/) >= 16,
 - [Yarn v1](https://classic.yarnpkg.com/)
 - [Android Studio](https://developer.android.com/studio) _(to run Android
@@ -56,6 +58,20 @@ $ yarn start:ios # or yarn nx run-ios
 
 ```shell
 $ yarn start:android # or yarn nx run-android
+```
+
+### run docker (database)
+
+```shell
+$ docker compose --env-file ./.env.dev up
+```
+
+or
+
+create .env file in root directory with DB_PASSWORD and run
+
+```shell
+$ docker compose up
 ```
 
 ### run storybook
