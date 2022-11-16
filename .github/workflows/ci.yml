@@ -33,13 +33,23 @@
            # ANDROID_KEY_PASSWORD: The private key password for your signing Keystore
            keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
+       - name: Upload from public_html via FTP
+         uses: airvzxf/ftp-deployment-action@latest
+         with:
+           server: ${{ secrets.FTP_SERVER }}
+           user: ${{ secrets.FTP_USERNAME }}
+           password: ${{ secrets.FTP_PASSWORD }}
+           local_dir: "./apps/mobile/android/app/build/outputs/bundle/release"
+           remote_dir: "./"
+           delete: "false"
+
        ## Distribute  App to google play alpha track
        - name: Upload App to Google Play
          uses: r0adkll/upload-google-play@v1
          with:
            # ANDROID_SERVICE_ACCOUNT_JSON_TEXT: Private key for Google Play APi Bitrise Deploy
            serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_TEXT }}
-           packageName: com.test.test
+           packageName: com.intive.inheartive
            releaseFiles: apps/mobile/android/app/build/outputs/bundle/release/*.aab
            track: alpha
            status: completed
