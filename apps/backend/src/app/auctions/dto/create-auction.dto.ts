@@ -1,4 +1,11 @@
+import { IsNumber, IsPositive, IsString } from 'class-validator';
+import { Category } from '../../categories/entities/category.entity';
+
 export class CreateAuctionDto {
+  @IsString()
   readonly title: string;
-  readonly category: string;
+
+  @IsNumber()
+  @IsPositive()
+  readonly category: Category;
 }
