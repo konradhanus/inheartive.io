@@ -1,12 +1,4 @@
-import {
-  BadRequestException,
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  InternalServerErrorException,
-  NestInterceptor,
-  NotFoundException,
-} from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor, NotFoundException } from '@nestjs/common';
 import { catchError, Observable, throwError } from 'rxjs';
 import { EntityNotFoundError } from 'typeorm';
 
@@ -21,11 +13,7 @@ export class NotFoundInterceptor implements NestInterceptor {
           return throwError(() => new NotFoundException());
         }
 
-        if (err instanceof BadRequestException) {
-          return throwError(() => err);
-        }
-
-        return throwError(() => new InternalServerErrorException());
+        return throwError(() => err);
       })
     );
   }
