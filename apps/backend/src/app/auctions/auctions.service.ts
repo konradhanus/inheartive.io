@@ -6,6 +6,8 @@ import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 import { Auction } from './entities/auction.entity';
 
+const MAX_LIMIT = 50;
+
 @Injectable()
 export class AuctionsService {
   constructor(
@@ -25,7 +27,7 @@ export class AuctionsService {
     return this.auctionsRepository.find({
       relations: ['category'],
       skip: offset,
-      take: limit,
+      take: limit || MAX_LIMIT,
       order: {
         id: 'ASC',
       },
