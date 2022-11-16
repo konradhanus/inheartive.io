@@ -1,10 +1,9 @@
-import { IsNumber, IsOptional, IsPositive, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsNumber, IsOptional, IsPositive, IsString, Length, MaxLength } from 'class-validator';
 import { Category } from '../../categories/entities/category.entity';
 
 export class CreateAuctionDto {
   @IsString()
-  @MinLength(6)
-  @MaxLength(50)
+  @Length(6, 50)
   readonly title: string;
 
   @IsString()

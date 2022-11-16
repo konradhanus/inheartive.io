@@ -1,8 +1,7 @@
-import { IsString, MaxLength, MinLength } from 'class-validator';
+import { IsString, Length } from 'class-validator';
 
 export class CreateCategoryDto {
   @IsString()
-  @MinLength(2)
-  @MaxLength(30)
+  @Length(2, 30)
   readonly name: string;
 }
