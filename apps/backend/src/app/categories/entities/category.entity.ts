@@ -1,7 +1,15 @@
-import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Auction } from '../../auctions/entities/auction.entity';
 
-@Entity('categories')
+@Entity()
 export class Category {
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,4 +20,10 @@ export class Category {
   @JoinTable()
   @OneToMany((type) => Auction, (auction) => auction.category)
   auctions: Auction[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  upodatedAt: Date;
 }

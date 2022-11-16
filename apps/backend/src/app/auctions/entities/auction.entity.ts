@@ -1,7 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Category } from '../../categories/entities/category.entity';
 
-@Entity('auctions')
+@Entity()
 export class Auction {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,4 +11,10 @@ export class Auction {
 
   @ManyToOne((type) => Category, (category) => category.auctions)
   category: Category;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  upodatedAt: Date;
 }
