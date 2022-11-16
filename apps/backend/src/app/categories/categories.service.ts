@@ -22,10 +22,8 @@ export class CategoriesService {
     return this.categoriesRepository.find();
   }
 
-  async findOne(id: number) {
-    const category = await this.categoriesRepository.findOneOrFail({ where: { id } });
-
-    return category;
+  findOne(id: number) {
+    return this.categoriesRepository.findOneOrFail({ where: { id } });
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
@@ -41,9 +39,7 @@ export class CategoriesService {
     return this.categoriesRepository.save(category);
   }
 
-  async remove(id: number) {
-    const category = await this.categoriesRepository.findOneByOrFail({ id });
-
-    return this.categoriesRepository.remove(category);
+  remove(id: number) {
+    return this.categoriesRepository.findOneOrFail({ where: { id } });
   }
 }

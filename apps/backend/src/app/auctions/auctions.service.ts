@@ -34,10 +34,8 @@ export class AuctionsService {
     });
   }
 
-  async findOne(id: number) {
-    const auction = await this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category'] });
-
-    return auction;
+  findOne(id: number) {
+    return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category'] });
   }
 
   async update(id: number, updateAuctionDto: UpdateAuctionDto) {
