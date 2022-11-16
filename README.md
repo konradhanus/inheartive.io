@@ -100,9 +100,22 @@ $ yarn nx storybook mobile
 ### Login to application
 
 Backend application have integration to external user provider. Locally it's
-[Authelia](https://www.authelia.com/) which is statically configured to serve
-users from YAML file. Currently available users are `user1@inheartive.com` and
-`user2@inheartive.com` with password `Password1`.
+[Keycloak](https://www.keycloak.org/) which is preconfigured with `my-app`
+realm. Available users:
+
+- `admin` (or by email `admin@inheartive.io`) with `Password1` password,
+
+* `user` (or by email `user@inheartive.io`) with `Password1` password.
+
+_Notice that users are named like admin/user, but actually we don't fetch any
+roles data from OAuth2 token._
+
+### Keycloak admin console
+
+Keycloak have admin console via WebUI available at http://localhost:8080/. Admin
+account is predefined with environments in docker-compose file.
+
+Hit `admin` with `admin` password to login to console.
 
 ### Detox for React Native
 

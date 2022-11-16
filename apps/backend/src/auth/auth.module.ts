@@ -1,22 +1,26 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
+import { Oauth2Strategy } from './oauth2.strategy';
+import { JwtStrategy } from './jwt.strategy';
 import { AuthService } from './auth.service';
-import { buildOpenIdClient, OidcStrategy } from './oidc.strategy';
-import { SessionSerializer } from './session.serializer';
-
-const OidcStrategyFactory = {
-  provide: 'OidcStrategy',
-  useFactory: async (authService: AuthService) => {
-    const client = await buildOpenIdClient();
-    return new OidcStrategy(authService, client);
-  },
-  inject: [AuthService],
-};
 
 @Module({
   controllers: [AuthController],
-  providers: [OidcStrategyFactory, SessionSerializer, AuthService],
-  imports: [PassportModule.register({ session: true, defaultStrategy: 'oidc' })],
+  providers: [Oauth2Strategy, JwtStrategy, AuthService],
+  imports: [
+    ConfigModule,
+    PassportModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: configService.get<string>('JWT_TOKEN_ALIVE') },
+      }),
+    }),
+  ],
 })
 export class AuthModule {}

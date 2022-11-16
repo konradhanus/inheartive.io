@@ -1,36 +1,22 @@
-import { Controller, Get, Request, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Controller, Get, Request, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
-import { LoginGuard } from './login.guard';
+import { Oauth2Guard } from './oauth2.guard';
+import { AuthService } from './auth.service';
 
 @Controller()
 export class AuthController {
-  @UseGuards(LoginGuard)
-  @Get('/_auth/callback')
-  loginCallback(@Res() res: Response) {
-    // TODO redirect to caller (frontend or mobile)
-    res.redirect('/api/user');
+  constructor(private readonly authService: AuthService) {}
+
+  @UseGuards(Oauth2Guard)
+  @Get('_auth/callback')
+  loginCallback(@Request() req, @Res() res: Response) {
+    const token = this.authService.generateJwt(req.user);
+    return res.status(200).json({ token, user: req.user });
   }
 
-  @UseGuards(LoginGuard)
-  @Get('/login')
+  @UseGuards(Oauth2Guard)
+  @Get('login')
   login() {
     return;
-  }
-
-  @Get('/user')
-  user(@Request() req) {
-    if (!req.user) {
-      throw new UnauthorizedException();
-    }
-    const { name, email } = req.user.user;
-    return {
-      name,
-      email,
-    };
-  }
-
-  @Get('/logout')
-  async logout(@Request() req, @Res() res: Response) {
-    req.session.destroy(async () => res.redirect('/api/'));
   }
 }
