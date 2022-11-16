@@ -9,6 +9,9 @@ export class Auction {
   @Column()
   title: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @ManyToOne((type) => Category, (category) => category.auctions)
   category: Category;
 
