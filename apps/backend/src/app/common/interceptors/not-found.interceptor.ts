@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   CallHandler,
   ExecutionContext,
   Injectable,
@@ -18,6 +19,10 @@ export class NotFoundInterceptor implements NestInterceptor {
 
         if (err instanceof EntityNotFoundError) {
           return throwError(() => new NotFoundException());
+        }
+
+        if (err instanceof BadRequestException) {
+          return throwError(() => err);
         }
 
         return throwError(() => new InternalServerErrorException());
