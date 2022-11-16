@@ -29,7 +29,7 @@ export class AuctionsService {
       skip: offset,
       take: limit || MAX_LIMIT,
       order: {
-        id: 'ASC',
+        createdAt: 'DESC',
       },
     });
   }
