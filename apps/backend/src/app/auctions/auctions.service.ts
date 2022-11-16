@@ -26,6 +26,9 @@ export class AuctionsService {
       relations: ['category'],
       skip: offset,
       take: limit,
+      order: {
+        id: 'ASC',
+      },
     });
   }
 
