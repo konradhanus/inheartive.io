@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Asset } from './entities/asset.entity';
 import { Repository } from 'typeorm';
 import { CreateAssetDto } from './dto/create-asset.dto';
+import { unlink } from 'fs';
 
 @Injectable()
 export class AssetsService {
@@ -35,8 +36,13 @@ export class AssetsService {
     const asset = await this.assetRepository.findOneBy({ id });
 
     if (!asset) {
-      throw new NotFoundException(`Auction #${id} not found`);
+      throw new NotFoundException(`Asset #${id} not found`);
     }
+
+    unlink(asset.fullPath, (err) => {
+      return new NotFoundException(err.message);
+      // @TODO Crate or/and implement Logger functionality
+    });
 
     return this.assetRepository.remove(asset);
   }

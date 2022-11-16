@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Asset {
@@ -6,8 +6,17 @@ export class Asset {
   id: number;
 
   @Column()
-  name: string;
+  originalName: string;
 
   @Column()
-  path: string;
+  fullPath: string;
+
+  @Column()
+  mimeType: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

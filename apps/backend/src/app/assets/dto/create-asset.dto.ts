@@ -1,4 +1,5 @@
 export class CreateAssetDto {
-  readonly name: string;
-  readonly path: string;
+  readonly originalName: string;
+  readonly fullPath: string;
+  readonly mimeType: string;
 }

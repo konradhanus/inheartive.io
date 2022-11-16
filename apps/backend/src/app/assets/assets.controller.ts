@@ -1,10 +1,14 @@
-import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { AssetsService } from './assets.service';
+import { Express } from 'express';
+import { Multer } from 'multer';
+import { ConfigService } from '@nestjs/config';
 import { CreateAssetDto } from './dto/create-asset.dto';
 
 @Controller('assets')
 export class AssetsController {
-  constructor(private readonly assetsService: AssetsService) {}
+  constructor(private readonly assetsService: AssetsService, private readonly configService: ConfigService) {}
 
   @Get()
   findAll() {
@@ -17,8 +21,14 @@ export class AssetsController {
   }
 
   @Post()
-  create(@Body() createAssetDto: CreateAssetDto) {
-    return this.assetsService.create(createAssetDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(@UploadedFile() file: Express.Multer.File) {
+    const asset: CreateAssetDto = {
+      originalName: file.originalname,
+      fullPath: file.path,
+      mimeType: file.mimetype,
+    };
+    return this.assetsService.create(asset);
   }
 
   @Delete(':id')

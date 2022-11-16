@@ -5,8 +5,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuctionsModule } from './auctions/auctions.module';
 import { ConfigModule } from '@nestjs/config';
-import { AssetsController } from './assets/assets.controller';
-import { AssetsService } from './assets/assets.service';
 import { AssetsModule } from './assets/assets.module';
 
 @Module({
