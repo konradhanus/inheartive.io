@@ -1,6 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityNotFoundError, Repository } from 'typeorm';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 import { Auction } from './entities/auction.entity';
@@ -18,16 +19,18 @@ export class AuctionsService {
     return this.auctionsRepository.save(auction);
   }
 
-  findAll() {
-    return this.auctionsRepository.find();
+  findAll(paginationQuery: PaginationQueryDto) {
+    const { limit, offset } = paginationQuery;
+
+    return this.auctionsRepository.find({
+      relations: ['category'],
+      skip: offset,
+      take: limit,
+    });
   }
 
   async findOne(id: number) {
-    const auction = await this.auctionsRepository.findOneBy({ id });
-
-    if (!auction) {
-      throw new NotFoundException(`Auction #${id} not found`);
-    }
+    const auction = await this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category'] });
 
     return auction;
   }
@@ -39,18 +42,14 @@ export class AuctionsService {
     });
 
     if (!auction) {
-      throw new NotFoundException(`Auction #${id} not found`);
+      throw new EntityNotFoundError(Auction, { id });
     }
 
     return this.auctionsRepository.save(auction);
   }
 
   async remove(id: number) {
-    const auction = await this.auctionsRepository.findOneBy({ id });
-
-    if (!auction) {
-      throw new NotFoundException(`Auction #${id} not found`);
-    }
+    const auction = await this.auctionsRepository.findOneByOrFail({ id });
 
     return this.auctionsRepository.remove(auction);
   }

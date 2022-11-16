@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Category } from '../../categories/entities/category.entity';
 
-@Entity()
+@Entity('auctions')
 export class Auction {
   @PrimaryGeneratedColumn()
   id: number;
@@ -8,6 +9,6 @@ export class Auction {
   @Column()
   title: string;
 
-  @Column()
-  category: string;
+  @ManyToOne((type) => Category, (category) => category.auctions)
+  category: Category;
 }

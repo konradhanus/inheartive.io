@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { AuctionsService } from './auctions.service';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
@@ -13,22 +14,26 @@ export class AuctionsController {
   }
 
   @Get()
-  findAll() {
-    return this.auctionsService.findAll();
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
+    return this.auctionsService.findAll(paginationQuery);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.auctionsService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    const auction = this.auctionsService.findOne(id);
+
+    return auction;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuctionDto: UpdateAuctionDto) {
-    return this.auctionsService.update(+id, updateAuctionDto);
+  update(@Param('id') id: number, @Body() updateAuctionDto: UpdateAuctionDto) {
+    return this.auctionsService.update(id, updateAuctionDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.auctionsService.remove(+id);
+  async remove(@Param('id') id: number) {
+    const result = await this.auctionsService.remove(id);
+
+    return result;
   }
 }
