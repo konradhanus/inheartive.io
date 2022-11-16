@@ -1,12 +1,31 @@
 # inHEARTive
 
+## Run Storybook for React Native
+
+### on first terminal
+
+- `yarn install`
+- `yarn start`
+
+### on second terminal
+
+- `yarn nx run-ios`
+- `yarn nx storybook mobile`
+
+on iOS simulator press `command + control + z`, select on context menu
+`toogle storybook`
+
+## Graph
+
+- `yarn graph`
+
 ## Installation
 
 ### Prerequisites:
 
 - [Docker](https://www.docker.com/) with
   [Compose](https://docs.docker.com/compose/)
-- [Node.js](https://nodejs.org/) >= 16
+- [Node.js](https://nodejs.org/) >= 16,
 - [Yarn v1](https://classic.yarnpkg.com/)
 - [Android Studio](https://developer.android.com/studio) _(to run Android
   emulator)_
@@ -42,6 +61,20 @@ $ yarn start:ios # or yarn nx run-ios
 $ yarn start:android # or yarn nx run-android
 ```
 
+### run docker (database)
+
+```shell
+$ docker compose --env-file ./.env.dev up
+```
+
+or
+
+create .env file in root directory with DB_PASSWORD and run
+
+```shell
+$ docker compose up
+```
+
 ### run storybook
 
 #### iOS
@@ -70,6 +103,37 @@ Backend application have integration to external user provider. Locally it's
 [Authelia](https://www.authelia.com/) which is statically configured to serve
 users from YAML file. Currently available users are `user1@inheartive.com` and
 `user2@inheartive.com` with password `Password1`.
+
+### Detox for React Native
+
+#### pre requirements
+
+```
+$ brew tap wix/brew
+$ brew install applesimutils
+$ npm install -g jest
+```
+
+### How to run E2E test
+
+`yarn nx run-ios` `yarn nx test-ios mobile-e2e`
+
+### Storybook for React Native
+
+Run as described in **Installation** and in 2nd terminal run additional command:
+
+```shell
+yarn nx storybook mobile
+```
+
+on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
+`toogle storybook`.
+
+### Troubleshoots
+
+`1. The keyboard does not work on the IOS emulator.`
+
+- The solution to this problem is to press cmd + shift + k.
 
 ### Detox for React Native
 
