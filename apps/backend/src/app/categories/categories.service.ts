@@ -26,11 +26,11 @@ export class CategoriesService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.categoriesRepository.findOneOrFail({ where: { id } });
   }
 
-  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
     const category = await this.categoriesRepository.preload({
       id,
       ...updateCategoryDto,
@@ -43,7 +43,7 @@ export class CategoriesService {
     return this.categoriesRepository.save(category);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.categoriesRepository.findOneOrFail({ where: { id } });
   }
 }

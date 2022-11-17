@@ -19,19 +19,19 @@ export class AuctionsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id') id: string) {
     const auction = this.auctionsService.findOne(id);
 
     return auction;
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateAuctionDto: UpdateAuctionDto) {
+  update(@Param('id') id: string, @Body() updateAuctionDto: UpdateAuctionDto) {
     return this.auctionsService.update(id, updateAuctionDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
+  async remove(@Param('id') id: string) {
     const result = await this.auctionsService.remove(id);
 
     return result;

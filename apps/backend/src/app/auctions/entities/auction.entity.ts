@@ -3,14 +3,17 @@ import { Category } from '../../categories/entities/category.entity';
 
 @Entity()
 export class Auction {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   title: string;
 
   @Column({ nullable: true })
   description: string;
+
+  @Column()
+  minPrice: number;
 
   @ManyToOne((type) => Category, (category) => category.auctions)
   category: Category;

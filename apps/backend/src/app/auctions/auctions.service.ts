@@ -34,11 +34,11 @@ export class AuctionsService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category'] });
   }
 
-  async update(id: number, updateAuctionDto: UpdateAuctionDto) {
+  async update(id: string, updateAuctionDto: UpdateAuctionDto) {
     const auction = await this.auctionsRepository.preload({
       id,
       ...updateAuctionDto,
@@ -51,7 +51,7 @@ export class AuctionsService {
     return this.auctionsRepository.save(auction);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const auction = await this.auctionsRepository.findOneByOrFail({ id });
 
     return this.auctionsRepository.remove(auction);

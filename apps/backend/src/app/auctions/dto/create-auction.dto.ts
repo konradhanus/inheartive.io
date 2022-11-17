@@ -1,5 +1,6 @@
-import { IsNumber, IsOptional, IsPositive, IsString, Length, MaxLength } from 'class-validator';
+import { IsNumber, IsOptional, IsPositive, IsString, IsUUID, Length, Max, MaxLength, Validate } from 'class-validator';
 import { Category } from '../../categories/entities/category.entity';
+import { CategoryExistsRule } from '../../categories/validators/category-exists';
 
 export class CreateAuctionDto {
   @IsString()
@@ -13,5 +14,10 @@ export class CreateAuctionDto {
 
   @IsNumber()
   @IsPositive()
+  @Max(10000)
+  readonly minPrice: number;
+
+  @IsUUID()
+  @Validate(CategoryExistsRule)
   readonly category: Category;
 }
