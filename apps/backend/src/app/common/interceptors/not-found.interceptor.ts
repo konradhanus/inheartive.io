@@ -1,13 +1,15 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor, NotFoundException } from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor, NotFoundException } from '@nestjs/common';
 import { catchError, Observable, throwError } from 'rxjs';
 import { EntityNotFoundError } from 'typeorm';
 
 @Injectable()
 export class NotFoundInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(NotFoundInterceptor.name);
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       catchError((err) => {
-        console.error(err);
+        this.logger.error(err);
 
         if (err instanceof EntityNotFoundError) {
           return throwError(() => new NotFoundException());
