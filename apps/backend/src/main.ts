@@ -5,6 +5,7 @@
 
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import * as passport from 'passport';
 import { useContainer } from 'class-validator';
 
 import { AppModule } from './app/app.module';
@@ -27,10 +28,14 @@ async function bootstrap() {
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+
+  app.use(passport.initialize());
+
   const port = process.env.PORT || 3333;
 
   app.useGlobalInterceptors(new NotFoundInterceptor());
   await app.listen(port);
+
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
 
