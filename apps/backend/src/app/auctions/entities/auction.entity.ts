@@ -1,13 +1,26 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Category } from '../../categories/entities/category.entity';
 
 @Entity()
 export class Auction {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   title: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @Column()
-  category: string;
+  minPrice: number;
+
+  @ManyToOne((type) => Category, (category) => category.auctions)
+  category: Category;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  upodatedAt: Date;
 }
