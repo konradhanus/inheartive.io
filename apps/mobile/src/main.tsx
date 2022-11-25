@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
 import App from './storybook/toggle-storybook';
 
-AppRegistry.registerComponent('Mobile', () => App);
+AppRegistry.registerComponent('inHEARTive', () => App);
