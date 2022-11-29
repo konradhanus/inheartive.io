@@ -11,7 +11,6 @@ import {
   SortKey,
 } from '@inheartive/data';
 
-import { ScrollView, View } from 'native-base';
 import { IconNameType } from '@inheartive/ui/organisms';
 
 export function AuctionsPage() {
@@ -42,21 +41,17 @@ export function AuctionsPage() {
   }, [sortBy, sortDir, selectedCategoryID]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView>
-        <AuctionsTemplate
-          categories={categories}
-          selectedCategoryID={selectedCategoryID}
-          onCategoryChange={(id) => setSelectedCategoryID(id)}
-          sortBy={sortBy}
-          onSortByChange={(sortBy) => setSortBy(sortBy)}
-          sortDir={sortDir}
-          onSortDirChange={(sortDir) => setSortDir(sortDir)}
-          auctions={auctions}
-          activeIcon={activeIcon}
-        />
-      </ScrollView>
-    </View>
+    <AuctionsTemplate
+      categories={categories}
+      selectedCategoryID={selectedCategoryID}
+      onCategoryChange={(id) => setSelectedCategoryID(id)}
+      sortBy={sortBy}
+      onSortByChange={(sortBy) => setSortBy(sortBy)}
+      sortDir={sortDir}
+      onSortDirChange={(sortDir) => setSortDir(sortDir)}
+      auctions={auctions}
+      activeIcon={activeIcon}
+    />
   );
 }
 

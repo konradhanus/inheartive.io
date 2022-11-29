@@ -5,6 +5,7 @@ import { Text, View } from '@inheartive/ui/atoms';
 import { AuctionsList, FilteringArea, FooterMenu, IconNameType } from '@inheartive/ui/organisms';
 import { Link } from 'react-router-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native';
 
 interface Props {
   categories: ICategory[];
@@ -34,25 +35,31 @@ export function AuctionsTemplate(props: Props) {
   } = props;
 
   return (
-    <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
-      <View mb={5}>
-        <Link to='/sign-in'>
-          <Text>Sign in</Text>
-        </Link>
-      </View>
+    <>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
+            <View mb={5}>
+              <Link to='/sign-in'>
+                <Text>Sign in</Text>
+              </Link>
+            </View>
 
-      <FilteringArea
-        categories={categories}
-        selectedCategoryID={selectedCategoryID}
-        onCategoryChange={onCategoryChange}
-        sortBy={sortBy}
-        onSortByChange={onSortByChange}
-        sortDir={sortDir}
-        onSortDirChange={onSortDirChange}
-      />
-      <AuctionsList auctions={auctions} linkPatternWithId='/auctions/:id' />
+            <FilteringArea
+              categories={categories}
+              selectedCategoryID={selectedCategoryID}
+              onCategoryChange={onCategoryChange}
+              sortBy={sortBy}
+              onSortByChange={onSortByChange}
+              sortDir={sortDir}
+              onSortDirChange={onSortDirChange}
+            />
+            <AuctionsList auctions={auctions} linkPatternWithId='/auctions/:id' />
+          </View>
+        </ScrollView>
+      </View>
       <FooterMenu activeIcon={activeIcon} />
-    </View>
+    </>
   );
 }
 
