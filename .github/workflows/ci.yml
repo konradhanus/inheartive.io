@@ -51,7 +51,7 @@
            serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_TEXT }}
            packageName: com.intive.inheartive
            releaseFiles: apps/mobile/android/app/build/outputs/bundle/release/*.aab
-           track: alpha
+           track: Alpha
            status: completed
            inAppUpdatePriority: 2
        - run: echo "🎉 ${{ job.status }}. 🎉"
