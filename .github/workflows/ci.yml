@@ -21,7 +21,7 @@ jobs:
         run: nx build-android mobile
       - name: Sign App Bundle
         id: sign_app
-        uses: r0adkll/sign-android-release@v1
+        uses: r0adkll/sign-android-release@v1.0.19
         with:
           releaseDirectory: apps/mobile/android/app/build/outputs/bundle/release
           # ANDROID_SIGNING_KEY: The base64 encoded signing key used to sign your app
