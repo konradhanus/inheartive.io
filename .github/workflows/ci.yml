@@ -1,66 +1,65 @@
- name: build-android
- on:
-   push:
-     branches:
-       - relese
- jobs:
-   build-android:
-     runs-on: ubuntu-latest
-     steps:
-       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-       # Setup build
-       - uses: actions/checkout@v3
-       - uses: actions/setup-node@v3
-         with:
-           node-version: '14'
-       - run: yarn install
-       - run: npm install -g nx
+name: build-android
+on:
+  push:
+    branches:
+      - release
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      # Setup build
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: yarn install
+      - run: npm install -g nx
 
-       - name: Building App
-         id: building_app
-         run: nx build-android mobile
-       - name: Sign App Bundle
-         id: sign_app
-         uses: r0adkll/sign-android-release@v1
-         with:
-           releaseDirectory: apps/mobile/android/app/build/outputs/bundle/release
-           # ANDROID_SIGNING_KEY: The base64 encoded signing key used to sign your app
-           signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
-           # ANDROID_ALIAS: The alias of your signing key
-           alias: ${{ secrets.ANDROID_ALIAS }}
-           # ANDROID_KEY_STORE_PASSWORD: The password to your signing Keystore
-           keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
-           # ANDROID_KEY_PASSWORD: The private key password for your signing Keystore
-           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Building App
+        id: building_app
+        run: nx build-android mobile
+      - name: Sign App Bundle
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: apps/mobile/android/app/build/outputs/bundle/release
+          # ANDROID_SIGNING_KEY: The base64 encoded signing key used to sign your app
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          # ANDROID_ALIAS: The alias of your signing key
+          alias: ${{ secrets.ANDROID_ALIAS }}
+          # ANDROID_KEY_STORE_PASSWORD: The password to your signing Keystore
+          keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          # ANDROID_KEY_PASSWORD: The private key password for your signing Keystore
+          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-       - name: Upload from public_html via FTP
-         uses: airvzxf/ftp-deployment-action@latest
-         with:
-           server: ${{ secrets.FTP_SERVER }}
-           user: ${{ secrets.FTP_USERNAME }}
-           password: ${{ secrets.FTP_PASSWORD }}
-           local_dir: "./apps/mobile/android/app/build/outputs/bundle/release"
-           remote_dir: "./"
-           delete: "false"
+      - name: Upload from public_html via FTP
+        uses: airvzxf/ftp-deployment-action@latest
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: './apps/mobile/android/app/build/outputs/bundle/release'
+          remote_dir: './'
+          delete: 'false'
 
-       ## Distribute  App to google play alpha track
-       - name: Upload App to Google Play
-         uses: r0adkll/upload-google-play@v1
-         with:
-           # ANDROID_SERVICE_ACCOUNT_JSON_TEXT: Private key for Google Play APi Bitrise Deploy
-           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_TEXT }}
-           packageName: com.intive.inheartive
-           releaseFiles: apps/mobile/android/app/build/outputs/bundle/release/*.aab
-           track: Alpha
-           status: completed
-           inAppUpdatePriority: 2
-       - run: echo "🎉 ${{ job.status }}. 🎉"
-
+      ## Distribute  App to google play alpha track
+      - name: Upload App to Google Play
+        uses: r0adkll/upload-google-play@v1
+        with:
+          # ANDROID_SERVICE_ACCOUNT_JSON_TEXT: Private key for Google Play APi Bitrise Deploy
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_TEXT }}
+          packageName: com.intive.inheartive
+          releaseFiles: apps/mobile/android/app/build/outputs/bundle/release/*.aab
+          track: Alpha
+          status: completed
+          inAppUpdatePriority: 2
+      - run: echo "🎉 ${{ job.status }}. 🎉"
 #name: build-ios
 #on:
 #  push:
 #    branches:
-#      - relese
+#      - release
 #jobs:
 #  build-android:
 #    runs-on: macOS-latest
