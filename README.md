@@ -1,5 +1,24 @@
 # inHEARTive
 
+## Run Storybook for React Native
+
+### on first terminal
+
+- `yarn install`
+- `yarn start`
+
+### on second terminal
+
+- `yarn nx run-ios`
+- `yarn nx storybook mobile`
+
+on iOS simulator press `command + control + z`, select on context menu
+`toogle storybook`
+
+## Graph
+
+- `yarn graph`
+
 ## Installation
 
 ### Prerequisites:
@@ -26,13 +45,14 @@ In development environment create file: local.properties with path for sdk:
 $ yarn install --frozen-lockfile
 $ yarn start
 ```
-### on second terminal  (iOS)
+
+### on second terminal (iOS)
 
 ```shell
 $ yarn start:ios # or yarn nx run-ios
 ```
 
-### on second terminal  (android)
+### on second terminal (android)
 
 ```shell
 $ yarn start:android # or yarn nx run-android
@@ -41,14 +61,16 @@ $ yarn start:android # or yarn nx run-android
 ### run storybook
 
 #### iOS
+
 - simulator press `command + control + z`, select on context menu
-`toogle storybook`
+  `toogle storybook`
 
 #### android
-- simulator press `command + control + m`, select on context menu
-`toogle storybook`
 
-or 
+- simulator press `command + control + m`, select on context menu
+  `toogle storybook`
+
+or
 
 Run storybook from command line
 
@@ -85,35 +107,78 @@ on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
 
 ### Generate new files with Nx
 
-There are at least 2 options: 
-1. Install <b>Nx Console</b> for Visual Studio Code or other development environment and choose properly options from menu
+There are at least 2 options:
+
+1. Install <b>Nx Console</b> for Visual Studio Code or other development
+   environment and choose properly options from menu
+
+### Troubleshoots
+
+`1. The keyboard does not work on the IOS emulator.`
+
+- The solution to this problem is to press cmd + shift + k.
+
+### Detox for React Native
+
+#### pre requirements
+
+```
+$ brew tap wix/brew
+$ brew install applesimutils
+$ npm install -g jest
+```
+
+### How to run E2E test
+
+`yarn nx run-ios` `yarn nx test-ios mobile-e2e`
+
+### Storybook for React Native
+
+Run as described in **Installation** and in 2nd terminal run additional command:
+
+```shell
+yarn nx storybook mobile
+```
+
+on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
+`toogle storybook`.
+
+### Generate new files with Nx
+
+There are at least 2 options:
+
+1. Install <b>Nx Console</b> for Visual Studio Code or other development
+   environment and choose properly options from menu
 2. Write a command in <b>terminal</b>
 
 #### Generate Library
 
 1. Generate library in development environment:
 
-Go to main menu: GENERATE & RU TARGET -> generate -> <b> @nrwl/react-native:library </b>
-Write name and directory
+Go to main menu: GENERATE & RU TARGET -> generate -> <b>
+@nrwl/react-native:library </b> Write name and directory
 
 2. Run in terminal a command:
 
 ```shell
  $ nx generate @nrwl/react-native:library exampleLibrary --directory=ui/example
 ```
+
 All library files will be generated in <b>libs</b> directory
 
 #### Generate Component
 
-1. Go to main menu: GENERATE & RU TARGET -> generate -> <b> @nrwl/react-native:component </b>
-Fill in the selected options
+1. Go to main menu: GENERATE & RU TARGET -> generate -> <b>
+   @nrwl/react-native:component </b> Fill in the selected options
 
 2. In terminal run a command:
 
 ```shell
 $ nx generate @nrwl/react-native:component ExampleComponent --project=mobile --directory=app --pascalCaseFiles
 ```
-Two files will be generated: ExampleComponent.tsx file for component and ExampleComponent.spec.tsx for  tests in example-component directory 
+
+Two files will be generated: ExampleComponent.tsx file for component and
+ExampleComponent.spec.tsx for tests in example-component directory
 
 ## Support
 
