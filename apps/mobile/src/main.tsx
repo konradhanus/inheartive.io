@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './storybook/toggle-storybook';
+import AppRoot from './app/App';
 
-AppRegistry.registerComponent('inHEARTive', () => App);
+AppRegistry.registerComponent('inHEARTive', () => AppRoot);

@@ -1,30 +1,22 @@
 import React from 'react';
-import { Badge, Column, Row, View, Text } from '@inheartive/ui/atoms';
+import { View } from '@inheartive/ui/atoms';
 import { IAuction } from '@inheartive/data';
+import { AuctionCard } from '../AuctionCard';
 
 interface Props {
   auctions: IAuction[];
+  linkPatternWithId: string;
 }
 
 function AuctionsList(props: Props) {
-  const { auctions } = props;
+  const { auctions, linkPatternWithId } = props;
 
   return (
-    <View mt={5}>
+    <View>
       {auctions.map((auction) => (
-        <Column mb={5} key={auction.id}>
-          <Text fontSize={12}>Category: {auction.category.name}</Text>
-          <Text fontSize={12}>Author: {auction.author.name}</Text>
-          <Text bold>{auction.title}</Text>
-          <Text>Heartcoins: {auction.heartcoins}</Text>
-          <Text>Created: {auction.creationDate}</Text>
-          <Row>
-            <Text>Expiration:</Text>
-            <Badge colorScheme={'primary'} rounded={16}>
-              {auction.expirationDate}
-            </Badge>
-          </Row>
-        </Column>
+        <View key={auction.id} mt={5}>
+          <AuctionCard auction={auction} linkPatternWithId={linkPatternWithId} />
+        </View>
       ))}
     </View>
   );
