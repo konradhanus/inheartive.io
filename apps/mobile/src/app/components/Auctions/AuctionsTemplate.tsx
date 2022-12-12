@@ -2,7 +2,7 @@
 import React from 'react';
 import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
-import { AuctionsList, FilteringArea, FooterMenu, IconNameType } from '@inheartive/ui/organisms';
+import { AuctionsList, FilteringArea, FooterMenu, IconNameType, AppHeader } from '@inheartive/ui/organisms';
 import { Link } from 'react-router-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native';
@@ -36,6 +36,7 @@ export function AuctionsTemplate(props: Props) {
 
   return (
     <>
+      <AppHeader />
       <View style={{ flex: 1 }}>
         <ScrollView>
           <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
