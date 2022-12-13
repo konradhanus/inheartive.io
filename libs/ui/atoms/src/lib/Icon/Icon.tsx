@@ -3,7 +3,6 @@ import React from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import { colors } from '@inheartive/ui/theme';
 
 import {
   MoonIcon,
@@ -37,6 +36,8 @@ import {
   PlayIcon,
   FavouriteIcon,
   DeleteIcon,
+  useTheme,
+  getColor,
 } from 'native-base';
 import { InterfaceIconProps } from 'native-base/src/components/primitives/Icon/types';
 
@@ -86,9 +87,11 @@ interface IIconProps extends InterfaceIconProps {
 }
 
 function Icon(props: IIconProps) {
+  const theme = useTheme();
+
   const iconProperties = {
     size: props.size || 17,
-    color: props.color || colors.primary[600],
+    color: props.color ? getColor(props.color, theme.colors, theme) : theme.colors.primary['500'],
     testID: props.testID,
   };
 
