@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Asset } from './entities/asset.entity';
 import { Repository } from 'typeorm';
@@ -7,6 +7,8 @@ import { unlink } from 'fs';
 
 @Injectable()
 export class AssetsService {
+  private readonly logger = new Logger(AssetsService.name);
+
   constructor(
     @InjectRepository(Asset)
     private readonly assetRepository: Repository<Asset>
@@ -29,8 +31,8 @@ export class AssetsService {
   async remove(id: number) {
     const asset = await this.assetRepository.findOneByOrFail({ id });
 
-    unlink(asset.fullPath, () => {
-      // @TODO Crate or/and implement Logger functionality
+    unlink(asset.fullPath, (err) => {
+      this.logger.error(err);
     });
 
     return this.assetRepository.remove(asset);
