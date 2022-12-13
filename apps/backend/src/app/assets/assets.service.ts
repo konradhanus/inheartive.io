@@ -18,7 +18,7 @@ export class AssetsService {
     return this.assetRepository.find();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return await this.assetRepository.findOneByOrFail({ id });
   }
 
@@ -28,7 +28,7 @@ export class AssetsService {
     return this.assetRepository.save(asset);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const asset = await this.assetRepository.findOneByOrFail({ id });
 
     unlink(asset.fullPath, (err) => {
