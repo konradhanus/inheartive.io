@@ -1,9 +1,7 @@
 import { Controller, Get, Post, Delete, Param, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AssetsService } from './assets.service';
-import { Express } from 'express';
 import { Multer } from 'multer';
-import { ConfigService } from '@nestjs/config';
 import { CreateAssetDto } from './dto/create-asset.dto';
 
 @Controller('assets')
@@ -22,7 +20,7 @@ export class AssetsController {
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  create(@UploadedFile() file: Express.Multer.File) {
+  create(@UploadedFile() file: Multer.File) {
     const asset: CreateAssetDto = {
       originalName: file.originalname,
       fullPath: file.path,
