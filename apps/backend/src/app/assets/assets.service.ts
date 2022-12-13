@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Asset } from './entities/asset.entity';
 import { Repository } from 'typeorm';
@@ -17,13 +17,7 @@ export class AssetsService {
   }
 
   async findOne(id: number) {
-    const asset = await this.assetRepository.findOneBy({ id });
-
-    if (!asset) {
-      throw new NotFoundException(`Asset #${id} not found`);
-    }
-
-    return asset;
+    return await this.assetRepository.findOneByOrFail({ id });
   }
 
   create(createAssetDto: CreateAssetDto) {
@@ -33,14 +27,9 @@ export class AssetsService {
   }
 
   async remove(id: number) {
-    const asset = await this.assetRepository.findOneBy({ id });
+    const asset = await this.assetRepository.findOneByOrFail({ id });
 
-    if (!asset) {
-      throw new NotFoundException(`Asset #${id} not found`);
-    }
-
-    unlink(asset.fullPath, (err) => {
-      return new NotFoundException(err.message);
+    unlink(asset.fullPath, () => {
       // @TODO Crate or/and implement Logger functionality
     });
 

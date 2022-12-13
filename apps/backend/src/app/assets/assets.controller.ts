@@ -8,7 +8,7 @@ import { CreateAssetDto } from './dto/create-asset.dto';
 
 @Controller('assets')
 export class AssetsController {
-  constructor(private readonly assetsService: AssetsService, private readonly configService: ConfigService) {}
+  constructor(private readonly assetsService: AssetsService) {}
 
   @Get()
   findAll() {
