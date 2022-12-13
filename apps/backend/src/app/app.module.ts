@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from '../auth/auth.module';
 import { AuctionsModule } from './auctions/auctions.module';
 import { ConfigModule } from '@nestjs/config';
+import { CategoriesModule } from './categories/categories.module';
 import { AssetsModule } from './assets/assets.module';
 
 @Module({
@@ -12,7 +13,6 @@ import { AssetsModule } from './assets/assets.module';
     ConfigModule.forRoot({
       envFilePath: ['.env', '.env.dev'],
     }),
-    AuctionsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -23,6 +23,9 @@ import { AssetsModule } from './assets/assets.module';
       autoLoadEntities: true,
       synchronize: process.env.MODE === 'dev',
     }),
+    AuthModule,
+    AuctionsModule,
+    CategoriesModule,
     AssetsModule,
   ],
   controllers: [AppController],
