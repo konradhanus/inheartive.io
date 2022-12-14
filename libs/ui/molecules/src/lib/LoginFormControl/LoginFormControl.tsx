@@ -6,7 +6,9 @@ function LoginFormControl() {
   return (
     <FormControl>
       <Input placeholder='E-mail' size='xl' />
-      <Button mt='4'>SIGN IN</Button>
+      <Button mt='4' colorScheme='secondary'>
+        SIGN IN
+      </Button>
     </FormControl>
   );
 }

@@ -25,7 +25,7 @@ function AuctionCard(props: Props) {
       <ImageBackground style={{ height: 180 }} source={imageSrc ?? placeholder}>
         <View alignItems={'flex-end'} justifyContent={'space-between'} height={'100%'} py={4} px={3}>
           <Icon size={30} name={IconType.starOutline} />
-          <Badge size={'xs'} fontSize={12} bgColor={'primary.600'} rounded={16}>
+          <Badge size={'xs'} fontSize={12} bgColor={'secondary.600'} rounded={16}>
             <Row>
               <Text fontSize={12} mr={2} color={'white'}>
                 Ends in:
