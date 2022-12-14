@@ -6,6 +6,7 @@ import { AuthModule } from '../auth/auth.module';
 import { AuctionsModule } from './auctions/auctions.module';
 import { ConfigModule } from '@nestjs/config';
 import { CategoriesModule } from './categories/categories.module';
+import { AssetsModule } from './assets/assets.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CategoriesModule } from './categories/categories.module';
     AuthModule,
     AuctionsModule,
     CategoriesModule,
+    AssetsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
