@@ -5,7 +5,7 @@ require_relative '../../../node_modules/@nrwl/react-native/nx_post_install'
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'Mobile' do
+target 'inHEARTive' do
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -28,7 +28,7 @@ target 'Mobile' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'MobileTests' do
+  target 'inHEARTiveTests' do
     inherit! :complete
     # Pods for testing
   end
