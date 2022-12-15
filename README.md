@@ -173,6 +173,37 @@ yarn nx storybook mobile
 on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
 `toogle storybook`.
 
+### Troubleshoots
+
+`1. The keyboard does not work on the IOS emulator.`
+
+- The solution to this problem is to press cmd + shift + k.
+
+### Detox for React Native
+
+#### pre requirements
+
+```
+$ brew tap wix/brew
+$ brew install applesimutils
+$ npm install -g jest
+```
+
+### How to run E2E test
+
+`yarn nx run-ios` `yarn nx test-ios mobile-e2e`
+
+### Storybook for React Native
+
+Run as described in **Installation** and in 2nd terminal run additional command:
+
+```shell
+yarn nx storybook mobile
+```
+
+on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
+`toogle storybook`.
+
 ### Generate new files with Nx
 
 There are at least 2 options:
