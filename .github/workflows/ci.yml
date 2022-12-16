@@ -90,7 +90,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ios/Pods
+            apps/mobile/ios/Pods
             ~/Library/Caches/CocoaPods
             ~/.cocoapods
           key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
@@ -98,7 +98,7 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Install Pods
-        run: cd ios && pod install --repo-update && cd ..
+        run: cd apps/mobile/ios && pod install --repo-update && cd ..
 
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.4.0
