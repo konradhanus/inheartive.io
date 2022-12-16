@@ -104,7 +104,7 @@ jobs:
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.4.0
         with:
-          project-path: ios/MyApp.xcodeproj
+          project-path: ios/inHEARTive.xcodeproj
           # IOS_P12_BASE64 - key and certificate
           p12-base64: ${{ secrets.IOS_P12_BASE64 }}
           # IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
