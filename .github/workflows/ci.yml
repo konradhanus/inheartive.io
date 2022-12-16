@@ -66,10 +66,10 @@ jobs:
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -87,7 +87,7 @@ jobs:
           bundler-cache: true
 
       - name: Restore Pods cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             apps/mobile/ios/Pods
@@ -114,7 +114,7 @@ jobs:
           team-id: ${{ secrets.IOS_TEAM_ID }}
           # IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          workspace-path: ios/inHEARTive.xcworkspace
+          workspace-path: apps/mobile/ios/inHEARTive.xcworkspace
           scheme: inHEARTive
 
       - name: 'Upload app to TestFlight'
