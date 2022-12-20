@@ -15,14 +15,14 @@ function Sort(props: ISortProps) {
   return (
     <Column>
       <Row display={'flex'} alignItems={'center'}>
-        <Text width={70}>Sort by:</Text>
+        <Text width={70}>Sort:</Text>
         <Select
           borderColor={'transparent'}
           selectedValue={sortBy}
-          width={170}
-          accessibilityLabel='Sort by'
+          width={50}
+          accessibilityLabel='Sort'
           color='black'
-          size={16}
+          size={18}
           display='flex'
           flexGrow={1}
           onValueChange={(val) => onSortByChange && onSortByChange(val as SortKey)}
@@ -33,11 +33,13 @@ function Sort(props: ISortProps) {
         </Select>
         {sortDir === SortDirection.ASC ? (
           <Pressable p={1} onPress={() => onSortDirChange && onSortDirChange(SortDirection.DESC)}>
-            <Icon name={IconType.arrowUp} />
+            <Icon name={IconType.arrowUp} color='black' />
+            <Icon name={IconType.arrowDown} color='gray.300' />
           </Pressable>
         ) : (
           <Pressable p={1} onPress={() => onSortDirChange && onSortDirChange(SortDirection.ASC)}>
-            <Icon name={IconType.arrowDown} />
+            <Icon name={IconType.arrowDown} color='black' />
+            <Icon name={IconType.arrowUp} color='gray.300' />
           </Pressable>
         )}
       </Row>

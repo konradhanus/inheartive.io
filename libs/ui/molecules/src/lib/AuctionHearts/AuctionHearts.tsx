@@ -9,8 +9,8 @@ function AuctionHearts(props: IAuctionHeartsProps) {
 
   return (
     <Row space={2} alignItems='center'>
-      <Text>{quantity}</Text>
       <Icon name={IconType.favoriteOutline} size={30} />
+      <Text>{quantity}</Text>
     </Row>
   );
 }

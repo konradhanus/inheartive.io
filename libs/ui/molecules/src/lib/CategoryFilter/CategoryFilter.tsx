@@ -16,7 +16,7 @@ function CategoryFilter(props: ICategoryFilterProps) {
       <Select
         borderColor={'transparent'}
         selectedValue={selectedValue}
-        width={170}
+        width={130}
         accessibilityLabel='Category'
         color='black'
         size={16}

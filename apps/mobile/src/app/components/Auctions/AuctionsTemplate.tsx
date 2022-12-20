@@ -40,12 +40,6 @@ export function AuctionsTemplate(props: Props) {
       <View style={{ flex: 1 }}>
         <ScrollView>
           <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
-            <View mb={5}>
-              <Link to='/sign-in'>
-                <Text>Sign in</Text>
-              </Link>
-            </View>
-
             <FilteringArea
               categories={categories}
               selectedCategoryID={selectedCategoryID}
@@ -56,6 +50,11 @@ export function AuctionsTemplate(props: Props) {
               onSortDirChange={onSortDirChange}
             />
             <AuctionsList auctions={auctions} linkPatternWithId='/auctions/:id' />
+            <View mb={5}>
+              <Link to='/sign-in'>
+                <Text>Sign in</Text>
+              </Link>
+            </View>
           </View>
         </ScrollView>
       </View>
