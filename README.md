@@ -39,6 +39,55 @@ In development environment create file: local.properties with path for sdk:
 
 ![image](https://user-images.githubusercontent.com/101329582/196930246-106e6a46-4eb3-46e1-8ff4-13e06ec9fbf0.png)
 
+### Additional steps for Android on Mac
+
+1. Create file "local.properties" in "apps/mobile/android/".
+2. Add inside "sdk.dir = /Users/<your_computer_name>/Library/Android/sdk". I.
+   ****\***** MacOS ****\*****
+
+   1. Open terminal and write "open .bash_profile"
+   2. Add following lines: export
+      ANDROID_SDK=/Users/<your_computer_name>/Library/Android/sdk export
+      PATH=/Users/<your_computer_name>/Library/Android/sdk/platform-tools:$PATH
+      export ANDROID_HOME=~/Library/Android/sdk/
+      export PATH=$PATH:~/android-sdks/platform-tools/
+      export PATH=$PATH:~/android-sdks/tools/
+
+   3. Save and quit.
+   4. Write in terminal "source ~/.bash_profile".
+   5. Turn off terminals. ****\***** End ****\*****
+
+II. ****\***** As ZSH User ****\*****
+
+1.  Open terminal and write "open ~/.zshrc".
+2.  Add following lines: export JAVA_HOME=/Applications/Android\
+    Studio.app/Contents/jre/Contents/Home export
+    ANDROID_HOME=/Users/<your_computer_name>/Library/Android/sdk export
+    PATH=$ANDROID_HOME/emulator:$PATH export
+    PATH=$ANDROID_HOME/platform-tools:$PATH export
+    PATH=$ANDROID_HOME/tools:$PATH export PATH=$ANDROID_HOME/tools/bin:$PATH
+
+3.  Save and quit.
+4.  Write in terminal "source ~/.zshrc".
+5.  Turn off terminals. ****\***** End ****\*****
+
+### Sync your project via Android Studio:
+
+1. Go File->Reload all from Disk.
+
+### ios on mac
+
+1. Run command in main project directory "inheartive.io" via terminal:
+   - "bundle init"
+   - "gem update --system"
+   - "bundle install"
+2. Go to directory "apps/mobile/ios/" and run command:
+
+- "pod install"
+- "bundle install"
+
+3. Restart all terminals
+
 ## Run inHEARTive
 
 ### on first terminal
@@ -175,9 +224,15 @@ on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
 
 ### Troubleshoots
 
-`1. The keyboard does not work on the IOS emulator.`
+1. The keyboard does not work on the IOS emulator.
 
 - The solution to this problem is to press cmd + shift + k.
+
+2. No bundle URL present.
+   - Close emulator,
+   - Close all terminal,
+   - Use this command: "rm -rf ios/build/; kill $(lsof -t -i:8081);"
+   - Run again application
 
 ### Detox for React Native
 
