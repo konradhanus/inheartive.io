@@ -1,5 +1,11 @@
 # inHEARTive
 
+## Scripts
+
+- Run android emulator with docker and clear cache via:
+  `sh scripts/run-android.sh`
+- Run ios emulator with docker and clear cache via: `sh scripts/run-ios.sh`
+
 ## Run Storybook for React Native
 
 ### on first terminal
@@ -42,8 +48,8 @@ In development environment create file: local.properties with path for sdk:
 ### Additional steps for Android on Mac
 
 1. Create file "local.properties" in "apps/mobile/android/".
-2. Add inside "sdk.dir = /Users/<your_computer_name>/Library/Android/sdk". I.
-   ****\***** MacOS ****\*****
+2. Add inside "sdk.dir = /Users/<your_computer_name>/Library/Android/sdk".
+   I. \***\*\*\*\*** MacOS \***\*\*\*\***
 
    1. Open terminal and write "open .bash_profile"
    2. Add following lines: export
@@ -55,21 +61,19 @@ In development environment create file: local.properties with path for sdk:
 
    3. Save and quit.
    4. Write in terminal "source ~/.bash_profile".
-   5. Turn off terminals. ****\***** End ****\*****
+   5. Turn off terminals. \***\*\*\*\*** End \***\*\*\*\***
 
-II. ****\***** As ZSH User ****\*****
+II. \***\*\*\*\*** As ZSH User \***\*\*\*\***
 
 1.  Open terminal and write "open ~/.zshrc".
 2.  Add following lines: export JAVA_HOME=/Applications/Android\
-    Studio.app/Contents/jre/Contents/Home export
-    ANDROID_HOME=/Users/<your_computer_name>/Library/Android/sdk export
-    PATH=$ANDROID_HOME/emulator:$PATH export
-    PATH=$ANDROID_HOME/platform-tools:$PATH export
-    PATH=$ANDROID_HOME/tools:$PATH export PATH=$ANDROID_HOME/tools/bin:$PATH
+    Studio.app/Contents/jre/Contents/Home export ANDROID_HOME=/Users/<your_computer_name>/Library/Android/sdk
+    export PATH=$ANDROID_HOME/emulator:$PATH export PATH=$ANDROID_HOME/platform-tools:$PATH
+    export PATH=$ANDROID_HOME/tools:$PATH export PATH=$ANDROID_HOME/tools/bin:$PATH
 
 3.  Save and quit.
 4.  Write in terminal "source ~/.zshrc".
-5.  Turn off terminals. ****\***** End ****\*****
+5.  Turn off terminals. \***\*\*\*\*** End \***\*\*\*\***
 
 ### Sync your project via Android Studio:
 
