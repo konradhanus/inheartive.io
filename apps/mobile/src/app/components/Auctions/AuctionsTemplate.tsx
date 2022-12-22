@@ -17,6 +17,8 @@ interface Props {
   onSortDirChange: (sortDir: SortDirection) => void;
   auctions: IAuction[];
   activeIcon: IconNameType;
+  favoriteAuctionsIds: string[];
+  onFavoriteChange: (auctionId: string, isCurrentlyFavorite: boolean) => void;
 }
 
 export function AuctionsTemplate(props: Props) {
@@ -32,6 +34,8 @@ export function AuctionsTemplate(props: Props) {
     sortDir,
     onSortDirChange,
     activeIcon,
+    favoriteAuctionsIds,
+    onFavoriteChange,
   } = props;
 
   return (
@@ -55,7 +59,12 @@ export function AuctionsTemplate(props: Props) {
               sortDir={sortDir}
               onSortDirChange={onSortDirChange}
             />
-            <AuctionsList auctions={auctions} linkPatternWithId='/auctions/:id' />
+            <AuctionsList
+              auctions={auctions}
+              favoriteAuctionsIds={favoriteAuctionsIds}
+              onFavoriteChange={onFavoriteChange}
+              linkPatternWithId='/auctions/:id'
+            />
           </View>
         </ScrollView>
       </View>

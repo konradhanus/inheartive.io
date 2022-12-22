@@ -15,6 +15,7 @@ import { IconNameType } from '@inheartive/ui/organisms';
 
 export function AuctionsPage() {
   const [auctions, setAuctions] = useState<IAuction[]>([]);
+  const [favoriteAuctionsIds, setFavoriteAuctionsIds] = useState<string[]>([]);
 
   const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -26,6 +27,7 @@ export function AuctionsPage() {
   useEffect(() => {
     // TODO: Categories API call
     setCategories(categoriesMock);
+    setFavoriteAuctionsIds(auctionsMock.filter((a, index) => index % 2).map((a) => a.id));
   }, []);
 
   useEffect(() => {
@@ -40,6 +42,14 @@ export function AuctionsPage() {
     setAuctions(finalAuctions);
   }, [sortBy, sortDir, selectedCategoryID]);
 
+  const onFavoriteChange = (auctionId: string, isCurrentlyFavorite: boolean) => {
+    const newFavouriteAuctionsIds = isCurrentlyFavorite
+      ? favoriteAuctionsIds.filter((id) => id !== auctionId)
+      : [...favoriteAuctionsIds, auctionId];
+
+    setFavoriteAuctionsIds(newFavouriteAuctionsIds);
+  };
+
   return (
     <AuctionsTemplate
       categories={categories}
@@ -51,6 +61,8 @@ export function AuctionsPage() {
       onSortDirChange={(sortDir) => setSortDir(sortDir)}
       auctions={auctions}
       activeIcon={activeIcon}
+      favoriteAuctionsIds={favoriteAuctionsIds}
+      onFavoriteChange={onFavoriteChange}
     />
   );
 }
