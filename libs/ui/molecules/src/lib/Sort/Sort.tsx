@@ -1,6 +1,8 @@
 import React from 'react';
-import { Column, Icon, IconType, Pressable, Row, Select, Text } from '@inheartive/ui/atoms';
+import { Column, Icon, IconType, Pressable, Row, Text } from '@inheartive/ui/atoms';
 import { SortDirection, SortKey, sortOptions } from '@inheartive/data';
+import { Actionsheet, Center, useDisclose } from 'native-base';
+import { theme } from '@inheartive/ui/theme';
 
 interface ISortProps {
   onSortByChange?: (sortBy: SortKey) => void;
@@ -11,37 +13,71 @@ interface ISortProps {
 
 function Sort(props: ISortProps) {
   const { onSortByChange, onSortDirChange, sortBy, sortDir } = props;
+  const { isOpen, onOpen, onClose } = useDisclose();
+
+  const SortButton = (props: { onOpen: () => void }) => {
+    const onOpen: () => void = props.onOpen;
+
+    const sortChange = () => {
+      if (sortDir === SortDirection.ASC) {
+        onSortDirChange && onSortDirChange(SortDirection.DESC);
+        onOpen();
+      } else {
+        onSortDirChange && onSortDirChange(SortDirection.ASC);
+        onOpen();
+      }
+    };
+
+    const ButtonText = () => {
+      return (
+        <Text
+          fontSize='lg'
+          _light={{
+            color: theme.colors.trueGray['600'],
+          }}
+        >
+          Sort
+        </Text>
+      );
+    };
+
+    return sortDir === SortDirection.ASC ? (
+      <Pressable onPress={sortChange}>
+        <Row space={3} alignItems='center'>
+          <ButtonText />
+          <Icon name={IconType.chevronDown} size={25} color={theme.colors.trueGray['500']} />
+        </Row>
+      </Pressable>
+    ) : (
+      <Pressable onPress={sortChange}>
+        <Row space={3} alignItems='center'>
+          <ButtonText />
+          <Icon name={IconType.chevronUp} size={25} color={theme.colors.trueGray['500']} />
+        </Row>
+      </Pressable>
+    );
+  };
 
   return (
     <Column>
       <Row display={'flex'} alignItems={'center'}>
-        <Text width={70}>Sort:</Text>
-        <Select
-          borderColor={'transparent'}
-          selectedValue={sortBy}
-          width={50}
-          accessibilityLabel='Sort'
-          color='black'
-          size={18}
-          display='flex'
-          flexGrow={1}
-          onValueChange={(val) => onSortByChange && onSortByChange(val as SortKey)}
-        >
-          {sortOptions.map((option) => (
-            <Select.Item key={option.key} label={option.label} value={option.key} />
-          ))}
-        </Select>
-        {sortDir === SortDirection.ASC ? (
-          <Pressable p={1} onPress={() => onSortDirChange && onSortDirChange(SortDirection.DESC)}>
-            <Icon name={IconType.arrowUp} color='black' />
-            <Icon name={IconType.arrowDown} color='gray.300' />
-          </Pressable>
-        ) : (
-          <Pressable p={1} onPress={() => onSortDirChange && onSortDirChange(SortDirection.ASC)}>
-            <Icon name={IconType.arrowDown} color='black' />
-            <Icon name={IconType.arrowUp} color='gray.300' />
-          </Pressable>
-        )}
+        <Center>
+          <SortButton onOpen={onOpen} />
+          <Actionsheet isOpen={isOpen} onClose={onClose}>
+            <Actionsheet.Content>
+              {sortOptions.map((option) => (
+                <Actionsheet.Item
+                  key={option.key}
+                  onPressIn={() => {
+                    onSortByChange && onSortByChange(option.key as SortKey);
+                  }}
+                >
+                  {option.label}
+                </Actionsheet.Item>
+              ))}
+            </Actionsheet.Content>
+          </Actionsheet>
+        </Center>
       </Row>
     </Column>
   );
