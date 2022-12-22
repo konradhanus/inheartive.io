@@ -39,11 +39,11 @@ export function AuctionsTemplate(props: Props) {
   } = props;
 
   return (
-    <>
+    <View style={{ flex: 1 }} paddingTop={insets.top}>
       <AppHeader />
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <View mt={10} paddingTop={insets.top} paddingBottom={insets.bottom}>
+          <View>
             <View mb={5}>
               <Link to='/sign-in'>
                 <Text>Sign in</Text>
@@ -69,7 +69,7 @@ export function AuctionsTemplate(props: Props) {
         </ScrollView>
       </View>
       <FooterMenu activeIcon={activeIcon} />
-    </>
+    </View>
   );
 }
 
