@@ -1,5 +1,7 @@
 import React from 'react';
-import { Row, Select, ISelectItemProps, Text } from '@inheartive/ui/atoms';
+import { Row, ISelectItemProps, Text, Pressable, Icon, IconType } from '@inheartive/ui/atoms';
+import { theme } from '@inheartive/ui/theme';
+import { Actionsheet, useDisclose } from 'native-base';
 
 interface ICategoryFilterProps {
   items: ISelectItemProps[];
@@ -9,25 +11,51 @@ interface ICategoryFilterProps {
 
 function CategoryFilter(props: ICategoryFilterProps) {
   const { onChange, selectedValue, items } = props;
+  const { isOpen, onOpen, onClose } = useDisclose();
+
+  const CategoryFilterButton = (props: { onOpen: () => void }) => {
+    const onOpen: () => void = props.onOpen;
+
+    const ButtonText = () => {
+      return (
+        <Text
+          fontSize='lg'
+          _light={{
+            color: theme.colors.trueGray['600'],
+          }}
+        >
+          Category
+        </Text>
+      );
+    };
+
+    return (
+      <Pressable onPress={onOpen}>
+        <Row space={3} alignItems='center'>
+          <ButtonText />
+          <Icon name={IconType.chevronUp} size={25} color={theme.colors.trueGray['500']} />
+        </Row>
+      </Pressable>
+    );
+  };
 
   return (
     <Row display={'flex'} alignItems={'center'}>
-      <Text width={70}>Category:</Text>
-      <Select
-        borderColor={'transparent'}
-        selectedValue={selectedValue}
-        width={130}
-        accessibilityLabel='Category'
-        color='black'
-        size={16}
-        display='flex'
-        flexGrow={1}
-        onValueChange={(itemValue) => onChange && onChange(itemValue)}
-      >
-        {items.map((category) => (
-          <Select.Item key={category.value} label={category.label} value={category.value} />
-        ))}
-      </Select>
+      <CategoryFilterButton onOpen={onOpen} />
+      <Actionsheet isOpen={isOpen} onClose={onClose}>
+        <Actionsheet.Content>
+          {items.map((category) => (
+            <Actionsheet.Item
+              key={category.value}
+              onPressIn={() => {
+                onChange && onChange(category.value);
+              }}
+            >
+              {category.label}
+            </Actionsheet.Item>
+          ))}
+        </Actionsheet.Content>
+      </Actionsheet>
     </Row>
   );
 }
