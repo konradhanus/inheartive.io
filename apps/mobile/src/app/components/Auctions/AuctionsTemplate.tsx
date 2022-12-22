@@ -43,7 +43,7 @@ export function AuctionsTemplate(props: Props) {
       <AppHeader />
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
+          <View mt={10} paddingTop={insets.top} paddingBottom={insets.bottom}>
             <View mb={5}>
               <Link to='/sign-in'>
                 <Text>Sign in</Text>
