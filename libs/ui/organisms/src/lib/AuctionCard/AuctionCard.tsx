@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Row, View, Text, ImageBackground, Icon, IconType } from '@inheartive/ui/atoms';
+import { Badge, Row, View, Text, ImageBackground, Icon, IconType, Pressable } from '@inheartive/ui/atoms';
 import { IAuction } from '@inheartive/data';
 import { placeholder } from '@inheartive/assets';
 import { AuctionAuthor, AuctionHearts } from '@inheartive/ui/molecules';
@@ -8,12 +8,15 @@ import { Link } from 'react-router-native';
 interface Props {
   auction: IAuction;
   linkPatternWithId?: string;
+  isFavorite: boolean;
+  onFavoriteChange: (auctionId: string, isCurrentlyFavorite: boolean) => void;
 }
 
 function AuctionCard(props: Props) {
+  const { linkPatternWithId, isFavorite, onFavoriteChange } = props;
   const { id, author, title, heartcoins, imageSrc, expirationDate } = props.auction;
 
-  const link = props.linkPatternWithId ? props.linkPatternWithId.replace(':id', id) : undefined;
+  const link = linkPatternWithId ? linkPatternWithId.replace(':id', id) : undefined;
 
   return (
     <View>
@@ -24,7 +27,10 @@ function AuctionCard(props: Props) {
 
       <ImageBackground style={{ height: 180 }} source={imageSrc ?? placeholder}>
         <View alignItems={'flex-end'} justifyContent={'space-between'} height={'100%'} py={4} px={3}>
-          <Icon size={30} name={IconType.starOutline} />
+          <Pressable p={1} onPress={() => onFavoriteChange(id, isFavorite)}>
+            <Icon size={30} color='secondary.600' name={isFavorite ? IconType.star : IconType.starOutline} />
+          </Pressable>
+
           <Badge size={'xs'} fontSize={12} bgColor={'secondary.600'} rounded={16}>
             <Row>
               <Text fontSize={12} mr={2} color={'white'}>

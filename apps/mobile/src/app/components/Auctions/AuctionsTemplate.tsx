@@ -17,6 +17,8 @@ interface Props {
   onSortDirChange: (sortDir: SortDirection) => void;
   auctions: IAuction[];
   activeIcon: IconNameType;
+  favoriteAuctionsIds: string[];
+  onFavoriteChange: (auctionId: string, isCurrentlyFavorite: boolean) => void;
 }
 
 export function AuctionsTemplate(props: Props) {
@@ -32,14 +34,16 @@ export function AuctionsTemplate(props: Props) {
     sortDir,
     onSortDirChange,
     activeIcon,
+    favoriteAuctionsIds,
+    onFavoriteChange,
   } = props;
 
   return (
-    <>
+    <View style={{ flex: 1 }} paddingTop={insets.top}>
       <AppHeader />
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
+          <View>
             <FilteringArea
               categories={categories}
               selectedCategoryID={selectedCategoryID}
@@ -49,7 +53,12 @@ export function AuctionsTemplate(props: Props) {
               sortDir={sortDir}
               onSortDirChange={onSortDirChange}
             />
-            <AuctionsList auctions={auctions} linkPatternWithId='/auctions/:id' />
+            <AuctionsList
+              auctions={auctions}
+              favoriteAuctionsIds={favoriteAuctionsIds}
+              onFavoriteChange={onFavoriteChange}
+              linkPatternWithId='/auctions/:id'
+            />
             <View mb={5}>
               <Link to='/sign-in'>
                 <Text>Sign in</Text>
@@ -59,7 +68,7 @@ export function AuctionsTemplate(props: Props) {
         </ScrollView>
       </View>
       <FooterMenu activeIcon={activeIcon} />
-    </>
+    </View>
   );
 }
 
