@@ -18,12 +18,7 @@ function CategoryFilter(props: ICategoryFilterProps) {
 
     const ButtonText = () => {
       return (
-        <Text
-          fontSize='lg'
-          _light={{
-            color: theme.colors.trueGray['600'],
-          }}
-        >
+        <Text fontSize='lg' color={theme.colors.trueGray['600']}>
           Filter
         </Text>
       );
@@ -40,7 +35,7 @@ function CategoryFilter(props: ICategoryFilterProps) {
   };
 
   return (
-    <Row display={'flex'} alignItems={'center'} ml={3} mt={2}>
+    <Row display={'flex'} alignItems={'center'} ml={3} mt={2} mb={2}>
       <CategoryFilterButton onOpen={onOpen} />
       <Actionsheet isOpen={isOpen} onClose={onClose}>
         <Actionsheet.Content>

@@ -30,12 +30,7 @@ function Sort(props: ISortProps) {
 
     const ButtonText = () => {
       return (
-        <Text
-          fontSize='lg'
-          _light={{
-            color: theme.colors.trueGray['600'],
-          }}
-        >
+        <Text fontSize='lg' color={theme.colors.trueGray['600']}>
           Sort
         </Text>
       );
@@ -53,7 +48,7 @@ function Sort(props: ISortProps) {
 
   return (
     <Column>
-      <Row display={'flex'} alignItems={'center'} mr={3} mt={2}>
+      <Row display={'flex'} alignItems={'center'} mr={3} mt={2} mb={2}>
         <Center>
           <SortButton onOpen={onOpen} />
           <Actionsheet isOpen={isOpen} onClose={onClose}>
@@ -65,7 +60,9 @@ function Sort(props: ISortProps) {
                     onSortByChange && onSortByChange(option.key as SortKey);
                   }}
                 >
-                  {option.label}
+                  <Text underline color={theme.colors.trueGray['500']}>
+                    {option.label}
+                  </Text>
                 </Actionsheet.Item>
               ))}
             </Actionsheet.Content>
