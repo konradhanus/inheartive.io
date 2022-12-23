@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - INHEART-320
 jobs:
   build-android:
     runs-on: ubuntu-latest
