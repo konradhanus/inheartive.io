@@ -24,7 +24,7 @@ function CategoryFilter(props: ICategoryFilterProps) {
             color: theme.colors.trueGray['600'],
           }}
         >
-          Category
+          Filter
         </Text>
       );
     };
@@ -33,7 +33,7 @@ function CategoryFilter(props: ICategoryFilterProps) {
       <Pressable onPress={onOpen}>
         <Row space={3} alignItems='center'>
           <ButtonText />
-          <Icon name={IconType.chevronUp} size={25} color={theme.colors.trueGray['500']} />
+          <Icon name={IconType.chevronDown} size={25} color={theme.colors.trueGray['500']} />
         </Row>
       </Pressable>
     );
