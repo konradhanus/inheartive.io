@@ -40,7 +40,7 @@ function CategoryFilter(props: ICategoryFilterProps) {
   };
 
   return (
-    <Row display={'flex'} alignItems={'center'}>
+    <Row display={'flex'} alignItems={'center'} ml={3} mt={2}>
       <CategoryFilterButton onOpen={onOpen} />
       <Actionsheet isOpen={isOpen} onClose={onClose}>
         <Actionsheet.Content>

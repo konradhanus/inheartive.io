@@ -41,18 +41,18 @@ export function AuctionsTemplate(props: Props) {
   return (
     <View style={{ flex: 1 }} paddingTop={insets.top}>
       <AppHeader />
+      <FilteringArea
+        categories={categories}
+        selectedCategoryID={selectedCategoryID}
+        onCategoryChange={onCategoryChange}
+        sortBy={sortBy}
+        onSortByChange={onSortByChange}
+        sortDir={sortDir}
+        onSortDirChange={onSortDirChange}
+      />
       <View style={{ flex: 1 }}>
         <ScrollView>
           <View>
-            <FilteringArea
-              categories={categories}
-              selectedCategoryID={selectedCategoryID}
-              onCategoryChange={onCategoryChange}
-              sortBy={sortBy}
-              onSortByChange={onSortByChange}
-              sortDir={sortDir}
-              onSortDirChange={onSortDirChange}
-            />
             <AuctionsList
               auctions={auctions}
               favoriteAuctionsIds={favoriteAuctionsIds}

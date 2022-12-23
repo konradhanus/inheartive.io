@@ -41,18 +41,11 @@ function Sort(props: ISortProps) {
       );
     };
 
-    return sortDir === SortDirection.ASC ? (
+    return (
       <Pressable onPress={sortChange}>
         <Row space={3} alignItems='center'>
           <ButtonText />
           <Icon name={IconType.chevronDown} size={25} color={theme.colors.trueGray['500']} />
-        </Row>
-      </Pressable>
-    ) : (
-      <Pressable onPress={sortChange}>
-        <Row space={3} alignItems='center'>
-          <ButtonText />
-          <Icon name={IconType.chevronUp} size={25} color={theme.colors.trueGray['500']} />
         </Row>
       </Pressable>
     );
@@ -60,7 +53,7 @@ function Sort(props: ISortProps) {
 
   return (
     <Column>
-      <Row display={'flex'} alignItems={'center'}>
+      <Row display={'flex'} alignItems={'center'} mr={3} mt={2}>
         <Center>
           <SortButton onOpen={onOpen} />
           <Actionsheet isOpen={isOpen} onClose={onClose}>
