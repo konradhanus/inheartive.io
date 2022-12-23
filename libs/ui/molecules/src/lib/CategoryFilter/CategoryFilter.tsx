@@ -39,6 +39,7 @@ function CategoryFilter(props: ICategoryFilterProps) {
       <CategoryFilterButton onOpen={onOpen} />
       <Actionsheet isOpen={isOpen} onClose={onClose}>
         <Actionsheet.Content>
+          <Actionsheet.Item isDisabled>Show</Actionsheet.Item>
           {items.map((category) => (
             <Actionsheet.Item
               key={category.value}
@@ -46,7 +47,11 @@ function CategoryFilter(props: ICategoryFilterProps) {
                 onChange && onChange(category.value);
               }}
             >
-              {category.label}
+              {category.value === selectedValue ? (
+                <Text underline> {category.label}</Text>
+              ) : (
+                <Text>{category.label}</Text>
+              )}
             </Actionsheet.Item>
           ))}
         </Actionsheet.Content>

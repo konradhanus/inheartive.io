@@ -53,6 +53,7 @@ function Sort(props: ISortProps) {
           <SortButton onOpen={onOpen} />
           <Actionsheet isOpen={isOpen} onClose={onClose}>
             <Actionsheet.Content>
+              <Actionsheet.Item isDisabled>Sort by</Actionsheet.Item>
               {sortOptions.map((option) => (
                 <Actionsheet.Item
                   key={option.key}
@@ -60,9 +61,7 @@ function Sort(props: ISortProps) {
                     onSortByChange && onSortByChange(option.key as SortKey);
                   }}
                 >
-                  <Text underline color={theme.colors.trueGray['500']}>
-                    {option.label}
-                  </Text>
+                  {option.key === sortBy ? <Text underline>{option.label}</Text> : <Text>{option.label}</Text>}
                 </Actionsheet.Item>
               ))}
             </Actionsheet.Content>
