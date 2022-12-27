@@ -24,6 +24,7 @@
     "@react-native-community/masked-view": "^0.1.11",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "date-fns": "^2.29.3",
     "native-base": "^3.4.17",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
