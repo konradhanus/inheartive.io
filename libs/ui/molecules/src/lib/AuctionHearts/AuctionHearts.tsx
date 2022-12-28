@@ -8,7 +8,7 @@ function AuctionHearts(props: IAuctionHeartsProps) {
   const { quantity } = props;
 
   return (
-    <Row space={2} alignItems='center'>
+    <Row space={1.5} alignItems='center'>
       <Text>{quantity}</Text>
       <Icon name={IconType.favoriteOutline} size={30} />
     </Row>

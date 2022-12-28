@@ -15,7 +15,7 @@ function AuctionAuthor(props: IAuctionAuthorProps) {
   };
 
   return (
-    <Row space={3} alignItems='center'>
+    <Row space={2} alignItems='center'>
       <Avatar size={'sm'} source={source}>
         {authorInitials}
       </Avatar>
