@@ -62,8 +62,6 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       # Setup build
       - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '13.4.1'
       - name: Check out Git repository
         uses: actions/checkout@v3
 
