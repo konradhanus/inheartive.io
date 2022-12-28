@@ -16,6 +16,8 @@
     "react-native-safe-area-context": "*",
     "jest-each": "*",
     "react-native-vector-icons": "*",
-    "react-native-keyboard-aware-scroll-view": "*"
+    "react-native-keyboard-aware-scroll-view": "*",
+    "@tanstack/react-query": "*",
+    "react-hook-form": "*"
   }
 }
