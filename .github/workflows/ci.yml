@@ -112,9 +112,8 @@ jobs:
         run: cd /apps/mobile
 
       - name: Make ipa file
-        run: npx react-native bundle --entry-file index.js --bundle-output ios/main.jsbundle --platform ios --dev false
-        xcodebuild -workspace ios/inHEARTive.xcworkspace -scheme inHEARTive -sdk iphoneos -configuration Release archive -archivePath build/inHEARTive.xcarchive
-        xcodebucild -exportArchive -archivePath build/inHEARTive.xcarchive -exportPath build/inHEARTive.ipa
+        run: npx react-native bundle --entry-file index.js --bundle-output ios/main.jsbundle --platform ios --dev false xcodebuild -workspace ios/inHEARTive.xcworkspace -scheme inHEARTive -sdk iphoneos -configuration Release archive -archivePath build/inHEARTive.xcarchive xcodebucild -exportArchive -archivePath build/inHEARTive.xcarchive -exportPath build/inHEARTive.ipa
+      
       # - name: Build IOS App
       #   uses: yukiarrr/ios-build-action@v1.4.0
       #   with:
