@@ -45,6 +45,88 @@ In development environment create file: local.properties with path for sdk:
 
 ![image](https://user-images.githubusercontent.com/101329582/196930246-106e6a46-4eb3-46e1-8ff4-13e06ec9fbf0.png)
 
+### Additional steps for Android on Mac
+
+#### Bash
+
+1. Create file `local.properties` in `apps/mobile/android/`.
+2. Add inside
+
+```text
+sdk.dir = /Users/<your_computer_name>/Library/Android/sdk
+```
+
+3. Open terminal and write
+
+```bash
+$ open ~/.bash_profile
+```
+
+4. Add following lines:
+
+```
+export ANDROID_SDK=/Users/<your_computer_name>/Library/Android/sdk
+export PATH=/Users/<your_computer_name>/Library/Android/sdk/platform-tools:$PATH
+export ANDROID_HOME=~/Library/Android/sdk/
+export PATH=$PATH:~/android-sdks/platform-tools/
+export PATH=$PATH:~/android-sdks/tools/
+```
+
+5. Save and quit.
+6. Write in terminal
+
+```bash
+$ source ~/.bash_profile
+```
+
+7. Turn off terminals
+
+#### ZSH
+
+1.  Open terminal and write
+
+```zsh
+$ open ~/.zshrc
+```
+
+2.  Add following lines:
+
+```
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/Contents/Home export ANDROID_HOME=/Users/<your_computer_name>/Library/Android/sdk"
+export PATH=$ANDROID_HOME/emulator:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/tools/bin:$PATH
+```
+
+3.  Save and quit.
+4.  Write in terminal
+
+```zsh
+source ~/.zshrc
+```
+
+5.  Turn off terminals.
+
+### Sync your project via Android Studio:
+
+1. Go File->Reload all from Disk.
+
+### ios on mac
+
+1. Run command in main project directory "inheartive.io" via terminal:
+
+- "bundle init"
+- "gem update --system"
+- "bundle install"
+
+2. Go to directory "apps/mobile/ios/" and run command:
+
+- "pod install"
+- "bundle install"
+
+3. Restart all terminals
+
 ## Run inHEARTive
 
 ### on first terminal
