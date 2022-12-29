@@ -5,6 +5,7 @@ import { placeholder } from '@inheartive/assets';
 import { AuctionAuthor, AuctionHearts } from '@inheartive/ui/molecules';
 import { Link } from 'react-router-native';
 import { theme } from '@inheartive/ui/theme';
+import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
   auction: IAuction;
@@ -18,6 +19,7 @@ function AuctionCard(props: Props) {
   const { id, author, title, heartcoins, imageSrc, expirationDate } = props.auction;
 
   const link = linkPatternWithId ? linkPatternWithId.replace(':id', id) : undefined;
+  const remainingTimeHumanized = formatDistanceToNow(expirationDate, { addSuffix: true });
 
   return (
     <View>
@@ -41,7 +43,7 @@ function AuctionCard(props: Props) {
                 Ends in:
               </Text>
               <Text fontSize={12} color={'white'} bold>
-                {expirationDate}
+                {remainingTimeHumanized}
               </Text>
             </Row>
           </Badge>

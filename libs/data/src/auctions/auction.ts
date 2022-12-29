@@ -8,6 +8,6 @@ export interface IAuction {
   author: IUser;
   heartcoins: number;
   imageSrc?: string;
-  expirationDate: string;
+  expirationDate: Date;
   creationDate: string;
 }
