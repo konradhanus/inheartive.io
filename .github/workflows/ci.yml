@@ -108,21 +108,28 @@ jobs:
       - name: Build iOS bundle
         run: yarn nx run mobile:bundle-ios
 
-      - name: Build IOS App
-        uses: yukiarrr/ios-build-action@v1.4.0
-        with:
-          project-path: apps/mobile/ios/inHEARTive.xcodeproj
-          # IOS_P12_BASE64 - key and certificate
-          p12-base64: ${{ secrets.IOS_P12_BASE64 }}
-          # IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
-          mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
-          code-signing-identity: 'iPhone Distribution'
-          # IOS_TEAM_ID : your apple team id
-          team-id: ${{ secrets.IOS_TEAM_ID }}
-          # IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
-          certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          workspace-path: apps/mobile/ios/inHEARTive.xcworkspace
-          scheme: inHEARTive
+      - name: go to folder ios
+        run: cd /apps/mobile
+
+      - name: Make ipa file
+        run: npx react-native bundle --entry-file index.js --bundle-output ios/main.jsbundle --platform ios --dev false
+        xcodebuild -workspace ios/inHEARTive.xcworkspace -scheme inHEARTive -sdk iphoneos -configuration Release archive -archivePath build/inHEARTive.xcarchive
+        xcodebucild -exportArchive -archivePath build/inHEARTive.xcarchive -exportPath build/inHEARTive.ipa
+      # - name: Build IOS App
+      #   uses: yukiarrr/ios-build-action@v1.4.0
+      #   with:
+      #     project-path: apps/mobile/ios/inHEARTive.xcodeproj
+      #     # IOS_P12_BASE64 - key and certificate
+      #     p12-base64: ${{ secrets.IOS_P12_BASE64 }}
+      #     # IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
+      #     mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+      #     code-signing-identity: 'iPhone Distribution'
+      #     # IOS_TEAM_ID : your apple team id
+      #     team-id: ${{ secrets.IOS_TEAM_ID }}
+      #     # IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
+      #     certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+      #     workspace-path: apps/mobile/ios/inHEARTive.xcworkspace
+      #     scheme: inHEARTive
 
      
 
