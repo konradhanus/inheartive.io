@@ -4,6 +4,7 @@ import { IAuction } from '@inheartive/data';
 import { placeholder } from '@inheartive/assets';
 import { AuctionAuthor, AuctionHearts } from '@inheartive/ui/molecules';
 import { Link } from 'react-router-native';
+import { theme } from '@inheartive/ui/theme';
 import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
@@ -27,10 +28,13 @@ function AuctionCard(props: Props) {
         <AuctionHearts quantity={heartcoins} />
       </Row>
 
-      <ImageBackground style={{ height: 180 }} source={imageSrc ?? placeholder}>
+      <ImageBackground
+        style={{ height: 180, backgroundColor: theme.colors.trueGray['300'] }}
+        source={imageSrc ?? placeholder}
+      >
         <View alignItems={'flex-end'} justifyContent={'space-between'} height={'100%'} py={4} px={3}>
           <Pressable p={1} onPress={() => onFavoriteChange(id, isFavorite)}>
-            <Icon size={30} color='secondary.600' name={isFavorite ? IconType.star : IconType.starOutline} />
+            <Icon size={30} color='primary.600' name={isFavorite ? IconType.star : IconType.starOutline} />
           </Pressable>
 
           <Badge size={'xs'} fontSize={12} bgColor={'secondary.600'} rounded={16}>
