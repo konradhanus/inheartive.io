@@ -2,7 +2,7 @@ name: build
 on:
   push:
     branches:
-      - feature/INHEART-309
+      - feature/INHEART-309-konrad
 jobs:
   # build-android:
   #   runs-on: ubuntu-latest
@@ -105,21 +105,24 @@ jobs:
         working-directory: ./apps/mobile/
         run: cd ios && pod install --repo-update && cd ..
 
-      - name: Build IOS App
-        uses: yukiarrr/ios-build-action@v1.4.0
-        with:
-          project-path: apps/mobile/ios/inHEARTive.xcodeproj
-          # IOS_P12_BASE64 - key and certificate
-          p12-base64: ${{ secrets.IOS_P12_BASE64 }}
-          # IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
-          mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
-          code-signing-identity: 'iPhone Distribution'
-          # IOS_TEAM_ID : your apple team id
-          team-id: ${{ secrets.IOS_TEAM_ID }}
-          # IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
-          certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          workspace-path: apps/mobile/ios/inHEARTive.xcworkspace
-          scheme: inHEARTive
+      # - name: Build IOS App
+      #   uses: yukiarrr/ios-build-action@v1.4.0
+      #   with:
+      #     project-path: apps/mobile/ios/inHEARTive.xcodeproj
+      #     # IOS_P12_BASE64 - key and certificate
+      #     p12-base64: ${{ secrets.IOS_P12_BASE64 }}
+      #     # IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
+      #     mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+      #     code-signing-identity: 'iPhone Distribution'
+      #     # IOS_TEAM_ID : your apple team id
+      #     team-id: ${{ secrets.IOS_TEAM_ID }}
+      #     # IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
+      #     certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+      #     workspace-path: apps/mobile/ios/inHEARTive.xcworkspace
+      #     scheme: inHEARTive
+
+      - name: Build iOS
+        run: yarn nx run mobile:bundle-ios
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1
