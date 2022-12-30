@@ -1,4 +1,5 @@
 import { AppRegistry } from 'react-native';
-import App from './storybook/toggle-storybook';
+import AppRoot from './app/App';
+import { name } from '../app.json';
 
-AppRegistry.registerComponent('Mobile', () => App);
+AppRegistry.registerComponent(name, () => AppRoot);

@@ -102,3 +102,7 @@ buck-out/
 
 
 apps/mobile-e2e/artifacts
+
+.env
+/Gemfile.lock
+/apps/mobile/yarn.lock

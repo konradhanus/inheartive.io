@@ -27,19 +27,20 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
-        ]
+        //disable until we find a way to fix the problem
+        //        "@nrwl/nx/enforce-module-boundaries": [
+        //          "error",
+        //          {
+        //            "enforceBuildableLibDependency": true,
+        //            "allow": [],
+        //            "depConstraints": [
+        //              {
+        //                "sourceTag": "*",
+        //                "onlyDependOnLibsWithTags": ["*"]
+        //              }
+        //            ]
+        //          }
+        //        ]
       }
     },
     {

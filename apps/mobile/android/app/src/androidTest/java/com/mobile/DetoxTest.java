@@ -1,5 +1,5 @@
 // Replace "com.mobile" here and below with your app's package name from the top of MainActivity.java
-package com.mobile;
+package com.intive.inheartive;
 
 import com.wix.detox.Detox;
 import com.wix.detox.config.DetoxConfig;
@@ -29,7 +29,7 @@ public class DetoxTest {
         DetoxConfig detoxConfig = new DetoxConfig();
         detoxConfig.idlePolicyConfig.masterTimeoutSec = 90;
         detoxConfig.idlePolicyConfig.idleResourceTimeoutSec = 60;
-        detoxConfig.rnContextLoadTimeoutSec = (com.mobile.BuildConfig.DEBUG ? 180 : 60);
+        detoxConfig.rnContextLoadTimeoutSec = (com.intive.inheartive.BuildConfig.DEBUG ? 180 : 60);
 
         Detox.runTests(mActivityRule, detoxConfig);
     }
