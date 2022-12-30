@@ -19,7 +19,7 @@ function AuctionCard(props: Props) {
   const { id, author, title, heartcoins, imageSrc, expirationDate } = props.auction;
 
   const link = linkPatternWithId ? linkPatternWithId.replace(':id', id) : undefined;
-  const remainingTimeHumanized = formatDistanceToNow(expirationDate, { addSuffix: true });
+  const remainingTimeHumanized = formatDistanceToNow(expirationDate, { addSuffix: true }).trim();
 
   return (
     <View>
@@ -40,7 +40,7 @@ function AuctionCard(props: Props) {
           <Badge size={'xs'} fontSize={12} bgColor={'secondary.600'} rounded={16}>
             <Row>
               <Text fontSize={12} mr={2} color={'white'}>
-                Ends in:
+                Ends:
               </Text>
               <Text fontSize={12} color={'white'} bold>
                 {remainingTimeHumanized}
