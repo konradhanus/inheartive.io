@@ -45,10 +45,11 @@ function CategoryFilter(props: ICategoryFilterProps) {
               key={category.value}
               onPressIn={() => {
                 onChange && onChange(category.value);
+                onClose();
               }}
             >
               {category.value === selectedValue ? (
-                <Text underline> {category.label}</Text>
+                <Text underline>{category.label}</Text>
               ) : (
                 <Text>{category.label}</Text>
               )}
