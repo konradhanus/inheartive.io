@@ -12,6 +12,7 @@ export class NotFoundInterceptor implements NestInterceptor {
         this.logger.error(err);
 
         if (err instanceof EntityNotFoundError) {
+          // TODO add more details
           return throwError(() => new NotFoundException());
         }
 
