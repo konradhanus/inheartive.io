@@ -21,7 +21,7 @@ export class CategoriesService {
   findAll() {
     return this.categoriesRepository.find({
       order: {
-        createdAt: 'DESC',
+        name: 'ASC',
       },
     });
   }
