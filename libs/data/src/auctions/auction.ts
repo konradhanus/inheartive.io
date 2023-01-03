@@ -6,8 +6,9 @@ export interface IAuction {
   title: string;
   category: ICategory;
   author: IUser;
-  heartcoins: number;
+  price: number;
   imageSrc?: string;
-  expirationDate: string;
-  creationDate: string;
+  expiresAt: string;
+  createdAt: string;
+  upodatedAt: string;
 }
