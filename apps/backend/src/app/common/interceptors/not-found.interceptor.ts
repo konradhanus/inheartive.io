@@ -9,6 +9,7 @@ export class NotFoundInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       catchError((err) => {
+        // todo Add message to the logger
         this.logger.error(err);
 
         if (err instanceof EntityNotFoundError) {

@@ -1,25 +1,25 @@
 import React from 'react';
-
 import { Avatar, Text, AvatarSourcePropType, Row } from '@inheartive/ui/atoms';
+import { IUser } from '@inheartive/data';
 
 interface IAuctionAuthorProps {
-  authorName: string;
-  authorInitials: string;
-  avatarSrc?: string | undefined;
+  author: IUser;
 }
 
 function AuctionAuthor(props: IAuctionAuthorProps) {
-  const { authorName, authorInitials, avatarSrc } = props;
+  const { author } = props;
   const source: AvatarSourcePropType = {
-    uri: avatarSrc,
+    uri: author.avatarSrc,
   };
 
   return (
     <Row space={2} alignItems='center'>
       <Avatar size={'sm'} source={source}>
-        {authorInitials}
+        {author.initials}
       </Avatar>
-      <Text>{authorName}</Text>
+      <Text>
+        {author.firstName} {author.lastName}
+      </Text>
     </Row>
   );
 }

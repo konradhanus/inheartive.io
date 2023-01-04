@@ -14,15 +14,15 @@ interface Props {
 
 function AuctionCard(props: Props) {
   const { linkPatternWithId, isFavorite, onFavoriteChange } = props;
-  const { id, author, title, heartcoins, imageSrc, expirationDate } = props.auction;
+  const { id, author, title, price, imageSrc, expiresAt } = props.auction;
 
   const link = linkPatternWithId ? linkPatternWithId.replace(':id', id) : undefined;
 
   return (
     <View>
       <Row justifyContent={'space-between'} py={1} px={3}>
-        <AuctionAuthor authorInitials={author.initials} avatarSrc={author.avatarSrc} authorName={author.fullName} />
-        <AuctionHearts quantity={heartcoins} />
+        <AuctionAuthor author={author} />
+        <AuctionHearts quantity={price} />
       </Row>
 
       <ImageBackground style={{ height: 180 }} source={imageSrc ?? placeholder}>
@@ -37,7 +37,7 @@ function AuctionCard(props: Props) {
                 Ends in:
               </Text>
               <Text fontSize={12} color={'white'} bold>
-                {expirationDate}
+                {expiresAt}
               </Text>
             </Row>
           </Badge>

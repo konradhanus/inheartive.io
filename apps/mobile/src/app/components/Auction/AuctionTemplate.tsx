@@ -1,32 +1,33 @@
 import React from 'react';
 import { IAuction } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Link } from 'react-router-native';
 
 interface Props {
-  auction: IAuction;
+  auction: IAuction | undefined;
   isLoading: boolean;
+  isError: boolean;
 }
 
 export function AuctionTemplate(props: Props) {
-  const { auction, isLoading } = props;
-  const insets = useSafeAreaInsets();
-
-  if (!auction) {
-    return <Text>Loading...</Text>;
-  }
+  const { auction, isLoading, isError } = props;
 
   return (
-    <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
-      <View mb={5}>
-        <Link to='/'>
-          <Text>Auctions</Text>
-        </Link>
-      </View>
+    <View>
       {isLoading && <Text>Loading...</Text>}
-      {!isLoading && !auction && <Text>Error while loading auction</Text>}
-      {!isLoading && auction && <Text>{auction.title}</Text>}
+      {isError && <Text>Error...</Text>}
+      {!isLoading && !isError && auction && (
+        <View>
+          <Text>
+            {auction.author.firstName} {auction.author.lastName}
+          </Text>
+          <Text>{auction.title}</Text>
+          <Text>{auction.description ?? ''}</Text>
+          <Text>{auction.category.name}</Text>
+          <Text>{auction.price}</Text>
+          <Text>{auction.expiresAt}</Text>
+          <Text>{auction.createdAt}</Text>
+        </View>
+      )}
     </View>
   );
 }

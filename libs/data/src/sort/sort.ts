@@ -5,7 +5,7 @@ import { SortKey } from './sort-key';
 export function sortAuctions(auctions: IAuction[], sortBy: SortKey, sortDir: SortDirection): IAuction[] {
   const sortedAuctions = [...auctions];
 
-  if (sortBy === SortKey.Heartcoins) {
+  if (sortBy === SortKey.Price) {
     sortDir === SortDirection.ASC
       ? sortedAuctions.sort((a1, a2) => a1[sortBy] - a2[sortBy])
       : sortedAuctions.sort((a1, a2) => a2[sortBy] - a1[sortBy]);

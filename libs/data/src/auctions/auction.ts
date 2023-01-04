@@ -4,6 +4,7 @@ import { IUser } from '../user';
 export interface IAuction {
   id: string;
   title: string;
+  description: string | null;
   category: ICategory;
   author: IUser;
   price: number;
