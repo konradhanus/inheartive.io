@@ -4,6 +4,7 @@ import { FormControl, Input, VStack } from 'native-base';
 import { UseFormRegister, UseFormHandleSubmit, FieldErrors, Controller, Control } from 'react-hook-form';
 import { CategoryCreateFormValues } from './category-create-form-values';
 import { ICategory } from '@inheartive/data';
+import { ScrollView } from 'native-base';
 
 interface Props {
   control: Control<CategoryCreateFormValues>;
@@ -20,7 +21,7 @@ export function CategoriesTemplate(props: Props) {
   const { categories, categoriesIsError, categoriesIsLoading, control, handleSubmit, errors, onSubmit } = props;
 
   return (
-    <View>
+    <ScrollView>
       <VStack px={5} space={4} justifyContent='center'>
         <FormControl isRequired isInvalid={'name' in errors}>
           <FormControl.Label>Name</FormControl.Label>
@@ -57,7 +58,7 @@ export function CategoriesTemplate(props: Props) {
           </View>
         )}
       </VStack>
-    </View>
+    </ScrollView>
   );
 }
 

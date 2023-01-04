@@ -2,7 +2,6 @@ import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, Text } from '@inheartive/ui/atoms';
 import { FooterIcon } from '@inheartive/ui/organisms';
-import { ScrollView } from 'react-native';
 import { RoutingPath } from '../../routing';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate } from 'react-router-native';
@@ -37,11 +36,7 @@ export function UnauthenticatedPageWrapper(props: Props) {
 
       {users && users.length > 0 && <Navigate to={RoutingPath.auctions} />}
 
-      {users && users.length === 0 && (
-        <View style={{ flex: 1 }}>
-          <ScrollView>{children}</ScrollView>
-        </View>
-      )}
+      {users && users.length === 0 && <View style={{ flex: 1 }}>{children}</View>}
     </View>
   );
 }

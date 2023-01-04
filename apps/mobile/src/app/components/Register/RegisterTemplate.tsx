@@ -5,6 +5,7 @@ import { UseFormRegister, UseFormHandleSubmit, FieldErrors, Controller, Control 
 import { RegisterFormValues } from './register-form-values';
 import { RoutingPath } from '../../routing';
 import { useNavigate } from 'react-router-native';
+import { ScrollView } from 'native-base';
 
 interface Props {
   control: Control<RegisterFormValues>;
@@ -20,7 +21,7 @@ export function RegisterTemplate(props: Props) {
   const navigate = useNavigate();
 
   return (
-    <View>
+    <ScrollView>
       <VStack px={5} space={3} justifyContent='center'>
         <FormControl isRequired isInvalid={'email' in errors}>
           <FormControl.Label>Email</FormControl.Label>
@@ -94,7 +95,7 @@ export function RegisterTemplate(props: Props) {
           Sign in
         </Button>
       </VStack>
-    </View>
+    </ScrollView>
   );
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, Text } from '@inheartive/ui/atoms';
 import { AppFooter, FooterIcon, AppHeader } from '@inheartive/ui/organisms';
-import { ScrollView } from 'react-native';
 import { footerIconRouteMap, RoutingPath } from '../../routing';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate } from 'react-router-native';
@@ -38,9 +37,7 @@ export function AuthenticatedPageWrapper(props: Props) {
       {users && users.length > 0 && (
         <>
           <AppHeader />
-          <View style={{ flex: 1 }}>
-            <ScrollView>{children}</ScrollView>
-          </View>
+          <View style={{ flex: 1 }}>{children}</View>
           <AppFooter iconRoutingMap={footerIconRouteMap} activeIcon={footerActiveIcon} />
         </>
       )}

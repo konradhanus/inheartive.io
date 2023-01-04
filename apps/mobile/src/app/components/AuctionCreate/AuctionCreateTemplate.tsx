@@ -14,6 +14,7 @@ import { Link } from 'react-router-native';
 import { ICategory, IUser } from '@inheartive/data';
 import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
+import { ScrollView } from 'native-base';
 
 interface Props {
   control: Control<AuctionFormValues>;
@@ -59,7 +60,7 @@ export function AuctionCreateTemplate(props: Props) {
   }, [expiresAtDate]);
 
   return (
-    <View>
+    <ScrollView>
       <Column px={5} space={4} justifyContent='center'>
         {author && (
           <Text>
@@ -217,7 +218,7 @@ export function AuctionCreateTemplate(props: Props) {
           </Link>
         </View>
       </Column>
-    </View>
+    </ScrollView>
   );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { IAuction } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
+import { ScrollView } from 'native-base';
 
 interface Props {
   auction: IAuction | undefined;
@@ -12,7 +13,7 @@ export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError } = props;
 
   return (
-    <View>
+    <ScrollView>
       {isLoading && <Text>Loading...</Text>}
       {isError && <Text>Error...</Text>}
       {!isLoading && !isError && auction && (
@@ -28,7 +29,7 @@ export function AuctionTemplate(props: Props) {
           <Text>{auction.createdAt}</Text>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 }
 

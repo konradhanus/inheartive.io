@@ -19,6 +19,7 @@
     "react-native-keyboard-aware-scroll-view": "*",
     "@tanstack/react-query": "*",
     "react-hook-form": "*",
-    "react-native-date-picker": "*"
+    "react-native-date-picker": "*",
+    "date-fns": "*"
   }
 }

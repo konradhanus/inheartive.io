@@ -4,6 +4,8 @@ import { IAuction } from '@inheartive/data';
 import { placeholder } from '@inheartive/assets';
 import { AuctionAuthor, AuctionHearts } from '@inheartive/ui/molecules';
 import { Link } from 'react-router-native';
+import { theme } from '@inheartive/ui/theme';
+import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
   auction: IAuction;
@@ -17,6 +19,7 @@ function AuctionCard(props: Props) {
   const { id, author, title, price, imageSrc, expiresAt } = props.auction;
 
   const link = linkPatternWithId ? linkPatternWithId.replace(':id', id) : undefined;
+  const remainingTimeHumanized = formatDistanceToNow(new Date(expiresAt), { addSuffix: true });
 
   return (
     <View>
@@ -25,19 +28,22 @@ function AuctionCard(props: Props) {
         <AuctionHearts quantity={price} />
       </Row>
 
-      <ImageBackground style={{ height: 180 }} source={imageSrc ?? placeholder}>
+      <ImageBackground
+        style={{ height: 180, backgroundColor: theme.colors.trueGray['300'] }}
+        source={imageSrc ?? placeholder}
+      >
         <View alignItems={'flex-end'} justifyContent={'space-between'} height={'100%'} py={4} px={3}>
           <Pressable p={1} onPress={() => onFavoriteChange(id, isFavorite)}>
-            <Icon size={30} color='secondary.600' name={isFavorite ? IconType.star : IconType.starOutline} />
+            <Icon size={30} color='primary.600' name={isFavorite ? IconType.star : IconType.starOutline} />
           </Pressable>
 
           <Badge size={'xs'} fontSize={12} bgColor={'secondary.600'} rounded={16}>
             <Row>
-              <Text fontSize={12} mr={2} color={'white'}>
-                Ends in:
+              <Text fontSize={12} mr={1} color={'white'}>
+                Ends:
               </Text>
               <Text fontSize={12} color={'white'} bold>
-                {expiresAt}
+                {remainingTimeHumanized}
               </Text>
             </Row>
           </Badge>

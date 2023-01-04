@@ -4,6 +4,7 @@ import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
 import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
 import { RoutingPath } from '../../routing';
+import { ScrollView } from 'react-native';
 
 interface Props {
   auctions: IAuction[];
@@ -55,17 +56,18 @@ export function AuctionsTemplate(props: Props) {
           onSortDirChange={onSortDirChange}
         />
       )}
+      <ScrollView>
+        {auctionsError && <Text>Error while loading auctions</Text>}
 
-      {auctionsError && <Text>Error while loading auctions</Text>}
-
-      {!auctionsLoading && !auctionsError && (
-        <AuctionsList
-          auctions={auctions}
-          favoriteAuctionsIds={favoriteAuctionsIds}
-          onFavoriteChange={onFavoriteChange}
-          linkPatternWithId={RoutingPath.auction}
-        />
-      )}
+        {!auctionsLoading && !auctionsError && (
+          <AuctionsList
+            auctions={auctions}
+            favoriteAuctionsIds={favoriteAuctionsIds}
+            onFavoriteChange={onFavoriteChange}
+            linkPatternWithId={RoutingPath.auction}
+          />
+        )}
+      </ScrollView>
     </View>
   );
 }
