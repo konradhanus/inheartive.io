@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from '@inheartive/ui/atoms';
-import { IAuction } from '@inheartive/data';
+import { Auction } from '@inheartive/data';
 import { AuctionCard } from '../AuctionCard';
 
 interface Props {
-  auctions: IAuction[];
+  auctions: Auction[];
   linkPatternWithId: string;
   favoriteAuctionsIds: string[];
   onFavoriteChange: (auctionId: string, isCurrentlyFavorite: boolean) => void;

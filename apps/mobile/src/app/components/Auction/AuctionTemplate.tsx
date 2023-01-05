@@ -1,10 +1,10 @@
 import React from 'react';
-import { IAuction } from '@inheartive/data';
+import { Auction } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
 import { ScrollView } from 'native-base';
 
 interface Props {
-  auction: IAuction | undefined;
+  auction: Auction | undefined;
   isLoading: boolean;
   isError: boolean;
 }

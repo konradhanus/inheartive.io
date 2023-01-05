@@ -83,11 +83,11 @@ enum IconType {
   calendarOutline = 'calendar-outline',
 }
 
-interface IIconProps extends InterfaceIconProps {
+interface Props extends InterfaceIconProps {
   name: IconType;
 }
 
-function Icon(props: IIconProps) {
+function Icon(props: Props) {
   const theme = useTheme();
 
   const iconProperties = {

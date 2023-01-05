@@ -1,6 +1,6 @@
-import { IUser } from './user';
+import { User } from './user';
 
-export const usersMock: IUser[] = [
+export const usersMock: User[] = [
   {
     id: 'uuuu-1111',
     firstName: 'John',

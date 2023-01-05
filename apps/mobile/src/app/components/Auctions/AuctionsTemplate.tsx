@@ -1,16 +1,16 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
-import { IAuction, ICategory, SortDirection, SortKey } from '@inheartive/data';
+import { Auction, Category, SortDirection, SortKey } from '@inheartive/data';
 import { Text, View } from '@inheartive/ui/atoms';
 import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
 import { RoutingPath } from '../../routing';
 import { ScrollView } from 'react-native';
 
 interface Props {
-  auctions: IAuction[];
+  auctions: Auction[];
   auctionsLoading: boolean;
   auctionsError: boolean;
-  categories: ICategory[];
+  categories: Category[];
   categoriesLoading: boolean;
   categoriesError: boolean;
   selectedCategoryID: string;
