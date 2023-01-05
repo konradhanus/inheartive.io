@@ -1,16 +1,16 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { Icon, IconType } from '@inheartive/ui/atoms';
 import { Row } from '@inheartive/ui/atoms';
 import TextStyled from './TextStyled';
 
-interface IHeartsCreditsProps {
+interface Props {
   credit: number;
   size: number;
   testID?: string;
 }
 
-const HeartsCredits: ComponentType<IHeartsCreditsProps> = (props) => {
+function HeartsCredits(props: Props) {
   const { credit, size, testID } = props;
 
   const style = {
@@ -26,6 +26,6 @@ const HeartsCredits: ComponentType<IHeartsCreditsProps> = (props) => {
       </TextStyled>
     </Row>
   );
-};
+}
 
 export { HeartsCredits };

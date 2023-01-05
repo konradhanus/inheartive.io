@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge, Row, View, Text, ImageBackground, Icon, IconType, Pressable } from '@inheartive/ui/atoms';
-import { IAuction } from '@inheartive/data';
+import { Auction } from '@inheartive/data';
 import { placeholder } from '@inheartive/assets';
 import { AuctionAuthor, AuctionHearts } from '@inheartive/ui/molecules';
 import { Link } from 'react-router-native';
@@ -8,7 +8,7 @@ import { theme } from '@inheartive/ui/theme';
 import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
-  auction: IAuction;
+  auction: Auction;
   linkPatternWithId?: string;
   isFavorite: boolean;
   onFavoriteChange: (auctionId: string, isCurrentlyFavorite: boolean) => void;

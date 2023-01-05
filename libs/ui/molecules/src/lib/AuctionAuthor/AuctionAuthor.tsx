@@ -1,12 +1,12 @@
 import React from 'react';
 import { Avatar, Text, AvatarSourcePropType, Row } from '@inheartive/ui/atoms';
-import { IUser } from '@inheartive/data';
+import { User } from '@inheartive/data';
 
-interface IAuctionAuthorProps {
-  author: IUser;
+interface Props {
+  author: User;
 }
 
-function AuctionAuthor(props: IAuctionAuthorProps) {
+function AuctionAuthor(props: Props) {
   const { author } = props;
   const source: AvatarSourcePropType = {
     uri: author.avatarSrc,

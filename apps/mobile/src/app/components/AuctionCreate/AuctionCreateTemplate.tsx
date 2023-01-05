@@ -11,7 +11,7 @@ import {
 } from 'react-hook-form';
 import { AuctionFormValues } from './auction-create-form-values';
 import { Link } from 'react-router-native';
-import { ICategory, IUser } from '@inheartive/data';
+import { Category, User } from '@inheartive/data';
 import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
 import { ScrollView } from 'native-base';
@@ -23,10 +23,10 @@ interface Props {
   errors: FieldErrors<AuctionFormValues>;
   setValue: UseFormSetValue<AuctionFormValues>;
   onSubmit: (data) => void;
-  categories: ICategory[];
+  categories: Category[];
   categoriesIsLoading: boolean;
   categoriesIsError: boolean;
-  author: IUser | undefined;
+  author: User | undefined;
 }
 
 export function AuctionCreateTemplate(props: Props) {

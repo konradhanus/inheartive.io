@@ -3,7 +3,7 @@ import { Button, View, Text } from '@inheartive/ui/atoms';
 import { FormControl, Input, VStack } from 'native-base';
 import { UseFormRegister, UseFormHandleSubmit, FieldErrors, Controller, Control } from 'react-hook-form';
 import { CategoryCreateFormValues } from './category-create-form-values';
-import { ICategory } from '@inheartive/data';
+import { Category } from '@inheartive/data';
 import { ScrollView } from 'native-base';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   handleSubmit: UseFormHandleSubmit<CategoryCreateFormValues>;
   errors: FieldErrors<CategoryCreateFormValues>;
   onSubmit: (data) => void;
-  categories: ICategory[];
+  categories: Category[];
   categoriesIsLoading: boolean;
   categoriesIsError: boolean;
 }

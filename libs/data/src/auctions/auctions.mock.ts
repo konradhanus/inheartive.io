@@ -1,6 +1,6 @@
 import { categoriesMock } from '../categories';
 import { usersMock } from '../user';
-import { IAuction } from './auction';
+import { Auction } from './auction';
 
 function inTwoHours() {
   const date = new Date();
@@ -20,7 +20,7 @@ function inOneWeek() {
   return date.toISOString();
 }
 
-export const auctionsMock: IAuction[] = [
+export const auctionsMock: Auction[] = [
   {
     id: 'aaaa-1111',
     author: usersMock[0],
