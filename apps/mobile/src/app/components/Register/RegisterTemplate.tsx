@@ -1,11 +1,10 @@
 import React from 'react';
-import { Button, View } from '@inheartive/ui/atoms';
-import { FormControl, Input, VStack } from 'native-base';
+import { Button, ScrollView, Column } from '@inheartive/ui/atoms';
+import { FormControl, Input } from 'native-base';
 import { UseFormRegister, UseFormHandleSubmit, FieldErrors, Controller, Control } from 'react-hook-form';
 import { RegisterFormValues } from './register-form-values';
 import { RoutingPath } from '../../routing';
 import { useNavigate } from 'react-router-native';
-import { ScrollView } from 'native-base';
 
 interface Props {
   control: Control<RegisterFormValues>;
@@ -22,7 +21,7 @@ export function RegisterTemplate(props: Props) {
 
   return (
     <ScrollView>
-      <VStack px={5} space={3} justifyContent='center'>
+      <Column px={5} space={3} justifyContent='center'>
         <FormControl isRequired isInvalid={'email' in errors}>
           <FormControl.Label>Email</FormControl.Label>
           <Controller
@@ -94,7 +93,7 @@ export function RegisterTemplate(props: Props) {
         <Button variant='outline' onPress={() => navigate(RoutingPath.signIn)}>
           Sign in
         </Button>
-      </VStack>
+      </Column>
     </ScrollView>
   );
 }

@@ -12,6 +12,7 @@ export * from './lib/ImageBackground';
 export * from './lib/Input';
 export * from './lib/Pressable';
 export * from './lib/Row';
+export * from './lib/ScrollView';
 export * from './lib/Select';
 export * from './lib/Stack';
 export * from './lib/Text';

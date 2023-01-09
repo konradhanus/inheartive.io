@@ -1,10 +1,9 @@
 import React from 'react';
-import { Button, View, Text } from '@inheartive/ui/atoms';
+import { Button, ScrollView, View, Text } from '@inheartive/ui/atoms';
 import { FormControl, Input, VStack } from 'native-base';
 import { UseFormRegister, UseFormHandleSubmit, FieldErrors, Controller, Control } from 'react-hook-form';
 import { CategoryCreateFormValues } from './category-create-form-values';
 import { Category } from '@inheartive/data';
-import { ScrollView } from 'native-base';
 
 interface Props {
   control: Control<CategoryCreateFormValues>;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Column, Icon, IconType, Pressable, Row, Text, View } from '@inheartive/ui/atoms';
+import { Button, Column, Icon, IconType, Pressable, Row, ScrollView, Text, View } from '@inheartive/ui/atoms';
 import { FormControl, Input, Select, TextArea } from 'native-base';
 import {
   UseFormRegister,
@@ -14,7 +14,6 @@ import { Link } from 'react-router-native';
 import { Category, User } from '@inheartive/data';
 import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
-import { ScrollView } from 'native-base';
 
 interface Props {
   control: Control<AuctionFormValues>;
