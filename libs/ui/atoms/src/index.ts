@@ -16,5 +16,6 @@ export * from './lib/ScrollView';
 export * from './lib/Select';
 export * from './lib/Stack';
 export * from './lib/Text';
+export * from './lib/TextArea';
 export * from './lib/TextLogo';
 export * from './lib/View';
