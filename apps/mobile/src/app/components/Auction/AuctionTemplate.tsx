@@ -1,8 +1,10 @@
 import React from 'react';
+import { Image } from '@inheartive/ui/atoms';
 import { IAuction } from '@inheartive/data';
-import { Text, View } from '@inheartive/ui/atoms';
+import { Button, Text, View } from '@inheartive/ui/atoms';
+import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Link } from 'react-router-native';
+import { timeOutline } from '@inheartive/assets';
 
 interface Props {
   auction: IAuction;
@@ -18,16 +20,21 @@ export function AuctionTemplate(props: Props) {
   }
 
   return (
-    <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
-      <View mb={5}>
-        <Link to='/'>
-          <Text>Auctions</Text>
-        </Link>
+    <>
+      <AuctionHeader />
+      <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
+        {isLoading && <Text>Loading...</Text>}
+        {!isLoading && !auction && <Text>Error while loading auction</Text>}
+        {!isLoading && auction && <Text>{auction.title}</Text>}
+        <Image my='2' source={timeOutline} alt='Time outline image' />
       </View>
-      {isLoading && <Text>Loading...</Text>}
-      {!isLoading && !auction && <Text>Error while loading auction</Text>}
-      {!isLoading && auction && <Text>{auction.title}</Text>}
-    </View>
+      <View mx={16}>
+        <Button onPress={() => console.log('BID onPress')}>BID</Button>
+        <Button onPress={() => console.log('REPORT onPress')} variant='lighGray'>
+          REPORT
+        </Button>
+      </View>
+    </>
   );
 }
 
