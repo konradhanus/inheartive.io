@@ -153,7 +153,8 @@ export function AuctionCreateTemplate(props: Props) {
                 placeholder='10'
                 onChangeText={(textNumber) => {
                   const valueNumber = +textNumber;
-                  if (isNaN(valueNumber)) {
+                  if (textNumber === '' || isNaN(valueNumber)) {
+                    onChange('');
                     return;
                   }
 
@@ -163,17 +164,14 @@ export function AuctionCreateTemplate(props: Props) {
               />
             )}
             name='price'
-            rules={{ min: 1, max: 1000, required: true }}
+            rules={{
+              min: { value: 1, message: 'The price must be positive' },
+              max: { value: 999, message: 'Max price is 999' },
+              required: 'The price is required',
+            }}
             defaultValue={10}
           />
-          {/* // Todo refactor */}
-          <FormControl.ErrorMessage>
-            {errors.price?.type === 'required'
-              ? errors.price?.message
-              : errors.price?.type === 'min'
-              ? 'Price must be positive'
-              : 'Max price is 1000'}
-          </FormControl.ErrorMessage>
+          <FormControl.ErrorMessage>{errors.price?.message}</FormControl.ErrorMessage>
         </FormControl>
 
         {minimumDate && expiresAtDate && (
