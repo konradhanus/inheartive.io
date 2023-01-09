@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, ScrollView, Column } from '@inheartive/ui/atoms';
-import { FormControl, Input } from 'native-base';
+import { FormControl, Input, Button, ScrollView, Column } from '@inheartive/ui/atoms';
 import { UseFormRegister, UseFormHandleSubmit, FieldErrors, Controller, Control } from 'react-hook-form';
 import { RegisterFormValues } from './register-form-values';
 import { RoutingPath } from '../../routing';

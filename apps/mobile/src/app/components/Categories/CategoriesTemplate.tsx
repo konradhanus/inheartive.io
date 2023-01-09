@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, ScrollView, View, Text } from '@inheartive/ui/atoms';
-import { FormControl, Input, VStack } from 'native-base';
+import { Button, Column, FormControl, Input, ScrollView, View, Text } from '@inheartive/ui/atoms';
 import { UseFormRegister, UseFormHandleSubmit, FieldErrors, Controller, Control } from 'react-hook-form';
 import { CategoryCreateFormValues } from './category-create-form-values';
 import { Category } from '@inheartive/data';
@@ -21,7 +20,7 @@ export function CategoriesTemplate(props: Props) {
 
   return (
     <ScrollView>
-      <VStack px={5} space={4} justifyContent='center'>
+      <Column px={5} space={4} justifyContent='center'>
         <FormControl isRequired isInvalid={'name' in errors}>
           <FormControl.Label>Name</FormControl.Label>
           <Controller
@@ -56,7 +55,7 @@ export function CategoriesTemplate(props: Props) {
             ))}
           </View>
         )}
-      </VStack>
+      </Column>
     </ScrollView>
   );
 }
