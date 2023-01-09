@@ -2,13 +2,15 @@
 import React from 'react';
 import { PixelRatio, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Box, Image, Text } from '@inheartive/ui/atoms';
+import { Box, Button, Image } from '@inheartive/ui/atoms';
 import { LoginFormControl } from '@inheartive/ui/molecules';
-import { View } from 'native-base';
 import { logo } from '../../assets/index';
-import { Link } from 'react-router-native';
+import { useNavigate } from 'react-router-native';
+import { RoutingPath } from '../../routing';
 
 export function SignInTemplate() {
+  const navigate = useNavigate();
+
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -17,15 +19,13 @@ export function SignInTemplate() {
     >
       <Image source={logo} alt='Logo' />
 
-      <Box w='100%' mt='10'>
+      <Box w='100%' mt={10}>
         <LoginFormControl />
-      </Box>
 
-      <View mt={5}>
-        <Link to='/'>
-          <Text>Auctions</Text>
-        </Link>
-      </View>
+        <Button mt={3} variant='outline' onPress={() => navigate(RoutingPath.register)}>
+          Register
+        </Button>
+      </Box>
     </KeyboardAwareScrollView>
   );
 }

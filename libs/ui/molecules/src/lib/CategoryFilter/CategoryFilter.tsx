@@ -3,13 +3,13 @@ import { Row, ISelectItemProps, Text, Pressable, Icon, IconType } from '@inheart
 import { theme } from '@inheartive/ui/theme';
 import { Actionsheet, useDisclose } from 'native-base';
 
-interface ICategoryFilterProps {
+interface Props {
   items: ISelectItemProps[];
   onChange?: (itemValue: string) => void;
   selectedValue?: string;
 }
 
-function CategoryFilter(props: ICategoryFilterProps) {
+function CategoryFilter(props: Props) {
   const { onChange, selectedValue, items } = props;
   const { isOpen, onOpen, onClose } = useDisclose();
 

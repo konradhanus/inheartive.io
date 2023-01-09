@@ -10,7 +10,7 @@ storiesOf('FilteringArea', module)
   .add('Basic', () => (
     <Column mt={4} mx='auto'>
       <FilteringArea
-        sortBy={SortKey.Heartcoins}
+        sortBy={SortKey.Price}
         sortDir={SortDirection.ASC}
         categories={categoriesMock}
         selectedCategoryID={categoriesMock[0].id}

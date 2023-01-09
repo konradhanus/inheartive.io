@@ -1,10 +1,10 @@
 import React from 'react';
-import { ICategory, SortDirection, SortKey } from '@inheartive/data';
+import { Category, SortDirection, SortKey } from '@inheartive/data';
 import { CategoryFilter, mapCategoriesToSelect, Sort } from '@inheartive/ui/molecules';
 import { HStack } from 'native-base';
 
 interface Props {
-  categories: ICategory[];
+  categories: Category[];
   selectedCategoryID: string;
   onCategoryChange: (id: string) => void;
   sortBy: SortKey;

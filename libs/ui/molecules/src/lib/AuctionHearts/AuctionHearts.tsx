@@ -1,10 +1,11 @@
 import React from 'react';
 import { Icon, IconType, Row, Text } from '@inheartive/ui/atoms';
-interface IAuctionHeartsProps {
+
+interface Props {
   quantity: number;
 }
 
-function AuctionHearts(props: IAuctionHeartsProps) {
+function AuctionHearts(props: Props) {
   const { quantity } = props;
 
   return (

@@ -7,15 +7,15 @@ export interface SortOption {
 
 export const sortOptions: SortOption[] = [
   {
-    key: SortKey.CreatedDate,
+    key: SortKey.CreatedAt,
     label: 'Created date',
   },
   {
-    key: SortKey.ExpirationDate,
+    key: SortKey.ExpiresAt,
     label: 'Expiry date',
   },
   {
-    key: SortKey.Heartcoins,
+    key: SortKey.Price,
     label: 'Heartcoins',
   },
   {

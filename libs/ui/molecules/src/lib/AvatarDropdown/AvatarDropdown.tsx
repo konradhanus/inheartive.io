@@ -3,18 +3,18 @@ import React, { useCallback } from 'react';
 import { Select, Box, Avatar } from '@inheartive/ui/atoms';
 import { useNavigate } from 'react-router';
 
-export interface IDropdownItem {
+export interface DropdownItem {
   name: string;
   route?: string;
 }
-export interface IDropdownProps {
-  dropdownList: IDropdownItem[];
+export interface DropdownProps {
+  dropdownList: DropdownItem[];
   selectedValue?: string;
   background?: string;
   testID?: string;
 }
 
-const AvatarDropdown = ({ dropdownList, selectedValue, background, testID }: IDropdownProps) => {
+const AvatarDropdown = ({ dropdownList, selectedValue, background, testID }: DropdownProps) => {
   const navigate = useNavigate();
   const handleOnClick = useCallback((routeName: string) => navigate(routeName, { replace: true }), [navigate]);
   const avatar = (
@@ -39,7 +39,7 @@ const AvatarDropdown = ({ dropdownList, selectedValue, background, testID }: IDr
         padding='0'
         testID={testID}
       >
-        {dropdownList.map((item: IDropdownItem, index) => (
+        {dropdownList.map((item: DropdownItem, index) => (
           <Select.Item onPress={() => handleOnClick(item.route)} key={index} label={item.name} value={item.route} />
         ))}
       </Select>

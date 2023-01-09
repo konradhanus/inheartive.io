@@ -1,35 +1,57 @@
 import { categoriesMock } from '../categories';
 import { usersMock } from '../user';
-import { IAuction } from './auction';
+import { Auction } from './auction';
 
-const date = new Date();
+function inTwoHours() {
+  const date = new Date();
+  date.setHours(date.getHours() + 2);
+  return date.toISOString();
+}
 
-export const auctionsMock: IAuction[] = [
+function tomorrow() {
+  const date = new Date();
+  date.setHours(date.getHours() + 24);
+  return date.toISOString();
+}
+
+function inOneWeek() {
+  const date = new Date();
+  date.setHours(date.getHours() + 24 * 7);
+  return date.toISOString();
+}
+
+export const auctionsMock: Auction[] = [
   {
     id: 'aaaa-1111',
     author: usersMock[0],
     title: 'Japanese lesson',
+    description: 'Nice lesson',
     category: categoriesMock[2],
-    heartcoins: 26,
-    expirationDate: new Date(new Date(date).setHours(date.getHours() + 4)),
-    creationDate: '2022-10-01T13:56:10Z',
+    price: 26,
+    expiresAt: tomorrow(),
+    createdAt: '2022-12-30T08:56:30.275Z',
+    upodatedAt: '2022-12-30T08:56:30.275Z',
   },
   {
     id: 'aaaa-1112',
     author: usersMock[1],
     title: 'Homemade beer',
+    description: 'I crafted it!',
     category: categoriesMock[1],
-    heartcoins: 2047,
-    expirationDate: new Date(new Date(date).setHours(date.getHours() + 180)),
-    creationDate: '2022-10-12T12:20:33Z',
+    price: 900,
+    expiresAt: inTwoHours(),
+    createdAt: '2022-12-28T08:56:30.275Z',
+    upodatedAt: '2022-12-29T08:56:30.275Z',
   },
   {
     id: 'aaaa-1113',
     author: usersMock[2],
     title: 'Bro',
+    description: 'Bro',
     category: categoriesMock[0],
-    heartcoins: 333,
-    expirationDate: new Date(new Date(date).setMinutes(date.getMinutes() + 21)),
-    creationDate: '2022-10-12T12:20:33Z',
+    price: 333,
+    expiresAt: inOneWeek(),
+    createdAt: '2022-12-22T08:56:30.275Z',
+    upodatedAt: '2022-12-23T08:56:30.275Z',
   },
 ];

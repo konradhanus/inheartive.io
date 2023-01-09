@@ -20,7 +20,7 @@ function loadStories() {
   require('../libs/ui/molecules/src/lib/Sort/__stories__/Sort.stories');
   require('../libs/ui/organisms/src/lib/AuctionCard/__stories__/AuctionCard.stories');
   require('../libs/ui/organisms/src/lib/FilteringArea/__stories__/FilteringArea.stories');
-  require('../libs/ui/organisms/src/lib/FooterMenu/__stories__/FooterMenu.stories');
+  require('../libs/ui/organisms/src/lib/AppFooter/__stories__/AppFooter.stories');
   require('../libs/ui/organisms/src/lib/AppHeader/__stories__/AppHeader.stories');
 }
 
@@ -41,7 +41,7 @@ const stories = [
   '../libs/ui/molecules/src/lib/Sort/__stories__/Sort.stories',
   '../libs/ui/organisms/src/lib/AuctionCard/__stories__/AuctionCard.stories',
   '../libs/ui/organisms/src/lib/FilteringArea/__stories__/FilteringArea.stories',
-  '../libs/ui/organisms/src/lib/FooterMenu/__stories__/FooterMenu.stories',
+  '../libs/ui/organisms/src/lib/AppFooter/__stories__/AppFooter.stories',
   '../libs/ui/organisms/src/lib/AppHeader/__stories__/AppHeader.stories',
 ];
 

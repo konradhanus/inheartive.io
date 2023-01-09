@@ -4,14 +4,14 @@ import { SortDirection, SortKey, sortOptions } from '@inheartive/data';
 import { Actionsheet, Center, useDisclose } from 'native-base';
 import { theme } from '@inheartive/ui/theme';
 
-interface ISortProps {
+interface Props {
   onSortByChange?: (sortBy: SortKey) => void;
   onSortDirChange?: (sortDir: SortDirection) => void;
   sortBy: SortKey;
   sortDir: SortDirection;
 }
 
-function Sort(props: ISortProps) {
+function Sort(props: Props) {
   const { onSortByChange, onSortDirChange, sortBy, sortDir } = props;
   const { isOpen, onOpen, onClose } = useDisclose();
 
