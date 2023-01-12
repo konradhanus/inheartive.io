@@ -10,7 +10,6 @@ export function AuctionPage() {
   const { id } = params;
 
   useEffect(() => {
-    const x = auctionsMock.find((a) => a.id === id);
     // TODO: Auction API call
     setAuction(auctionsMock.find((a) => a.id === id));
     setIsLoading(false);
