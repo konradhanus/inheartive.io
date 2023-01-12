@@ -29,14 +29,22 @@ export function AuctionTemplate(props: Props) {
     <>
       <AuctionHeader />
       <ImageBackground
-        style={{ height: 180, backgroundColor: theme.colors.trueGray['300'] }}
+        style={{ height: 220, backgroundColor: theme.colors.trueGray['300'] }}
         source={auction.imageSrc ?? placeholder}
       />
-      <View my={5} mx={3} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
+      <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
         {isLoading && <Text>Loading...</Text>}
         {!isLoading && !auction && <Text>Error while loading auction</Text>}
-        {!isLoading && auction && <Text my={3}>{auction.title}</Text>}
-        {!isLoading && auction && <Text my={3}>{descTmp}</Text>}
+        {!isLoading && auction && (
+          <Text fontSize='lg' my={3}>
+            {auction.title}
+          </Text>
+        )}
+        {!isLoading && auction && (
+          <Text fontSize='sm' my={3}>
+            {descTmp}
+          </Text>
+        )}
         <AuctionAuthor
           authorInitials={auction.author.initials}
           avatarSrc={auction.author.avatarSrc}
