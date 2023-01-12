@@ -2,26 +2,28 @@ import { IAuction } from '../auctions';
 import { SortDirection } from './sort-direction';
 import { SortKey } from './sort-key';
 
+const compareString = (fst: string | Date, scd: string | Date) =>
+  `${fst}`.toLocaleLowerCase().localeCompare(`${scd}`.toLocaleLowerCase());
+
+const compareNumber = (a: number, b: number) => a - b;
+
+const withStrategy =
+  <Strategy extends SortKey, A extends IAuction>(
+    sortDir: boolean,
+    sortBy: Strategy,
+    sortStrategy: (a: A[Strategy], b: A[Strategy]) => number
+  ) =>
+  (auction1: A, auction2: A) => {
+    const [fst, scd] = sortDir ? [auction1, auction2] : [auction2, auction1];
+
+    return sortStrategy(fst[sortBy], scd[sortBy]);
+  };
+
 export function sortAuctions(auctions: IAuction[], sortBy: SortKey, sortDir: SortDirection): IAuction[] {
   const sortedAuctions = [...auctions];
+  const isAsc = sortDir === SortDirection.ASC;
 
-  if (sortBy === SortKey.Heartcoins) {
-    sortDir === SortDirection.ASC
-      ? sortedAuctions.sort((a1, a2) => a1[sortBy] - a2[sortBy])
-      : sortedAuctions.sort((a1, a2) => a2[sortBy] - a1[sortBy]);
-
-    return sortedAuctions;
-  }
-
-  return sortByStringValue(sortedAuctions, sortBy, sortDir);
-}
-
-function sortByStringValue(auctions: IAuction[], sortBy: SortKey, sortDir: SortDirection) {
-  return sortDir === SortDirection.ASC
-    ? auctions.sort(function (auction1, auction2) {
-        return `${auction1[sortBy]}`.toLocaleLowerCase().localeCompare(`${auction2[sortBy]}`.toLocaleLowerCase());
-      })
-    : auctions.sort(function (auction1, auction2) {
-        return `${auction2[sortBy]}`.toLocaleLowerCase().localeCompare(`${auction1[sortBy]}`.toLocaleLowerCase());
-      });
+  return sortBy === SortKey.Heartcoins
+    ? sortedAuctions.sort(withStrategy(isAsc, sortBy, compareNumber))
+    : sortedAuctions.sort(withStrategy(isAsc, sortBy, compareString));
 }
