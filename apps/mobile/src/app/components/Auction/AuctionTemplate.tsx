@@ -1,12 +1,11 @@
 import React from 'react';
-import { ImageBackground } from '@inheartive/ui/atoms';
+import { AuctionImage, imageTypes } from '@inheartive/ui/atoms';
 import { IAuction } from '@inheartive/data';
 import { Button, Text, View } from '@inheartive/ui/atoms';
 import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
-import { placeholder } from '@inheartive/assets';
 
 interface Props {
   auction: IAuction;
@@ -28,10 +27,7 @@ export function AuctionTemplate(props: Props) {
   return (
     <>
       <AuctionHeader />
-      <ImageBackground
-        style={{ height: 220, backgroundColor: theme.colors.trueGray['300'] }}
-        source={auction.imageSrc ?? placeholder}
-      />
+      <AuctionImage imageType={imageTypes.detail} />
       <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
         {isLoading && <Text>Loading...</Text>}
         {!isLoading && !auction && <Text>Error while loading auction</Text>}

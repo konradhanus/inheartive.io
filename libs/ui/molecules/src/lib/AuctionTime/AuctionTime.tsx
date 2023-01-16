@@ -1,8 +1,6 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { Row, Text } from '@inheartive/ui/atoms';
-import { Image } from '@inheartive/ui/atoms';
-import { timeOutline } from '@inheartive/assets';
+import { Icon, IconType, Row, Text } from '@inheartive/ui/atoms';
 
 interface IAuctionTimeProps {
   expirationDate: number | Date;
@@ -14,7 +12,7 @@ function AuctionTime(props: IAuctionTimeProps) {
 
   return (
     <Row space={1.5} alignItems='center'>
-      <Image source={timeOutline} alt='Time outline image' size={10} />
+      <Icon name={IconType.timeOutline} size={40} />
       <Text>{remainingTimeHumanized}</Text>
     </Row>
   );

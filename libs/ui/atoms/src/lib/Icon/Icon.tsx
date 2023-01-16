@@ -80,6 +80,7 @@ enum IconType {
   home = 'home',
   homeOutline = 'home-outline',
   plusCircle = 'plus-circle',
+  timeOutline = 'time-outline',
 }
 
 interface IIconProps extends InterfaceIconProps {
@@ -209,6 +210,9 @@ function Icon(props: IIconProps) {
 
     case 'plus-circle':
       return <Feather name='plus-circle' {...iconProperties} />;
+
+    case 'time-outline':
+      return <Ionicons name='time-outline' {...iconProperties} />;
 
     default:
       // eslint-disable-next-line no-throw-literal

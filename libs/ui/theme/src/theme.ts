@@ -18,7 +18,6 @@ export const theme = extendTheme({
         rounded: 'md',
         size: 'lg',
         my: 2,
-        fontFamily: 'Abel',
       },
       variants: {
         lighGray: {
