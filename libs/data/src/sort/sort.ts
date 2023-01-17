@@ -14,9 +14,9 @@ const withStrategy =
     sortStrategy: (a: A[Strategy], b: A[Strategy]) => number
   ) =>
   (auction1: A, auction2: A) => {
-    const [fst, scd] = sortDir ? [auction1, auction2] : [auction2, auction1];
+    const [firstString, secondString] = sortDir ? [auction1, auction2] : [auction2, auction1];
 
-    return sortStrategy(fst[sortBy], scd[sortBy]);
+    return sortStrategy(firstString[sortBy], secondString[sortBy]);
   };
 
 export function sortAuctions(auctions: IAuction[], sortBy: SortKey, sortDir: SortDirection): IAuction[] {
