@@ -2,8 +2,8 @@ import { IAuction } from '../auctions';
 import { SortDirection } from './sort-direction';
 import { SortKey } from './sort-key';
 
-const compareString = (fst: string | Date, scd: string | Date) =>
-  `${fst}`.toLocaleLowerCase().localeCompare(`${scd}`.toLocaleLowerCase());
+const compareString = (firstString: string | Date, secondString: string | Date) =>
+  `${firstString}`.toLocaleLowerCase().localeCompare(`${secondString}`.toLocaleLowerCase());
 
 const compareNumber = (a: number, b: number) => a - b;
 
