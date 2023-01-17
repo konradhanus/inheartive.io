@@ -8,12 +8,12 @@ const compareString = (firstString: string | Date, secondString: string | Date) 
 const compareNumber = (a: number, b: number) => a - b;
 
 const withStrategy =
-  <Strategy extends SortKey, A extends IAuction>(
+  <Strategy extends SortKey, Auction extends IAuction>(
     sortDir: boolean,
     sortBy: Strategy,
-    sortStrategy: (a: A[Strategy], b: A[Strategy]) => number
+    sortStrategy: (a: Auction[Strategy], b: Auction[Strategy]) => number
   ) =>
-  (auction1: A, auction2: A) => {
+  (auction1: Auction, auction2: Auction) => {
     const [firstString, secondString] = sortDir ? [auction1, auction2] : [auction2, auction1];
 
     return sortStrategy(firstString[sortBy], secondString[sortBy]);
