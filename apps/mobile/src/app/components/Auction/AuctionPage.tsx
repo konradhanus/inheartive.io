@@ -15,6 +15,10 @@ export function AuctionPage() {
     setIsLoading(false);
   }, [id]);
 
+  if (!auction) {
+    return <p>Loading ...</p>;
+  }
+
   return <AuctionTemplate isLoading={isLoading} auction={auction} />;
 }
 
