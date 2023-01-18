@@ -16,10 +16,6 @@ export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError } = props;
   const insets = useSafeAreaInsets();
 
-  //TODO
-  const descTmp =
-    'Auction offer details Lorem ipsum dolor sit amet. Aut atque voluptas in corporis accusamus sit iure officiis aut saepe quos et maiores nemo. Non unde enim sit quia quas est dolorum consequatur vel temporibus nostrum. Vel eveniet unde et corporis obcaecati et harum soluta non quia aliquid et autem quas ea itaque galisum. Ex accusamus voluptatibus non unde beatae quo dolor dolores non perspiciatis neque.';
-
   if (!auction) {
     return <Text>Loading...</Text>;
   }
@@ -37,7 +33,7 @@ export function AuctionTemplate(props: Props) {
               {auction.title}
             </Text>
             <Text fontSize='sm' my={3}>
-              {descTmp}
+              {auction.description ?? ''}
             </Text>
           </>
         )}
