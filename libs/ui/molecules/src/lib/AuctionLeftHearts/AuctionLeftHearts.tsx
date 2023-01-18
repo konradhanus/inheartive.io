@@ -6,17 +6,17 @@ interface IAuctionHeartsProps {
   authorName?: string;
 }
 
-function AuctionHearts(props: IAuctionHeartsProps) {
+function AuctionLeftHearts(props: IAuctionHeartsProps) {
   const { quantity, authorName } = props;
 
   return (
     <Row space={1.5} alignItems='center'>
+      <Icon name={IconType.favoriteOutline} size={40} />
       <Text>
         {quantity} {authorName}
       </Text>
-      <Icon name={IconType.favoriteOutline} size={30} />
     </Row>
   );
 }
 
-export { AuctionHearts };
+export { AuctionLeftHearts };

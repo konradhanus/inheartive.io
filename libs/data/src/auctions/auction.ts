@@ -1,15 +1,13 @@
-import { Category } from '../categories';
-import { User } from '../user';
+import { ICategory } from '../categories';
+import { IUser } from '../user';
 
-export interface Auction {
+export interface IAuction {
   id: string;
   title: string;
-  description: string | null;
-  category: Category;
-  author: User;
-  price: number;
+  category: ICategory;
+  author: IUser;
+  heartcoins: number;
   imageSrc?: string;
-  expiresAt: string;
-  createdAt: string;
-  upodatedAt: string;
+  expirationDate: Date;
+  creationDate: string;
 }

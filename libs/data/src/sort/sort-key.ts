@@ -1,6 +1,6 @@
 export enum SortKey {
-  CreatedAt = 'createdAt',
-  ExpiresAt = 'expiresAt',
-  Price = 'price',
+  CreatedDate = 'creationDate',
+  ExpirationDate = 'expirationDate',
+  Heartcoins = 'heartcoins',
   Title = 'title',
 }

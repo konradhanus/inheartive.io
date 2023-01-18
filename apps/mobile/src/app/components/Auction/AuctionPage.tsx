@@ -17,6 +17,10 @@ export function AuctionPage() {
     queryFn: () => fetch(routeWithId(apiRoutes.auction, id)).then((res) => res.json()),
   });
 
+  if (!auction) {
+    return <p>Loading ...</p>;
+  }
+
   return <AuctionTemplate isLoading={isLoading} isError={!!error} auction={auction} />;
 }
 

@@ -81,6 +81,7 @@ enum IconType {
   homeOutline = 'home-outline',
   plusCircle = 'plus-circle',
   calendarOutline = 'calendar-outline',
+  timeOutline = 'time-outline',
 }
 
 interface Props extends InterfaceIconProps {
@@ -213,6 +214,8 @@ function Icon(props: Props) {
 
     case 'calendar-outline':
       return <Ionicons name='calendar-outline' {...iconProperties} />;
+    case 'time-outline':
+      return <Ionicons name='time-outline' {...iconProperties} />;
 
     default:
       // eslint-disable-next-line no-throw-literal

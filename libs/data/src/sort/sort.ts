@@ -1,27 +1,29 @@
-import { Auction } from '../auctions';
+import { IAuction } from '../auctions';
 import { SortDirection } from './sort-direction';
 import { SortKey } from './sort-key';
 
-export function sortAuctions(auctions: Auction[], sortBy: SortKey, sortDir: SortDirection): Auction[] {
+const compareString = (firstString: string | Date, secondString: string | Date) =>
+  `${firstString}`.toLocaleLowerCase().localeCompare(`${secondString}`.toLocaleLowerCase());
+
+const compareNumber = (a: number, b: number) => a - b;
+
+const withStrategy =
+  <Strategy extends SortKey, Auction extends IAuction>(
+    sortDir: boolean,
+    sortBy: Strategy,
+    sortStrategy: (a: Auction[Strategy], b: Auction[Strategy]) => number
+  ) =>
+  (auction1: Auction, auction2: Auction) => {
+    const [firstString, secondString] = sortDir ? [auction1, auction2] : [auction2, auction1];
+
+    return sortStrategy(firstString[sortBy], secondString[sortBy]);
+  };
+
+export function sortAuctions(auctions: IAuction[], sortBy: SortKey, sortDir: SortDirection): IAuction[] {
   const sortedAuctions = [...auctions];
+  const isAsc = sortDir === SortDirection.ASC;
 
-  if (sortBy === SortKey.Price) {
-    sortDir === SortDirection.ASC
-      ? sortedAuctions.sort((a1, a2) => a1[sortBy] - a2[sortBy])
-      : sortedAuctions.sort((a1, a2) => a2[sortBy] - a1[sortBy]);
-
-    return sortedAuctions;
-  }
-
-  return sortByStringValue(sortedAuctions, sortBy, sortDir);
-}
-
-function sortByStringValue(auctions: Auction[], sortBy: SortKey, sortDir: SortDirection) {
-  return sortDir === SortDirection.ASC
-    ? auctions.sort(function (auction1, auction2) {
-        return `${auction1[sortBy]}`.toLocaleLowerCase().localeCompare(`${auction2[sortBy]}`.toLocaleLowerCase());
-      })
-    : auctions.sort(function (auction1, auction2) {
-        return `${auction2[sortBy]}`.toLocaleLowerCase().localeCompare(`${auction1[sortBy]}`.toLocaleLowerCase());
-      });
+  return sortBy === SortKey.Heartcoins
+    ? sortedAuctions.sort(withStrategy(isAsc, sortBy, compareNumber))
+    : sortedAuctions.sort(withStrategy(isAsc, sortBy, compareString));
 }

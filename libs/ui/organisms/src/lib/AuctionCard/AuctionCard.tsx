@@ -1,10 +1,9 @@
 import React from 'react';
-import { Badge, Row, View, Text, ImageBackground, Icon, IconType, Pressable } from '@inheartive/ui/atoms';
+import { Badge, Row, View, Text, Icon, IconType, Pressable, AuctionImage, imageTypes } from '@inheartive/ui/atoms';
 import { Auction } from '@inheartive/data';
 import { placeholder } from '@inheartive/assets';
 import { AuctionAuthor, AuctionHearts } from '@inheartive/ui/molecules';
 import { Link } from 'react-router-native';
-import { theme } from '@inheartive/ui/theme';
 import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
@@ -27,16 +26,11 @@ function AuctionCard(props: Props) {
         <AuctionAuthor author={author} />
         <AuctionHearts quantity={price} />
       </Row>
-
-      <ImageBackground
-        style={{ height: 180, backgroundColor: theme.colors.trueGray['300'] }}
-        source={imageSrc ?? placeholder}
-      >
+      <AuctionImage imageType={imageTypes.list} imageSrc={imageSrc ?? placeholder}>
         <View alignItems={'flex-end'} justifyContent={'space-between'} height={'100%'} py={4} px={3}>
           <Pressable p={1} onPress={() => onFavoriteChange(id, isFavorite)}>
             <Icon size={30} color='primary.600' name={isFavorite ? IconType.star : IconType.starOutline} />
           </Pressable>
-
           <Badge size={'xs'} fontSize={12} bgColor={'secondary.600'} rounded={16}>
             <Row>
               <Text fontSize={12} mr={1} color={'white'}>
@@ -48,7 +42,7 @@ function AuctionCard(props: Props) {
             </Row>
           </Badge>
         </View>
-      </ImageBackground>
+      </AuctionImage>
 
       <View py={1} px={3}>
         {link ? (
