@@ -1,5 +1,7 @@
+import { Platform } from 'react-native';
+
 // TODO move to env
-const apiUrlPrefix = 'http://localhost:3333/api';
+const apiUrlPrefix = Platform.OS === 'android' ? 'http://10.0.2.2:3333/api' : 'http://localhost:3333/api';
 
 export const apiRoutes = {
   auctions: `${apiUrlPrefix}/auctions`,
