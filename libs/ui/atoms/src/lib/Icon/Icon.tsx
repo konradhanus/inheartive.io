@@ -80,14 +80,15 @@ enum IconType {
   home = 'home',
   homeOutline = 'home-outline',
   plusCircle = 'plus-circle',
+  calendarOutline = 'calendar-outline',
   timeOutline = 'time-outline',
 }
 
-interface IIconProps extends InterfaceIconProps {
+interface Props extends InterfaceIconProps {
   name: IconType;
 }
 
-function Icon(props: IIconProps) {
+function Icon(props: Props) {
   const theme = useTheme();
 
   const iconProperties = {
@@ -210,6 +211,9 @@ function Icon(props: IIconProps) {
 
     case 'plus-circle':
       return <Feather name='plus-circle' {...iconProperties} />;
+
+    case 'calendar-outline':
+      return <Ionicons name='calendar-outline' {...iconProperties} />;
 
     case 'time-outline':
       return <Ionicons name='time-outline' {...iconProperties} />;

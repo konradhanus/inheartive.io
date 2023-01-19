@@ -21,6 +21,6 @@ export class CategoryExistsRule implements ValidatorConstraintInterface {
   }
 
   defaultMessage() {
-    return `Category doesn't exist.`;
+    return `Category doesn't exist`;
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import SignInTemplate from './SignInTemplate';
 
 export function SignInPage() {

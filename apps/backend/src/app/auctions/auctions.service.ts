@@ -25,7 +25,7 @@ export class AuctionsService {
     const { limit, offset } = paginationQuery;
 
     return this.auctionsRepository.find({
-      relations: ['category'],
+      relations: ['category', 'author'],
       skip: offset,
       take: limit || MAX_LIMIT,
       order: {
@@ -35,7 +35,7 @@ export class AuctionsService {
   }
 
   findOne(id: string) {
-    return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category'] });
+    return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category', 'author'] });
   }
 
   async update(id: string, updateAuctionDto: UpdateAuctionDto) {

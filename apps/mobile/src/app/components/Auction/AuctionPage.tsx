@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import AuctionTemplate from './AuctionTemplate';
 import { useParams } from 'react-router-native';
-import { auctionsMock, IAuction } from '@inheartive/data';
+import { useQuery } from '@tanstack/react-query';
+import { apiRoutes, routeWithId } from '@inheartive/data';
 
 export function AuctionPage() {
-  const [auction, setAuction] = useState<IAuction>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const params = useParams();
   const { id } = params;
 
-  useEffect(() => {
-    // TODO: Auction API call
-    setAuction(auctionsMock.find((a) => a.id === id));
-    setIsLoading(false);
-  }, [id]);
+  const {
+    isLoading,
+    error,
+    data: auction,
+  } = useQuery({
+    queryKey: ['auction', id],
+    queryFn: () => fetch(routeWithId(apiRoutes.auction, id)).then((res) => res.json()),
+  });
 
-  if (!auction) {
-    return <p>Loading ...</p>;
-  }
-
-  return <AuctionTemplate isLoading={isLoading} auction={auction} />;
+  return <AuctionTemplate isLoading={isLoading} isError={!!error} auction={auction} />;
 }
 
 export default AuctionPage;
