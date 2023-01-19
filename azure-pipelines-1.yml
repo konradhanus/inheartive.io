@@ -13,10 +13,23 @@ steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
-  displayName: 'Install Node.js'
+  displayName: 'Install Node engine'
+
+- script: |
+    npm install --global yarn
+  displayName: 'Install yarn'
 
 - script: |
     npm install --global yarn
     yarn install
-    yarn nx build backend
-  displayName: 'npm install and build'
+  displayName: 'Install dependencies'
+
+# - script: |
+#     npm install --global yarn
+#     yarn install
+#     yarn nx build backend
+#   displayName: 'Build application'
+
+- script: |
+    yarn start
+  displayName: 'Start application'
