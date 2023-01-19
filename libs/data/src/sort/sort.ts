@@ -8,22 +8,22 @@ const compareString = (firstString: string | Date, secondString: string | Date) 
 const compareNumber = (a: number, b: number) => a - b;
 
 const withStrategy =
-  <Strategy extends SortKey, Auction>(
+  <Strategy extends SortKey, Auct extends Auction>(
     sortDir: boolean,
     sortBy: Strategy,
-    sortStrategy: (a: Auction[Strategy], b: Auction[Strategy]) => number
+    sortStrategy: (a: Auct[Strategy], b: Auct[Strategy]) => number
   ) =>
-  (auction1: Auction, auction2: Auction) => {
+  (auction1: Auct, auction2: Auct) => {
     const [firstString, secondString] = sortDir ? [auction1, auction2] : [auction2, auction1];
 
     return sortStrategy(firstString[sortBy], secondString[sortBy]);
   };
 
-export function sortAuctions(auctions: IAuction[], sortBy: SortKey, sortDir: SortDirection): IAuction[] {
+export function sortAuctions(auctions: Auction[], sortBy: SortKey, sortDir: SortDirection): Auction[] {
   const sortedAuctions = [...auctions];
   const isAsc = sortDir === SortDirection.ASC;
 
-  return sortBy === SortKey.Heartcoins
+  return sortBy === SortKey.Price
     ? sortedAuctions.sort(withStrategy(isAsc, sortBy, compareNumber))
     : sortedAuctions.sort(withStrategy(isAsc, sortBy, compareString));
 }
