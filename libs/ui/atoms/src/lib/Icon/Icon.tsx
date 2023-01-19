@@ -89,6 +89,8 @@ function Icon(props: IIconProps) {
   const theme = useTheme();
 
   const iconProperties = {
+    // Its Native-Base bug so added not perfect workaround for this
+    // TODO When it will be fixed delete this workaround
     size: typeof props.size === 'number' ? props.size + 0.01 : 17,
     color: props.color ? getColor(props.color, theme.colors, theme) : theme.colors.primary['500'],
     testID: props.testID,
