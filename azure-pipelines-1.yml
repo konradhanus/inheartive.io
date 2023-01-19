@@ -36,6 +36,6 @@ steps:
     azureSubscription: 'Azure subscription 1(1526c5fa-d0e8-4673-affa-fef19142401f)'
     appType: 'webAppLinux'
     WebAppName: 'inheartiveapi'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.js'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/dist/apps/backend/main.js'
     RuntimeStack: 'NODE|18-lts'
     StartupCommand: 'node main.js'
