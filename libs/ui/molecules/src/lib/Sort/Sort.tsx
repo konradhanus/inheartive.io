@@ -59,6 +59,7 @@ function Sort(props: Props) {
                   key={option.key}
                   onPressIn={() => {
                     onSortByChange && onSortByChange(option.key as SortKey);
+                    onClose();
                   }}
                 >
                   {option.key === sortBy ? <Text underline>{option.label}</Text> : <Text>{option.label}</Text>}
