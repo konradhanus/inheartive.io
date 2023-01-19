@@ -20,22 +20,12 @@ steps:
   displayName: 'Install yarn'
 
 - script: |
+    echo "Starting build proccess..."
     npm install --global yarn
     yarn install
   displayName: 'Install dependencies'
 
 - script: |
-    npm install --global yarn
-    yarn install
+    echo "Building application..."
     yarn nx build backend
   displayName: 'Build application'
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(1526c5fa-d0e8-4673-affa-fef19142401f)'
-    appType: 'webAppLinux'
-    WebAppName: 'inheartiveapi'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/dist/apps/backend/main.js'
-    RuntimeStack: 'NODE|18-lts'
-    StartupCommand: 'node main.js'
