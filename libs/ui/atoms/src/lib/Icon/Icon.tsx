@@ -1,9 +1,8 @@
 import React from 'react';
-
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-
+import { InterfaceIconProps } from 'native-base/src/components/primitives/Icon/types';
 import {
   MoonIcon,
   SunIcon,
@@ -39,7 +38,6 @@ import {
   useTheme,
   getColor,
 } from 'native-base';
-import { InterfaceIconProps } from 'native-base/src/components/primitives/Icon/types';
 
 enum IconType {
   add = 'add',
@@ -80,17 +78,21 @@ enum IconType {
   home = 'home',
   homeOutline = 'home-outline',
   plusCircle = 'plus-circle',
+  calendarOutline = 'calendar-outline',
+  timeOutline = 'time-outline',
 }
 
-interface IIconProps extends InterfaceIconProps {
+interface Props extends InterfaceIconProps {
   name: IconType;
 }
 
-function Icon(props: IIconProps) {
+function Icon(props: Props) {
   const theme = useTheme();
 
   const iconProperties = {
-    size: props.size || 17,
+    // Its Native-Base bug so added not perfect workaround for this
+    // TODO When it will be fixed delete this workaround
+    size: typeof props.size === 'number' ? props.size + 0.01 : 17,
     color: props.color ? getColor(props.color, theme.colors, theme) : theme.colors.primary['500'],
     testID: props.testID,
   };
@@ -209,6 +211,12 @@ function Icon(props: IIconProps) {
 
     case 'plus-circle':
       return <Feather name='plus-circle' {...iconProperties} />;
+
+    case 'calendar-outline':
+      return <Ionicons name='calendar-outline' {...iconProperties} />;
+
+    case 'time-outline':
+      return <Ionicons name='time-outline' {...iconProperties} />;
 
     default:
       // eslint-disable-next-line no-throw-literal

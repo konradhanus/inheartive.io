@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Row, TextLogo, textLogoColor, View } from '@inheartive/ui/atoms';
+import { Avatar, Row, TextLogo, textLogoColor } from '@inheartive/ui/atoms';
 
 function AppHeader() {
   return (

@@ -141,8 +141,8 @@ android {
         applicationId "com.intive.inheartive"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "2.0.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type

@@ -1,16 +1,19 @@
 import React from 'react';
-import { IAuction } from '@inheartive/data';
-import { Text, View } from '@inheartive/ui/atoms';
+import { Auction } from '@inheartive/data';
+import { AuctionImage, ScrollView, imageTypes } from '@inheartive/ui/atoms';
+import { Button, Text, View } from '@inheartive/ui/atoms';
+import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Link } from 'react-router-native';
-
+import { AuctionAuthor, AuctionLeftHearts, AuctionTime } from '@inheartive/ui/molecules';
+import { theme } from '@inheartive/ui/theme';
 interface Props {
-  auction: IAuction;
+  auction: Auction | undefined;
   isLoading: boolean;
+  isError: boolean;
 }
 
 export function AuctionTemplate(props: Props) {
-  const { auction, isLoading } = props;
+  const { auction, isLoading, isError } = props;
   const insets = useSafeAreaInsets();
 
   if (!auction) {
@@ -18,16 +21,37 @@ export function AuctionTemplate(props: Props) {
   }
 
   return (
-    <View mt={10} px={8} paddingTop={insets.top} paddingBottom={insets.bottom}>
-      <View mb={5}>
-        <Link to='/'>
-          <Text>Auctions</Text>
-        </Link>
+    <ScrollView>
+      <AuctionHeader />
+      <AuctionImage imageType={imageTypes.detail} />
+      <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
+        {isLoading && <Text>Loading...</Text>}
+        {!isLoading && !auction && <Text>Error while loading auction</Text>}
+        {!isLoading && !isError && auction && (
+          <>
+            <Text fontSize='lg' my={3}>
+              {auction.title}
+            </Text>
+            <Text fontSize='sm' my={3}>
+              {auction.description ?? ''}
+            </Text>
+          </>
+        )}
+        <AuctionAuthor
+          authorInitials={auction.author.initials}
+          avatarSrc={auction.author.avatarSrc}
+          authorFirstName={auction.author.firstName}
+          authorLastName={auction.author.lastName}
+          avatarBgColor={theme.colors.primary[500]}
+        />
+        <AuctionLeftHearts quantity={auction.price} authorName={auction.author.firstName} />
+        <AuctionTime expirationDate={auction.expiresAt} />
       </View>
-      {isLoading && <Text>Loading...</Text>}
-      {!isLoading && !auction && <Text>Error while loading auction</Text>}
-      {!isLoading && auction && <Text>{auction.title}</Text>}
-    </View>
+      <View mx={16}>
+        <Button>BID</Button>
+        <Button variant='lighGray'>REPORT</Button>
+      </View>
+    </ScrollView>
   );
 }
 

@@ -1,5 +1,7 @@
 export * from './lib/AuctionAuthor';
 export * from './lib/AuctionHearts';
+export * from './lib/AuctionLeftHearts';
+export * from './lib/AuctionTime';
 export * from './lib/CategoryFilter';
 export * from './lib/HeartsCredits';
 export * from './lib/LoginFormControl';
