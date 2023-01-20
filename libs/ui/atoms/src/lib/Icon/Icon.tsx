@@ -1,9 +1,8 @@
 import React from 'react';
-
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-
+import { InterfaceIconProps } from 'native-base/src/components/primitives/Icon/types';
 import {
   MoonIcon,
   SunIcon,
@@ -39,7 +38,6 @@ import {
   useTheme,
   getColor,
 } from 'native-base';
-import { InterfaceIconProps } from 'native-base/src/components/primitives/Icon/types';
 
 enum IconType {
   add = 'add',
@@ -92,7 +90,9 @@ function Icon(props: Props) {
   const theme = useTheme();
 
   const iconProperties = {
-    size: props.size || 17,
+    // Its Native-Base bug so added not perfect workaround for this
+    // TODO When it will be fixed delete this workaround
+    size: typeof props.size === 'number' ? props.size + 0.01 : 17,
     color: props.color ? getColor(props.color, theme.colors, theme) : theme.colors.primary['500'],
     testID: props.testID,
   };
