@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AuctionsTemplate from './AuctionsTemplate';
-import { apiRoutes, SortDirection, SortKey } from '@inheartive/data';
+import { apiRoutes, Auction, sortAuctions, SortDirection, SortKey } from '@inheartive/data';
 import { useQuery } from '@tanstack/react-query';
 
 export function AuctionsPage() {
@@ -23,7 +23,7 @@ export function AuctionsPage() {
   });
 
   const [favoriteAuctionsIds, setFavoriteAuctionsIds] = useState<string[]>([]);
-
+  const [finalAuctions, setFinalAuctions] = useState<Auction[]>([]);
   const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
 
   const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpiresAt);
@@ -31,19 +31,27 @@ export function AuctionsPage() {
 
   useEffect(() => {
     if (auctions) {
-      setFavoriteAuctionsIds(auctions.filter((a, index) => index % 2).map((a) => a.id));
+      setFinalAuctions(auctions);
+      setFavoriteAuctionsIds(
+        finalAuctions
+          .filter((auction: Auction, index: number) => index % 2)
+          .map((auction: { id: string }) => auction.id)
+      );
     }
   }, [auctions]);
 
   // TODO implement filtering and sorting - backend request
-  //   useEffect(() => {
-  //     if (selectedCategoryID) {
-  //       finalAuctions = finalAuctions.filter((auction) => auction.category.id === selectedCategoryID);
-  //     }
+  useEffect(() => {
+    if (auctions) {
+      if (selectedCategoryID) {
+        setFinalAuctions(auctions.filter((auction: Auction) => auction.category.id === selectedCategoryID));
+      } else {
+        setFinalAuctions(auctions);
+      }
+    }
 
-  //     finalAuctions = sortAuctions(finalAuctions, sortBy, sortDir);
-  //     setAuctions(finalAuctions);
-  //   }, [sortBy, sortDir, selectedCategoryID]);
+    setFinalAuctions(sortAuctions(finalAuctions, sortBy, sortDir));
+  }, [sortBy, sortDir, selectedCategoryID]);
 
   // TODO implement favorites on backend
   const onFavoriteChange = (auctionId: string, isCurrentlyFavorite: boolean) => {
@@ -59,7 +67,7 @@ export function AuctionsPage() {
       categories={categories}
       categoriesLoading={categoriesLoading}
       categoriesError={!!categoriesError}
-      auctions={auctions}
+      auctions={finalAuctions}
       auctionsLoading={auctionsLoading}
       auctionsError={!!auctionsError}
       selectedCategoryID={selectedCategoryID}
