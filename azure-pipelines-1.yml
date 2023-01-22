@@ -30,6 +30,11 @@ steps:
     yarn nx build backend --prod
   displayName: 'Build application'
   
+- script: |
+    rm -rf ./node_modules
+    rm -rf ./apps/mobile
+  displayName: 'Delete unnecessary items'
+  
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
