@@ -27,7 +27,7 @@ steps:
 
 - script: |
     echo "Building application..."
-    yarn nx build backend
+    yarn nx build backend --prod
   displayName: 'Build application'
   
 - task: ArchiveFiles@2
