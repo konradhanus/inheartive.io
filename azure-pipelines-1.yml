@@ -35,7 +35,7 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist'
     includeRootFolder: false
     archiveType: zip
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/artifact.zip'
     replaceExistingArchive: true
   displayName: 'Archive Application'
 
