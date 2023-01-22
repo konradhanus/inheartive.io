@@ -29,12 +29,19 @@ steps:
     echo "Building application..."
     yarn nx build backend
   displayName: 'Build application'
-# - task: CopyFiles@2
-#   inputs:
-#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact: drop'
-#   inputs:
-#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-- publish: $(Build.ArtifactStagingDirectory)
-  artifact: inHEARTiveApp
+  
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+  displayName: 'Archive Application'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'Publish Artifacts'
