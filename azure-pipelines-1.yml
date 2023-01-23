@@ -21,7 +21,6 @@ steps:
 
 - script: |
     echo "Starting build proccess..."
-    npm install --global yarn
     yarn install
   displayName: 'Install dependencies'
 
