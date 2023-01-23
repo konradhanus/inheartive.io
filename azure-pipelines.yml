@@ -16,6 +16,15 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    npm install --global yarn
+  displayName: 'Install yarn'
+
+- script: |
+    echo "Starting build proccess..."
+    yarn install
+  displayName: 'Install dependencies'
+
+- script: |
+    echo "Building application..."
+    yarn nx build backend --prod
+  displayName: 'Build application'
