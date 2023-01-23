@@ -1,4 +1,5 @@
 # Node.js
+
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -10,12 +11,35 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: PowerShell@2
+  displayName: Build
+  env:
+    NODE_OPTIONS: --max_old_space_size=16384
+    
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '18.x'
   displayName: 'Install Node.js'
 
 - script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    npm install --global yarn
+    yarn install
+  displayName: 'yarn install'
+
+- script: |
+    yarn nx build backend --prod
+  displayName: 'Build application'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: ''
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'backend'
+    publishLocation: 'Container'
