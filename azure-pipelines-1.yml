@@ -10,6 +10,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
+- task: PowerShell@2
+  displayName: Build
+  env:
+    NODE_OPTIONS: --max_old_space_size=16384
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
@@ -24,6 +29,7 @@ steps:
     yarn install
   displayName: 'Install dependencies'
 
+
 - script: |
     echo "Building application..."
     yarn nx build backend --prod
@@ -32,7 +38,7 @@ steps:
 - script: |
     rm -rf ./apps/mobile
   displayName: 'Delete unnecessary items'
-  
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
