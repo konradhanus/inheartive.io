@@ -30,7 +30,6 @@ steps:
   displayName: 'Build application'
   
 - script: |
-    rm -rf ./node_modules
     rm -rf ./apps/mobile
   displayName: 'Delete unnecessary items'
   
