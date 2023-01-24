@@ -16,6 +16,8 @@ steps:
   inputs:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
+  env:
+      NODE_OPTIONS: --max_old_space_size=16384
 
 - script: |
     npm install --global yarn
