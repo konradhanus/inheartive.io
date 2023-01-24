@@ -30,7 +30,7 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'dist/apps/backend/'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/apps/backend/'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
