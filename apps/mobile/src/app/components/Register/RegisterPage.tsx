@@ -15,7 +15,6 @@ export function RegisterPage() {
 
   const mutation = useMutation({
     mutationFn: (data: RegisterFormValues) => {
-      console.log({ data });
       return fetch(apiRoutes.users, {
         method: 'POST',
         headers: {

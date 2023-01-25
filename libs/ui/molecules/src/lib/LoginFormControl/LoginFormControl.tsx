@@ -38,7 +38,6 @@ function LoginFormControl() {
         .json()
         .then((data) => {
           const { access_token = '' } = data || {};
-          console.log({ access_token });
           if (access_token) {
             setAccessToken(access_token);
             navigate(RoutingPath.auctions);
