@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { Avatar, Row, TextLogo, textLogoColor } from '@inheartive/ui/atoms';
-
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import { useNavigate } from 'react-router-native';
 
 import { View, Select } from '@inheartive/ui/atoms';
 
+import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
+
 function AppHeader() {
   const [menuItem, setMenuItem] = useState('');
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    navigate(RoutingPath.signIn);
+  };
+
   return (
     <Row px={8} py={2} justifyContent={'space-between'} bg='primary.500' alignItems='center'>
       <TextLogo width={150} color={textLogoColor.inverted} />
@@ -19,7 +26,7 @@ function AppHeader() {
           display='flex'
           flexGrow={1}
         >
-          <Select.Item label='Log out' value='Logout' />
+          <Select.Item label='Log out' value='Logout' onPress={logOut} />
         </Select>
       </View>
     </Row>

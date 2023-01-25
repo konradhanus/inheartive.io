@@ -14,14 +14,16 @@ export function RegisterPage() {
   } = useForm<RegisterFormValues>();
 
   const mutation = useMutation({
-    mutationFn: (data: RegisterFormValues) =>
-      fetch(apiRoutes.users, {
+    mutationFn: (data: RegisterFormValues) => {
+      console.log({ data });
+      return fetch(apiRoutes.users, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      }),
+      });
+    },
   });
 
   const onSubmit = (data: RegisterFormValues) => mutation.mutate(data);
