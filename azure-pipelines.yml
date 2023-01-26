@@ -10,6 +10,23 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+  - task: replacetokens@5
+    inputs:
+      targetFiles: '**/*.env.dev'
+      encoding: 'auto'
+      tokenPattern: 'default'
+      writeBOM: true
+      actionOnMissing: 'warn'
+      keepToken: false
+      actionOnNoFiles: 'continue'
+      enableTransforms: false
+      enableRecursion: false
+      useLegacyPattern: false
+      enableTelemetry: true
+  - task: CmdLine@2
+    inputs:
+      script: 'mv .env.dev .env'
+
   - task: NodeTool@0
     inputs:
       versionSpec: '18.x'
