@@ -12,7 +12,7 @@ pool:
 steps:
   - task: replacetokens@5
     inputs:
-      targetFiles: '**/*.env.dev'
+      targetFiles: '**/*.env.prod'
       encoding: 'auto'
       tokenPattern: 'default'
       writeBOM: true
@@ -25,7 +25,7 @@ steps:
       enableTelemetry: true
   - task: CmdLine@2
     inputs:
-      script: 'mv .env.dev .env'
+      script: 'mv .env.prod .env'
 
   - task: NodeTool@0
     inputs:
