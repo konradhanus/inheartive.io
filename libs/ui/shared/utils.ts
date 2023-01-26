@@ -25,3 +25,10 @@ export const getValue = async (key: string) =>
     },
     () => null
   );
+
+const isString = (value: unknown): value is string => typeof value === 'string';
+
+export const isAuthorized = async () => {
+  const result = await getValue('access_token');
+  return isString(result) && result.length > 0;
+};

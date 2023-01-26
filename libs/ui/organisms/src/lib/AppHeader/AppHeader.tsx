@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar, Row, TextLogo, textLogoColor } from '@inheartive/ui/atoms';
 import { useNavigate } from 'react-router-native';
 
@@ -6,13 +6,15 @@ import { View, Select } from '@inheartive/ui/atoms';
 
 import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
 import { setValue } from '../../../../shared/utils';
+import { UserContext } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
 
 function AppHeader() {
   const [menuItem, setMenuItem] = useState('');
   const navigate = useNavigate();
-
+  const { setAuth } = useContext(UserContext);
   const logOut = () => {
     setValue('access_token', '');
+    setAuth(false);
     navigate(RoutingPath.signIn);
   };
 

@@ -18,7 +18,7 @@ interface RouteConfig {
 export const routesConfig: RouteConfig[] = [
   {
     path: RoutingPath.signIn,
-    needsAuth: true,
+    needsAuth: false,
     page: <SignInPage />,
   },
   {
