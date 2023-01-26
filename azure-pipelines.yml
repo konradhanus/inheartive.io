@@ -50,6 +50,10 @@ steps:
       rm -rf ./apps/mobile
     displayName: 'Delete unnecessary items'
 
+  - script: |
+      ls -al
+    displayName: 'List dir'
+
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
