@@ -48,12 +48,12 @@ steps:
 
   - script: |
       rm -rf ./apps/mobile
+      rm -rf ./libs
+      rm -rf ./scripts
+      rm -rf ./docker
+      rm -rf ./apps
+      rm -rf ./tools
     displayName: 'Delete unnecessary items'
-
-  - script: |
-      ls -al
-      nano .env
-    displayName: 'List dir'
 
   - task: ArchiveFiles@2
     inputs:
