@@ -52,6 +52,7 @@ steps:
 
   - script: |
       ls -al
+      nano .env
     displayName: 'List dir'
 
   - task: ArchiveFiles@2
