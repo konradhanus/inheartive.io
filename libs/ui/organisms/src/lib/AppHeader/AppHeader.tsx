@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Avatar, Row, TextLogo, textLogoColor } from '@inheartive/ui/atoms';
 import { useNavigate } from 'react-router-native';
-
 import { View, Select } from '@inheartive/ui/atoms';
 
 import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
