@@ -6,14 +6,7 @@ import { apiRoutes } from '@inheartive/data';
 import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
-
-export const storage = {
-  access_token: '',
-};
-
-const setAccessToken = (token: string) => {
-  storage.access_token = token;
-};
+import { setValue } from '../../../../shared/utils';
 
 function LoginFormControl() {
   const [email, setEmail] = useState('');
@@ -39,7 +32,7 @@ function LoginFormControl() {
         .then((data) => {
           const { access_token = '' } = data || {};
           if (access_token) {
-            setAccessToken(access_token);
+            setValue('access_token', access_token);
             navigate(RoutingPath.auctions);
           }
         })
