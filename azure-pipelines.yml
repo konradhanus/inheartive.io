@@ -53,6 +53,10 @@ steps:
       rm -rf ./docker
       rm -rf ./apps
       rm -rf ./tools
+      rm -rf ./.github
+      rm -rf ./.husky
+      rm -rf ./.vscode
+      rm -rf ./.storybook
     displayName: 'Delete unnecessary items'
 
   - task: ArchiveFiles@2
