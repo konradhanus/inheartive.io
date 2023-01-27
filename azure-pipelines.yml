@@ -47,7 +47,7 @@ steps:
     displayName: 'Build application'
 
   - script: |
-      rm -rf ./apps/mobile
+      rm -rf ./apps
       rm -rf ./libs
       rm -rf ./scripts
       rm -rf ./docker
