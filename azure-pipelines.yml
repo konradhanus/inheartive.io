@@ -57,6 +57,7 @@ steps:
       rm -rf ./.husky
       rm -rf ./.vscode
       rm -rf ./.storybook
+      rm -rf ./node_modules
     displayName: 'Delete unnecessary items'
 
   - task: ArchiveFiles@2
