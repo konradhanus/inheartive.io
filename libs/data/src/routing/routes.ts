@@ -8,6 +8,7 @@ export const apiRoutes = {
   auction: `${apiUrlPrefix}/auctions/:id`,
   categories: `${apiUrlPrefix}/categories`,
   users: `${apiUrlPrefix}/users`,
+  login: `${apiUrlPrefix}/login`,
 } as const;
 
 export const routeWithId = (route: string, id: string) => {

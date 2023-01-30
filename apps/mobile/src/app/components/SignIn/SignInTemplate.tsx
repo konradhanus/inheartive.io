@@ -10,6 +10,7 @@ import { RoutingPath } from '../../routing';
 
 export function SignInTemplate() {
   const navigate = useNavigate();
+  const onPress = () => navigate(RoutingPath.register);
 
   return (
     <KeyboardAwareScrollView
@@ -22,7 +23,7 @@ export function SignInTemplate() {
       <Box w='100%' mt={10}>
         <LoginFormControl />
 
-        <Button mt={3} variant='outline' onPress={() => navigate(RoutingPath.register)}>
+        <Button mt={3} variant='outline' onPress={onPress}>
           Register
         </Button>
       </Box>

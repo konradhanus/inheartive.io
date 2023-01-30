@@ -36,4 +36,7 @@ export class UsersService {
   findOne(id: string) {
     return this.userRepository.findOneOrFail({ where: { id }, relations: ['auctions'] });
   }
+  findByEmail(email: string) {
+    return this.userRepository.findOneOrFail({ where: { email }, relations: ['auctions'] });
+  }
 }
