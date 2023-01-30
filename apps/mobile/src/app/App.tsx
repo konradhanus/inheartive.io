@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { theme } from '@inheartive/ui/theme';
 import { routesConfig } from './routing';
 import AuthenticatedPageWrapper from './components/AuthenticatedPageWrapper/AuthenticatedPageWrapper';
-import UnauthenticatedPageWrapper from './components/UnauthenticatedPageWrapper/UnauthenticatedPageWrapper';
+
+import SignInPage from './components/SignIn/SignInPage';
+import { UserContext, UserProvider } from './components/Providers/UserProvider';
 
 export const App = () => {
   const queryClient = new QueryClient();
+  const { auth } = useContext(UserContext);
 
   return (
     <QueryClientProvider client={queryClient}>
       <NativeBaseProvider theme={theme}>
         <NativeRouter>
           <Routes>
-            {routesConfig.map((r) => (
+            {routesConfig.map(({ path, needsAuth, page, footerIcon }) => (
               <Route
-                key={r.path}
-                path={r.path}
+                key={path}
+                path={path}
                 element={
-                  r.needsAuth ? (
-                    <AuthenticatedPageWrapper footerActiveIcon={r.footerIcon}>{r.page}</AuthenticatedPageWrapper>
+                  needsAuth ? (
+                    auth ? (
+                      <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>{page}</AuthenticatedPageWrapper>
+                    ) : (
+                      <SignInPage />
+                    )
                   ) : (
-                    <UnauthenticatedPageWrapper>{r.page}</UnauthenticatedPageWrapper>
+                    page
                   )
                 }
               />
@@ -35,4 +42,10 @@ export const App = () => {
   );
 };
 
-export default App;
+export default () => {
+  return (
+    <UserProvider>
+      <App />
+    </UserProvider>
+  );
+};
