@@ -1,4 +1,4 @@
-export interface IDropdownItem {
+export interface DropdownItem {
   name: string;
   route?: string;
 }

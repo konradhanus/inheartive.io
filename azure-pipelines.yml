@@ -1,0 +1,76 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  - master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: replacetokens@5
+    inputs:
+      targetFiles: '**/*.env.prod'
+      encoding: 'auto'
+      tokenPattern: 'default'
+      writeBOM: true
+      actionOnMissing: 'warn'
+      keepToken: false
+      actionOnNoFiles: 'continue'
+      enableTransforms: false
+      enableRecursion: false
+      useLegacyPattern: false
+      enableTelemetry: true
+  - task: CmdLine@2
+    inputs:
+      script: 'mv .env.prod .env'
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+    displayName: 'Install Node engine'
+
+  - script: |
+      npm install --global yarn
+    displayName: 'Install yarn'
+
+  - script: |
+      echo "Starting build proccess..."
+      yarn install
+    displayName: 'Install dependencies'
+
+  - script: |
+      echo "Building application..."
+      yarn nx build backend --prod
+    displayName: 'Build application'
+
+  - script: |
+      rm -rf ./apps
+      rm -rf ./libs
+      rm -rf ./scripts
+      rm -rf ./docker
+      rm -rf ./apps
+      rm -rf ./tools
+      rm -rf ./.github
+      rm -rf ./.husky
+      rm -rf ./.vscode
+      rm -rf ./.storybook
+    displayName: 'Delete unnecessary items'
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+      includeRootFolder: false
+      archiveType: zip
+      archiveFile: '$(Build.ArtifactStagingDirectory)/artifact.zip'
+      replaceExistingArchive: true
+    displayName: 'Archive Application'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
+    displayName: 'Publish Artifacts'

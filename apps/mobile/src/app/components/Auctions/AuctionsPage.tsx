@@ -1,47 +1,59 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React, { useEffect, useState } from 'react';
 import AuctionsTemplate from './AuctionsTemplate';
-import {
-  auctionsMock,
-  categoriesMock,
-  IAuction,
-  ICategory,
-  sortAuctions,
-  SortDirection,
-  SortKey,
-} from '@inheartive/data';
-
-import { IconNameType } from '@inheartive/ui/organisms';
+import { apiRoutes, Auction, sortAuctions, SortDirection, SortKey } from '@inheartive/data';
+import { useQuery } from '@tanstack/react-query';
 
 export function AuctionsPage() {
-  const [auctions, setAuctions] = useState<IAuction[]>([]);
+  const {
+    isLoading: auctionsLoading,
+    error: auctionsError,
+    data: auctions,
+  } = useQuery({
+    queryKey: ['auctions'],
+    queryFn: () => fetch(apiRoutes.auctions).then((res) => res.json()),
+  });
+
+  const {
+    isLoading: categoriesLoading,
+    error: categoriesError,
+    data: categories,
+  } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => fetch(apiRoutes.categories).then((res) => res.json()),
+  });
+
   const [favoriteAuctionsIds, setFavoriteAuctionsIds] = useState<string[]>([]);
-
+  const [finalAuctions, setFinalAuctions] = useState<Auction[]>([]);
   const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
-  const [categories, setCategories] = useState<ICategory[]>([]);
 
-  const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpirationDate);
+  const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpiresAt);
   const [sortDir, setSortDir] = useState<SortDirection>(SortDirection.ASC);
-  const [activeIcon, setActiveIcon] = useState<IconNameType>(IconNameType.search);
 
   useEffect(() => {
-    // TODO: Categories API call
-    setCategories(categoriesMock);
-    setFavoriteAuctionsIds(auctionsMock.filter((a, index) => index % 2).map((a) => a.id));
-  }, []);
+    if (auctions) {
+      setFinalAuctions(auctions);
+      setFavoriteAuctionsIds(
+        finalAuctions
+          .filter((auction: Auction, index: number) => index % 2)
+          .map((auction: { id: string }) => auction.id)
+      );
+    }
+  }, [auctions]);
 
+  // TODO implement filtering and sorting - backend request
   useEffect(() => {
-    // TODO: Auctions API call
-    let finalAuctions = [...auctionsMock];
-
-    if (selectedCategoryID) {
-      finalAuctions = finalAuctions.filter((auction) => auction.category.id === selectedCategoryID);
+    if (auctions) {
+      if (selectedCategoryID) {
+        setFinalAuctions(auctions.filter((auction: Auction) => auction.category.id === selectedCategoryID));
+      } else {
+        setFinalAuctions(auctions);
+      }
     }
 
-    finalAuctions = sortAuctions(finalAuctions, sortBy, sortDir);
-    setAuctions(finalAuctions);
+    setFinalAuctions(sortAuctions(finalAuctions, sortBy, sortDir));
   }, [sortBy, sortDir, selectedCategoryID]);
 
+  // TODO implement favorites on backend
   const onFavoriteChange = (auctionId: string, isCurrentlyFavorite: boolean) => {
     const newFavouriteAuctionsIds = isCurrentlyFavorite
       ? favoriteAuctionsIds.filter((id) => id !== auctionId)
@@ -53,14 +65,17 @@ export function AuctionsPage() {
   return (
     <AuctionsTemplate
       categories={categories}
+      categoriesLoading={categoriesLoading}
+      categoriesError={!!categoriesError}
+      auctions={finalAuctions}
+      auctionsLoading={auctionsLoading}
+      auctionsError={!!auctionsError}
       selectedCategoryID={selectedCategoryID}
       onCategoryChange={(id) => setSelectedCategoryID(id)}
       sortBy={sortBy}
       onSortByChange={(sortBy) => setSortBy(sortBy)}
       sortDir={sortDir}
       onSortDirChange={(sortDir) => setSortDir(sortDir)}
-      auctions={auctions}
-      activeIcon={activeIcon}
       favoriteAuctionsIds={favoriteAuctionsIds}
       onFavoriteChange={onFavoriteChange}
     />

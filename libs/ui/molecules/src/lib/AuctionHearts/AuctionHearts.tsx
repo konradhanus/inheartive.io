@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, IconType, Row, Text } from '@inheartive/ui/atoms';
+
 interface IAuctionHeartsProps {
   quantity: number;
   authorName?: string;

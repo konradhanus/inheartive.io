@@ -1,13 +1,13 @@
 import React from 'react';
 import { Badge, Row, View, Text, Icon, IconType, Pressable, AuctionImage, imageTypes } from '@inheartive/ui/atoms';
-import { IAuction } from '@inheartive/data';
+import { Auction } from '@inheartive/data';
 import { placeholder } from '@inheartive/assets';
 import { AuctionAuthor, AuctionHearts } from '@inheartive/ui/molecules';
 import { Link } from 'react-router-native';
 import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
-  auction: IAuction;
+  auction: Auction;
   linkPatternWithId?: string;
   isFavorite: boolean;
   onFavoriteChange: (auctionId: string, isCurrentlyFavorite: boolean) => void;
@@ -15,16 +15,21 @@ interface Props {
 
 function AuctionCard(props: Props) {
   const { linkPatternWithId, isFavorite, onFavoriteChange } = props;
-  const { id, author, title, heartcoins, imageSrc, expirationDate } = props.auction;
+  const { id, author, title, price, imageSrc, expiresAt } = props.auction;
 
   const link = linkPatternWithId ? linkPatternWithId.replace(':id', id) : undefined;
-  const remainingTimeHumanized = formatDistanceToNow(expirationDate, { addSuffix: true }).trim();
+  const remainingTimeHumanized = formatDistanceToNow(new Date(expiresAt), { addSuffix: true });
 
   return (
     <View>
       <Row justifyContent={'space-between'} py={1} px={3}>
-        <AuctionAuthor authorInitials={author.initials} avatarSrc={author.avatarSrc} authorName={author.fullName} />
-        <AuctionHearts quantity={heartcoins} />
+        <AuctionAuthor
+          authorInitials={author.initials}
+          avatarSrc={author.avatarSrc}
+          authorFirstName={author.firstName}
+          authorLastName={author.lastName}
+        />
+        <AuctionHearts quantity={price} />
       </Row>
       <AuctionImage imageType={imageTypes.list} imageSrc={imageSrc ?? placeholder}>
         <View alignItems={'flex-end'} justifyContent={'space-between'} height={'100%'} py={4} px={3}>
@@ -33,7 +38,7 @@ function AuctionCard(props: Props) {
           </Pressable>
           <Badge size={'xs'} fontSize={12} bgColor={'secondary.600'} rounded={16}>
             <Row>
-              <Text fontSize={12} mr={2} color={'white'}>
+              <Text fontSize={12} mr={1} color={'white'}>
                 Ends:
               </Text>
               <Text fontSize={12} color={'white'} bold>
