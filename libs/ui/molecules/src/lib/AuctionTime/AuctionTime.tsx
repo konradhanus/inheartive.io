@@ -3,12 +3,18 @@ import { formatDistanceToNow } from 'date-fns';
 import { Icon, IconType, Row, Text } from '@inheartive/ui/atoms';
 
 interface IAuctionTimeProps {
-  expirationDate: number | Date;
+  expirationDate: Date | number | string;
 }
 
 function AuctionTime(props: IAuctionTimeProps) {
   const { expirationDate } = props;
-  const remainingTimeHumanized = formatDistanceToNow(expirationDate, { addSuffix: true }).trim();
+  let remainingTimeHumanized = '';
+
+  if (typeof expirationDate === 'string') {
+    remainingTimeHumanized = expirationDate;
+  } else {
+    remainingTimeHumanized = formatDistanceToNow(expirationDate, { addSuffix: true }).trim();
+  }
 
   return (
     <Row space={1.5} alignItems='center'>

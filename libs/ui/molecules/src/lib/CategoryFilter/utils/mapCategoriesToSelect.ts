@@ -1,7 +1,7 @@
 import { ISelectItemProps } from 'native-base';
-import { ICategory } from '@inheartive/data';
+import { Category } from '@inheartive/data';
 
-export const mapCategoriesToSelect = (categories: ICategory[]): ISelectItemProps[] => {
+export const mapCategoriesToSelect = (categories: Category[]): ISelectItemProps[] => {
   const items: ISelectItemProps[] = categories.map((category) => {
     return { value: category.id, label: category.name };
   });
