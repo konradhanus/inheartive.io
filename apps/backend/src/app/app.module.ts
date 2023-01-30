@@ -20,7 +20,7 @@ import { UsersModule } from './users/users.module';
       port: 5432,
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      database: 'postgres',
+      database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: process.env.MODE === 'dev',
     }),
