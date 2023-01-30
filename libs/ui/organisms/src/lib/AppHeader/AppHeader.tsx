@@ -8,7 +8,7 @@ import { setValue } from '../../../../shared/utils';
 import { UserContext } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
 
 function AppHeader() {
-  const [menuItem, setMenuItem] = useState<string>('');
+  const [menuItem, setMenuItem] = useState('');
   const navigate = useNavigate();
   const { setAuth } = useContext(UserContext);
   const logOut = () => {
