@@ -47,12 +47,17 @@ steps:
     displayName: 'Build application'
 
   - script: |
-      rm -rf ./apps/mobile
+      rm -rf ./apps
+      rm -rf ./libs
+      rm -rf ./scripts
+      rm -rf ./docker
+      rm -rf ./apps
+      rm -rf ./tools
+      rm -rf ./.github
+      rm -rf ./.husky
+      rm -rf ./.vscode
+      rm -rf ./.storybook
     displayName: 'Delete unnecessary items'
-
-  - script: |
-      ls -al
-    displayName: 'List dir'
 
   - task: ArchiveFiles@2
     inputs:
