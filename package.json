@@ -21,6 +21,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "@nrwl/nx-cloud": "^15.0.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@tanstack/react-query": "^4.20.4",
     "class-transformer": "^0.5.1",
