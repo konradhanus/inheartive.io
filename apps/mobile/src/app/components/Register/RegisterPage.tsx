@@ -1,17 +1,13 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
+
 import { useMutation } from '@tanstack/react-query';
 import { RegisterFormValues } from './register-form-values';
 import { apiRoutes } from '@inheartive/data';
 import RegisterTemplate from './RegisterTemplate';
 
 export function RegisterPage() {
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RegisterFormValues>();
+  const formMethods = useForm<RegisterFormValues>();
 
   const mutation = useMutation({
     mutationFn: (data: RegisterFormValues) => {
@@ -28,13 +24,9 @@ export function RegisterPage() {
   const onSubmit = (data: RegisterFormValues) => mutation.mutate(data);
 
   return (
-    <RegisterTemplate
-      control={control}
-      register={register}
-      handleSubmit={handleSubmit}
-      errors={errors}
-      onSubmit={onSubmit}
-    />
+    <FormProvider {...formMethods}>
+      <RegisterTemplate onSubmit={onSubmit} />
+    </FormProvider>
   );
 }
 
