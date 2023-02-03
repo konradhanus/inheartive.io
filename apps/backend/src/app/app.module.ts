@@ -24,8 +24,8 @@ import { UsersModule } from './users/users.module';
       autoLoadEntities: true,
       synchronize: process.env.MODE === 'dev',
       ssl: {
-        rejectUnauthorized: false,
-        ca: process.env.DB_CA_CERT,
+        rejectUnauthorized: true,
+        ca: process.env.DB_CA_CERT.replace(/\\n/g, '\n'),
       },
     }),
     AuthModule,
