@@ -26,6 +26,12 @@ steps:
   - task: CmdLine@2
     inputs:
       script: 'mv .env.prod .env'
+    displayName: 'Rename .env.prod to .env'
+
+  - task: CmdLine@2
+    inputs:
+      script: 'nano .env'
+    displayName: 'Show .env file'
 
   - task: NodeTool@0
     inputs:
