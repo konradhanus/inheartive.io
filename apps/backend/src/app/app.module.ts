@@ -22,6 +22,7 @@ import { UsersModule } from './users/users.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
+      entities: ['apps/backend/src/app/**/entities/*.entity.js'],
       synchronize: process.env.MODE === 'dev',
       ssl: {
         rejectUnauthorized: true,
