@@ -58,6 +58,28 @@ steps:
       rm -rf ./.husky
       rm -rf ./.vscode
       rm -rf ./.storybook
+      rm -rf ./yarn.lock
+      rm -rf ./.commitlintrc.js
+      rm -rf ./.editorconfig
+      rm -rf ./.env.dev
+      rm -rf ./.eslintrc.json
+      rm -rf ./.gitignore
+      rm -rf ./.lintstagedrc.js
+      rm -rf ./.prettierignore
+      rm -rf ./.prettierrc
+      rm -rf ./Gemfile
+      rm -rf ./LICENSE
+      rm -rf ./README.md
+      rm -rf ./azure-pipelines.yml
+      rm -rf ./babel.config.json
+      rm -rf ./changelog.md
+      rm -rf ./docker-compose.yml
+      rm -rf ./jest.config.ts
+      rm -rf ./jest.preset.js
+      rm -rf ./nx.json
+      rm -rf ./package.json
+      rm -rf ./react-native.config.js
+      rm -rf ./tsconfig.base.json
     displayName: 'Delete unnecessary items'
 
   - task: ArchiveFiles@2
