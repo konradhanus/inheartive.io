@@ -1,21 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useForm, FormProvider } from 'react-hook-form';
 
-import { Button, FormControl, Input } from '@inheartive/ui/atoms';
+import { Button, FormControl, View } from '@inheartive/ui/atoms';
 import { apiRoutes } from '@inheartive/data';
-import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
 import { setValue } from '../../../../shared/utils';
 import { UserContext } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
+import { EmailInput } from '@inheartive/ui/organisms';
 
 function LoginFormControl() {
-  const [email, setEmail] = useState('');
   const { setAuth } = useContext(UserContext);
 
-  const onChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    setEmail(e.nativeEvent.text);
-  };
+  const formMethods = useForm<{ email: string }>();
+  const {
+    getValues,
+    formState: { errors },
+    handleSubmit,
+  } = formMethods;
   const navigate = useNavigate();
 
   const setAuthenticated = async (access_token: string) => {
@@ -48,15 +51,26 @@ function LoginFormControl() {
     },
   });
 
-  const signIn = () => mutateAsync({ email });
+  const signIn = () => {
+    const { email } = getValues();
+    const isEmailError = 'email' in errors;
+    if (!isEmailError) {
+      mutateAsync({ email });
+    }
+  };
 
   return (
-    <FormControl>
-      <Input placeholder='E-mail' size='xl' value={email} onChange={onChange} />
-      <Button mt='4' onPress={signIn}>
+    <FormProvider {...formMethods}>
+      <FormControl isInvalid={'email' in errors}>
+        <EmailInput placeholder='E-mail' />
+        <View height={6} position='relative'>
+          <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
+        </View>
+      </FormControl>
+      <Button mt='4' onPress={(e) => handleSubmit(signIn)(e)}>
         Sign in
       </Button>
-    </FormControl>
+    </FormProvider>
   );
 }
 

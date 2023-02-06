@@ -1,23 +1,11 @@
 import React from 'react';
 import { FormControl, Input, Button, ScrollView, Column } from '@inheartive/ui/atoms';
-import {
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldErrors,
-  Controller,
-  Control,
-  FieldValues,
-  UseControllerProps,
-} from 'react-hook-form';
+import { Controller, FieldValues, UseControllerProps, useFormContext } from 'react-hook-form';
 import { RegisterFormValues } from './register-form-values';
 import { RoutingPath } from '../../routing';
 import { useNavigate } from 'react-router-native';
-
+import { EmailInput } from '@inheartive/ui/organisms';
 interface Props<T extends FieldValues> {
-  control: Control<T>;
-  register: UseFormRegister<T>;
-  handleSubmit: UseFormHandleSubmit<T>;
-  errors: FieldErrors<T>;
   onSubmit: (data: T) => void;
 }
 type FormRulesStrategy = {
@@ -39,7 +27,12 @@ const FORM_RULES_STRATEGY = {
 } as const satisfies FormRulesStrategy;
 
 export function RegisterTemplate(props: Props<RegisterFormValues>) {
-  const { control, handleSubmit, errors, onSubmit } = props;
+  const { onSubmit } = props;
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useFormContext<RegisterFormValues>();
 
   const navigate = useNavigate();
 
@@ -48,20 +41,7 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
       <Column px={5} space={3} justifyContent='center'>
         <FormControl isRequired isInvalid={'email' in errors}>
           <FormControl.Label>Email</FormControl.Label>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                onBlur={onBlur}
-                placeholder='john.doe@example.com'
-                onChangeText={(val) => onChange(val)}
-                value={value}
-              />
-            )}
-            name='email'
-            rules={FORM_RULES_STRATEGY.email}
-            defaultValue=''
-          />
+          <EmailInput placeholder={'john.doe@example.com'} />
           <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
         </FormControl>
 
