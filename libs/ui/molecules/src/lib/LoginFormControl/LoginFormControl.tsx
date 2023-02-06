@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { Button, FormControl, Text, View } from '@inheartive/ui/atoms';
+import { Button, FormControl, View } from '@inheartive/ui/atoms';
 import { apiRoutes } from '@inheartive/data';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
@@ -17,6 +17,7 @@ function LoginFormControl() {
   const {
     getValues,
     formState: { errors },
+    handleSubmit,
   } = formMethods;
   const navigate = useNavigate();
 
@@ -52,20 +53,21 @@ function LoginFormControl() {
 
   const signIn = () => {
     const { email } = getValues();
-    mutateAsync({ email });
+    const isEmailError = 'email' in errors;
+    if (!isEmailError) {
+      mutateAsync({ email });
+    }
   };
 
   return (
     <FormProvider {...formMethods}>
-      <FormControl>
+      <FormControl isInvalid={'email' in errors}>
         <EmailInput placeholder='E-mail' />
-        <View height={5} position='relative'>
-          <Text color='red.700' position={'absolute'}>
-            {errors.email?.message}
-          </Text>
+        <View height={6} position='relative'>
+          <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
         </View>
       </FormControl>
-      <Button mt='4' onPress={signIn}>
+      <Button mt='4' onPress={(e) => handleSubmit(signIn)(e)}>
         Sign in
       </Button>
     </FormProvider>

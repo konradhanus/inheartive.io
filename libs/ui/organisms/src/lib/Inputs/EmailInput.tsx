@@ -21,6 +21,7 @@ interface EmailInputProps {
 
 export function EmailInput({ placeholder }: EmailInputProps) {
   const { control } = useFormContext<WithEmail>();
+
   return (
     <Controller
       control={control}
