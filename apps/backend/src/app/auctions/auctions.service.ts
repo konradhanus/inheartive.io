@@ -34,6 +34,24 @@ export class AuctionsService {
     });
   }
 
+  findAllByCategory(paginationQuery: PaginationQueryDto, name: string) {
+    const { limit, offset } = paginationQuery;
+
+    return this.auctionsRepository.find({
+      relations: ['category', 'author'],
+      skip: offset,
+      take: limit || MAX_LIMIT,
+      order: {
+        createdAt: 'DESC',
+      },
+      where: {
+        category: {
+          name,
+        },
+      },
+    });
+  }
+
   findOne(id: string) {
     return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category', 'author'] });
   }

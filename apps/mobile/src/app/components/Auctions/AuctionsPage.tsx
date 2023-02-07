@@ -4,13 +4,14 @@ import { apiRoutes, Auction, sortAuctions, SortDirection, SortKey } from '@inhea
 import { useQuery } from '@tanstack/react-query';
 
 export function AuctionsPage() {
+  const route = `${apiRoutes.auctionsByCategory.replace(':name', 'Bilbo Baggins')}`;
   const {
     isLoading: auctionsLoading,
     error: auctionsError,
     data: auctions,
   } = useQuery({
     queryKey: ['auctions'],
-    queryFn: () => fetch(apiRoutes.auctions).then((res) => res.json()),
+    queryFn: () => fetch(route).then((res) => res.json()),
   });
 
   const {
