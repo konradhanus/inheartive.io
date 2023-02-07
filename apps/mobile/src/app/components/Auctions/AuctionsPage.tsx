@@ -4,13 +4,17 @@ import { apiRoutes, Auction, sortAuctions, SortDirection, SortKey } from '@inhea
 import { useQuery } from '@tanstack/react-query';
 
 export function AuctionsPage() {
+  //TODO remove tmp cookingCategoryId
+  const cookingCategoryId = 'f0818a83-de98-4ebb-9c91-01eedcaac5a2';
+  const route = `${apiRoutes.auctionsByCategory.replace(':id', cookingCategoryId)}`;
+
   const {
     isLoading: auctionsLoading,
     error: auctionsError,
     data: auctions,
   } = useQuery({
     queryKey: ['auctions'],
-    queryFn: () => fetch(apiRoutes.auctions).then((res) => res.json()),
+    queryFn: () => fetch(route).then((res) => res.json()),
   });
 
   const {

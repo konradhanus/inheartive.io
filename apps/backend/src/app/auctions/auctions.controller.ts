@@ -18,6 +18,11 @@ export class AuctionsController {
     return this.auctionsService.findAll(paginationQuery);
   }
 
+  @Get('/category/:id')
+  findAllByCategory(@Query() paginationQuery: PaginationQueryDto, @Param('id') id: string) {
+    return this.auctionsService.findAllByCategory(paginationQuery, id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     const auction = this.auctionsService.findOne(id);
