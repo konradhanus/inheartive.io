@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -7,11 +7,11 @@ import { routesConfig } from './routing';
 import AuthenticatedPageWrapper from './components/AuthenticatedPageWrapper/AuthenticatedPageWrapper';
 
 import SignInPage from './components/SignIn/SignInPage';
-import { UserContext, UserProvider } from './components/Providers/UserProvider';
+import { UserProvider, useUser } from './components/Providers/UserProvider';
 
 export const App = () => {
   const queryClient = new QueryClient();
-  const { auth } = useContext(UserContext);
+  const { user } = useUser();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -24,7 +24,7 @@ export const App = () => {
                 path={path}
                 element={
                   needsAuth ? (
-                    auth ? (
+                    user ? (
                       <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>{page}</AuthenticatedPageWrapper>
                     ) : (
                       <SignInPage />

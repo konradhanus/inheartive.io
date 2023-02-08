@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 
@@ -7,11 +7,11 @@ import { apiRoutes } from '@inheartive/data';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
 import { setValue } from '../../../../shared/utils';
-import { UserContext } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
+import { useUser } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
 import { EmailInput } from '@inheartive/ui/organisms';
 
 function LoginFormControl() {
-  const { setAuth } = useContext(UserContext);
+  const { setUser } = useUser();
 
   const formMethods = useForm<{ email: string }>();
   const {
@@ -21,9 +21,8 @@ function LoginFormControl() {
   } = formMethods;
   const navigate = useNavigate();
 
-  const setAuthenticated = async (access_token: string) => {
-    const success = await setValue('access_token', access_token);
-    setAuth(success);
+  const setAccessToken = async (access_token: string) => {
+    await setValue('access_token', access_token);
   };
 
   const { mutateAsync } = useMutation({
@@ -41,9 +40,10 @@ function LoginFormControl() {
       value
         .json()
         .then((data) => {
-          const { access_token = '' } = data || {};
+          const { access_token = '', user = null } = data || {};
           if (access_token) {
-            setAuthenticated(access_token);
+            setAccessToken(access_token);
+            setUser(user);
             navigate(RoutingPath.auctions);
           }
         })
