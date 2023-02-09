@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check
+        id: check
+        run: |
+          ls
       - name: Replace Tokens
         id: replace_tokens
         run: |
