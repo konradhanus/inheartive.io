@@ -50,10 +50,8 @@ jobs:
       - name: Zip Artifact
         run: |
           zip -r artifact.zip artifact
-    steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
-      
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
@@ -62,4 +60,3 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: artifact.zip
           server-dir: /
-          
