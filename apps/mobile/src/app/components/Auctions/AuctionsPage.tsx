@@ -2,20 +2,10 @@ import React, { useEffect, useState } from 'react';
 import AuctionsTemplate from './AuctionsTemplate';
 import { apiRoutes, Auction, sortAuctions, SortDirection, SortKey } from '@inheartive/data';
 import { useQuery } from '@tanstack/react-query';
+import { useFetchAutions } from './useFetchAutions';
 
 export function AuctionsPage() {
-  //TODO remove tmp cookingCategoryId
-  const cookingCategoryId = 'f0818a83-de98-4ebb-9c91-01eedcaac5a2';
-  const route = `${apiRoutes.auctionsByCategory.replace(':id', cookingCategoryId)}`;
-
-  const {
-    isLoading: auctionsLoading,
-    error: auctionsError,
-    data: auctions,
-  } = useQuery({
-    queryKey: ['auctions'],
-    queryFn: () => fetch(route).then((res) => res.json()),
-  });
+  const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
 
   const {
     isLoading: categoriesLoading,
@@ -28,34 +18,17 @@ export function AuctionsPage() {
 
   const [favoriteAuctionsIds, setFavoriteAuctionsIds] = useState<string[]>([]);
   const [finalAuctions, setFinalAuctions] = useState<Auction[]>([]);
-  const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
-
   const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpiresAt);
   const [sortDir, setSortDir] = useState<SortDirection>(SortDirection.ASC);
+  const { isLoading: auctionsLoading, error: auctionsError, auctions = [] } = useFetchAutions(selectedCategoryID);
 
-  useEffect(() => {
-    if (auctions) {
-      setFinalAuctions(auctions);
-      setFavoriteAuctionsIds(
-        finalAuctions
-          .filter((auction: Auction, index: number) => index % 2)
-          .map((auction: { id: string }) => auction.id)
-      );
-    }
-  }, [auctions]);
-
-  // TODO implement filtering and sorting - backend request
-  useEffect(() => {
-    if (auctions) {
-      if (selectedCategoryID) {
-        setFinalAuctions(auctions.filter((auction: Auction) => auction.category.id === selectedCategoryID));
-      } else {
-        setFinalAuctions(auctions);
-      }
-    }
-
+  if (auctions) {
+    setFinalAuctions(auctions);
+    setFavoriteAuctionsIds(
+      finalAuctions.filter((auction: Auction, index: number) => index % 2).map((auction: { id: string }) => auction.id)
+    );
     setFinalAuctions(sortAuctions(finalAuctions, sortBy, sortDir));
-  }, [sortBy, sortDir, selectedCategoryID]);
+  }
 
   // TODO implement favorites on backend
   const onFavoriteChange = (auctionId: string, isCurrentlyFavorite: boolean) => {

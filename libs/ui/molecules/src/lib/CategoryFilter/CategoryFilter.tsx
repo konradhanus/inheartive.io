@@ -13,6 +13,9 @@ function CategoryFilter(props: Props) {
   const { onChange, selectedValue, items } = props;
   const { isOpen, onOpen, onClose } = useDisclose();
 
+  //console.log('CategoryFilter');
+  //console.log(props);
+
   const CategoryFilterButton = (props: { onOpen: () => void }) => {
     const onOpen: () => void = props.onOpen;
 

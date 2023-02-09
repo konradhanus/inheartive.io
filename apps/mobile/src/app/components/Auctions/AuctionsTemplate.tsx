@@ -24,6 +24,8 @@ interface Props {
 }
 
 export function AuctionsTemplate(props: Props) {
+  //console.log('___________________  AuctionsTemplate _______________');
+
   const {
     auctions,
     auctionsLoading,
@@ -40,6 +42,9 @@ export function AuctionsTemplate(props: Props) {
     favoriteAuctionsIds,
     onFavoriteChange,
   } = props;
+
+  //console.log('selectedCategoryID:' + selectedCategoryID);
+  //console.log(auctions);
 
   return (
     <View>
