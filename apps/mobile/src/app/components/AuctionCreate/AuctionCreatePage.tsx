@@ -6,8 +6,14 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { apiRoutes } from '@inheartive/data';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../routing';
+import { useUser } from '../Providers/UserProvider';
+
+interface PayloadWithAuthor extends AuctionFormValues {
+  author: string;
+}
 
 export function AuctionCreatePage() {
+  const { user } = useUser();
   const navigate = useNavigate();
   const {
     isLoading: categoriesIsLoading,
@@ -18,14 +24,8 @@ export function AuctionCreatePage() {
     queryFn: () => fetch(apiRoutes.categories).then((res) => res.json()),
   });
 
-  // tmp users loading since we don't have auth user right now
-  const { data: users } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => fetch(apiRoutes.users).then((res) => res.json()),
-  });
-
   const mutation = useMutation({
-    mutationFn: (data) => {
+    mutationFn: (data: PayloadWithAuthor) => {
       return fetch(apiRoutes.auctions, {
         method: 'POST',
         headers: {
@@ -45,33 +45,34 @@ export function AuctionCreatePage() {
     formState: { errors },
   } = useForm<AuctionFormValues>();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: AuctionFormValues) => {
     // todo change expiresAt to end of the day? (time)
 
-    // todo add auth user
-    if (!users) {
-      console.log('Users not loaded');
-    } else if (!users.length) {
-      console.log('Users are empty');
-    } else {
-      data.author = users[0].id;
-      mutation.mutate(data);
+    if (user) {
+      const withAuthor: PayloadWithAuthor = {
+        ...data,
+        author: user.id,
+      };
+
+      mutation.mutate(withAuthor);
     }
   };
 
   return (
-    <AuctionCreateTemplate
-      control={control}
-      register={register}
-      handleSubmit={handleSubmit}
-      errors={errors}
-      onSubmit={onSubmit}
-      categories={categories}
-      categoriesIsLoading={categoriesIsLoading}
-      categoriesIsError={categoriesIsError}
-      author={users?.length ? users[0] : undefined}
-      setValue={setValue}
-    />
+    user && (
+      <AuctionCreateTemplate
+        control={control}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        onSubmit={onSubmit}
+        categories={categories}
+        categoriesIsLoading={categoriesIsLoading}
+        categoriesIsError={categoriesIsError}
+        author={user}
+        setValue={setValue}
+      />
+    )
   );
 }
 
