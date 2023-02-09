@@ -5,10 +5,10 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Button, FormControl, View } from '@inheartive/ui/atoms';
 import { apiRoutes } from '@inheartive/data';
 import { useNavigate } from 'react-router-native';
-import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
-import { setValue } from '../../../../shared/utils';
-import { useUser } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
 import { EmailInput } from '@inheartive/ui/organisms';
+import { useUser } from 'apps/mobile/src/app/components/Providers/UserProvider';
+import { RoutingPath } from 'apps/mobile/src/app/routing/routing-path';
+import { setValue } from 'libs/ui/shared/utils';
 
 function LoginFormControl() {
   const { setUser } = useUser();
