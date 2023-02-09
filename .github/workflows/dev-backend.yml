@@ -13,7 +13,7 @@ jobs:
       - name: Replace Tokens
         id: replace_tokens
         run: |
-          mv **/*.envgithub.dev .env
+          mv .envgithub.dev .env
       - name: Install Node engine
         uses: actions/setup-node@v2
         with:
