@@ -48,14 +48,9 @@ jobs:
           rm -rf ./.vscode
           rm -rf ./.storybook
       - name: Archive Application
-        id: archive
-        uses: actions/upload-artifact@v2
+        uses: montudor/action-zip@v1
         with:
-          name: artifact
-          path: $(pwd)
-      - name: Zip Artifact
-        run: |
-          zip -r artifact.zip artifact
+          args: zip -qq -r artifact.zip ./
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
