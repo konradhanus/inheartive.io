@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
       - name: Check
         id: check
         run: |
@@ -54,8 +56,6 @@ jobs:
       - name: Zip Artifact
         run: |
           zip -r artifact.zip artifact
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v3
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
