@@ -13,7 +13,7 @@ jobs:
       - name: Check
         id: check
         run: |
-          ls
+          ls -la
       - name: Replace Tokens
         id: replace_tokens
         run: |
