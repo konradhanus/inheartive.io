@@ -5,37 +5,32 @@ import { Actionsheet, useDisclose } from 'native-base';
 
 interface Props {
   items: ISelectItemProps[];
-  onChange?: (itemValue: string) => void;
-  selectedValue?: string;
+  onChange: (itemValue: ISelectItemProps) => void;
+  selectedValue: ISelectItemProps;
 }
+
+const ButtonText = () => (
+  <Text fontSize='lg' color={theme.colors.trueGray['600']}>
+    Filter
+  </Text>
+);
+
+interface CategoryFilterButtonProps {
+  onOpen: () => void;
+}
+
+const CategoryFilterButton = ({ onOpen }: CategoryFilterButtonProps) => (
+  <Pressable onPress={onOpen}>
+    <Row space={3} alignItems='center'>
+      <ButtonText />
+      <Icon name={IconType.chevronDown} size={25} color={theme.colors.trueGray['500']} />
+    </Row>
+  </Pressable>
+);
 
 function CategoryFilter(props: Props) {
   const { onChange, selectedValue, items } = props;
   const { isOpen, onOpen, onClose } = useDisclose();
-
-  //console.log('CategoryFilter');
-  //console.log(props);
-
-  const CategoryFilterButton = (props: { onOpen: () => void }) => {
-    const onOpen: () => void = props.onOpen;
-
-    const ButtonText = () => {
-      return (
-        <Text fontSize='lg' color={theme.colors.trueGray['600']}>
-          Filter
-        </Text>
-      );
-    };
-
-    return (
-      <Pressable onPress={onOpen}>
-        <Row space={3} alignItems='center'>
-          <ButtonText />
-          <Icon name={IconType.chevronDown} size={25} color={theme.colors.trueGray['500']} />
-        </Row>
-      </Pressable>
-    );
-  };
 
   return (
     <Row display={'flex'} alignItems={'center'} ml={3} mt={2} mb={2}>
@@ -47,11 +42,11 @@ function CategoryFilter(props: Props) {
             <Actionsheet.Item
               key={category.value}
               onPressIn={() => {
-                onChange && onChange(category.value);
+                onChange(category);
                 onClose();
               }}
             >
-              {category.value === selectedValue ? (
+              {category.value === selectedValue.value ? (
                 <Text underline>{category.label}</Text>
               ) : (
                 <Text>{category.label}</Text>

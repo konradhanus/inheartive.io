@@ -1,7 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { Auction, Category, SortDirection, SortKey } from '@inheartive/data';
-import { Text, View } from '@inheartive/ui/atoms';
+import { Text, View, ISelectItemProps } from '@inheartive/ui/atoms';
 import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
 import { RoutingPath } from '../../routing';
 import { ScrollView } from 'react-native';
@@ -13,8 +13,8 @@ interface Props {
   categories: Category[];
   categoriesLoading: boolean;
   categoriesError: boolean;
-  selectedCategoryID: string;
-  onCategoryChange: (id: string) => void;
+  selectedCategoryID: ISelectItemProps;
+  onCategoryChange: (category: ISelectItemProps) => void;
   sortBy: SortKey;
   onSortByChange: (sortBy: SortKey) => void;
   sortDir: SortDirection;

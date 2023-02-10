@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AuctionsTemplate from './AuctionsTemplate';
-import { apiRoutes, Auction, sortAuctions, SortDirection, SortKey } from '@inheartive/data';
+import { apiRoutes, SortDirection, SortKey } from '@inheartive/data';
 import { useQuery } from '@tanstack/react-query';
 import { useFetchAutions } from './useFetchAutions';
+import { ISelectItemProps } from '@inheartive/ui/atoms';
+
+const INITIAL_SELECTED_CATEGORY: ISelectItemProps = {
+  value: '',
+  label: '',
+};
 
 export function AuctionsPage() {
-  const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
+  const [selectedCategory, setSelectedCategoryID] = useState<ISelectItemProps>(INITIAL_SELECTED_CATEGORY);
 
   const {
     isLoading: categoriesLoading,
@@ -17,18 +23,9 @@ export function AuctionsPage() {
   });
 
   const [favoriteAuctionsIds, setFavoriteAuctionsIds] = useState<string[]>([]);
-  const [finalAuctions, setFinalAuctions] = useState<Auction[]>([]);
   const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpiresAt);
   const [sortDir, setSortDir] = useState<SortDirection>(SortDirection.ASC);
-  const { isLoading: auctionsLoading, error: auctionsError, auctions = [] } = useFetchAutions(selectedCategoryID);
-
-  if (auctions) {
-    setFinalAuctions(auctions);
-    setFavoriteAuctionsIds(
-      finalAuctions.filter((auction: Auction, index: number) => index % 2).map((auction: { id: string }) => auction.id)
-    );
-    setFinalAuctions(sortAuctions(finalAuctions, sortBy, sortDir));
-  }
+  const { isLoading: auctionsLoading, error: auctionsError, auctions = [] } = useFetchAutions(selectedCategory.value);
 
   // TODO implement favorites on backend
   const onFavoriteChange = (auctionId: string, isCurrentlyFavorite: boolean) => {
@@ -44,10 +41,10 @@ export function AuctionsPage() {
       categories={categories}
       categoriesLoading={categoriesLoading}
       categoriesError={!!categoriesError}
-      auctions={finalAuctions}
+      auctions={auctions}
       auctionsLoading={auctionsLoading}
       auctionsError={!!auctionsError}
-      selectedCategoryID={selectedCategoryID}
+      selectedCategoryID={selectedCategory}
       onCategoryChange={(id) => setSelectedCategoryID(id)}
       sortBy={sortBy}
       onSortByChange={(sortBy) => setSortBy(sortBy)}
