@@ -37,7 +37,7 @@ export class AuctionsService {
   findAllByCategory(paginationQuery: PaginationQueryDto, id: string) {
     const { limit, offset } = paginationQuery;
 
-    return this.auctionsRepository.find({
+    const result = this.auctionsRepository.find({
       relations: ['category', 'author'],
       skip: offset,
       take: limit || MAX_LIMIT,
@@ -50,6 +50,8 @@ export class AuctionsService {
         },
       },
     });
+
+    return result;
   }
 
   findOne(id: string) {

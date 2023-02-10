@@ -27,6 +27,7 @@ import { Link } from 'react-router-native';
 import { Category, User } from '@inheartive/data';
 import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
+import CategoriesPage from '../Categories/CategoriesPage';
 
 interface Props {
   control: Control<AuctionFormValues>;
@@ -226,6 +227,7 @@ export function AuctionCreateTemplate(props: Props) {
           <Link to={RoutingPath.categories}>
             <Text>Categories management</Text>
           </Link>
+          <CategoriesPage />
         </View>
       </Column>
     </ScrollView>
