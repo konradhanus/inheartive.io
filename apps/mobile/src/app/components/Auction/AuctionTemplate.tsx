@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Auction } from '@inheartive/data';
 import { AuctionImage, ScrollView, imageTypes } from '@inheartive/ui/atoms';
-import { Button, Text, View } from '@inheartive/ui/atoms';
+import { Button, Text, View, Input } from '@inheartive/ui/atoms';
+
 import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AuctionAuthor, AuctionLeftHearts, AuctionTime } from '@inheartive/ui/molecules';
+import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
+
 interface Props {
   auction: Auction | undefined;
   isLoading: boolean;
@@ -15,6 +17,13 @@ interface Props {
 export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError } = props;
   const insets = useSafeAreaInsets();
+  const [bid, setBid] = useState(0);
+
+  const parseBid = (value: string) => {
+    const parsed = parseInt(value);
+    const finalBid = Number.isNaN(parsed) ? 0 : parsed;
+    setBid(finalBid);
+  };
 
   if (!auction) {
     return <Text>Loading...</Text>;
@@ -46,8 +55,10 @@ export function AuctionTemplate(props: Props) {
         />
         <AuctionLeftHearts quantity={auction.price} authorName={auction.author.firstName} />
         <AuctionTime expirationDate={auction.expiresAt} />
+        <AuctionBid currentBid={42} />
       </View>
       <View mx={16}>
+        <Input placeholder='10' onChangeText={parseBid} value={`${bid}`} keyboardType='numeric' />
         <Button>BID</Button>
         <Button variant='lighGray'>REPORT</Button>
       </View>
