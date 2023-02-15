@@ -106,12 +106,12 @@ jobs:
         run: cd ./apps/mobile/ios && pod install --repo-update && cd ..
 
       - name: PWD
-        run: pwd && ls -a
+        run: cd ./apps/mobile/ios && ls -a
 
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.4.0
         with:
-          project-path: ./inHEARTive.xcodeproj
+          project-path: ./apps/mobile/ios/inHEARTive.xcodeproj
           #            IOS_P12_BASE64 - key and certificate
           p12-base64: ${{ secrets.IOS_P12_BASE64 }}
           #            IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
@@ -121,7 +121,7 @@ jobs:
           team-id: ${{ secrets.IOS_TEAM_ID }}
           #            IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          workspace-path: ./inHEARTive.xcworkspace
+          workspace-path: ./apps/mobile/ios/inHEARTive.xcworkspace
           scheme: inHEARTive
 
       - name: 'Upload app to TestFlight'
