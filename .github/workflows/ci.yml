@@ -122,7 +122,7 @@ jobs:
           #            IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           workspace-path: ./inHEARTive.xcworkspace
-          scheme: MyApp
+          scheme: inHEARTive
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1
