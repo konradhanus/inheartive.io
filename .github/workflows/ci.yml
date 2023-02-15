@@ -108,6 +108,12 @@ jobs:
       - name: PWD
         run: cd ./apps/mobile/ios && ls -a
 
+      - name: Show fastline version
+        run: cd ./apps/mobile/ios && bundle exec fastlane --version
+
+      - name: Show v2
+        run: fastlane action get_version_number
+
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.5.0
         with:
