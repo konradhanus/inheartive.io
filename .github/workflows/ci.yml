@@ -102,8 +102,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-
 
-      - name: Install Pods
+      - name: PWD
         run: pwd
+
+      - name: Install Pods
         run: cd ios && pod install --repo-update && cd ..
 
       - name: Build IOS App
