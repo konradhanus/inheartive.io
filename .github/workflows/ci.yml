@@ -108,10 +108,7 @@ jobs:
       - name: PWD
         run: cd ./apps/mobile/ios && ls -a
 
-      - name: Show fastline version
-        run: cd ./apps/mobile/ios && bundle exec fastlane --version
-
-      - name: Show v2
+      - name: Show fastlane version
         run: fastlane action get_version_number
 
       - name: Build IOS App
