@@ -34,12 +34,18 @@ interface Props {
   handleSubmit: UseFormHandleSubmit<AuctionFormValues>;
   errors: FieldErrors<AuctionFormValues>;
   setValue: UseFormSetValue<AuctionFormValues>;
-  onSubmit: (data) => void;
+  onSubmit: (data: AuctionFormValues) => void;
   categories: Category[];
   categoriesIsLoading: boolean;
   categoriesIsError: boolean;
   author: User | undefined;
 }
+
+const PRICE_RULES = {
+  min: { value: 1, message: 'The price must be positive' },
+  max: { value: 999, message: 'Max price is 999' },
+  required: 'The price is required',
+};
 
 export function AuctionCreateTemplate(props: Props) {
   const {
@@ -68,9 +74,10 @@ export function AuctionCreateTemplate(props: Props) {
   }, []);
 
   useEffect(() => {
-    setValue('expiresAt', expiresAtDate);
-  }, [expiresAtDate]);
-
+    if (expiresAtDate) {
+      setValue('expiresAt', expiresAtDate);
+    }
+  }, [expiresAtDate, setValue]);
   return (
     <ScrollView>
       <Column px={5} space={4} justifyContent='center'>
@@ -151,24 +158,13 @@ export function AuctionCreateTemplate(props: Props) {
             render={({ field: { onChange, value } }) => (
               <Input
                 placeholder='10'
-                onChangeText={(textNumber) => {
-                  const valueNumber = +textNumber;
-                  if (textNumber === '' || isNaN(valueNumber)) {
-                    onChange('');
-                    return;
-                  }
-
-                  onChange(+textNumber);
-                }}
+                onChangeText={(value) => onChange(parseInt(value))}
                 value={`${value}`}
+                keyboardType='numeric'
               />
             )}
             name='price'
-            rules={{
-              min: { value: 1, message: 'The price must be positive' },
-              max: { value: 999, message: 'Max price is 999' },
-              required: 'The price is required',
-            }}
+            rules={PRICE_RULES}
             defaultValue={10}
           />
           <FormControl.ErrorMessage>{errors.price?.message}</FormControl.ErrorMessage>

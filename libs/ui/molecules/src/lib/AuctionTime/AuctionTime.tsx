@@ -5,16 +5,16 @@ import { Icon, IconType, Row, Text } from '@inheartive/ui/atoms';
 interface IAuctionTimeProps {
   expirationDate: Date | number | string;
 }
+const isString = (value: unknown): value is string => typeof value === 'string';
+
+const formatTime = (expirationDate: number | Date) => formatDistanceToNow(expirationDate, { addSuffix: true }).trim();
+
+const getremainingTime = (expirationDate: string | number | Date) =>
+  isString(expirationDate) ? expirationDate : formatTime(expirationDate);
 
 function AuctionTime(props: IAuctionTimeProps) {
   const { expirationDate } = props;
-  let remainingTimeHumanized = '';
-
-  if (typeof expirationDate === 'string') {
-    remainingTimeHumanized = expirationDate;
-  } else {
-    remainingTimeHumanized = formatDistanceToNow(expirationDate, { addSuffix: true }).trim();
-  }
+  const remainingTimeHumanized = getremainingTime(expirationDate);
 
   return (
     <Row space={1.5} alignItems='center'>
