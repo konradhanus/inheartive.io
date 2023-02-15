@@ -103,6 +103,7 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Install Pods
+        run: pwd
         run: cd ios && pod install --repo-update && cd ..
 
       - name: Build IOS App
