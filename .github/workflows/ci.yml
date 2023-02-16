@@ -110,8 +110,8 @@ jobs:
       - name: Install Pods
         run: cd ./apps/mobile/ios && pod install --repo-update && cd ..
 
-      - name: PWD
-        run: cd ./apps/mobile/ios && ls -a
+#      - name: PWD
+#        run: cd ./apps/mobile/ios && ls -a
 
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.5.0
@@ -128,20 +128,20 @@ jobs:
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           workspace-path: ./apps/mobile/ios/inHEARTive.xcworkspace
           scheme: inHEARTive
-          build-phases: |
-            clean build
-            test
-            archive
-            exportArchive -archivePath ./build/inHEARTive.xcarchive -exportOptionsPlist ./exportOptions.plist -exportPath ./output -allowProvisioningUpdates
-          dependencies: |
-            - target: inHEARTive
-              dependOn: [Dependencies, Pods-inHEARTive]
-            - target: Pods-inHEARTive
+#          build-phases: |
+#            clean build
+#            test
+#            archive
+#            exportArchive -archivePath ./build/inHEARTive.xcarchive -exportOptionsPlist ./exportOptions.plist -exportPath ./output -allowProvisioningUpdates
+#          dependencies: |
+#            - target: inHEARTive
+#              dependOn: [Dependencies, Pods-inHEARTive]
+#            - target: Pods-inHEARTive
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1
         with:
-          app-path: 'output/inHEARTive.ipa'
+          app-path: './inHEARTive.ipa'
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
