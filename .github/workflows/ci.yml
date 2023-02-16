@@ -74,6 +74,12 @@ jobs:
         with:
           xcode-version: '14.2'
 
+      - name: Show all installed Xcode versions
+        run: xcodebuild -showsdks
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_14.2.app
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -110,8 +116,8 @@ jobs:
       - name: Install Pods
         run: cd ./apps/mobile/ios && pod install --repo-update && cd ..
 
-#      - name: PWD
-#        run: cd ./apps/mobile/ios && ls -a
+      #      - name: PWD
+      #        run: cd ./apps/mobile/ios && ls -a
 
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.5.0
@@ -128,15 +134,15 @@ jobs:
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           workspace-path: ./apps/mobile/ios/inHEARTive.xcworkspace
           scheme: inHEARTive
-#          build-phases: |
-#            clean build
-#            test
-#            archive
-#            exportArchive -archivePath ./build/inHEARTive.xcarchive -exportOptionsPlist ./exportOptions.plist -exportPath ./output -allowProvisioningUpdates
-#          dependencies: |
-#            - target: inHEARTive
-#              dependOn: [Dependencies, Pods-inHEARTive]
-#            - target: Pods-inHEARTive
+      #          build-phases: |
+      #            clean build
+      #            test
+      #            archive
+      #            exportArchive -archivePath ./build/inHEARTive.xcarchive -exportOptionsPlist ./exportOptions.plist -exportPath ./output -allowProvisioningUpdates
+      #          dependencies: |
+      #            - target: inHEARTive
+      #              dependOn: [Dependencies, Pods-inHEARTive]
+      #            - target: Pods-inHEARTive
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1
