@@ -7,6 +7,7 @@ import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
+import { BidModal } from './BidModal';
 
 interface Props {
   auction: Auction | undefined;
@@ -18,6 +19,7 @@ export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError } = props;
   const insets = useSafeAreaInsets();
   const [bid, setBid] = useState(0);
+  const [isBidModal, setBidVisibility] = useState(false);
 
   const parseBid = (value: string) => {
     const parsed = parseInt(value);
@@ -25,12 +27,17 @@ export function AuctionTemplate(props: Props) {
     setBid(finalBid);
   };
 
+  const openModal = () => setBidVisibility(true);
+
+  const closeModal = () => setBidVisibility(false);
+
   if (!auction) {
     return <Text>Loading...</Text>;
   }
 
   return (
     <ScrollView>
+      {isBidModal && <BidModal bid={bid} closeModal={closeModal} />}
       <AuctionHeader />
       <AuctionImage imageType={imageTypes.detail} />
       <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
@@ -59,7 +66,7 @@ export function AuctionTemplate(props: Props) {
       </View>
       <View mx={16}>
         <Input placeholder='10' onChangeText={parseBid} value={`${bid}`} keyboardType='numeric' />
-        <Button>BID</Button>
+        <Button onPress={openModal}>BID</Button>
         <Button variant='lighGray'>REPORT</Button>
       </View>
     </ScrollView>
