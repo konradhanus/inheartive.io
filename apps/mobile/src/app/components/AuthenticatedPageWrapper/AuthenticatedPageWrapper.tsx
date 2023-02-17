@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, Text } from '@inheartive/ui/atoms';
 import { AppFooter, FooterIcon, AppHeader } from '@inheartive/ui/organisms';
 import { footerIconRouteMap, RoutingPath } from '../../routing';
@@ -15,7 +15,7 @@ interface Props {
 export function AuthenticatedPageWrapper(props: Props) {
   const { children, footerActiveIcon } = props;
 
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
 
   const {
     isLoading: usersLoading,
@@ -27,7 +27,7 @@ export function AuthenticatedPageWrapper(props: Props) {
   });
 
   return (
-    <View style={{ flex: 1 }} paddingTop={insets.top} paddingBottom={insets.bottom}>
+    <View style={{ flex: 1 }} paddingTop={10} paddingBottom={10}>
       {usersLoading && <Text>Loading...</Text>}
 
       {usersError && <Text>An error occured!</Text>}

@@ -25,7 +25,7 @@ import {
 import { AuctionFormValues } from './auction-create-form-values';
 import { Link } from 'react-router-native';
 import { Category, User } from '@inheartive/data';
-import DatePicker from 'react-native-date-picker';
+// import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
 
 interface Props {
@@ -185,7 +185,7 @@ export function AuctionCreateTemplate(props: Props) {
                       </Pressable>
 
                       <View>
-                        <DatePicker
+                        {/* <DatePicker
                           minimumDate={minimumDate}
                           mode='date'
                           modal
@@ -198,7 +198,7 @@ export function AuctionCreateTemplate(props: Props) {
                           onCancel={() => {
                             setOpen(false);
                           }}
-                        />
+                        /> */}
                       </View>
                     </Row>
                   )}

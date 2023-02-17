@@ -4,7 +4,7 @@ import { AuctionImage, ScrollView, imageTypes } from '@inheartive/ui/atoms';
 import { Button, Text, View, Input } from '@inheartive/ui/atoms';
 
 import { AuctionHeader } from '@inheartive/ui/organisms';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
 
@@ -16,7 +16,7 @@ interface Props {
 
 export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError } = props;
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
   const [bid, setBid] = useState(0);
 
   const parseBid = (value: string) => {
@@ -33,7 +33,7 @@ export function AuctionTemplate(props: Props) {
     <ScrollView>
       <AuctionHeader />
       <AuctionImage imageType={imageTypes.detail} />
-      <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
+      <View my={5} mx={2} px={3} paddingTop={10} paddingBottom={10}>
         {isLoading && <Text>Loading...</Text>}
         {!isLoading && !auction && <Text>Error while loading auction</Text>}
         {!isLoading && !isError && auction && (
