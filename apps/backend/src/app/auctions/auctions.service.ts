@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EntityNotFoundError, Repository } from 'typeorm';
+import { EntityNotFoundError, MoreThan, Repository } from 'typeorm';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
@@ -30,6 +30,9 @@ export class AuctionsService {
       take: limit || MAX_LIMIT,
       order: {
         createdAt: 'DESC',
+      },
+      where: {
+        expiresAt: MoreThan(new Date()),
       },
     });
   }

@@ -27,6 +27,8 @@ import { Link } from 'react-router-native';
 import { Category, User } from '@inheartive/data';
 import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
+import addMonths from 'date-fns/addMonths';
+import addDays from 'date-fns/addDays';
 import CategoriesPage from '../Categories/CategoriesPage';
 
 interface Props {
@@ -48,6 +50,8 @@ const PRICE_RULES = {
   required: 'The price is required',
 };
 
+const initialDate = () => addDays(new Date(), 7);
+
 export function AuctionCreateTemplate(props: Props) {
   const {
     categories,
@@ -65,9 +69,11 @@ export function AuctionCreateTemplate(props: Props) {
   const [expiresAtDate, setExpiresAtDate] = useState<Date>();
   const [open, setOpen] = useState(false);
 
+  const openDatepicker = () => setOpen(true);
+  const closeDatepicker = () => setOpen(false);
+
   useEffect(() => {
-    const date = new Date();
-    date.setDate(date.getDate() + 7);
+    const date = initialDate();
 
     setMinimumDate(date);
     setExpiresAtDate(date);
@@ -79,6 +85,7 @@ export function AuctionCreateTemplate(props: Props) {
       setValue('expiresAt', expiresAtDate);
     }
   }, [expiresAtDate, setValue]);
+
   return (
     <ScrollView>
       <Column px={5} space={4} justifyContent='center'>
@@ -180,25 +187,24 @@ export function AuctionCreateTemplate(props: Props) {
                 <View>
                   {value && (
                     <Row space={4}>
-                      <Input onPressIn={() => setOpen(true)} flexGrow={1} value={value.toDateString()} />
-                      <Pressable onPress={() => setOpen(true)}>
+                      <Input onPressIn={openDatepicker} flexGrow={1} value={value.toDateString()} />
+                      <Pressable onPress={openDatepicker}>
                         <Icon name={IconType.calendarOutline} size={28} />
                       </Pressable>
 
                       <View>
                         <DatePicker
                           minimumDate={minimumDate}
+                          maximumDate={addMonths(minimumDate, 1)}
                           mode='date'
                           modal
                           open={open}
                           date={expiresAtDate}
                           onConfirm={(date) => {
-                            setOpen(false);
+                            closeDatepicker();
                             setExpiresAtDate(date);
                           }}
-                          onCancel={() => {
-                            setOpen(false);
-                          }}
+                          onCancel={closeDatepicker}
                         />
                       </View>
                     </Row>
