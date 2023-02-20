@@ -10,7 +10,7 @@ const EMAIL_RULES = {
   required: 'Email name is required',
   minLength: 2,
   pattern: {
-    value: /.*@intive.com$/,
+    value: /.*@intive\.com$/,
     message: 'Only intive email is allowed',
   },
 };
