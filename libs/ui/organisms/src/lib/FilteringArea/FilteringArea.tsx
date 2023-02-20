@@ -2,11 +2,12 @@ import React from 'react';
 import { Category, SortDirection, SortKey } from '@inheartive/data';
 import { CategoryFilter, mapCategoriesToSelect, Sort } from '@inheartive/ui/molecules';
 import { HStack } from 'native-base';
+import { ISelectItemProps } from '@inheartive/ui/atoms';
 
 interface Props {
   categories: Category[];
   selectedCategoryID: string;
-  onCategoryChange: (id: string) => void;
+  onCategoryChange: (selectedCategory: ISelectItemProps) => void;
   sortBy: SortKey;
   onSortByChange: (sortBy: SortKey) => void;
   sortDir: SortDirection;

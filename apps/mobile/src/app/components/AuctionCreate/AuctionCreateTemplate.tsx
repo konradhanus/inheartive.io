@@ -29,6 +29,7 @@ import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
 import addMonths from 'date-fns/addMonths';
 import addDays from 'date-fns/addDays';
+import CategoriesPage from '../Categories/CategoriesPage';
 
 interface Props {
   control: Control<AuctionFormValues>;
@@ -228,6 +229,7 @@ export function AuctionCreateTemplate(props: Props) {
           <Link to={RoutingPath.categories}>
             <Text>Categories management</Text>
           </Link>
+          <CategoriesPage />
         </View>
       </Column>
     </ScrollView>
