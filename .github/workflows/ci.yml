@@ -61,94 +61,119 @@ on:
     branches:
       - INHEART-309-20220215
 jobs:
-  build-ios:
+  deploy:
+    name: Deploying to Testflight
     runs-on: macOS-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      #      Setup build
-      - name: Check out Git repository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Install gpg
+        run: brew install gnupg
+      - name: Setup provisioning profile
+        env:
+          IOS_KEYS: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+        run: ./.github/secrets/decrypt_secrets.sh
+      - name: Archiving project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        run: ./.github/scripts/archive_app.sh
+      - name: Exporting .ipa
+        run: ./.github/scripts/export_ipa.sh
+      - name: Publishing app
+        if: success()
+        env:
+          APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+          APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+        run: ./.github/scripts/publish_testflight.sh
+# jobs:
+#   build-ios:
+#     runs-on: macOS-latest
+#     steps:
+#       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#       #      Setup build
+#       - name: Check out Git repository
+#         uses: actions/checkout@v3
 
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '14.2'
+#       - name: Setup Xcode
+#         uses: maxim-lobanov/setup-xcode@v1
+#         with:
+#           xcode-version: '14.2'
 
-      - name: Show all installed Xcode versions
-        run: xcodebuild -showsdks
+#       - name: Show all installed Xcode versions
+#         run: xcodebuild -showsdks
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_14.2.app
+#       - name: Select Xcode
+#         run: sudo xcode-select -s /Applications/Xcode_14.2.app
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+#       - name: Get yarn cache directory path
+#         id: yarn-cache-dir-path
+#         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Restore node_modules from cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+#       - name: Restore node_modules from cache
+#         uses: actions/cache@v2
+#         id: yarn-cache
+#         with:
+#           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+#           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+#           restore-keys: |
+#             ${{ runner.os }}-yarn-
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile --network-timeout 300000
+#       - name: Install dependencies
+#         run: yarn install --frozen-lockfile --network-timeout 300000
 
-      - name: Setup Ruby (bundle)
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.6
-          bundler-cache: true
+#       - name: Setup Ruby (bundle)
+#         uses: ruby/setup-ruby@v1
+#         with:
+#           ruby-version: 2.6
+#           bundler-cache: true
 
-      - name: Restore Pods cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ios/Pods
-            ~/Library/Caches/CocoaPods
-            ~/.cocoapods
-          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
+#       - name: Restore Pods cache
+#         uses: actions/cache@v2
+#         with:
+#           path: |
+#             ios/Pods
+#             ~/Library/Caches/CocoaPods
+#             ~/.cocoapods
+#           key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pods-
 
-      - name: Install Pods
-        run: cd ./apps/mobile/ios && pod install --repo-update && cd ..
+#       - name: Install Pods
+#         run: cd ./apps/mobile/ios && pod install --repo-update && cd ..
 
-      #      - name: PWD
-      #        run: cd ./apps/mobile/ios && ls -a
+#       #      - name: PWD
+#       #        run: cd ./apps/mobile/ios && ls -a
 
-      - name: Build IOS App
-        uses: yukiarrr/ios-build-action@v1.5.0
-        with:
-          project-path: ./apps/mobile/ios/inHEARTive.xcodeproj
-          #            IOS_P12_BASE64 - key and certificate
-          p12-base64: ${{ secrets.IOS_P12_BASE64 }}
-          #            IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
-          mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
-          code-signing-identity: 'iPhone Distribution'
-          #            IOS_TEAM_ID : your apple team id
-          team-id: ${{ secrets.IOS_TEAM_ID }}
-          #            IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
-          certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          workspace-path: ./apps/mobile/ios/inHEARTive.xcworkspace
-          scheme: inHEARTive
-      #          build-phases: |
-      #            clean build
-      #            test
-      #            archive
-      #            exportArchive -archivePath ./build/inHEARTive.xcarchive -exportOptionsPlist ./exportOptions.plist -exportPath ./output -allowProvisioningUpdates
-      #          dependencies: |
-      #            - target: inHEARTive
-      #              dependOn: [Dependencies, Pods-inHEARTive]
-      #            - target: Pods-inHEARTive
+#       - name: Build IOS App
+#         uses: yukiarrr/ios-build-action@v1.5.0
+#         with:
+#           project-path: ./apps/mobile/ios/inHEARTive.xcodeproj
+#           #            IOS_P12_BASE64 - key and certificate
+#           p12-base64: ${{ secrets.IOS_P12_BASE64 }}
+#           #            IOS_MOBILE_PROVISION_BASE64 : Base64 encoded Provisioning profile file.
+#           mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+#           code-signing-identity: 'iPhone Distribution'
+#           #            IOS_TEAM_ID : your apple team id
+#           team-id: ${{ secrets.IOS_TEAM_ID }}
+#           #            IOS_CERTIFICATE_PASSWORD : Password used to generate p2 certificate
+#           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+#           workspace-path: ./apps/mobile/ios/inHEARTive.xcworkspace
+#           scheme: inHEARTive
+#       #          build-phases: |
+#       #            clean build
+#       #            test
+#       #            archive
+#       #            exportArchive -archivePath ./build/inHEARTive.xcarchive -exportOptionsPlist ./exportOptions.plist -exportPath ./output -allowProvisioningUpdates
+#       #          dependencies: |
+#       #            - target: inHEARTive
+#       #              dependOn: [Dependencies, Pods-inHEARTive]
+#       #            - target: Pods-inHEARTive
 
-      - name: 'Upload app to TestFlight'
-        uses: apple-actions/upload-testflight-build@v1
-        with:
-          app-path: './inHEARTive.ipa'
-          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
-          api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
-      - run: echo "🎉 ${{ job.status }}. 🎉"
+#       - name: 'Upload app to TestFlight'
+#         uses: apple-actions/upload-testflight-build@v1
+#         with:
+#           app-path: './inHEARTive.ipa'
+#           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#           api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+#           api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+#       - run: echo "🎉 ${{ job.status }}. 🎉"
