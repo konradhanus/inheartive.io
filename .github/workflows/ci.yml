@@ -73,6 +73,8 @@ jobs:
         env:
           IOS_KEYS: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
         run: .github/secrets/decrypt_secrets.sh
+      - name: List dir
+        run: ls -la
       - name: Archiving project
         env:
           PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
