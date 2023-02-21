@@ -51,7 +51,7 @@ function AuctionCard(props: Props) {
 
       <View py={1} px={3}>
         {link ? (
-          <Link to={link}>
+          <Link to={link} underlayColor='transparent'>
             <Text fontSize={16}>{title}</Text>
           </Link>
         ) : (

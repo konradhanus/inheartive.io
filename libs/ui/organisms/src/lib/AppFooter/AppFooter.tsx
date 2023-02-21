@@ -17,23 +17,23 @@ function AppFooter(props: Props) {
 
   return (
     <HStack bg='white' justifyContent='space-between' px='4' alignItems='center' testID='footer-menu'>
-      <Link to={iconRoutingMap[FooterIcon.auctions]}>
+      <Link to={iconRoutingMap[FooterIcon.auctions]} underlayColor='transparent'>
         <AppFooterIcon name={FooterIcon.auctions} isActive={activeIcon === FooterIcon.auctions} />
       </Link>
 
-      <Link to={iconRoutingMap[FooterIcon.auctions]}>
+      <Link to={iconRoutingMap[FooterIcon.auctions]} underlayColor='transparent'>
         <AppFooterIcon name={FooterIcon.search} isActive={activeIcon === FooterIcon.search} />
       </Link>
 
-      <Link to={iconRoutingMap[FooterIcon.auctions]}>
+      <Link to={iconRoutingMap[FooterIcon.auctions]} underlayColor='transparent'>
         <HeartsCredits credit={99} size={60} />
       </Link>
 
-      <Link to={iconRoutingMap[FooterIcon.addAuction]}>
+      <Link to={iconRoutingMap[FooterIcon.addAuction]} underlayColor='transparent'>
         <AppFooterIcon name={FooterIcon.addAuction} isActive={activeIcon === FooterIcon.addAuction} />
       </Link>
 
-      <Link to={iconRoutingMap[FooterIcon.auctions]}>
+      <Link to={iconRoutingMap[FooterIcon.auctions]} underlayColor='transparent'>
         <AppFooterIcon name={FooterIcon.favorites} isActive={activeIcon === FooterIcon.favorites} />
       </Link>
     </HStack>
