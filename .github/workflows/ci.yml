@@ -69,8 +69,8 @@ jobs:
         uses: actions/checkout@v1
       - name: Install gpg
         run: brew install gnupg
-      - name: List dir
-        run: ls -la
+      - name: Add permissions to execute scripts
+        run: chmod +x ./.github/scripts/*.sh && chmod +x ./.github/secrets/*.sh
       - name: Setup provisioning profile
         env:
           IOS_KEYS: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
