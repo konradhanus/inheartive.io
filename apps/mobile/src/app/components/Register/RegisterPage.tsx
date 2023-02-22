@@ -10,13 +10,12 @@ export function RegisterPage() {
   const formMethods = useForm<RegisterFormValues>();
   const mutation = useMutation({
     mutationFn: (data: RegisterFormValues) => {
-      data.email = data.email.toLowerCase();
       return fetch(apiRoutes.users, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, email: data.email.toLowerCase() }),
       });
     },
   });
