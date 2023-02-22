@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Auction } from '@inheartive/data';
-import { AuctionImage, ScrollView, imageTypes } from '@inheartive/ui/atoms';
+import { AuctionImage, ScrollView, imageTypes, Loader } from '@inheartive/ui/atoms';
 import { Button, Text, View, Input } from '@inheartive/ui/atoms';
 
 import { AuctionHeader } from '@inheartive/ui/organisms';
@@ -32,7 +32,7 @@ export function AuctionTemplate(props: Props) {
   const closeModal = () => setBidVisibility(false);
 
   if (!auction) {
-    return <Text>Loading...</Text>;
+    return <Loader />;
   }
 
   return (
@@ -41,7 +41,7 @@ export function AuctionTemplate(props: Props) {
       <AuctionHeader />
       <AuctionImage imageType={imageTypes.detail} />
       <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
-        {isLoading && <Text>Loading...</Text>}
+        {isLoading && <Loader />}
         {!isLoading && !auction && <Text>Error while loading auction</Text>}
         {!isLoading && !isError && auction && (
           <>
