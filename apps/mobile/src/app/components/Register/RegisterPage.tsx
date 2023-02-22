@@ -8,9 +8,11 @@ import RegisterTemplate from './RegisterTemplate';
 
 export function RegisterPage() {
   const formMethods = useForm<RegisterFormValues>();
-
   const mutation = useMutation({
     mutationFn: (data: RegisterFormValues) => {
+      console.log(data);
+      data.email = data.email.toLowerCase();
+      console.log(data);
       return fetch(apiRoutes.users, {
         method: 'POST',
         headers: {
