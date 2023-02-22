@@ -226,7 +226,7 @@ export function AuctionCreateTemplate(props: Props) {
         </Button>
 
         <View mt={3} mb={5}>
-          <Link to={RoutingPath.categories}>
+          <Link to={RoutingPath.categories} underlayColor='transparent'>
             <Text>Categories management</Text>
           </Link>
           <CategoriesPage />
