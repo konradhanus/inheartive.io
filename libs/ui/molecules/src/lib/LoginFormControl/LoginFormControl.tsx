@@ -28,12 +28,14 @@ function LoginFormControl() {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (data: { email: string }) => {
+      console.log(data);
+      console.log({ ...data, email: data.email.toLowerCase() });
       const response = await fetch(apiRoutes.login, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, email: data.email.toLowerCase() }),
       });
       return response;
     },
