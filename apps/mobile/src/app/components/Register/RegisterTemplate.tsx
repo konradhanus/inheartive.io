@@ -31,10 +31,12 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useFormContext<RegisterFormValues>();
 
   const navigate = useNavigate();
+
+  const isDisabled = !isValid;
 
   return (
     <ScrollView>
@@ -87,6 +89,8 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
         </FormControl>
 
         <Button
+          disabled={isDisabled}
+          isDisabled={isDisabled}
           onPress={(e) => {
             handleSubmit(onSubmit)(e);
           }}

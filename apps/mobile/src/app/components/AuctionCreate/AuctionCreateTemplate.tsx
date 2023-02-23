@@ -14,14 +14,7 @@ import {
   Text,
   View,
 } from '@inheartive/ui/atoms';
-import {
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldErrors,
-  Controller,
-  Control,
-  UseFormSetValue,
-} from 'react-hook-form';
+import { Controller, UseFormReturn } from 'react-hook-form';
 import { AuctionFormValues } from './auction-create-form-values';
 import { Link } from 'react-router-native';
 import { Category, User } from '@inheartive/data';
@@ -33,16 +26,12 @@ import CategoriesPage from '../Categories/CategoriesPage';
 import { safeIntParse } from 'libs/ui/shared/utils';
 
 interface Props {
-  control: Control<AuctionFormValues>;
-  register: UseFormRegister<AuctionFormValues>;
-  handleSubmit: UseFormHandleSubmit<AuctionFormValues>;
-  errors: FieldErrors<AuctionFormValues>;
-  setValue: UseFormSetValue<AuctionFormValues>;
   onSubmit: (data: AuctionFormValues) => void;
   categories: Category[];
   categoriesIsLoading: boolean;
   categoriesIsError: boolean;
   author: User | undefined;
+  form: UseFormReturn<AuctionFormValues>;
 }
 
 const PRICE_RULES = {
@@ -54,17 +43,13 @@ const PRICE_RULES = {
 const initialDate = () => addDays(new Date(), 7);
 
 export function AuctionCreateTemplate(props: Props) {
+  const { categories, categoriesIsError, categoriesIsLoading, onSubmit, author, form } = props;
   const {
-    categories,
-    categoriesIsError,
-    categoriesIsLoading,
     control,
     handleSubmit,
-    errors,
-    onSubmit,
+    formState: { errors, isValid },
     setValue,
-    author,
-  } = props;
+  } = form;
 
   const [minimumDate, setMinimumDate] = useState<Date>();
   const [expiresAtDate, setExpiresAtDate] = useState<Date>();
@@ -86,6 +71,8 @@ export function AuctionCreateTemplate(props: Props) {
       setValue('expiresAt', expiresAtDate);
     }
   }, [expiresAtDate, setValue]);
+
+  const isDisabled = !isValid;
 
   return (
     <ScrollView>
@@ -219,6 +206,8 @@ export function AuctionCreateTemplate(props: Props) {
           </FormControl>
         )}
         <Button
+          disabled={isDisabled}
+          isDisabled={isDisabled}
           onPress={(e) => {
             handleSubmit(onSubmit)(e);
           }}

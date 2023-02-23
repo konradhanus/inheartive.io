@@ -37,13 +37,7 @@ export function AuctionCreatePage() {
     onSuccess: () => navigate(RoutingPath.auctions),
   });
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<AuctionFormValues>();
+  const form = useForm<AuctionFormValues>();
 
   const onSubmit = (data: AuctionFormValues) => {
     // todo change expiresAt to end of the day? (time)
@@ -61,16 +55,12 @@ export function AuctionCreatePage() {
   return (
     user && (
       <AuctionCreateTemplate
-        control={control}
-        register={register}
-        handleSubmit={handleSubmit}
-        errors={errors}
+        form={form}
         onSubmit={onSubmit}
         categories={categories}
         categoriesIsLoading={categoriesIsLoading}
         categoriesIsError={categoriesIsError}
         author={user}
-        setValue={setValue}
       />
     )
   );
