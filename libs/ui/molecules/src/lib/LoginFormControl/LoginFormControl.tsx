@@ -16,9 +16,10 @@ function LoginFormControl() {
   const formMethods = useForm<{ email: string }>();
   const {
     getValues,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
   } = formMethods;
+
   const navigate = useNavigate();
 
   const setAccessToken = async (access_token: string) => {
@@ -59,6 +60,8 @@ function LoginFormControl() {
     }
   };
 
+  const isDisabled = !isValid;
+
   return (
     <FormProvider {...formMethods}>
       <FormControl isInvalid={'email' in errors}>
@@ -67,7 +70,7 @@ function LoginFormControl() {
           <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
         </View>
       </FormControl>
-      <Button mt='4' onPress={(e) => handleSubmit(signIn)(e)}>
+      <Button mt='4' onPress={(e) => handleSubmit(signIn)(e)} disabled={isDisabled} isDisabled={isDisabled}>
         Sign in
       </Button>
     </FormProvider>
