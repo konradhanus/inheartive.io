@@ -8,7 +8,6 @@ import RegisterTemplate from './RegisterTemplate';
 
 export function RegisterPage() {
   const formMethods = useForm<RegisterFormValues>();
-
   const mutation = useMutation({
     mutationFn: (data: RegisterFormValues) => {
       return fetch(apiRoutes.users, {
@@ -16,7 +15,7 @@ export function RegisterPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, email: data.email.toLowerCase() }),
       });
     },
   });
