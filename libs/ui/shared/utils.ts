@@ -32,3 +32,8 @@ export const isAuthorized = async () => {
   const result = await getValue('access_token');
   return isString(result) && result.length > 0;
 };
+
+export const safeIntParse = (value: string) => {
+  const parsed = parseInt(value);
+  return Number.isNaN(parsed) ? 0 : parsed;
+};
