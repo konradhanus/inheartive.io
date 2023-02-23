@@ -8,6 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
 import { BidModal } from './BidModal';
+import { safeIntParse } from 'libs/ui/shared/utils';
 
 interface Props {
   auction: Auction | undefined;
@@ -21,11 +22,7 @@ export function AuctionTemplate(props: Props) {
   const [bid, setBid] = useState(0);
   const [isBidModal, setBidVisibility] = useState(false);
 
-  const parseBid = (value: string) => {
-    const parsed = parseInt(value);
-    const finalBid = Number.isNaN(parsed) ? 0 : parsed;
-    setBid(finalBid);
-  };
+  const parseBid = (value: string) => setBid(safeIntParse(value));
 
   const openModal = () => setBidVisibility(true);
 
