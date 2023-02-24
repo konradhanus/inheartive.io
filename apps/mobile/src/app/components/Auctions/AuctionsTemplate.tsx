@@ -60,12 +60,14 @@ export function AuctionsTemplate(props: Props) {
         {auctionsError && <Text>Error while loading auctions</Text>}
 
         {!auctionsLoading && !auctionsError && (
-          <AuctionsList
-            auctions={auctions}
-            favoriteAuctionsIds={favoriteAuctionsIds}
-            onFavoriteChange={onFavoriteChange}
-            linkPatternWithId={RoutingPath.auction}
-          />
+          <View paddingBottom='12'>
+            <AuctionsList
+              auctions={auctions}
+              favoriteAuctionsIds={favoriteAuctionsIds}
+              onFavoriteChange={onFavoriteChange}
+              linkPatternWithId={RoutingPath.auction}
+            />
+          </View>
         )}
       </ScrollView>
     </View>
