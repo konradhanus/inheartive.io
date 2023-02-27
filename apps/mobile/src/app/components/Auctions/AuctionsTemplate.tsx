@@ -5,6 +5,7 @@ import { ISelectItemProps, Text, View } from '@inheartive/ui/atoms';
 import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
 import { RoutingPath } from '../../routing';
 import { ScrollView } from 'react-native';
+import styled from 'styled-components/native';
 
 interface Props {
   auctions: Auction[];
@@ -60,18 +61,21 @@ export function AuctionsTemplate(props: Props) {
         {auctionsError && <Text>Error while loading auctions</Text>}
 
         {!auctionsLoading && !auctionsError && (
-          <View paddingBottom='12'>
+          <StyledView>
             <AuctionsList
               auctions={auctions}
               favoriteAuctionsIds={favoriteAuctionsIds}
               onFavoriteChange={onFavoriteChange}
               linkPatternWithId={RoutingPath.auction}
             />
-          </View>
+          </StyledView>
         )}
       </ScrollView>
     </View>
   );
 }
+const StyledView = styled(View)`
+  padding-bottom: 50px;
+`;
 
 export default AuctionsTemplate;
