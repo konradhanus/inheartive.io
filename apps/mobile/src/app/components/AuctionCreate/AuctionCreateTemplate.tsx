@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   FormControl,
   Input,
+  NumberInput,
   Select,
   TextArea,
   Button,
@@ -36,7 +37,7 @@ interface Props {
 
 const PRICE_RULES = {
   min: { value: 1, message: 'The price must be positive' },
-  max: { value: 999, message: 'Max price is 999' },
+  max: { value: 99999, message: 'Max price is 99999' },
   required: 'The price is required',
 };
 
@@ -153,14 +154,7 @@ export function AuctionCreateTemplate(props: Props) {
           <Controller
             control={control}
             render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder='10'
-                onChangeText={(value) => {
-                  onChange(safeIntParse(value));
-                }}
-                value={`${value}`}
-                keyboardType='numeric'
-              />
+              <NumberInput placeholder='10' onChangeText={(value) => onChange(safeIntParse(value))} value={value} />
             )}
             name='price'
             rules={PRICE_RULES}
