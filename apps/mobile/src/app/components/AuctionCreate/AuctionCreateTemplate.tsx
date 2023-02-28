@@ -24,7 +24,6 @@ import { RoutingPath } from '../../routing';
 import addMonths from 'date-fns/addMonths';
 import addDays from 'date-fns/addDays';
 import CategoriesPage from '../Categories/CategoriesPage';
-import { safeIntParse } from 'libs/ui/shared/utils';
 
 interface Props {
   onSubmit: (data: AuctionFormValues) => void;
@@ -154,7 +153,7 @@ export function AuctionCreateTemplate(props: Props) {
           <Controller
             control={control}
             render={({ field: { onChange, value } }) => (
-              <NumberInput placeholder='10' onChangeText={(value) => onChange(safeIntParse(value))} value={value} />
+              <NumberInput placeholder='10' value={value} onChange={onChange} />
             )}
             name='price'
             rules={PRICE_RULES}
