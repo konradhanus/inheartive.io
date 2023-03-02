@@ -11,5 +11,5 @@ export interface Auction {
   imageSrc?: string;
   expiresAt: string;
   createdAt: string;
-  upodatedAt: string;
+  updatedAt: string;
 }

@@ -49,6 +49,7 @@ export function AuctionCreateTemplate(props: Props) {
     handleSubmit,
     formState: { errors, isValid },
     setValue,
+    trigger,
   } = form;
 
   const [minimumDate, setMinimumDate] = useState<Date>();
@@ -154,7 +155,9 @@ export function AuctionCreateTemplate(props: Props) {
             render={({ field: { onChange, value } }) => (
               <Input
                 placeholder='10'
-                onChangeText={(value) => onChange(safeIntParse(value))}
+                onChangeText={(value) => {
+                  onChange(safeIntParse(value));
+                }}
                 value={`${value}`}
                 keyboardType='numeric'
               />

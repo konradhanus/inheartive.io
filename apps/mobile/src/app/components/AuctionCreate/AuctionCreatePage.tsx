@@ -37,7 +37,7 @@ export function AuctionCreatePage() {
     onSuccess: () => navigate(RoutingPath.auctions),
   });
 
-  const form = useForm<AuctionFormValues>();
+  const form = useForm<AuctionFormValues>({ mode: 'onChange' });
 
   const onSubmit = (data: AuctionFormValues) => {
     // todo change expiresAt to end of the day? (time)

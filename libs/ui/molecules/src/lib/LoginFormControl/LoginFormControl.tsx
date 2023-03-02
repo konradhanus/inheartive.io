@@ -13,7 +13,7 @@ import { setValue } from 'libs/ui/shared/utils';
 function LoginFormControl() {
   const { setUser } = useUser();
 
-  const formMethods = useForm<{ email: string }>();
+  const formMethods = useForm<{ email: string }>({ mode: 'onChange' });
   const {
     getValues,
     formState: { errors, isValid },
