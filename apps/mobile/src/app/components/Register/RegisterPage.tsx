@@ -9,7 +9,7 @@ import RegisterTemplate from './RegisterTemplate';
 import { RoutingPath } from '../../routing';
 
 export function RegisterPage() {
-  const formMethods = useForm<RegisterFormValues>();
+  const formMethods = useForm<RegisterFormValues>({ mode: 'onChange' });
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: (data: RegisterFormValues) => {
