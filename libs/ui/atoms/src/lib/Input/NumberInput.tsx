@@ -20,8 +20,5 @@ const NumberInput = (props: Props) => {
     />
   );
 };
-// export const safeIntParse = (value: string) => {
-//   const parsed = parseInt(value);
-//   return Number.isNaN(parsed) ? 0 : parsed;
-// };
+
 export { NumberInput };
