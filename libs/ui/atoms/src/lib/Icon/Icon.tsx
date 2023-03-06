@@ -1,5 +1,7 @@
 import React from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import AntIcon from 'react-native-vector-icons/AntDesign';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { InterfaceIconProps } from 'native-base/src/components/primitives/Icon/types';
@@ -80,6 +82,7 @@ enum IconType {
   plusCircle = 'plus-circle',
   calendarOutline = 'calendar-outline',
   timeOutline = 'time-outline',
+  user = 'user',
 }
 
 interface Props extends InterfaceIconProps {
@@ -193,6 +196,9 @@ function Icon(props: Props) {
 
     case 'star':
       return <MaterialIcon name='star' {...iconProperties} />;
+
+    case 'user':
+      return <AntIcon name='user' {...iconProperties} />;
 
     case 'star-outline':
       return <MaterialIcon name='star-outline' {...iconProperties} />;

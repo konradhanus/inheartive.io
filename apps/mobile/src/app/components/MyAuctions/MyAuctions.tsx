@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { apiRoutes, Auction, routeWithId } from '@inheartive/data';
 import { ScrollView, View, Text, Loader } from '@inheartive/ui/atoms';
 import { useUser } from '../Providers/UserProvider';
-import { AuctionCard } from '@inheartive/ui/organisms';
+import { AuctionRow } from './AuctionRow';
 
 interface MyAuctionsListProps {
   userId: string;
@@ -24,7 +24,7 @@ const MyAuctionsList = ({ userId }: MyAuctionsListProps) => {
       <View>
         {auctions.map((auction) => (
           <View key={auction.id} mt={5}>
-            <AuctionCard auction={auction} isFavorite={false} onFavoriteChange={() => undefined} />
+            <AuctionRow auction={auction} />
           </View>
         ))}
       </View>
