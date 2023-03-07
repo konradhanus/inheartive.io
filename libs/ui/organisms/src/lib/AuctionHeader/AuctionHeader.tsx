@@ -6,7 +6,7 @@ import { theme } from 'native-base';
 function AuctionHeader() {
   return (
     <Row px={8} py={2} justifyContent={'space-between'} bg='white' alignItems='center'>
-      <Link to='/'>
+      <Link to='/' underlayColor='transparent'>
         <Icon name={IconType.chevronLeft} size={35} color={theme.colors.trueGray['500']} />
       </Link>
       <Icon name={IconType.starOutline} size={45} />

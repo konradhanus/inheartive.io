@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Auction } from '@inheartive/data';
-import { AuctionImage, ScrollView, imageTypes } from '@inheartive/ui/atoms';
+import { AuctionImage, ScrollView, imageTypes, Loader } from '@inheartive/ui/atoms';
 import { Button, Text, View, Input } from '@inheartive/ui/atoms';
 
 import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
+import { BidModal } from './BidModal';
+import { safeIntParse } from 'libs/ui/shared/utils';
 
 interface Props {
   auction: Auction | undefined;
@@ -18,23 +20,25 @@ export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError } = props;
   const insets = useSafeAreaInsets();
   const [bid, setBid] = useState(0);
+  const [isBidModal, setBidVisibility] = useState(false);
 
-  const parseBid = (value: string) => {
-    const parsed = parseInt(value);
-    const finalBid = Number.isNaN(parsed) ? 0 : parsed;
-    setBid(finalBid);
-  };
+  const parseBid = (value: string) => setBid(safeIntParse(value));
+
+  const openModal = () => setBidVisibility(true);
+
+  const closeModal = () => setBidVisibility(false);
 
   if (!auction) {
-    return <Text>Loading...</Text>;
+    return <Loader />;
   }
 
   return (
     <ScrollView>
+      {isBidModal && <BidModal bid={bid} closeModal={closeModal} />}
       <AuctionHeader />
       <AuctionImage imageType={imageTypes.detail} />
       <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
-        {isLoading && <Text>Loading...</Text>}
+        {isLoading && <Loader />}
         {!isLoading && !auction && <Text>Error while loading auction</Text>}
         {!isLoading && !isError && auction && (
           <>
@@ -59,7 +63,7 @@ export function AuctionTemplate(props: Props) {
       </View>
       <View mx={16}>
         <Input placeholder='10' onChangeText={parseBid} value={`${bid}`} keyboardType='numeric' />
-        <Button>BID</Button>
+        <Button onPress={openModal}>BID</Button>
         <Button variant='lighGray'>REPORT</Button>
       </View>
     </ScrollView>

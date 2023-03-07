@@ -22,7 +22,7 @@ export function CategoriesPage() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<CategoryCreateFormValues>();
+  } = useForm<CategoryCreateFormValues>({ mode: 'onChange' });
 
   const onSubmit = (data) => {
     mutation.mutate(data);

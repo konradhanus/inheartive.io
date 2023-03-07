@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, Text } from '@inheartive/ui/atoms';
+import { View, Text, Loader } from '@inheartive/ui/atoms';
 import { AppFooter, FooterIcon, AppHeader } from '@inheartive/ui/organisms';
 import { footerIconRouteMap, RoutingPath } from '../../routing';
 import { useQuery } from '@tanstack/react-query';
@@ -28,7 +28,7 @@ export function AuthenticatedPageWrapper(props: Props) {
 
   return (
     <View style={{ flex: 1 }} paddingTop={insets.top} paddingBottom={insets.bottom}>
-      {usersLoading && <Text>Loading...</Text>}
+      {usersLoading && <Loader />}
 
       {usersError && <Text>An error occured!</Text>}
 

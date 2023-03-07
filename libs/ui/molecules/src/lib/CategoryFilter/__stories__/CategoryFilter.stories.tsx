@@ -10,6 +10,11 @@ storiesOf('CategoryFilter', module)
   .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
   .add('Basic', () => (
     <Column mt={4} mx='auto'>
-      <CategoryFilter items={mapCategoriesToSelect(categoriesMock)} />
+      <CategoryFilter
+        selectedValue={{ value: '', label: '' }}
+        items={mapCategoriesToSelect(categoriesMock)}
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        onChange={() => {}}
+      />
     </Column>
   ));

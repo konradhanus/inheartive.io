@@ -14,31 +14,24 @@ import {
   Text,
   View,
 } from '@inheartive/ui/atoms';
-import {
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldErrors,
-  Controller,
-  Control,
-  UseFormSetValue,
-} from 'react-hook-form';
+import { Controller, UseFormReturn } from 'react-hook-form';
 import { AuctionFormValues } from './auction-create-form-values';
 import { Link } from 'react-router-native';
 import { Category, User } from '@inheartive/data';
 import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
+import addMonths from 'date-fns/addMonths';
+import addDays from 'date-fns/addDays';
+import CategoriesPage from '../Categories/CategoriesPage';
+import { safeIntParse } from 'libs/ui/shared/utils';
 
 interface Props {
-  control: Control<AuctionFormValues>;
-  register: UseFormRegister<AuctionFormValues>;
-  handleSubmit: UseFormHandleSubmit<AuctionFormValues>;
-  errors: FieldErrors<AuctionFormValues>;
-  setValue: UseFormSetValue<AuctionFormValues>;
   onSubmit: (data: AuctionFormValues) => void;
   categories: Category[];
   categoriesIsLoading: boolean;
   categoriesIsError: boolean;
   author: User | undefined;
+  form: UseFormReturn<AuctionFormValues>;
 }
 
 const PRICE_RULES = {
@@ -47,26 +40,27 @@ const PRICE_RULES = {
   required: 'The price is required',
 };
 
+const initialDate = () => addDays(new Date(), 7);
+
 export function AuctionCreateTemplate(props: Props) {
+  const { categories, categoriesIsError, categoriesIsLoading, onSubmit, author, form } = props;
   const {
-    categories,
-    categoriesIsError,
-    categoriesIsLoading,
     control,
     handleSubmit,
-    errors,
-    onSubmit,
+    formState: { errors, isValid },
     setValue,
-    author,
-  } = props;
+    trigger,
+  } = form;
 
   const [minimumDate, setMinimumDate] = useState<Date>();
   const [expiresAtDate, setExpiresAtDate] = useState<Date>();
   const [open, setOpen] = useState(false);
 
+  const openDatepicker = () => setOpen(true);
+  const closeDatepicker = () => setOpen(false);
+
   useEffect(() => {
-    const date = new Date();
-    date.setDate(date.getDate() + 7);
+    const date = initialDate();
 
     setMinimumDate(date);
     setExpiresAtDate(date);
@@ -78,6 +72,9 @@ export function AuctionCreateTemplate(props: Props) {
       setValue('expiresAt', expiresAtDate);
     }
   }, [expiresAtDate, setValue]);
+
+  const isDisabled = !isValid;
+
   return (
     <ScrollView>
       <Column px={5} space={4} justifyContent='center'>
@@ -158,7 +155,9 @@ export function AuctionCreateTemplate(props: Props) {
             render={({ field: { onChange, value } }) => (
               <Input
                 placeholder='10'
-                onChangeText={(value) => onChange(parseInt(value))}
+                onChangeText={(value) => {
+                  onChange(safeIntParse(value));
+                }}
                 value={`${value}`}
                 keyboardType='numeric'
               />
@@ -179,25 +178,24 @@ export function AuctionCreateTemplate(props: Props) {
                 <View>
                   {value && (
                     <Row space={4}>
-                      <Input onPressIn={() => setOpen(true)} flexGrow={1} value={value.toDateString()} />
-                      <Pressable onPress={() => setOpen(true)}>
+                      <Input onPressIn={openDatepicker} flexGrow={1} value={value.toDateString()} />
+                      <Pressable onPress={openDatepicker}>
                         <Icon name={IconType.calendarOutline} size={28} />
                       </Pressable>
 
                       <View>
                         <DatePicker
                           minimumDate={minimumDate}
+                          maximumDate={addMonths(minimumDate, 1)}
                           mode='date'
                           modal
                           open={open}
                           date={expiresAtDate}
                           onConfirm={(date) => {
-                            setOpen(false);
+                            closeDatepicker();
                             setExpiresAtDate(date);
                           }}
-                          onCancel={() => {
-                            setOpen(false);
-                          }}
+                          onCancel={closeDatepicker}
                         />
                       </View>
                     </Row>
@@ -211,6 +209,8 @@ export function AuctionCreateTemplate(props: Props) {
           </FormControl>
         )}
         <Button
+          disabled={isDisabled}
+          isDisabled={isDisabled}
           onPress={(e) => {
             handleSubmit(onSubmit)(e);
           }}
@@ -219,9 +219,10 @@ export function AuctionCreateTemplate(props: Props) {
         </Button>
 
         <View mt={3} mb={5}>
-          <Link to={RoutingPath.categories}>
+          <Link to={RoutingPath.categories} underlayColor='transparent'>
             <Text>Categories management</Text>
           </Link>
+          <CategoriesPage />
         </View>
       </Column>
     </ScrollView>

@@ -1,10 +1,11 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { Auction, Category, SortDirection, SortKey } from '@inheartive/data';
-import { Text, View } from '@inheartive/ui/atoms';
+import { ISelectItemProps, Text, View } from '@inheartive/ui/atoms';
 import { AuctionsList, FilteringArea } from '@inheartive/ui/organisms';
 import { RoutingPath } from '../../routing';
 import { ScrollView } from 'react-native';
+import styled from 'styled-components/native';
 
 interface Props {
   auctions: Auction[];
@@ -13,8 +14,8 @@ interface Props {
   categories: Category[];
   categoriesLoading: boolean;
   categoriesError: boolean;
-  selectedCategoryID: string;
-  onCategoryChange: (id: string) => void;
+  selectedCategory: ISelectItemProps;
+  onCategoryChange: (selectedCategory: ISelectItemProps) => void;
   sortBy: SortKey;
   onSortByChange: (sortBy: SortKey) => void;
   sortDir: SortDirection;
@@ -31,7 +32,7 @@ export function AuctionsTemplate(props: Props) {
     categories,
     categoriesLoading,
     categoriesError,
-    selectedCategoryID,
+    selectedCategory,
     onCategoryChange,
     sortBy,
     onSortByChange,
@@ -48,7 +49,7 @@ export function AuctionsTemplate(props: Props) {
       {!categoriesLoading && !categoriesError && (
         <FilteringArea
           categories={categories}
-          selectedCategoryID={selectedCategoryID}
+          selectedCategoryID={selectedCategory.value}
           onCategoryChange={onCategoryChange}
           sortBy={sortBy}
           onSortByChange={onSortByChange}
@@ -60,16 +61,21 @@ export function AuctionsTemplate(props: Props) {
         {auctionsError && <Text>Error while loading auctions</Text>}
 
         {!auctionsLoading && !auctionsError && (
-          <AuctionsList
-            auctions={auctions}
-            favoriteAuctionsIds={favoriteAuctionsIds}
-            onFavoriteChange={onFavoriteChange}
-            linkPatternWithId={RoutingPath.auction}
-          />
+          <StyledView>
+            <AuctionsList
+              auctions={auctions}
+              favoriteAuctionsIds={favoriteAuctionsIds}
+              onFavoriteChange={onFavoriteChange}
+              linkPatternWithId={RoutingPath.auction}
+            />
+          </StyledView>
         )}
       </ScrollView>
     </View>
   );
 }
+const StyledView = styled(View)`
+  padding-bottom: 50px;
+`;
 
 export default AuctionsTemplate;
