@@ -5,6 +5,7 @@ import { RegisterFormValues } from './register-form-values';
 import { RoutingPath } from '../../routing';
 import { useNavigate } from 'react-router-native';
 import { EmailInput } from '@inheartive/ui/organisms';
+import { BackHandler } from 'react-native';
 interface Props<T extends FieldValues> {
   onSubmit: (data: T) => void;
 }
@@ -38,6 +39,16 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
 
   const isDisabled = !isValid;
 
+  React.useEffect(() => {
+    const backAction = () => {
+      navigate(RoutingPath.signIn);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove();
+  }, []);
   return (
     <ScrollView>
       <Column px={5} space={3} justifyContent='center'>

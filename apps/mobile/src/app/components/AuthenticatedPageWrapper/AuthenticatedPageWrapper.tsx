@@ -6,6 +6,8 @@ import { footerIconRouteMap, RoutingPath } from '../../routing';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate } from 'react-router-native';
 import { apiRoutes } from '@inheartive/data';
+import { BackHandler } from 'react-native';
+import { useNavigate } from 'react-router-native';
 
 interface Props {
   children: JSX.Element;
@@ -16,7 +18,31 @@ export function AuthenticatedPageWrapper(props: Props) {
   const { children, footerActiveIcon } = props;
 
   const insets = useSafeAreaInsets();
+  const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const backAction = () => {
+      if (footerActiveIcon === FooterIcon.auctions) {
+        BackHandler.exitApp();
+        return true;
+      } else if (
+        footerActiveIcon === FooterIcon.search ||
+        footerActiveIcon === FooterIcon.heartcoins ||
+        footerActiveIcon === FooterIcon.addAuction ||
+        footerActiveIcon === FooterIcon.favorites
+      ) {
+        navigate(RoutingPath.auctions);
+        return true;
+      } else {
+        navigate(-1);
+        return true;
+      }
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove();
+  }, [footerActiveIcon]);
   const {
     isLoading: usersLoading,
     isError: usersError,
