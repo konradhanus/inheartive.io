@@ -59,7 +59,6 @@ export function AuctionTemplate(props: Props) {
         />
         <AuctionLeftHearts quantity={auction.price} authorName={auction.author.firstName} />
         <AuctionTime expirationDate={auction.expiresAt} />
-        <AuctionBid currentBid={42} />
       </View>
       <View mx={16}>
         <Input placeholder='10' onChangeText={parseBid} value={`${bid}`} keyboardType='numeric' />
