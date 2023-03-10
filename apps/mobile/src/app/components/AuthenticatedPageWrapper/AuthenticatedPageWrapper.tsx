@@ -16,31 +16,27 @@ interface Props {
 
 export function AuthenticatedPageWrapper(props: Props) {
   const { children, footerActiveIcon } = props;
-
+  console.log(footerActiveIcon);
+  console.log(FooterIcon.addAuction);
   const insets = useSafeAreaInsets();
+  const MEANINGFUL_NAME = [FooterIcon.search, FooterIcon.heartcoins, FooterIcon.addAuction, FooterIcon.favorites];
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    const backAction = () => {
+  const backAction = () => {
+    if (footerActiveIcon) {
       if (footerActiveIcon === FooterIcon.auctions) {
         BackHandler.exitApp();
         return true;
-      } else if (
-        footerActiveIcon === FooterIcon.search ||
-        footerActiveIcon === FooterIcon.heartcoins ||
-        footerActiveIcon === FooterIcon.addAuction ||
-        footerActiveIcon === FooterIcon.favorites
-      ) {
+      }
+      if (MEANINGFUL_NAME.includes(footerActiveIcon)) {
         navigate(RoutingPath.auctions);
         return true;
-      } else {
-        navigate(-1);
-        return true;
       }
-    };
-
+    }
+    navigate(-1);
+    return true;
+  };
+  React.useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-
     return () => backHandler.remove();
   }, [footerActiveIcon]);
   const {
