@@ -16,8 +16,7 @@ interface Props {
 
 export function AuthenticatedPageWrapper(props: Props) {
   const { children, footerActiveIcon } = props;
-  console.log(footerActiveIcon);
-  console.log(FooterIcon.addAuction);
+
   const insets = useSafeAreaInsets();
   const MEANINGFUL_NAME = [FooterIcon.search, FooterIcon.heartcoins, FooterIcon.addAuction, FooterIcon.favorites];
   const navigate = useNavigate();
