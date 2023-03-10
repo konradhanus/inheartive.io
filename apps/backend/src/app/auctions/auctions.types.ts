@@ -1,12 +1,13 @@
+import { FindOptionsOrderValue } from 'typeorm';
+
 export type AuctionSorkKey = 'title' | 'price' | 'createdAt' | 'expiresAt';
 
 interface AuctionBaseParams {
-  auctionId: string;
   authorId: string;
   categoryId: string;
   isExpired: boolean;
   sortBy: AuctionSorkKey;
-  order: string;
+  order: FindOptionsOrderValue;
 }
 
 export type AuctionParams = Partial<AuctionBaseParams>;

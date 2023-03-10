@@ -1,4 +1,4 @@
-import { FindOptionsWhere, LessThan, MoreThan } from 'typeorm';
+import { FindOptionsOrder, FindOptionsWhere, LessThan, MoreThan } from 'typeorm';
 import { AuctionParams } from './auctions.types';
 import { Auction } from './entities/auction.entity';
 
@@ -24,9 +24,7 @@ const toExpiresAt = (isExpired: boolean) => {
   return {};
 };
 
-const toId = (id: string) => ({ id });
-
-const WHERE_QUERY_PARAMS = ['authorId', 'categoryId', 'isExpired', 'auctionId'] as const;
+const WHERE_QUERY_PARAMS = ['authorId', 'categoryId', 'isExpired'] as const;
 
 type QueryParamsStrategy = Partial<Record<keyof AuctionParams, (id: string | boolean) => FindOptionsWhere<Auction>>>;
 
@@ -34,7 +32,6 @@ const QueryParamsStrategy: QueryParamsStrategy = {
   authorId: toAuthorId,
   categoryId: toCategoryId,
   isExpired: toExpiresAt,
-  auctionId: toId,
 };
 
 export const toWhereQuery = (params: AuctionParams): FindOptionsWhere<Auction> =>
@@ -47,3 +44,17 @@ export const toWhereQuery = (params: AuctionParams): FindOptionsWhere<Auction> =
         }
       : acc;
   }, {});
+
+const DEFAULT_ORDER = {
+  createdAt: 'DESC',
+} as const;
+
+export const toOrderQuery = (params: AuctionParams): FindOptionsOrder<Auction> => {
+  if (params.sortBy) {
+    return {
+      [params.sortBy]: params.order || 'ASC',
+    };
+  }
+
+  return DEFAULT_ORDER;
+};
