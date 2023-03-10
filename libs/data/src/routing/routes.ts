@@ -5,9 +5,9 @@ const apiUrlPrefix = Platform.OS === 'android' ? 'http://10.0.2.2:3333/api' : 'h
 
 export const apiRoutes = {
   auctions: `${apiUrlPrefix}/auctions`,
-  auctionsByCategory: `${apiUrlPrefix}/auctions/category/:id`,
+  auctionsByCategory: `${apiUrlPrefix}/auctions?categoryId=:id`,
   auction: `${apiUrlPrefix}/auctions/:id`,
-  myAuctions: `${apiUrlPrefix}/auctions/my/:id`,
+  myAuctions: `${apiUrlPrefix}/auctions?authorId=:id`,
   categories: `${apiUrlPrefix}/categories`,
   users: `${apiUrlPrefix}/users`,
   login: `${apiUrlPrefix}/login`,

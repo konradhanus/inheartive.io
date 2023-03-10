@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { FindOptionsOrderValue } from 'typeorm';
 import { AuctionsService } from './auctions.service';
+import { AuctionSorkKey } from './auctions.types';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 
@@ -14,18 +15,21 @@ export class AuctionsController {
   }
 
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
-    return this.auctionsService.findAll(paginationQuery);
-  }
-
-  @Get('/category/:id')
-  findAllByCategory(@Query() paginationQuery: PaginationQueryDto, @Param('id') id: string) {
-    return this.auctionsService.findAllByCategory(paginationQuery, id);
-  }
-
-  @Get('/my/:id')
-  findAMyAuctions(@Query() paginationQuery: PaginationQueryDto, @Param('id') id: string) {
-    return this.auctionsService.findMyAuctions(paginationQuery, id);
+  findAll(
+    @Query('authorId') authorId: string,
+    @Query('categoryId') categoryId: string,
+    @Query('isExpired') isExpired: boolean,
+    @Query('sortBy') sortBy: AuctionSorkKey,
+    @Query('order') order: FindOptionsOrderValue
+  ) {
+    const queryParams = {
+      authorId,
+      categoryId,
+      isExpired,
+      sortBy,
+      order,
+    };
+    return this.auctionsService.findAll({ limit: 100, offset: undefined }, queryParams);
   }
 
   @Get(':id')
