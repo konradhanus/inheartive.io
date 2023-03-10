@@ -201,6 +201,12 @@ on iOS simulator press `CMD` + `CTRL` + `Z` select on context menu
 
 - The solution to this problem is to press cmd + shift + k.
 
+`Unable to run emulator`
+
+- Go to `apps/mobile/android` and run `./gradlew clean`
+- Check this
+  [answer](https://stackoverflow.com/questions/54415332/command-failed-gradlew-bat-installdebug-error-whenever-installing-dependencies)
+
 ### Detox for React Native
 
 #### pre requirements

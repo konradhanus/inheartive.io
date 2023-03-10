@@ -1,6 +1,7 @@
 export type AuctionSorkKey = 'title' | 'price' | 'createdAt' | 'expiresAt';
 
 interface AuctionBaseParams {
+  auctionId: string;
   authorId: string;
   categoryId: string;
   isExpired: boolean;

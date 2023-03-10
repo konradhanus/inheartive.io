@@ -24,21 +24,6 @@ export class AuctionsService {
 
   findAll(paginationQuery: PaginationQueryDto, params: AuctionParams) {
     const { limit, offset } = paginationQuery;
-    return this.auctionsRepository.find({
-      relations: ['category', 'author'],
-      skip: offset,
-      take: limit || MAX_LIMIT,
-      order: {
-        createdAt: 'DESC',
-      },
-      where: {
-        expiresAt: MoreThan(new Date()),
-      },
-    });
-  }
-
-  findMyAuctions(paginationQuery: PaginationQueryDto, id: string) {
-    const { limit, offset } = paginationQuery;
 
     return this.auctionsRepository.find({
       relations: ['category', 'author'],
@@ -47,17 +32,12 @@ export class AuctionsService {
       order: {
         createdAt: 'DESC',
       },
-      where: {
-        author: {
-          id,
-        },
-      },
+      where: toWhereQuery(params),
     });
   }
 
   findAllByCategory(paginationQuery: PaginationQueryDto, id: string) {
     const { limit, offset } = paginationQuery;
-
     const result = this.auctionsRepository.find({
       relations: ['category', 'author'],
       skip: offset,

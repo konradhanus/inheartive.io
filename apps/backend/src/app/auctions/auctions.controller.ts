@@ -16,35 +16,25 @@ export class AuctionsController {
 
   @Get()
   findAll(
+    @Query('auctionId') auctionId: string,
     @Query('authorId') authorId: string,
     @Query('categoryId') categoryId: string,
     @Query('isExpired') isExpired: boolean,
     @Query('sortBy') sortBy: AuctionSorkKey
   ) {
     const queryParams = {
+      auctionId,
       authorId,
       categoryId,
       isExpired,
       sortBy,
     };
-    return this.auctionsService.findAll({ limit: 100, offset: 100 }, queryParams);
+    return this.auctionsService.findAll({ limit: 100, offset: undefined }, queryParams);
   }
 
   @Get('/category/:id')
   findAllByCategory(@Query() paginationQuery: PaginationQueryDto, @Param('id') id: string) {
     return this.auctionsService.findAllByCategory(paginationQuery, id);
-  }
-
-  @Get('/my/:id')
-  findAMyAuctions(@Query() paginationQuery: PaginationQueryDto, @Param('id') id: string) {
-    return this.auctionsService.findMyAuctions(paginationQuery, id);
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    const auction = this.auctionsService.findOne(id);
-
-    return auction;
   }
 
   @Patch(':id')
