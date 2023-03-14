@@ -1,18 +1,21 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { apiRoutes, Auction, routeWithId } from '@inheartive/data';
+import { Auction, routeWithId } from '@inheartive/data';
 import { ScrollView, View, Text, Loader } from '@inheartive/ui/atoms';
 import { useUser } from '../Providers/UserProvider';
 import { AuctionRow } from './AuctionRow';
 
-interface MyAuctionsListProps {
+interface MyAuctionsProps {
+  url: string;
+}
+interface MyAuctionsListProps extends MyAuctionsProps {
   userId: string;
 }
 
-const MyAuctionsList = ({ userId }: MyAuctionsListProps) => {
+const MyAuctionsList = ({ userId, url }: MyAuctionsListProps) => {
   const { isLoading, data: auctions = [] } = useQuery<Auction[]>({
     queryKey: ['auction', userId],
-    queryFn: () => fetch(routeWithId(apiRoutes.myAuctions, userId)).then((res) => res.json()),
+    queryFn: () => fetch(routeWithId(url, userId)).then((res) => res.json()),
   });
 
   if (isLoading) {
@@ -32,13 +35,13 @@ const MyAuctionsList = ({ userId }: MyAuctionsListProps) => {
   );
 };
 
-export function MyAuctions() {
+export function MyAuctions({ url }: MyAuctionsProps) {
   const { user } = useUser();
 
   return (
     <ScrollView>
       <Text>My auctions:</Text>
-      <View>{user?.id && <MyAuctionsList userId={user.id} />}</View>
+      <View>{user?.id && <MyAuctionsList userId={user.id} url={url} />}</View>
     </ScrollView>
   );
 }

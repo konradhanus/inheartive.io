@@ -18,6 +18,7 @@ function AppHeader() {
   };
 
   const toMyAuctions = () => navigate(RoutingPath.myAuctions);
+  const toMyBids = () => navigate(RoutingPath.myAuctions);
 
   return (
     <Row px={8} py={2} justifyContent={'space-between'} bg='primary.500' alignItems='center'>
@@ -33,6 +34,7 @@ function AppHeader() {
         >
           <Select.Item label='Log out' value='Logout' onPress={logOut} />
           <Select.Item label='My auctions' value='MyAuctions' onPress={toMyAuctions} />
+          <Select.Item label='My bids' value='MyBids' onPress={toMyBids} />
         </Select>
       </View>
     </Row>
