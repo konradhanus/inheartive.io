@@ -19,7 +19,7 @@ jobs:
       - name: Replace tokens
         uses: cschleiden/replace-tokens@v1
         with:
-          files: '[**/*.env.prod]'
+          files: '["**/*.env.prod"]'
 
       - name: Rename .env.prod to .env
         run: |
