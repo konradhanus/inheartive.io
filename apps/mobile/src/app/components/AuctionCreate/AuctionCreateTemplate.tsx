@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   FormControl,
   Input,
+  NumberInput,
   Select,
   TextArea,
   Button,
@@ -23,7 +24,6 @@ import { RoutingPath } from '../../routing';
 import addMonths from 'date-fns/addMonths';
 import addDays from 'date-fns/addDays';
 import CategoriesPage from '../Categories/CategoriesPage';
-import { safeIntParse } from 'libs/ui/shared/utils';
 
 interface Props {
   onSubmit: (data: AuctionFormValues) => void;
@@ -36,7 +36,7 @@ interface Props {
 
 const PRICE_RULES = {
   min: { value: 1, message: 'The price must be positive' },
-  max: { value: 999, message: 'Max price is 999' },
+  max: { value: 99999, message: 'Max price is 99999' },
   required: 'The price is required',
 };
 
@@ -49,22 +49,18 @@ export function AuctionCreateTemplate(props: Props) {
     handleSubmit,
     formState: { errors, isValid },
     setValue,
-    trigger,
   } = form;
 
-  const [minimumDate, setMinimumDate] = useState<Date>();
-  const [expiresAtDate, setExpiresAtDate] = useState<Date>();
+  const minimumDate = initialDate();
+
+  const [expiresAtDate, setExpiresAtDate] = useState<Date>(minimumDate);
   const [open, setOpen] = useState(false);
 
   const openDatepicker = () => setOpen(true);
   const closeDatepicker = () => setOpen(false);
 
   useEffect(() => {
-    const date = initialDate();
-
-    setMinimumDate(date);
-    setExpiresAtDate(date);
-    setValue('expiresAt', date);
+    setValue('expiresAt', minimumDate);
   }, []);
 
   useEffect(() => {
@@ -153,14 +149,7 @@ export function AuctionCreateTemplate(props: Props) {
           <Controller
             control={control}
             render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder='10'
-                onChangeText={(value) => {
-                  onChange(safeIntParse(value));
-                }}
-                value={`${value}`}
-                keyboardType='numeric'
-              />
+              <NumberInput placeholder='10' value={value} onChange={onChange} />
             )}
             name='price'
             rules={PRICE_RULES}
@@ -186,7 +175,7 @@ export function AuctionCreateTemplate(props: Props) {
                       <View>
                         <DatePicker
                           minimumDate={minimumDate}
-                          maximumDate={addMonths(minimumDate, 1)}
+                          maximumDate={addMonths(new Date(), 1)}
                           mode='date'
                           modal
                           open={open}
