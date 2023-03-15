@@ -1,7 +1,8 @@
-import { IsNumber, IsPositive } from 'class-validator';
+import { IsInt, IsNumber, IsPositive, Max } from 'class-validator';
 
 export class CreateBidDto {
-  @IsNumber()
   @IsPositive()
+  @Max(99999)
+  @IsInt()
   readonly value: number;
 }
