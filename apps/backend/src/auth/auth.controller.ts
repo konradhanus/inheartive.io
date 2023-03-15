@@ -2,6 +2,7 @@ import { Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { Oauth2Guard } from './oauth2.guard';
 import { AuthService } from './auth.service';
+import { User } from './types/user';
 
 @Controller('login')
 export class AuthController {
@@ -16,11 +17,13 @@ export class AuthController {
   // TODO uncomment this guard
   // @UseGuards(Oauth2Guard)
   @Post()
-  async login(@Request() req: any) {
+  async login(@Request() req: { body: User }) {
     const { body: user } = req;
     if (user) {
-      const validated = await this.authService.validateUser(user.email);
-      return this.authService.login(validated);
+      const validated = await this.authService.validateUser(user);
+      if (validated) {
+        return this.authService.login(validated);
+      }
     }
 
     return null;
