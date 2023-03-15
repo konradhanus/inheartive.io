@@ -9,11 +9,13 @@ export class BidsService {
     @InjectRepository(Bid)
     private bidsRepository: Repository<Bid>
   ) {}
+
   create(createBidDto: CreateBidDto) {
     const bid = this.bidsRepository.create(createBidDto);
 
     return this.bidsRepository.save(bid);
   }
+
   findAll() {
     return this.bidsRepository.find();
   }
