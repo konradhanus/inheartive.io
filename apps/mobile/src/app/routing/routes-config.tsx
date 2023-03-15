@@ -48,12 +48,12 @@ export const routesConfig: RouteConfig[] = [
   {
     path: RoutingPath.myAuctions,
     needsAuth: true,
-    page: <MyAuctions url={apiRoutes.myAuctions} />,
+    page: <MyAuctions url={apiRoutes.myAuctions} label='My auctions' />,
   },
   {
     path: RoutingPath.myBids,
     needsAuth: true,
-    page: <MyAuctions url={apiRoutes.myBids} />,
+    page: <MyAuctions url={apiRoutes.myBids} label='My bids' />,
   },
   {
     path: RoutingPath.categories,
