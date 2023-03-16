@@ -14,18 +14,9 @@ type FormRulesStrategy = {
 };
 
 const FORM_RULES_STRATEGY = {
-  email: {
-    required: 'Email name is required',
-    minLength: 2,
-    pattern: {
-      value: /.*@intive.com$/,
-      message: 'Only intive email is allowed',
-    },
-  },
   firstName: { required: 'First name is required', minLength: 2 },
   lastName: { required: 'Last name is required', minLength: 2 },
-  password: { required: 'Password is required', minLength: { value: 8, message: 'Min 8!' } },
-} as const satisfies FormRulesStrategy;
+};
 
 export function RegisterTemplate(props: Props<RegisterFormValues>) {
   const { onSubmit } = props;

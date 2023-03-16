@@ -6,7 +6,13 @@ interface WithPassword {
   password: string;
 }
 
-const PASSWORD_RULES = { required: 'Password is required', minLength: { value: 8, message: 'Min 8!' } };
+const PASSWORD_RULES = {
+  required: 'Password is required',
+  minLength: {
+    value: 8,
+    message: 'Min 8 characters',
+  },
+};
 
 interface InputProps {
   placeholder: string;
