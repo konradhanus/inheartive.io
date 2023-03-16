@@ -17,6 +17,6 @@ export class BidsService {
   }
 
   findAll() {
-    return this.bidsRepository.find();
+    return this.bidsRepository.find({ relations: ['auction', 'user'] });
   }
 }

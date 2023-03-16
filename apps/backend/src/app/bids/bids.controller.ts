@@ -8,11 +8,14 @@ export class BidsController {
 
   @Post()
   create(@Body() createBidDto: CreateBidDto) {
+    console.log('create', createBidDto);
     return this.bidsService.create(createBidDto);
   }
 
   @Get()
   findAll() {
-    return this.bidsService.findAll();
+    const bids = this.bidsService.findAll();
+
+    return bids;
   }
 }
