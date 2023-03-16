@@ -6,7 +6,7 @@ import { CreateBidDto } from './dto/create-bid.dto';
 export class BidsController {
   constructor(private readonly bidsService: BidsService) {}
 
-  @Post('/create')
+  @Post()
   create(@Body() createBidDto: CreateBidDto) {
     return this.bidsService.create(createBidDto);
   }
