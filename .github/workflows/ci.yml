@@ -101,8 +101,8 @@ jobs:
 
       - name: Import Certificates and Provisioning Profiles
         run: |
-          fastlane match development --readonly
-          fastlane match appstore --readonly
+          fastlane match development
+          fastlane match appstore
         env:
           MATCH_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
 
