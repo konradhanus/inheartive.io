@@ -60,7 +60,8 @@ name: build-ios
 on:
   push:
     branches:
-      - release
+      - INHEART-309-v3
+      # - release
 jobs:
   build-android:
     runs-on: macOS-latest
