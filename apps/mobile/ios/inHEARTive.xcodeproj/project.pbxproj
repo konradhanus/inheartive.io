@@ -27,10 +27,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* inHEARTiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = inHEARTiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* test */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = test; path = ../../../../../../../../Desktop/test; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* inHEARTiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = inHEARTiveTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* inHEARTive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inHEARTive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* test */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = test; path = ../../../../../../../../Desktop/test; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = inHEARTive/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = inHEARTive/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = inHEARTive/Images.xcassets; sourceTree = "<group>"; };
@@ -131,8 +131,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* inHEARTive.app */,
-				00E356EE1AD99517003FC87E /* inHEARTiveTests.xctest */,
+				13B07F961A680F5B00A75B9A /* test */,
+				00E356EE1AD99517003FC87E /* test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 			);
 			name = inHEARTiveTests;
 			productName = inHEARTiveTests;
-			productReference = 00E356EE1AD99517003FC87E /* inHEARTiveTests.xctest */;
+			productReference = 00E356EE1AD99517003FC87E /* test */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		13B07F861A680F5B00A75B9A /* inHEARTive */ = {
@@ -191,7 +191,7 @@
 			);
 			name = inHEARTive;
 			productName = inHEARTive;
-			productReference = 13B07F961A680F5B00A75B9A /* inHEARTive.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* test */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -504,7 +504,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 683MXZZR23;
 				ENABLE_BITCODE = NO;
@@ -538,7 +538,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 683MXZZR23;
 				INFOPLIST_FILE = inHEARTive/Info.plist;
