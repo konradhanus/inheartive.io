@@ -71,6 +71,8 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
+      - run: echo "IOS_TEAM_ID ${{ secrets.IOS_TEAM_ID }}"
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -108,7 +110,7 @@ jobs:
         run: cd apps/mobile/ios && pod install --repo-update && cd ..
 
       - name: Pre-test
-        run: xcodebuild -workspace ./apps/mobile/ios/inHEARTive.xcworkspace -scheme inHEARTive -configuration Release -sdk iphoneos
+        run: xcodebuild -workspace ./apps/mobile/ios/inHEARTive.xcworkspace -scheme inHEARTive -configuration Release -sdk iphoneos -allowProvisioningUpdates
 
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.4.0
