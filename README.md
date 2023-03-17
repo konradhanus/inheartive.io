@@ -258,6 +258,21 @@ $ npm install -g jest
 
 `yarn nx run-ios` `yarn nx test-ios mobile-e2e`
 
+## How to set new version for application
+
+Run: VERSION=${versionNumber} yarn set-version,
+
+for example:
+
+```shell
+VERSION=2.0.1 yarn set-version
+```
+
+versionNumber= the version number which we want to set
+
+It should update versions in package.json, build.gradle, Info.plist files and
+package.json in mobile folder
+
 ### Storybook for React Native
 
 Run as described in **Installation** and in 2nd terminal run additional command:
