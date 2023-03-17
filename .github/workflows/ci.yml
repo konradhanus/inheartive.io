@@ -108,7 +108,7 @@ jobs:
         run: cd apps/mobile/ios && pod install --repo-update && cd ..
 
       - name: Pre-test
-        run: xcodebuild -workspace inHEARTive.xcworkspace -scheme inHEARTive -configuration Release -sdk iphoneos
+        run: xcodebuild -workspace ./apps/mobile/ios/inHEARTive.xcworkspace -scheme inHEARTive -configuration Release -sdk iphoneos
 
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.4.0
