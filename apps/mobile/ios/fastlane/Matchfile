@@ -1,4 +1,4 @@
-git_url("https://github.com/konradhanus/inheartive.io")
+git_url("https://github.com/konradhanus/inheartive.io.git")
 git_branch("INHEART-309-v3")
 app_identifier("pl.reactblog.intive")
 username("konrad.hanus@gmail.com")
