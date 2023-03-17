@@ -22,7 +22,7 @@ platform :ios do
     match(type: "appstore")
     build_app(workspace: "inHEARTive.xcworkspace", scheme: "inHEARTive")
     upload_to_app_store(
-      skip_wating_for_build_processing: true
+      skip_waiting_for_build_processing: true
     )
     clean_build_artifacts
   end
@@ -33,7 +33,7 @@ platform :ios do
     match(type: "appstore")
     build_app(workspace: "inHEARTive.xcworkspace", scheme: "inHEARTive")
     upload_to_testflight(
-      skip_wating_for_build_processing: true
+      skip_waiting_for_build_processing: true
     )
     clean_build_artifacts
   end
