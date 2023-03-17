@@ -1,6 +1,6 @@
 {
   "name": "inheartive",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "scripts": {
     "start": "nx run-many --target=serve --projects=backend,mobile",
@@ -9,7 +9,8 @@
     "build": "nx build",
     "test": "nx test",
     "prepare": "husky install",
-    "graph": "nx graph -dep"
+    "graph": "nx graph -dep",
+    "set-version": "concurrently 'cd ./apps/mobile && set-version $VERSION' 'set-version $VERSION'"
   },
   "private": true,
   "dependencies": {
@@ -90,6 +91,7 @@
     "commitlint-config-jira": "^1.6.4",
     "commitlint-plugin-function-rules": "^1.7.1",
     "commitlint-plugin-jira-rules": "^1.6.4",
+    "concurrently": "^7.6.0",
     "detox": "19.12.1",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
@@ -113,6 +115,7 @@
     "nx": "^14.8.6",
     "prettier": "^2.7.1",
     "react-native-config": "1.4.6",
+    "react-native-set-version": "^1.1.2",
     "react-native-storybook-loader": "^2.0.5",
     "react-native-svg": "^12.4.4",
     "react-native-svg-transformer": "1.0.0",
