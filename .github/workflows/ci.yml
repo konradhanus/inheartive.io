@@ -108,13 +108,13 @@ jobs:
         run: ls
 
       - name: Test2
-        run: cd ios
+        run: cd apps/mobile/ios
 
       - name: Test3
         run: ls
 
       - name: Install Pods
-        run: cd ios && pod install --repo-update && cd ..
+        run: cd apps/mobile/ios && pod install --repo-update && cd ..
 
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.4.0
