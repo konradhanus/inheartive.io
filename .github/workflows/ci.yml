@@ -84,8 +84,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      # - name: Install dependencies
-      #   run: yarn install --frozen-lockfile --network-timeout 300000
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --network-timeout 300000
 
       - name: Setup Ruby (bundle)
         uses: ruby/setup-ruby@v1
@@ -103,15 +103,6 @@ jobs:
           key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
-
-      - name: Test1
-        run: ls
-
-      - name: Test2
-        run: cd apps/mobile/ios
-
-      - name: Test3
-        run: ls
 
       - name: Install Pods
         run: cd apps/mobile/ios && pod install --repo-update && cd ..
