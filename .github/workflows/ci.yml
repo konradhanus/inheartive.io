@@ -95,6 +95,17 @@ jobs:
           ruby-version: 2.6
           bundler-cache: true
 
+      - name: Install Fastlane
+        run: |
+          gem install fastlane
+
+      - name: Import Certificates and Provisioning Profiles
+        run: |
+          fastlane match development --readonly
+          fastlane match appstore --readonly
+        env:
+          MATCH_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+
       - name: Restore Pods cache
         uses: actions/cache@v2
         with:
