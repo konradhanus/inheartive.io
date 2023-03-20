@@ -20,8 +20,8 @@ interface Props {
 
 interface AutionBidPayload {
   value: number;
-  auctionId: string;
-  authorId: string;
+  auction: string;
+  user: string;
 }
 
 export function AuctionTemplate(props: Props) {
@@ -61,8 +61,8 @@ export function AuctionTemplate(props: Props) {
   const confirmModal = () => {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
-      const { id: authorId } = user;
-      mutation.mutate({ value: bid, auctionId, authorId });
+      const { id: userId } = user;
+      mutation.mutate({ value: bid, auction: auctionId, user: userId });
     }
   };
 

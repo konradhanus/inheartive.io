@@ -10,9 +10,9 @@ export class CreateBidDto {
   readonly value: number;
 
   @IsUUID()
-  readonly auctionId: Auction;
+  readonly auction: Auction;
 
   @IsUUID()
   @Validate(UserExistsRule)
-  readonly authorId: User;
+  readonly user: User;
 }

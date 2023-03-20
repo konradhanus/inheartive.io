@@ -12,7 +12,6 @@ export class BidsService {
 
   create(createBidDto: CreateBidDto) {
     const bid = this.bidsRepository.create(createBidDto);
-
     return this.bidsRepository.save(bid);
   }
 
