@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { BidsService } from './bids.service';
 import { CreateBidDto } from './dto/create-bid.dto';
 
@@ -8,7 +8,6 @@ export class BidsController {
 
   @Post()
   create(@Body() createBidDto: CreateBidDto) {
-    console.log('create', createBidDto);
     return this.bidsService.create(createBidDto);
   }
 
