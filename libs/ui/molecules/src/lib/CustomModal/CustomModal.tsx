@@ -5,10 +5,11 @@ import { View, Button } from '@inheartive/ui/atoms';
 
 interface CustomModalProps {
   closeModal: () => void;
+  confirmModal: () => void;
   children: ReactNode;
 }
 
-export const CustomModal = ({ closeModal, children }: CustomModalProps) => (
+export const CustomModal = ({ closeModal, confirmModal, children }: CustomModalProps) => (
   <View style={styles.centeredView}>
     <Modal animationType='slide' transparent={true} visible={true} onRequestClose={closeModal}>
       <View style={styles.centeredView}>
@@ -18,7 +19,7 @@ export const CustomModal = ({ closeModal, children }: CustomModalProps) => (
             <Button style={styles.actionButton} variant='lighGray' onPress={closeModal}>
               Cancel
             </Button>
-            <Button onPress={closeModal}>Confirm</Button>
+            <Button onPress={confirmModal}>Confirm</Button>
           </View>
         </View>
       </View>

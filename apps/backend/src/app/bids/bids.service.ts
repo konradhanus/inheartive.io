@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Bid } from './entities/bid.entity';
 import { CreateBidDto } from './dto/create-bid.dto';
+import { findByAuctionId } from './bids.utils';
+
 @Injectable()
 export class BidsService {
   constructor(
@@ -10,13 +12,26 @@ export class BidsService {
     private bidsRepository: Repository<Bid>
   ) {}
 
-  create(createBidDto: CreateBidDto) {
+  maxBid(auctionId: string) {
+    const byAuctionId = findByAuctionId(auctionId);
+
+    return this.bidsRepository.findOne(byAuctionId);
+  }
+
+  async create(createBidDto: CreateBidDto) {
     const bid = this.bidsRepository.create(createBidDto);
 
-    return this.bidsRepository.save(bid);
+    const { value } = createBidDto;
+    const maxBid = await this.maxBid(createBidDto.auction.id);
+
+    if (value > maxBid.value) {
+      return this.bidsRepository.save(bid);
+    }
+
+    return null;
   }
 
   findAll() {
-    return this.bidsRepository.find();
+    return this.bidsRepository.find({ relations: ['auction', 'user'] });
   }
 }
