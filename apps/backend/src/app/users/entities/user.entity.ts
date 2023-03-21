@@ -26,7 +26,7 @@ export class User {
   @Column()
   initials: string;
 
-  @Column({ select: false })
+  @Column()
   password: string;
 
   @JoinTable()

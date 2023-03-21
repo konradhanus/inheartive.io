@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { Button, FormControl, View } from '@inheartive/ui/atoms';
+import { Button, FormControl, View, Text } from '@inheartive/ui/atoms';
 import { apiRoutes } from '@inheartive/data';
 import { useNavigate } from 'react-router-native';
-import { EmailInput } from '@inheartive/ui/organisms';
+import { EmailInput, PasswordInput } from '@inheartive/ui/organisms';
 import { useUser } from 'apps/mobile/src/app/components/Providers/UserProvider';
 import { RoutingPath } from 'apps/mobile/src/app/routing/routing-path';
 import { setValue } from 'libs/ui/shared/utils';
 
+interface LoginForm {
+  email: string;
+  password: string;
+}
 function LoginFormControl() {
   const { setUser } = useUser();
+  const [loginError, setLoginError] = useState(false);
 
-  const formMethods = useForm<{ email: string }>({ mode: 'onChange' });
+  const formMethods = useForm<LoginForm>({ mode: 'onChange' });
   const {
     getValues,
     formState: { errors, isValid },
@@ -27,7 +32,7 @@ function LoginFormControl() {
   };
 
   const { mutateAsync } = useMutation({
-    mutationFn: async (data: { email: string }) => {
+    mutationFn: async (data: LoginForm) => {
       const response = await fetch(apiRoutes.login, {
         method: 'POST',
         headers: {
@@ -48,15 +53,17 @@ function LoginFormControl() {
             navigate(RoutingPath.auctions);
           }
         })
-        .catch(() => console.log('error'));
+        .catch(() => {
+          setLoginError(true);
+        });
     },
   });
 
   const signIn = () => {
-    const { email } = getValues();
-    const isEmailError = 'email' in errors;
-    if (!isEmailError) {
-      mutateAsync({ email });
+    const { email, password } = getValues();
+    setLoginError(false);
+    if (isValid) {
+      mutateAsync({ email, password });
     }
   };
 
@@ -65,11 +72,20 @@ function LoginFormControl() {
   return (
     <FormProvider {...formMethods}>
       <FormControl isInvalid={'email' in errors}>
-        <EmailInput placeholder='E-mail' />
-        <View height={6} position='relative'>
-          <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
+        <View>
+          <EmailInput placeholder='E-mail' />
+          <View height={6} position='relative' marginBottom={2}>
+            <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
+          </View>
         </View>
       </FormControl>
+      <FormControl isInvalid={'password' in errors}>
+        <PasswordInput placeholder='password' />
+        <View height={6} position='relative' marginBottom={2}>
+          <FormControl.ErrorMessage>{errors.password?.message}</FormControl.ErrorMessage>
+        </View>
+      </FormControl>
+      {loginError && <Text>User name or password are wrong</Text>}
       <Button mt='4' onPress={(e) => handleSubmit(signIn)(e)} disabled={isDisabled} isDisabled={isDisabled}>
         Sign in
       </Button>

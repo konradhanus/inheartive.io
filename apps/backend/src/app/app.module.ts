@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CategoriesModule } from './categories/categories.module';
 import { AssetsModule } from './assets/assets.module';
 import { UsersModule } from './users/users.module';
+import { BidsModule } from './bids/bids.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { UsersModule } from './users/users.module';
     CategoriesModule,
     AssetsModule,
     UsersModule,
+    BidsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
