@@ -23,10 +23,13 @@ import { UsersModule } from './users/users.module';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: process.env.MODE === 'dev',
-      // ssl: {
-      //   rejectUnauthorized: false,
-      //   ca: process.env.DB_CA_CERT,
-      // },
+      ssl:
+        process.env.MODE === 'prod'
+          ? {
+              rejectUnauthorized: true,
+              ca: process.env.DB_CA_CERT,
+            }
+          : null,
     }),
     AuthModule,
     AuctionsModule,
