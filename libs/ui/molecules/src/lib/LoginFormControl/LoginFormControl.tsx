@@ -80,7 +80,7 @@ function LoginFormControl() {
         </View>
       </FormControl>
       <FormControl isInvalid={'password' in errors}>
-        <PasswordInput placeholder='password' />
+        <PasswordInput placeholder='Password' />
         <View height={6} position='relative' marginBottom={2}>
           <FormControl.ErrorMessage>{errors.password?.message}</FormControl.ErrorMessage>
         </View>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { apiRoutes, Auction } from '@inheartive/data';
+import { apiRoutes, Auction, Bid } from '@inheartive/data';
 import { AuctionImage, ScrollView, imageTypes, Loader } from '@inheartive/ui/atoms';
 import { Button, Text, View, Input } from '@inheartive/ui/atoms';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -13,9 +13,10 @@ import { safeIntParse } from 'libs/ui/shared/utils';
 import { useUser } from '../Providers/UserProvider';
 
 interface Props {
-  auction: Auction | undefined;
+  auction: Auction;
   isLoading: boolean;
   isError: boolean;
+  refetch: () => void;
 }
 
 interface AutionBidPayload {
@@ -24,21 +25,19 @@ interface AutionBidPayload {
   user: string;
 }
 
+const computeMaxBid = (bids: Bid[], price: number) =>
+  bids.reduce((acc, bid) => (bid.value > price ? bid.value : acc), price);
+
 export function AuctionTemplate(props: Props) {
-  const { auction, isLoading, isError } = props;
+  const { auction, isLoading, isError, refetch } = props;
+  const { bids, price } = auction;
+  const nextBid = computeMaxBid(bids, price);
+
   const insets = useSafeAreaInsets();
-  const [bid, setBid] = useState(0);
+
+  const [bid, setBid] = useState(nextBid + 1);
   const [isBidModal, setBidVisibility] = useState(false);
   const { user } = useUser();
-
-  const {
-    isLoading: isBidLoading,
-    isError: isBidError,
-    data: bids,
-  } = useQuery({
-    queryKey: ['bids'],
-    queryFn: () => fetch(apiRoutes.bids).then((res) => res.json()),
-  });
 
   const openModal = () => setBidVisibility(true);
 
@@ -62,13 +61,10 @@ export function AuctionTemplate(props: Props) {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
       const { id: userId } = user;
-      mutation.mutate({ value: bid, auction: auctionId, user: userId });
+      const x = mutation.mutate({ value: bid, auction: auctionId, user: userId });
     }
+    refetch();
   };
-
-  if (!auction) {
-    return <Loader />;
-  }
 
   return (
     <ScrollView>
@@ -95,7 +91,7 @@ export function AuctionTemplate(props: Props) {
           authorLastName={auction.author.lastName}
           avatarBgColor={theme.colors.primary[500]}
         />
-        <AuctionLeftHearts quantity={auction.price} authorName={auction.author.firstName} />
+        <AuctionLeftHearts quantity={nextBid} authorName={auction.author.firstName} />
         <AuctionTime expirationDate={auction.expiresAt} />
       </View>
       <View mx={16}>
