@@ -1,10 +1,10 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 
 import React, { useState } from 'react';
-import HeartsCredits from '../../../../molecules/src/lib/HeartsCredits';
 import { Icon, IconType, Pressable } from '@inheartive/ui/atoms';
 import { FooterMenuProps, IconNameType } from './FooterMenuTypes';
 import { HStack } from 'native-base';
+import { HeartsCredits } from '@inheartive/ui/molecules';
 
 const FooterMenu: React.ComponentType<FooterMenuProps> = ({ testID, activeIcon }) => {
   const activeColor = 'black';

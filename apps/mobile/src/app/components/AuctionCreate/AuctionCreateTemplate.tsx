@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   FormControl,
   Input,
+  NumberInput,
   Select,
   TextArea,
   Button,
@@ -14,62 +15,61 @@ import {
   Text,
   View,
 } from '@inheartive/ui/atoms';
-import {
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldErrors,
-  Controller,
-  Control,
-  UseFormSetValue,
-} from 'react-hook-form';
+import { Controller, UseFormReturn } from 'react-hook-form';
 import { AuctionFormValues } from './auction-create-form-values';
 import { Link } from 'react-router-native';
 import { Category, User } from '@inheartive/data';
 import DatePicker from 'react-native-date-picker';
 import { RoutingPath } from '../../routing';
+import addMonths from 'date-fns/addMonths';
+import addDays from 'date-fns/addDays';
+import CategoriesPage from '../Categories/CategoriesPage';
 
 interface Props {
-  control: Control<AuctionFormValues>;
-  register: UseFormRegister<AuctionFormValues>;
-  handleSubmit: UseFormHandleSubmit<AuctionFormValues>;
-  errors: FieldErrors<AuctionFormValues>;
-  setValue: UseFormSetValue<AuctionFormValues>;
-  onSubmit: (data) => void;
+  onSubmit: (data: AuctionFormValues) => void;
   categories: Category[];
   categoriesIsLoading: boolean;
   categoriesIsError: boolean;
   author: User | undefined;
+  form: UseFormReturn<AuctionFormValues>;
 }
 
+const PRICE_RULES = {
+  min: { value: 1, message: 'The price must be positive' },
+  max: { value: 99999, message: 'Max price is 99999' },
+  required: 'The price is required',
+};
+
+const initialDate = () => addDays(new Date(), 7);
+
 export function AuctionCreateTemplate(props: Props) {
+  const { categories, categoriesIsError, categoriesIsLoading, onSubmit, author, form } = props;
   const {
-    categories,
-    categoriesIsError,
-    categoriesIsLoading,
     control,
     handleSubmit,
-    errors,
-    onSubmit,
+    formState: { errors, isValid },
     setValue,
-    author,
-  } = props;
+  } = form;
 
-  const [minimumDate, setMinimumDate] = useState<Date>();
-  const [expiresAtDate, setExpiresAtDate] = useState<Date>();
+  const minimumDate = initialDate();
+
+  const [expiresAtDate, setExpiresAtDate] = useState<Date>(minimumDate);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const date = new Date();
-    date.setDate(date.getDate() + 7);
+  const openDatepicker = () => setOpen(true);
+  const closeDatepicker = () => setOpen(false);
 
-    setMinimumDate(date);
-    setExpiresAtDate(date);
-    setValue('expiresAt', date);
+  useEffect(() => {
+    setValue('expiresAt', minimumDate);
   }, []);
 
   useEffect(() => {
-    setValue('expiresAt', expiresAtDate);
-  }, [expiresAtDate]);
+    if (expiresAtDate) {
+      setValue('expiresAt', expiresAtDate);
+    }
+  }, [expiresAtDate, setValue]);
+
+  const isDisabled = !isValid;
 
   return (
     <ScrollView>
@@ -149,26 +149,10 @@ export function AuctionCreateTemplate(props: Props) {
           <Controller
             control={control}
             render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder='10'
-                onChangeText={(textNumber) => {
-                  const valueNumber = +textNumber;
-                  if (textNumber === '' || isNaN(valueNumber)) {
-                    onChange('');
-                    return;
-                  }
-
-                  onChange(+textNumber);
-                }}
-                value={`${value}`}
-              />
+              <NumberInput placeholder='10' value={value} onChange={onChange} />
             )}
             name='price'
-            rules={{
-              min: { value: 1, message: 'The price must be positive' },
-              max: { value: 999, message: 'Max price is 999' },
-              required: 'The price is required',
-            }}
+            rules={PRICE_RULES}
             defaultValue={10}
           />
           <FormControl.ErrorMessage>{errors.price?.message}</FormControl.ErrorMessage>
@@ -183,25 +167,24 @@ export function AuctionCreateTemplate(props: Props) {
                 <View>
                   {value && (
                     <Row space={4}>
-                      <Input onPressIn={() => setOpen(true)} flexGrow={1} value={value.toDateString()} />
-                      <Pressable onPress={() => setOpen(true)}>
+                      <Input onPressIn={openDatepicker} flexGrow={1} value={value.toDateString()} />
+                      <Pressable onPress={openDatepicker}>
                         <Icon name={IconType.calendarOutline} size={28} />
                       </Pressable>
 
                       <View>
                         <DatePicker
                           minimumDate={minimumDate}
+                          maximumDate={addMonths(new Date(), 1)}
                           mode='date'
                           modal
                           open={open}
                           date={expiresAtDate}
                           onConfirm={(date) => {
-                            setOpen(false);
+                            closeDatepicker();
                             setExpiresAtDate(date);
                           }}
-                          onCancel={() => {
-                            setOpen(false);
-                          }}
+                          onCancel={closeDatepicker}
                         />
                       </View>
                     </Row>
@@ -215,6 +198,8 @@ export function AuctionCreateTemplate(props: Props) {
           </FormControl>
         )}
         <Button
+          disabled={isDisabled}
+          isDisabled={isDisabled}
           onPress={(e) => {
             handleSubmit(onSubmit)(e);
           }}
@@ -223,9 +208,10 @@ export function AuctionCreateTemplate(props: Props) {
         </Button>
 
         <View mt={3} mb={5}>
-          <Link to={RoutingPath.categories}>
+          <Link to={RoutingPath.categories} underlayColor='transparent'>
             <Text>Categories management</Text>
           </Link>
+          <CategoriesPage />
         </View>
       </Column>
     </ScrollView>

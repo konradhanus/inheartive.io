@@ -5,7 +5,7 @@ import { Actionsheet, useDisclose } from 'native-base';
 
 interface Props {
   items: ISelectItemProps[];
-  onChange?: (itemValue: string) => void;
+  onChange?: (selectedCategory: ISelectItemProps) => void;
   selectedValue?: string;
 }
 
@@ -44,7 +44,7 @@ function CategoryFilter(props: Props) {
             <Actionsheet.Item
               key={category.value}
               onPressIn={() => {
-                onChange && onChange(category.value);
+                onChange && onChange(category);
                 onClose();
               }}
             >

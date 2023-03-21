@@ -6,8 +6,7 @@ import { apiRoutes, routeWithId } from '@inheartive/data';
 
 export function AuctionPage() {
   const params = useParams();
-  const { id } = params;
-
+  const { id = '' } = params;
   const {
     isLoading,
     error,

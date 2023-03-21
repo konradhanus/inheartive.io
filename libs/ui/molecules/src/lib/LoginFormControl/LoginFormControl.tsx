@@ -1,26 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useForm, FormProvider } from 'react-hook-form';
 
-import { Button, FormControl, Input } from '@inheartive/ui/atoms';
+import { Button, FormControl, View } from '@inheartive/ui/atoms';
 import { apiRoutes } from '@inheartive/data';
-import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { useNavigate } from 'react-router-native';
-import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
-import { setValue } from '../../../../shared/utils';
-import { UserContext } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
+import { EmailInput } from '@inheartive/ui/organisms';
+import { useUser } from 'apps/mobile/src/app/components/Providers/UserProvider';
+import { RoutingPath } from 'apps/mobile/src/app/routing/routing-path';
+import { setValue } from 'libs/ui/shared/utils';
 
 function LoginFormControl() {
-  const [email, setEmail] = useState('');
-  const { setAuth } = useContext(UserContext);
+  const { setUser } = useUser();
 
-  const onChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    setEmail(e.nativeEvent.text);
-  };
+  const formMethods = useForm<{ email: string }>({ mode: 'onChange' });
+  const {
+    getValues,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = formMethods;
+
   const navigate = useNavigate();
 
-  const setAuthenticated = async (access_token: string) => {
-    const success = await setValue('access_token', access_token);
-    setAuth(success);
+  const setAccessToken = async (access_token: string) => {
+    await setValue('access_token', access_token);
   };
 
   const { mutateAsync } = useMutation({
@@ -30,7 +33,7 @@ function LoginFormControl() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, email: data.email.toLowerCase() }),
       });
       return response;
     },
@@ -38,9 +41,10 @@ function LoginFormControl() {
       value
         .json()
         .then((data) => {
-          const { access_token = '' } = data || {};
+          const { access_token = '', user = null } = data || {};
           if (access_token) {
-            setAuthenticated(access_token);
+            setAccessToken(access_token);
+            setUser(user);
             navigate(RoutingPath.auctions);
           }
         })
@@ -48,15 +52,28 @@ function LoginFormControl() {
     },
   });
 
-  const signIn = () => mutateAsync({ email });
+  const signIn = () => {
+    const { email } = getValues();
+    const isEmailError = 'email' in errors;
+    if (!isEmailError) {
+      mutateAsync({ email });
+    }
+  };
+
+  const isDisabled = !isValid;
 
   return (
-    <FormControl>
-      <Input placeholder='E-mail' size='xl' value={email} onChange={onChange} />
-      <Button mt='4' onPress={signIn}>
+    <FormProvider {...formMethods}>
+      <FormControl isInvalid={'email' in errors}>
+        <EmailInput placeholder='E-mail' />
+        <View height={6} position='relative'>
+          <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
+        </View>
+      </FormControl>
+      <Button mt='4' onPress={(e) => handleSubmit(signIn)(e)} disabled={isDisabled} isDisabled={isDisabled}>
         Sign in
       </Button>
-    </FormControl>
+    </FormProvider>
   );
 }
 

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AuctionsTemplate from './AuctionsTemplate';
-import { apiRoutes, Auction, sortAuctions, SortDirection, SortKey } from '@inheartive/data';
+import { apiRoutes, sortAuctions, SortDirection, SortKey } from '@inheartive/data';
 import { useQuery } from '@tanstack/react-query';
+import { useFetchAutions } from './useFetchAutions';
+import { ISelectItemProps } from '@inheartive/ui/atoms';
+
+const INITIAL_SELECTED_CATEGORY: ISelectItemProps = {
+  value: '',
+  label: '',
+};
 
 export function AuctionsPage() {
-  const {
-    isLoading: auctionsLoading,
-    error: auctionsError,
-    data: auctions,
-  } = useQuery({
-    queryKey: ['auctions'],
-    queryFn: () => fetch(apiRoutes.auctions).then((res) => res.json()),
-  });
+  const [selectedCategory, setSelectedCategory] = useState<ISelectItemProps>(INITIAL_SELECTED_CATEGORY);
 
   const {
     isLoading: categoriesLoading,
@@ -23,35 +23,9 @@ export function AuctionsPage() {
   });
 
   const [favoriteAuctionsIds, setFavoriteAuctionsIds] = useState<string[]>([]);
-  const [finalAuctions, setFinalAuctions] = useState<Auction[]>([]);
-  const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
-
   const [sortBy, setSortBy] = useState<SortKey>(SortKey.ExpiresAt);
   const [sortDir, setSortDir] = useState<SortDirection>(SortDirection.ASC);
-
-  useEffect(() => {
-    if (auctions) {
-      setFinalAuctions(auctions);
-      setFavoriteAuctionsIds(
-        finalAuctions
-          .filter((auction: Auction, index: number) => index % 2)
-          .map((auction: { id: string }) => auction.id)
-      );
-    }
-  }, [auctions]);
-
-  // TODO implement filtering and sorting - backend request
-  useEffect(() => {
-    if (auctions) {
-      if (selectedCategoryID) {
-        setFinalAuctions(auctions.filter((auction: Auction) => auction.category.id === selectedCategoryID));
-      } else {
-        setFinalAuctions(auctions);
-      }
-    }
-
-    setFinalAuctions(sortAuctions(finalAuctions, sortBy, sortDir));
-  }, [sortBy, sortDir, selectedCategoryID]);
+  const { isLoading: auctionsLoading, error: auctionsError, auctions = [] } = useFetchAutions(selectedCategory.value);
 
   // TODO implement favorites on backend
   const onFavoriteChange = (auctionId: string, isCurrentlyFavorite: boolean) => {
@@ -67,11 +41,11 @@ export function AuctionsPage() {
       categories={categories}
       categoriesLoading={categoriesLoading}
       categoriesError={!!categoriesError}
-      auctions={finalAuctions}
+      auctions={sortAuctions(auctions, sortBy, sortDir)}
       auctionsLoading={auctionsLoading}
       auctionsError={!!auctionsError}
-      selectedCategoryID={selectedCategoryID}
-      onCategoryChange={(id) => setSelectedCategoryID(id)}
+      selectedCategory={selectedCategory}
+      onCategoryChange={(selectedCategory) => setSelectedCategory(selectedCategory)}
       sortBy={sortBy}
       onSortByChange={(sortBy) => setSortBy(sortBy)}
       sortDir={sortDir}

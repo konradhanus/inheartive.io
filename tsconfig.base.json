@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "types": ["@types/styled-components-react-native"],
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

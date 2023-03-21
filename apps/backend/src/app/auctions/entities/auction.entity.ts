@@ -29,5 +29,5 @@ export class Auction {
   createdAt: Date;
 
   @UpdateDateColumn()
-  upodatedAt: Date;
+  updatedAt: Date;
 }

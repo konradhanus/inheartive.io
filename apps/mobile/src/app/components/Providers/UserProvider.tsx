@@ -1,24 +1,30 @@
-import { useState, ReactNode } from 'react';
+import { User } from '@inheartive/data';
+import { useState, ReactNode, useContext } from 'react';
 
 import { createContext } from 'react';
 
-export const UserContext = createContext({
-  auth: false,
+interface UserContext {
+  setUser: (user: User | null) => void;
+  user: User | null;
+}
+export const UserContext = createContext<UserContext>({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setAuth: (auth: boolean) => {},
+  setUser: (user: User | null) => {},
+  user: null,
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState(false);
-
+  const [user, setUser] = useState<User | null>(null);
   return (
     <UserContext.Provider
       value={{
-        auth,
-        setAuth,
+        setUser,
+        user,
       }}
     >
       {children}
     </UserContext.Provider>
   );
 };
+
+export const useUser = () => useContext(UserContext);

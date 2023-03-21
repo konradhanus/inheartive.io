@@ -20,3 +20,5 @@ export * from './lib/Text';
 export * from './lib/TextArea';
 export * from './lib/TextLogo';
 export * from './lib/View';
+export * from './lib/Loader';
+export * from './lib/Input/NumberInput';

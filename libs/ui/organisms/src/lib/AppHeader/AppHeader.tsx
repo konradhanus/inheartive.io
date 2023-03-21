@@ -1,21 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Avatar, Row, TextLogo, textLogoColor } from '@inheartive/ui/atoms';
 import { useNavigate } from 'react-router-native';
 import { View, Select } from '@inheartive/ui/atoms';
 
-import { RoutingPath } from '../../../../../../apps/mobile/src/app/routing/routing-path';
-import { setValue } from '../../../../shared/utils';
-import { UserContext } from '../../../../../../apps/mobile/src/app/components/Providers/UserProvider';
+import { RoutingPath } from 'apps/mobile/src/app/routing/routing-path';
+import { setValue } from 'libs/ui/shared/utils';
+import { useUser } from 'apps/mobile/src/app/components/Providers/UserProvider';
 
 function AppHeader() {
   const [menuItem, setMenuItem] = useState('');
   const navigate = useNavigate();
-  const { setAuth } = useContext(UserContext);
+  const { setUser } = useUser();
   const logOut = () => {
     setValue('access_token', '');
-    setAuth(false);
+    setUser(null);
     navigate(RoutingPath.signIn);
   };
+
+  const toMyAuctions = () => navigate(RoutingPath.myAuctions);
+  const toMyBids = () => navigate(RoutingPath.myAuctions);
 
   return (
     <Row px={8} py={2} justifyContent={'space-between'} bg='primary.500' alignItems='center'>
@@ -30,6 +33,8 @@ function AppHeader() {
           flexGrow={1}
         >
           <Select.Item label='Log out' value='Logout' onPress={logOut} />
+          <Select.Item label='My auctions' value='MyAuctions' onPress={toMyAuctions} />
+          <Select.Item label='My bids' value='MyBids' onPress={toMyBids} />
         </Select>
       </View>
     </Row>
