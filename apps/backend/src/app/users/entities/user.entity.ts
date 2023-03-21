@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Auction } from '../../auctions/entities/auction.entity';
 
-@Entity()
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -26,7 +26,7 @@ export class User {
   @Column()
   initials: string;
 
-  @Column({ select: false })
+  @Column()
   password: string;
 
   @JoinTable()
