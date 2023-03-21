@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Up
 import { Category } from '../../categories/entities/category.entity';
 import { User } from '../../users/entities/user.entity';
 
-@Entity()
+@Entity('auctions')
 export class Auction {
   @PrimaryGeneratedColumn('uuid')
   id: string;
