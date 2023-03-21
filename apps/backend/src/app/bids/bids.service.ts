@@ -22,7 +22,8 @@ export class BidsService {
     const bid = this.bidsRepository.create(createBidDto);
 
     const { value } = createBidDto;
-    const maxBid = await this.maxBid(createBidDto.auction.id);
+
+    const maxBid = (await this.maxBid(createBidDto.auction.id)) || { value: 0 };
 
     if (value > maxBid.value) {
       return this.bidsRepository.save(bid);

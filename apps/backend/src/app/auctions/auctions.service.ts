@@ -26,7 +26,7 @@ export class AuctionsService {
     const { limit, offset } = paginationQuery;
 
     return this.auctionsRepository.find({
-      relations: ['category', 'author'],
+      relations: ['category', 'author', 'bids'],
       skip: offset,
       take: limit || MAX_LIMIT,
       order: toOrderQuery(params),
