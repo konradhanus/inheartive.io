@@ -61,7 +61,7 @@ export function AuctionTemplate(props: Props) {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
       const { id: userId } = user;
-      const x = mutation.mutate({ value: bid, auction: auctionId, user: userId });
+      mutation.mutate({ value: bid, auction: auctionId, user: userId });
     }
     refetch();
   };
