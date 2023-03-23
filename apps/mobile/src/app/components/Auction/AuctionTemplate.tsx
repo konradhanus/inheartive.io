@@ -1,12 +1,16 @@
-import React, { useRef } from 'react';
-import { Auction } from '@inheartive/data';
+import React, { useRef, useState } from 'react';
 import { AuctionImage, ScrollView, imageTypes, Loader, Icon, Row } from '@inheartive/ui/atoms';
 import { Button, Text, View, Input, IconType } from '@inheartive/ui/atoms';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { apiRoutes, Auction } from '@inheartive/data';
 import { AuctionHeader } from '@inheartive/ui/organisms';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { BidModal } from './BidModal';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
+import { useUser } from '../Providers/UserProvider';
+import { safeIntParse } from 'libs/ui/shared/utils';
 import { ModalBottom } from '../ModalBottom/ModalBottom';
 
 interface Props {
@@ -15,10 +19,54 @@ interface Props {
   isError: boolean;
 }
 
+interface AutionBidPayload {
+  value: number;
+  auction: string;
+  user: string;
+}
+
 export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError } = props;
   const insets = useSafeAreaInsets();
   const bottomSheet = useRef();
+  const [bid, setBid] = useState(0);
+  const [isBidModal, setBidVisibility] = useState(false);
+  const { user } = useUser();
+
+  const {
+    isLoading: isBidLoading,
+    isError: isBidError,
+    data: bids,
+  } = useQuery({
+    queryKey: ['bids'],
+    queryFn: () => fetch(apiRoutes.bids).then((res) => res.json()),
+  });
+
+  const openModal = () => setBidVisibility(true);
+
+  const closeModal = () => setBidVisibility(false);
+
+  const mutation = useMutation({
+    mutationFn: (data: AutionBidPayload) =>
+      fetch(apiRoutes.bids, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: closeModal,
+  });
+
+  const parseBid = (value: string) => setBid(safeIntParse(value));
+
+  const confirmModal = () => {
+    if (auction?.id && user?.id) {
+      const { id: auctionId } = auction;
+      const { id: userId } = user;
+      mutation.mutate({ value: bid, auction: auctionId, user: userId });
+    }
+  };
 
   if (!auction) {
     return <Loader />;
@@ -55,6 +103,7 @@ export function AuctionTemplate(props: Props) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />}
         <ModalBottom bottomSheet={bottomSheet} BidButton={BidButton} BidPanel={BidPanel} />
         <AuctionHeader />
         <AuctionImage imageType={imageTypes.detail} />

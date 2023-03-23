@@ -5,11 +5,12 @@ import { CustomModal } from '@inheartive/ui/molecules';
 
 interface BidModalProps {
   closeModal: () => void;
+  confirmModal: () => void;
   bid: number;
 }
 
-export const BidModal = ({ closeModal, bid }: BidModalProps) => (
-  <CustomModal closeModal={closeModal}>
+export const BidModal = ({ closeModal, bid, confirmModal }: BidModalProps) => (
+  <CustomModal closeModal={closeModal} confirmModal={confirmModal}>
     <Text style={styles.modalText}>Do you want to confirm your bid: {bid} ?</Text>
   </CustomModal>
 );

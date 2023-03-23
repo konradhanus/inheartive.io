@@ -5,6 +5,7 @@ export const RoutingPath = {
   auctionCreate: '/auctions/create',
   auction: '/auctions/:id',
   myAuctions: '/auctions/my',
+  myBids: '/auctions/bids',
   categories: '/categories',
 } as const;
 

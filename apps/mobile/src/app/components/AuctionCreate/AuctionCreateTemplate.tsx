@@ -49,22 +49,18 @@ export function AuctionCreateTemplate(props: Props) {
     handleSubmit,
     formState: { errors, isValid },
     setValue,
-    trigger,
   } = form;
 
-  const [minimumDate, setMinimumDate] = useState<Date>();
-  const [expiresAtDate, setExpiresAtDate] = useState<Date>();
+  const minimumDate = initialDate();
+
+  const [expiresAtDate, setExpiresAtDate] = useState<Date>(minimumDate);
   const [open, setOpen] = useState(false);
 
   const openDatepicker = () => setOpen(true);
   const closeDatepicker = () => setOpen(false);
 
   useEffect(() => {
-    const date = initialDate();
-
-    setMinimumDate(date);
-    setExpiresAtDate(date);
-    setValue('expiresAt', date);
+    setValue('expiresAt', minimumDate);
   }, []);
 
   useEffect(() => {
@@ -179,7 +175,7 @@ export function AuctionCreateTemplate(props: Props) {
                       <View>
                         <DatePicker
                           minimumDate={minimumDate}
-                          maximumDate={addMonths(minimumDate, 1)}
+                          maximumDate={addMonths(new Date(), 1)}
                           mode='date'
                           modal
                           open={open}

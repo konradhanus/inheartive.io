@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EntityNotFoundError, MoreThan, Repository } from 'typeorm';
+import { EntityNotFoundError, Repository } from 'typeorm';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { AuctionParams } from './auctions.types';
+import { toOrderQuery, toWhereQuery } from './auctions.utils';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 import { Auction } from './entities/auction.entity';
 
 const MAX_LIMIT = 50;
-
 @Injectable()
 export class AuctionsService {
   constructor(
@@ -21,58 +22,16 @@ export class AuctionsService {
     return this.auctionsRepository.save(auction);
   }
 
-  findAll(paginationQuery: PaginationQueryDto) {
+  findAll(paginationQuery: PaginationQueryDto, params: AuctionParams) {
     const { limit, offset } = paginationQuery;
 
     return this.auctionsRepository.find({
-      relations: ['category', 'author'],
+      relations: ['category', 'author', 'bids'],
       skip: offset,
       take: limit || MAX_LIMIT,
-      order: {
-        createdAt: 'DESC',
-      },
-      where: {
-        expiresAt: MoreThan(new Date()),
-      },
+      order: toOrderQuery(params),
+      where: toWhereQuery(params),
     });
-  }
-
-  findMyAuctions(paginationQuery: PaginationQueryDto, id: string) {
-    const { limit, offset } = paginationQuery;
-
-    return this.auctionsRepository.find({
-      relations: ['category', 'author'],
-      skip: offset,
-      take: limit || MAX_LIMIT,
-      order: {
-        createdAt: 'DESC',
-      },
-      where: {
-        author: {
-          id,
-        },
-      },
-    });
-  }
-
-  findAllByCategory(paginationQuery: PaginationQueryDto, id: string) {
-    const { limit, offset } = paginationQuery;
-
-    const result = this.auctionsRepository.find({
-      relations: ['category', 'author'],
-      skip: offset,
-      take: limit || MAX_LIMIT,
-      order: {
-        createdAt: 'DESC',
-      },
-      where: {
-        category: {
-          id,
-        },
-      },
-    });
-
-    return result;
   }
 
   findOne(id: string) {

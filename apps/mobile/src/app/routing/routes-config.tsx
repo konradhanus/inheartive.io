@@ -8,6 +8,7 @@ import RegisterPage from '../components/Register/RegisterPage';
 
 import { FooterIcon } from '@inheartive/ui/organisms';
 import MyAuctions from '../components/MyAuctions';
+import { apiRoutes } from '@inheartive/data';
 
 interface RouteConfig {
   path: RoutingPath;
@@ -47,7 +48,12 @@ export const routesConfig: RouteConfig[] = [
   {
     path: RoutingPath.myAuctions,
     needsAuth: true,
-    page: <MyAuctions />,
+    page: <MyAuctions url={apiRoutes.myAuctions} />,
+  },
+  {
+    path: RoutingPath.myBids,
+    needsAuth: true,
+    page: <MyAuctions url={apiRoutes.myBids} />,
   },
   {
     path: RoutingPath.categories,
