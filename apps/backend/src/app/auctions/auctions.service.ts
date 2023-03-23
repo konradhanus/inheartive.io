@@ -35,7 +35,7 @@ export class AuctionsService {
   }
 
   findOne(id: string) {
-    return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category', 'author'] });
+    return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category', 'author', 'bids'] });
   }
 
   async update(id: string, updateAuctionDto: UpdateAuctionDto) {

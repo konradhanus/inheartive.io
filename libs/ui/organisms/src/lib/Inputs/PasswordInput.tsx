@@ -25,7 +25,13 @@ export function PasswordInput({ placeholder }: InputProps) {
     <Controller
       control={control}
       render={({ field: { onChange, onBlur, value } }) => (
-        <Input type='password' onBlur={onBlur} onChangeText={(val) => onChange(val)} value={value} />
+        <Input
+          placeholder={placeholder}
+          type='password'
+          onBlur={onBlur}
+          onChangeText={(val) => onChange(val)}
+          value={value}
+        />
       )}
       name='password'
       rules={PASSWORD_RULES}
