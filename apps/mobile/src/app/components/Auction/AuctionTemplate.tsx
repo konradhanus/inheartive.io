@@ -2,9 +2,10 @@ import React, { useRef, useState } from 'react';
 import { AuctionImage, ScrollView, imageTypes, Loader, Icon, Row } from '@inheartive/ui/atoms';
 import { Button, Text, View, Input, IconType } from '@inheartive/ui/atoms';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { apiRoutes, Auction } from '@inheartive/data';
+import { apiRoutes, Auction, Bid } from '@inheartive/data';
+
 import { AuctionHeader } from '@inheartive/ui/organisms';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { BidModal } from './BidModal';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
@@ -14,9 +15,10 @@ import { safeIntParse } from 'libs/ui/shared/utils';
 import { ModalBottom } from '../ModalBottom/ModalBottom';
 
 interface Props {
-  auction: Auction | undefined;
+  auction: Auction;
   isLoading: boolean;
   isError: boolean;
+  refetch: () => void;
 }
 
 interface AutionBidPayload {
@@ -25,22 +27,19 @@ interface AutionBidPayload {
   user: string;
 }
 
+const computeMaxBid = (bids: Bid[], price: number) =>
+  bids.reduce((acc, bid) => (bid.value > price ? bid.value : acc), price);
+
 export function AuctionTemplate(props: Props) {
-  const { auction, isLoading, isError } = props;
+  const { auction, isLoading, isError, refetch } = props;
+  const { bids, price } = auction;
+  const nextBid = computeMaxBid(bids, price);
   const insets = useSafeAreaInsets();
   const bottomSheet = useRef();
-  const [bid, setBid] = useState(0);
+
+  const [bid, setBid] = useState(nextBid + 1);
   const [isBidModal, setBidVisibility] = useState(false);
   const { user } = useUser();
-
-  const {
-    isLoading: isBidLoading,
-    isError: isBidError,
-    data: bids,
-  } = useQuery({
-    queryKey: ['bids'],
-    queryFn: () => fetch(apiRoutes.bids).then((res) => res.json()),
-  });
 
   const openModal = () => setBidVisibility(true);
 
@@ -66,6 +65,7 @@ export function AuctionTemplate(props: Props) {
       const { id: userId } = user;
       mutation.mutate({ value: bid, auction: auctionId, user: userId });
     }
+    refetch();
   };
 
   if (!auction) {
@@ -127,7 +127,7 @@ export function AuctionTemplate(props: Props) {
             authorLastName={auction.author.lastName}
             avatarBgColor={theme.colors.primary[500]}
           />
-          <AuctionLeftHearts quantity={auction.price} authorName={auction.author.firstName} />
+          <AuctionLeftHearts quantity={nextBid} authorName={auction.author.firstName} />
           <AuctionTime expirationDate={auction.expiresAt} />
           <AuctionBid currentBid={42} />
         </View>

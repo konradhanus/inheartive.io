@@ -11,12 +11,13 @@ export function AuctionPage() {
     isLoading,
     error,
     data: auction,
+    refetch,
   } = useQuery({
     queryKey: ['auction', id],
     queryFn: () => fetch(routeWithId(apiRoutes.auction, id)).then((res) => res.json()),
   });
 
-  return <AuctionTemplate isLoading={isLoading} isError={!!error} auction={auction} />;
+  return auction && <AuctionTemplate isLoading={isLoading} isError={!!error} auction={auction} refetch={refetch} />;
 }
 
 export default AuctionPage;
