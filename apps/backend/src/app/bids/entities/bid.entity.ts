@@ -16,4 +16,3 @@ export class Bid {
   @CreateDateColumn()
   createdAt: Date;
 }
-console.log({ process: process.env });
