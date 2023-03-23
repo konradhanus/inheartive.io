@@ -32,7 +32,7 @@ export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError, refetch } = props;
   const { bids, price } = auction;
   const nextBid = computeMaxBid(bids, price);
-
+  console.log({ process });
   const insets = useSafeAreaInsets();
 
   const [bid, setBid] = useState(nextBid + 1);
