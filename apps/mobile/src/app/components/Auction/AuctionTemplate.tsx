@@ -99,12 +99,11 @@ export function AuctionTemplate(props: Props) {
       </Row>
     </View>
   );
-  const BidButton = <Button>BID</Button>;
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />}
-        <ModalBottom bottomSheet={bottomSheet} BidButton={BidButton} BidPanel={BidPanel} />
+        <ModalBottom bottomSheet={bottomSheet} BidPanel={BidPanel} />
         <AuctionHeader />
         <AuctionImage imageType={imageTypes.detail} />
         <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
