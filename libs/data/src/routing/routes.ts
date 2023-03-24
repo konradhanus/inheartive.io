@@ -8,7 +8,7 @@ export const apiRoutes = {
   auctionsByCategory: `${apiUrlPrefix}/auctions?categoryId=:id`,
   auction: `${apiUrlPrefix}/auctions/:id`,
   myAuctions: `${apiUrlPrefix}/auctions?authorId=:id`,
-  myBids: `${apiUrlPrefix}/auctions?not_implemented`,
+  myBids: `${apiUrlPrefix}/auctions?bidAuthorId=:id`,
   bids: `${apiUrlPrefix}/bids`,
   categories: `${apiUrlPrefix}/categories`,
   users: `${apiUrlPrefix}/users`,

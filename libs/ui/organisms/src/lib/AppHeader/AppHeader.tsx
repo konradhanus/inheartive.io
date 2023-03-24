@@ -18,7 +18,7 @@ function AppHeader() {
   };
 
   const toMyAuctions = () => navigate(RoutingPath.myAuctions);
-  const toMyBids = () => navigate(RoutingPath.myAuctions);
+  const toMyBids = () => navigate(RoutingPath.myBids);
 
   return (
     <Row px={8} py={2} justifyContent={'space-between'} bg='primary.500' alignItems='center'>
