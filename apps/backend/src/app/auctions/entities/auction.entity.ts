@@ -12,7 +12,7 @@ import { Bid } from '../../bids/entities/bid.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { User } from '../../users/entities/user.entity';
 
-@Entity('auctions')
+@Entity('auction')
 export class Auction {
   @PrimaryGeneratedColumn('uuid')
   id: string;
