@@ -10,7 +10,8 @@
     "test": "nx test",
     "prepare": "husky install",
     "graph": "nx graph -dep",
-    "set-version": "concurrently 'cd ./apps/mobile && set-version $VERSION' 'set-version $VERSION'"
+    "set-version": "concurrently 'cd ./apps/mobile && set-version $VERSION' 'set-version $VERSION'",
+    "fastlane": "cd ./apps/mobile/ios && bundle update && bundle exec fastlane release"
   },
   "private": true,
   "dependencies": {
