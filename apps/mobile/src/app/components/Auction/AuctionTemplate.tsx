@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { apiRoutes, Auction, Bid } from '@inheartive/data';
+import { apiRoutes, Auction } from '@inheartive/data';
 import { AuctionImage, ScrollView, imageTypes, Loader } from '@inheartive/ui/atoms';
 import { Button, Text, View, Input } from '@inheartive/ui/atoms';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -25,16 +25,17 @@ interface AutionBidPayload {
   user: string;
 }
 
-const computeMaxBid = (bids: Bid[], price: number) =>
+const computeMaxBid = ({ bids, price }: Auction) =>
   bids.reduce((acc, bid) => (bid.value > price ? bid.value : acc), price);
 
 export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError, refetch } = props;
-  const { bids, price } = auction;
-  const nextBid = computeMaxBid(bids, price);
+
+  const maxBid = computeMaxBid(auction);
   const insets = useSafeAreaInsets();
 
-  const [bid, setBid] = useState(nextBid + 1);
+  const [currentBid, setBid] = useState(maxBid + 1);
+
   const [isBidModal, setBidVisibility] = useState(false);
   const { user } = useUser();
 
@@ -51,7 +52,10 @@ export function AuctionTemplate(props: Props) {
         },
         body: JSON.stringify(data),
       }),
-    onSuccess: closeModal,
+    onSuccess: () => {
+      closeModal();
+      refetch();
+    },
   });
 
   const parseBid = (value: string) => setBid(safeIntParse(value));
@@ -60,14 +64,13 @@ export function AuctionTemplate(props: Props) {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
       const { id: userId } = user;
-      mutation.mutate({ value: bid, auction: auctionId, user: userId });
+      mutation.mutate({ value: currentBid, auction: auctionId, user: userId });
     }
-    refetch();
   };
 
   return (
     <ScrollView>
-      {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />}
+      {isBidModal && <BidModal bid={currentBid} closeModal={closeModal} confirmModal={confirmModal} />}
       <AuctionHeader />
       <AuctionImage imageType={imageTypes.detail} />
       <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
@@ -90,11 +93,11 @@ export function AuctionTemplate(props: Props) {
           authorLastName={auction.author.lastName}
           avatarBgColor={theme.colors.primary[500]}
         />
-        <AuctionLeftHearts quantity={nextBid} authorName={auction.author.firstName} />
+        <AuctionLeftHearts quantity={maxBid} authorName={auction.author.firstName} />
         <AuctionTime expirationDate={auction.expiresAt} />
       </View>
       <View mx={16}>
-        <Input placeholder='10' onChangeText={parseBid} value={`${bid}`} keyboardType='numeric' />
+        <Input placeholder='10' onChangeText={parseBid} value={`${currentBid}`} keyboardType='numeric' />
         <Button onPress={openModal}>BID</Button>
         <Button variant='lighGray'>REPORT</Button>
       </View>
