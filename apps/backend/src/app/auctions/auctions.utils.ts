@@ -14,7 +14,7 @@ const toCategoryId = (id: string): FindOptionsWhere<Auction> => ({
   },
 });
 
-const toExpiresAt = (isExpired: boolean) => {
+const toExpiresAt = (isExpired: boolean): FindOptionsWhere<Auction> => {
   if (isExpired) {
     const dateCompare = isExpired ? LessThan : MoreThan;
     return {
@@ -24,7 +24,15 @@ const toExpiresAt = (isExpired: boolean) => {
   return {};
 };
 
-const WHERE_QUERY_PARAMS = ['authorId', 'categoryId', 'isExpired'] as const;
+const toBidAuthorId = (id: string): FindOptionsWhere<Auction> => ({
+  bids: {
+    user: {
+      id,
+    },
+  },
+});
+
+const WHERE_QUERY_PARAMS = ['authorId', 'categoryId', 'isExpired', 'bidAuthorId'] as const;
 
 type QueryParamsStrategy = Partial<Record<keyof AuctionParams, (id: string | boolean) => FindOptionsWhere<Auction>>>;
 
@@ -32,6 +40,7 @@ const QueryParamsStrategy: QueryParamsStrategy = {
   authorId: toAuthorId,
   categoryId: toCategoryId,
   isExpired: toExpiresAt,
+  bidAuthorId: toBidAuthorId,
 };
 
 export const toWhereQuery = (params: AuctionParams): FindOptionsWhere<Auction> =>

@@ -8,7 +8,7 @@ export class Bid {
   @ManyToOne((type) => Auction, (auction) => auction.bids)
   @JoinColumn()
   auction: Auction;
-  @ManyToOne((type) => User)
+  @ManyToOne((type) => User, (user) => user)
   @JoinColumn()
   user: User;
   @Column()

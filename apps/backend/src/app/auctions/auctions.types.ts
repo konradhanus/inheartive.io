@@ -8,6 +8,7 @@ interface AuctionBaseParams {
   isExpired: boolean;
   sortBy: AuctionSorkKey;
   order: FindOptionsOrderValue;
+  bidAuthorId: string;
 }
 
 export type AuctionParams = Partial<AuctionBaseParams>;

@@ -7,8 +7,10 @@ import { AuctionRow } from './AuctionRow';
 
 interface MyAuctionsProps {
   url: string;
+  label: string;
 }
-interface MyAuctionsListProps extends MyAuctionsProps {
+interface MyAuctionsListProps {
+  url: string;
   userId: string;
 }
 
@@ -35,12 +37,12 @@ const MyAuctionsList = ({ userId, url }: MyAuctionsListProps) => {
   );
 };
 
-export function MyAuctions({ url }: MyAuctionsProps) {
+export function MyAuctions({ url, label }: MyAuctionsProps) {
   const { user } = useUser();
 
   return (
     <ScrollView>
-      <Text>My auctions:</Text>
+      <Text>{label}:</Text>
       <View>{user?.id && <MyAuctionsList userId={user.id} url={url} />}</View>
     </ScrollView>
   );
