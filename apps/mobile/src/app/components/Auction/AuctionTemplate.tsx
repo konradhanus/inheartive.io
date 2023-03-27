@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { AuctionImage, ScrollView, imageTypes, Loader, Icon, Row } from '@inheartive/ui/atoms';
-import { Button, Text, View, Input, IconType } from '@inheartive/ui/atoms';
+import { Button, Text, View } from '@inheartive/ui/atoms';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { apiRoutes, Auction, Bid } from '@inheartive/data';
 
@@ -11,7 +11,6 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
 import { useUser } from '../Providers/UserProvider';
-import { safeIntParse } from 'libs/ui/shared/utils';
 import { ModalBottom } from '../ModalBottom/ModalBottom';
 
 interface Props {
@@ -35,13 +34,11 @@ export function AuctionTemplate(props: Props) {
   const { bids, price } = auction;
   const nextBid = computeMaxBid(bids, price);
   const insets = useSafeAreaInsets();
-  const bottomSheet = useRef();
+  // const bottomSheet = useRef();
 
   const [bid, setBid] = useState(nextBid + 1);
   const [isBidModal, setBidVisibility] = useState(false);
   const { user } = useUser();
-
-  const openModal = () => setBidVisibility(true);
 
   const closeModal = () => setBidVisibility(false);
 
@@ -57,8 +54,6 @@ export function AuctionTemplate(props: Props) {
     onSuccess: closeModal,
   });
 
-  const parseBid = (value: string) => setBid(safeIntParse(value));
-
   const confirmModal = () => {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
@@ -71,39 +66,12 @@ export function AuctionTemplate(props: Props) {
   if (!auction) {
     return <Loader />;
   }
-  const BidPanel = (
-    <View mx={16} justifyContent='center'>
-      <Row padding='4px'>
-        <AuctionLeftHearts fSize='24px' quantity={auction.price} authorName={auction.author.firstName} />
-      </Row>
-      <Row space={1.5} alignItems='center' background='#B4B3AF' borderRadius='16px' padding='4px'>
-        <Icon name={IconType.favoriteOutline} size={40} />
-        <Input
-          color='grey'
-          fontSize='24px'
-          padding='0'
-          defaultValue={`${auction.price + 1}`}
-          width='80%'
-          textDecorationColor='transparent'
-          focusOutlineColor='transparent'
-          bgColor='transparent'
-          background='transparent'
-          borderColor='transparent'
-          keyboardType='numeric'
-        />
-      </Row>
-      <Row justifyContent='center' alignItems='center'>
-        <Button width='90%' marginTop='20px' fontSize='30px' height='50px'>
-          BID
-        </Button>
-      </Row>
-    </View>
-  );
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />}
-        <ModalBottom bottomSheet={bottomSheet} BidPanel={BidPanel} />
+        {/* {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />} */}
+        {/* <ModalBottom auction={auction} bottomSheet={bottomSheet} /> */}
         <AuctionHeader />
         <AuctionImage imageType={imageTypes.detail} />
         <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
@@ -131,9 +99,9 @@ export function AuctionTemplate(props: Props) {
           <AuctionBid currentBid={42} />
         </View>
         <View mx={16}>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Button onPress={() => bottomSheet.current.show()}>BID</Button>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Button variant='lighGray'>REPORT</Button>
         </View>
       </ScrollView>

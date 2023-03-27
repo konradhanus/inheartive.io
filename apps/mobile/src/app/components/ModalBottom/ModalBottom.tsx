@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { View } from '@inheartive/ui/atoms';
 
 import BottomSheet from 'react-native-gesture-bottom-sheet';
+import { BidPanel } from '../BidPanel/BidPanel';
+import { Auction } from '@inheartive/data';
 
-const ModalBottom = ({ BidPanel, bottomSheet }: { BidPanel: React.ReactNode; bottomSheet: any }) => {
+const ModalBottom = ({ bottomSheet, auction }: { bottomSheet: any; auction: Auction }) => {
   return (
     <BottomSheet draggable={false} hasDraggableIcon ref={bottomSheet} height={200}>
-      <View>{BidPanel}</View>
+      <View>
+        <BidPanel auction={auction} />
+      </View>
     </BottomSheet>
   );
 };
