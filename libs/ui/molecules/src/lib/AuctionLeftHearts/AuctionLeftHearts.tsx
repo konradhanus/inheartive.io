@@ -4,15 +4,16 @@ import { Icon, IconType, Row, Text } from '@inheartive/ui/atoms';
 interface IAuctionHeartsProps {
   quantity: number;
   authorName?: string;
+  fSize?: string;
 }
 
 function AuctionLeftHearts(props: IAuctionHeartsProps) {
-  const { quantity, authorName } = props;
+  const { quantity, authorName, fSize } = props;
 
   return (
     <Row space={1.5} alignItems='center'>
       <Icon name={IconType.favoriteOutline} size={40} />
-      <Text>
+      <Text fontSize={fSize}>
         {quantity} {authorName}
       </Text>
     </Row>
