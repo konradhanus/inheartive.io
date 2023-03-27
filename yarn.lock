@@ -12520,11 +12520,6 @@ react-native-device-info@^10.4.0:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.4.0.tgz#9d90706641941d7da8ab7b316a37d3111eb231e4"
   integrity sha512-Z37e0HtpBvfkPRgv4xN7lXpvmJyzjwCXSFTXEkw6m2UgnnIsWlOD02Avu4hJXBlIMMazaW3ZLKal3o9h3AYvCw==
 
-react-native-gesture-bottom-sheet@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-bottom-sheet/-/react-native-gesture-bottom-sheet-1.1.0.tgz#cd6efd4d1cd8df2c0a077da7c9b6c023b3044af1"
-  integrity sha512-1kF6wwtN9cPOav9iNC1hZ9gdpILucQ4vTgUYjyCHGc100WTgm6j7QDclT3a12Ge8X4PTsZF1PRZreGGIkGJKUg==
-
 react-native-gesture-handler@^2.7.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.9.0.tgz#2f63812e523c646f25b9ad660fc6f75948e51241"
