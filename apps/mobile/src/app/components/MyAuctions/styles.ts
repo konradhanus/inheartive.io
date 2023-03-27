@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 20,
   },
-  description: {
+  title: {
     width: '40%',
   },
 });

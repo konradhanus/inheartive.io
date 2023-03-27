@@ -20,7 +20,8 @@ export class AuctionsController {
     @Query('categoryId') categoryId: string,
     @Query('isExpired') isExpired: boolean,
     @Query('sortBy') sortBy: AuctionSorkKey,
-    @Query('order') order: FindOptionsOrderValue
+    @Query('order') order: FindOptionsOrderValue,
+    @Query('bidAuthorId') bidAuthorId: string
   ) {
     const queryParams = {
       authorId,
@@ -28,6 +29,7 @@ export class AuctionsController {
       isExpired,
       sortBy,
       order,
+      bidAuthorId,
     };
     return this.auctionsService.findAll({ limit: 100, offset: undefined }, queryParams);
   }
