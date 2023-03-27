@@ -16,6 +16,11 @@ jobs:
       - run: yarn install
       - run: npm install -g nx
 
+      - name: Choose correct .env file
+        run: |
+          echo "🎉 Building for android"
+          mv .env.android.release .env
+
       - name: Building App
         id: building_app
         run: nx build-android mobile

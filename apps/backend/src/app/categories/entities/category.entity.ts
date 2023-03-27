@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Auction } from '../../auctions/entities/auction.entity';
 
-@Entity()
+@Entity('category')
 export class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -25,5 +25,5 @@ export class Category {
   createdAt: Date;
 
   @UpdateDateColumn()
-  upodatedAt: Date;
+  updatedAt: Date;
 }

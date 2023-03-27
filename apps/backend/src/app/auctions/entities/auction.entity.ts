@@ -1,8 +1,18 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Bid } from '../../bids/entities/bid.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { User } from '../../users/entities/user.entity';
 
-@Entity()
+@Entity('auction')
 export class Auction {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -29,5 +39,9 @@ export class Auction {
   createdAt: Date;
 
   @UpdateDateColumn()
-  upodatedAt: Date;
+  updatedAt: Date;
+
+  @OneToMany((type) => Bid, (bid) => bid.auction)
+  @JoinColumn()
+  bids: Bid[];
 }

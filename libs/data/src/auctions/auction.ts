@@ -1,6 +1,11 @@
 import { Category } from '../categories';
 import { User } from '../user';
 
+export interface Bid {
+  id: string;
+  createdAt: string;
+  value: number;
+}
 export interface Auction {
   id: string;
   title: string;
@@ -11,5 +16,6 @@ export interface Auction {
   imageSrc?: string;
   expiresAt: string;
   createdAt: string;
-  upodatedAt: string;
+  updatedAt: string;
+  bids: Bid[];
 }

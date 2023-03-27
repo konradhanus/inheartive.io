@@ -1,39 +1,42 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useNavigate } from 'react-router-native';
+
 import { useMutation } from '@tanstack/react-query';
 import { RegisterFormValues } from './register-form-values';
 import { apiRoutes } from '@inheartive/data';
 import RegisterTemplate from './RegisterTemplate';
+import { RoutingPath } from '../../routing';
 
 export function RegisterPage() {
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RegisterFormValues>();
-
+  const formMethods = useForm<RegisterFormValues>({ mode: 'onChange' });
+  const navigate = useNavigate();
   const mutation = useMutation({
-    mutationFn: (data: RegisterFormValues) =>
-      fetch(apiRoutes.users, {
+    mutationFn: (data: RegisterFormValues) => {
+      return fetch(apiRoutes.users, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-      }),
+        body: JSON.stringify({ ...data, email: data.email.toLowerCase() }),
+      });
+    },
+    onSuccess: (response) => {
+      if (response.ok) {
+        navigate(RoutingPath.signIn);
+      } else {
+        // TODO handle error, for example when email is not unique
+        console.log(response);
+      }
+    },
   });
 
   const onSubmit = (data: RegisterFormValues) => mutation.mutate(data);
 
   return (
-    <RegisterTemplate
-      control={control}
-      register={register}
-      handleSubmit={handleSubmit}
-      errors={errors}
-      onSubmit={onSubmit}
-    />
+    <FormProvider {...formMethods}>
+      <RegisterTemplate onSubmit={onSubmit} />
+    </FormProvider>
   );
 }
 

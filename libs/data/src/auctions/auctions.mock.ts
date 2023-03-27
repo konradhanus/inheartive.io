@@ -30,7 +30,7 @@ export const auctionsMock: Auction[] = [
     price: 26,
     expiresAt: tomorrow(),
     createdAt: '2022-12-30T08:56:30.275Z',
-    upodatedAt: '2022-12-30T08:56:30.275Z',
+    updatedAt: '2022-12-30T08:56:30.275Z',
   },
   {
     id: 'aaaa-1112',
@@ -41,7 +41,7 @@ export const auctionsMock: Auction[] = [
     price: 900,
     expiresAt: inTwoHours(),
     createdAt: '2022-12-28T08:56:30.275Z',
-    upodatedAt: '2022-12-29T08:56:30.275Z',
+    updatedAt: '2022-12-29T08:56:30.275Z',
   },
   {
     id: 'aaaa-1113',
@@ -52,6 +52,6 @@ export const auctionsMock: Auction[] = [
     price: 333,
     expiresAt: inOneWeek(),
     createdAt: '2022-12-22T08:56:30.275Z',
-    upodatedAt: '2022-12-23T08:56:30.275Z',
+    updatedAt: '2022-12-23T08:56:30.275Z',
   },
 ];

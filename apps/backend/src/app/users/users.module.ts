@@ -10,5 +10,6 @@ import { UserExistsRule } from './validators/user-exists';
   imports: [TypeOrmModule.forFeature([User, Auction])],
   controllers: [UsersController],
   providers: [UsersService, UserExistsRule],
+  exports: [UsersService],
 })
 export class UsersModule {}

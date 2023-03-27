@@ -1,23 +1,12 @@
 import React from 'react';
 import { FormControl, Input, Button, ScrollView, Column } from '@inheartive/ui/atoms';
-import {
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldErrors,
-  Controller,
-  Control,
-  FieldValues,
-  UseControllerProps,
-} from 'react-hook-form';
+import { Controller, FieldValues, UseControllerProps, useFormContext } from 'react-hook-form';
 import { RegisterFormValues } from './register-form-values';
 import { RoutingPath } from '../../routing';
 import { useNavigate } from 'react-router-native';
-
+import { EmailInput, PasswordInput } from '@inheartive/ui/organisms';
+import { BackHandler } from 'react-native';
 interface Props<T extends FieldValues> {
-  control: Control<T>;
-  register: UseFormRegister<T>;
-  handleSubmit: UseFormHandleSubmit<T>;
-  errors: FieldErrors<T>;
   onSubmit: (data: T) => void;
 }
 type FormRulesStrategy = {
@@ -25,43 +14,38 @@ type FormRulesStrategy = {
 };
 
 const FORM_RULES_STRATEGY = {
-  email: {
-    required: 'Email name is required',
-    minLength: 2,
-    pattern: {
-      value: /.*@intive.com$/,
-      message: 'Only intive email is allowed',
-    },
-  },
   firstName: { required: 'First name is required', minLength: 2 },
   lastName: { required: 'Last name is required', minLength: 2 },
-  password: { required: 'Password is required', minLength: { value: 8, message: 'Min 8!' } },
-} as const satisfies FormRulesStrategy;
+};
 
 export function RegisterTemplate(props: Props<RegisterFormValues>) {
-  const { control, handleSubmit, errors, onSubmit } = props;
+  const { onSubmit } = props;
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useFormContext<RegisterFormValues>();
 
   const navigate = useNavigate();
 
+  const isDisabled = !isValid;
+
+  React.useEffect(() => {
+    const backAction = () => {
+      navigate(RoutingPath.signIn);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove();
+  }, []);
   return (
     <ScrollView>
       <Column px={5} space={3} justifyContent='center'>
         <FormControl isRequired isInvalid={'email' in errors}>
           <FormControl.Label>Email</FormControl.Label>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                onBlur={onBlur}
-                placeholder='john.doe@example.com'
-                onChangeText={(val) => onChange(val)}
-                value={value}
-              />
-            )}
-            name='email'
-            rules={FORM_RULES_STRATEGY.email}
-            defaultValue=''
-          />
+          <EmailInput placeholder={'john.doe@example.com'} />
           <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
         </FormControl>
 
@@ -95,18 +79,13 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
 
         <FormControl isRequired isInvalid={'password' in errors}>
           <FormControl.Label>Password</FormControl.Label>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input type='password' onBlur={onBlur} onChangeText={(val) => onChange(val)} value={value} />
-            )}
-            name='password'
-            rules={FORM_RULES_STRATEGY.password}
-          />
+          <PasswordInput placeholder='password' />
           <FormControl.ErrorMessage>{errors.password?.message}</FormControl.ErrorMessage>
         </FormControl>
 
         <Button
+          disabled={isDisabled}
+          isDisabled={isDisabled}
           onPress={(e) => {
             handleSubmit(onSubmit)(e);
           }}

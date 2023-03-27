@@ -31,7 +31,7 @@ async function bootstrap() {
 
   app.use(passport.initialize());
 
-  const port = process.env.PORT || 3333;
+  const port = process.env.BACKEND_PORT || 3333;
 
   app.useGlobalInterceptors(new NotFoundInterceptor());
   await app.listen(port);

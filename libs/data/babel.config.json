@@ -8,7 +8,7 @@
       }
     ]
   ],
-  "plugins": [],
+  "plugins": [["module:react-native-dotenv"]],
   "env": {
     "test": {
       "presets": ["module:metro-react-native-babel-preset"]

@@ -6,6 +6,7 @@ import { AuthController } from './auth.controller';
 import { Oauth2Strategy } from './oauth2.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthService } from './auth.service';
+import { UsersModule } from '../app/users/users.module';
 
 @Module({
   controllers: [AuthController],
@@ -21,6 +22,7 @@ import { AuthService } from './auth.service';
         signOptions: { expiresIn: configService.get<string>('JWT_TOKEN_ALIVE') },
       }),
     }),
+    UsersModule,
   ],
 })
 export class AuthModule {}
