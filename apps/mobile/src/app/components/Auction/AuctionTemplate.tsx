@@ -34,7 +34,7 @@ export function AuctionTemplate(props: Props) {
   const { bids, price } = auction;
   const nextBid = computeMaxBid(bids, price);
   const insets = useSafeAreaInsets();
-  // const bottomSheet = useRef();
+  const bottomSheet = useRef();
 
   const [bid, setBid] = useState(nextBid + 1);
   const [isBidModal, setBidVisibility] = useState(false);
@@ -70,8 +70,8 @@ export function AuctionTemplate(props: Props) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {/* {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />} */}
-        {/* <ModalBottom auction={auction} bottomSheet={bottomSheet} /> */}
+        {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />}
+        <ModalBottom auction={auction} bottomSheet={bottomSheet} />
         <AuctionHeader />
         <AuctionImage imageType={imageTypes.detail} />
         <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
@@ -99,9 +99,9 @@ export function AuctionTemplate(props: Props) {
           <AuctionBid currentBid={42} />
         </View>
         <View mx={16}>
-          {/* <TouchableOpacity>
+          <TouchableOpacity>
             <Button onPress={() => bottomSheet.current.show()}>BID</Button>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <Button variant='lighGray'>REPORT</Button>
         </View>
       </ScrollView>
