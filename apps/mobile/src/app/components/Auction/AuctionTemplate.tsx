@@ -25,13 +25,12 @@ interface AutionBidPayload {
   user: string;
 }
 
-const computeMaxBid = (bids: Bid[], price: number) =>
+const computeMaxBid = ({ bids, price }: Auction) =>
   bids.reduce((acc, bid) => (bid.value > price ? bid.value : acc), price);
 
 export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError, refetch } = props;
-  const { bids, price } = auction;
-  const bid = computeMaxBid(bids, price);
+  const bid = computeMaxBid(auction);
   const insets = useSafeAreaInsets();
   const bottomSheet = useRef<BottomSheet>();
   const { user } = useUser();
@@ -48,8 +47,8 @@ export function AuctionTemplate(props: Props) {
         body: JSON.stringify(data),
       }),
     onSuccess: () => {
-      refetch();
       closeModal();
+      refetch();
     },
   });
 
