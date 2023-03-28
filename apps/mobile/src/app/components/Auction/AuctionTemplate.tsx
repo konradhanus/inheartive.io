@@ -26,17 +26,18 @@ interface AutionBidPayload {
   user: string;
 }
 
-const computeMaxBid = (bids: Bid[], price: number) =>
+const computeMaxBid = ({ bids, price }: Auction) =>
   bids.reduce((acc, bid) => (bid.value > price ? bid.value : acc), price);
 
 export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError, refetch } = props;
-  const { bids, price } = auction;
-  const nextBid = computeMaxBid(bids, price);
+
+  const maxBid = computeMaxBid(auction);
   const insets = useSafeAreaInsets();
   const bottomSheet = useRef();
 
-  const [bid, setBid] = useState(nextBid + 1);
+  const [currentBid, setBid] = useState(maxBid + 1);
+
   const [isBidModal, setBidVisibility] = useState(false);
   const { user } = useUser();
 
@@ -51,16 +52,18 @@ export function AuctionTemplate(props: Props) {
         },
         body: JSON.stringify(data),
       }),
-    onSuccess: closeModal,
+    onSuccess: () => {
+      closeModal();
+      refetch();
+    },
   });
 
   const confirmModal = () => {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
       const { id: userId } = user;
-      mutation.mutate({ value: bid, auction: auctionId, user: userId });
+      mutation.mutate({ value: currentBid, auction: auctionId, user: userId });
     }
-    refetch();
   };
 
   if (!auction) {
