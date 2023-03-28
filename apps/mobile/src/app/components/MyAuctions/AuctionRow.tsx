@@ -9,8 +9,8 @@ interface AuctionRowProps {
 
 export const AuctionRow = ({ auction }: AuctionRowProps) => (
   <View style={styles.row}>
-    <View style={styles.description}>
-      <Text style={styles.text}>{auction.description}</Text>
+    <View style={styles.title}>
+      <Text style={styles.text}>{auction.title}</Text>
     </View>
     <Icon name={'user'} size={30} />
     <Text style={styles.text}>{'X.X.'}</Text>

@@ -80,6 +80,8 @@ steps:
       rm -rf ./package.json
       rm -rf ./react-native.config.js
       rm -rf ./tsconfig.base.json
+      rm -rf ./git
+      rm -rf ./ruby-version
     displayName: 'Delete unnecessary items'
 
   - task: ArchiveFiles@2
