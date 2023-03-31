@@ -1,17 +1,16 @@
-import React, { useRef, useState } from 'react';
-import { AuctionImage, ScrollView, imageTypes, Loader, Icon, Row } from '@inheartive/ui/atoms';
+import React, { useRef } from 'react';
+import { AuctionImage, ScrollView, imageTypes, Loader } from '@inheartive/ui/atoms';
 import { Button, Text, View } from '@inheartive/ui/atoms';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { apiRoutes, Auction, Bid } from '@inheartive/data';
 
 import { AuctionHeader } from '@inheartive/ui/organisms';
 import { useMutation } from '@tanstack/react-query';
-import { BidModal } from './BidModal';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
 import { theme } from '@inheartive/ui/theme';
 import { useUser } from '../Providers/UserProvider';
-import { ModalBottom } from '../ModalBottom/ModalBottom';
+import { BottomSheet, ModalBottom } from '../ModalBottom/ModalBottom';
 
 interface Props {
   auction: Auction;
@@ -31,17 +30,12 @@ const computeMaxBid = ({ bids, price }: Auction) =>
 
 export function AuctionTemplate(props: Props) {
   const { auction, isLoading, isError, refetch } = props;
-
-  const maxBid = computeMaxBid(auction);
+  const bid = computeMaxBid(auction);
   const insets = useSafeAreaInsets();
-  const bottomSheet = useRef();
-
-  const [currentBid, setBid] = useState(maxBid + 1);
-
-  const [isBidModal, setBidVisibility] = useState(false);
+  const bottomSheet = useRef<BottomSheet>();
   const { user } = useUser();
-
-  const closeModal = () => setBidVisibility(false);
+  const showModal = () => bottomSheet.current?.show();
+  const closeModal = () => bottomSheet.current?.close();
 
   const mutation = useMutation({
     mutationFn: (data: AutionBidPayload) =>
@@ -62,19 +56,17 @@ export function AuctionTemplate(props: Props) {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
       const { id: userId } = user;
-      mutation.mutate({ value: currentBid, auction: auctionId, user: userId });
+      mutation.mutate({ value: bid + 1, auction: auctionId, user: userId });
     }
   };
 
   if (!auction) {
     return <Loader />;
   }
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {isBidModal && <BidModal bid={bid} closeModal={closeModal} confirmModal={confirmModal} />}
-        <ModalBottom auction={auction} bottomSheet={bottomSheet} />
+        <ModalBottom bid={bid} auction={auction} bottomSheet={bottomSheet} confirmModal={confirmModal} />
         <AuctionHeader />
         <AuctionImage imageType={imageTypes.detail} />
         <View my={5} mx={2} px={3} paddingTop={insets.top} paddingBottom={insets.bottom}>
@@ -97,13 +89,13 @@ export function AuctionTemplate(props: Props) {
             authorLastName={auction.author.lastName}
             avatarBgColor={theme.colors.primary[500]}
           />
-          <AuctionLeftHearts quantity={nextBid} authorName={auction.author.firstName} />
+          <AuctionLeftHearts quantity={bid} authorName={auction.author.firstName} />
           <AuctionTime expirationDate={auction.expiresAt} />
           <AuctionBid currentBid={42} />
         </View>
         <View mx={16}>
           <TouchableOpacity>
-            <Button onPress={() => bottomSheet.current.show()}>BID</Button>
+            <Button onPress={showModal}>BID</Button>
           </TouchableOpacity>
           <Button variant='lighGray'>REPORT</Button>
         </View>
