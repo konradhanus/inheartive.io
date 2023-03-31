@@ -37,6 +37,8 @@ export function AuctionTemplate(props: Props) {
   const showModal = () => bottomSheet.current?.show();
   const closeModal = () => bottomSheet.current?.close();
 
+  const isMyAuction = user?.id && user.id === auction.author.id;
+
   const mutation = useMutation({
     mutationFn: (data: AutionBidPayload) =>
       fetch(apiRoutes.bids, {
@@ -93,12 +95,14 @@ export function AuctionTemplate(props: Props) {
           <AuctionTime expirationDate={auction.expiresAt} />
           <AuctionBid currentBid={42} />
         </View>
-        <View mx={16}>
-          <TouchableOpacity>
-            <Button onPress={showModal}>BID</Button>
-          </TouchableOpacity>
-          <Button variant='lighGray'>REPORT</Button>
-        </View>
+        {!isMyAuction && (
+          <View mx={16}>
+            <TouchableOpacity>
+              <Button onPress={showModal}>BID</Button>
+            </TouchableOpacity>
+            <Button variant='lighGray'>REPORT</Button>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -126,8 +130,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 export default AuctionTemplate;
