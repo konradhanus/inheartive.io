@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { FindOptionsOrderValue } from 'typeorm';
 import { AuctionsService } from './auctions.service';
-import { AuctionSorkKey } from './auctions.types';
+import { AuctionSorkKey, SearchTopic } from './auctions.types';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 
@@ -32,6 +32,15 @@ export class AuctionsController {
       bidAuthorId,
     };
     return this.auctionsService.findAll({ limit: 100, offset: undefined }, queryParams);
+  }
+
+  // TODO: This endpoint is extendable. You can add other options to search
+  // for example: search by title, description, author, category, etc.
+  // query parameter can be: title, description, author, category, etc. All in all query is most often field name in Auction entity
+  @Get('search')
+  findBy(@Query('query') query?: SearchTopic, @Query('author') author?: string) {
+    const queryParams = { query, author };
+    return this.auctionsService.findBy({ limit: 100, offset: undefined }, queryParams);
   }
 
   @Get(':id')

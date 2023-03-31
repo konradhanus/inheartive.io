@@ -1,5 +1,5 @@
 import { FindOptionsOrder, FindOptionsWhere, LessThan, MoreThan } from 'typeorm';
-import { AuctionParams } from './auctions.types';
+import { AuctionParams, AuctionSearchParams } from './auctions.types';
 import { Auction } from './entities/auction.entity';
 
 const toAuthorId = (id: string): FindOptionsWhere<Auction> => ({
@@ -66,4 +66,19 @@ export const toOrderQuery = (params: AuctionParams): FindOptionsOrder<Auction> =
   }
 
   return DEFAULT_ORDER;
+};
+
+export const toSearchQuery = (params: AuctionSearchParams): FindOptionsWhere<Auction> => {
+  let condition = null;
+
+  if (params.author) {
+    condition = { user: { id: params.author } };
+  }
+  if (params.query) {
+    return {
+      [params.query]: condition,
+    };
+  }
+
+  return {};
 };
