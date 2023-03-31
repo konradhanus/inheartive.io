@@ -42,7 +42,7 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
   }, []);
   return (
     <ScrollView>
-      <Column px={5} space={3} justifyContent='center'>
+      <Column px={5} space={3} justifyContent='center' marginTop={10}>
         <FormControl isRequired isInvalid={'email' in errors}>
           <FormControl.Label>Email</FormControl.Label>
           <EmailInput placeholder={'john.doe@example.com'} />
