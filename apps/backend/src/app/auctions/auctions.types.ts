@@ -2,6 +2,8 @@ import { FindOptionsOrderValue } from 'typeorm';
 
 export type AuctionSorkKey = 'title' | 'price' | 'createdAt' | 'expiresAt';
 
+export type SearchTopic = 'bids' | 'category' | 'author';
+
 interface AuctionBaseParams {
   authorId: string;
   categoryId: string;
@@ -11,4 +13,10 @@ interface AuctionBaseParams {
   bidAuthorId: string;
 }
 
+interface SearchAuctionParams {
+  query: SearchTopic;
+  author: string;
+}
+
 export type AuctionParams = Partial<AuctionBaseParams>;
+export type AuctionSearchParams = Partial<SearchAuctionParams>;

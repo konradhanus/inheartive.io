@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
-import { AuctionParams } from './auctions.types';
-import { toOrderQuery, toWhereQuery } from './auctions.utils';
+import { AuctionParams, AuctionSearchParams } from './auctions.types';
+import { toOrderQuery, toWhereQuery, toSearchQuery } from './auctions.utils';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 import { Auction } from './entities/auction.entity';
@@ -42,6 +42,15 @@ export class AuctionsService {
 
   findOne(id: string) {
     return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category', 'author', 'bids'] });
+  }
+
+  findBy(paginationQuery: PaginationQueryDto, params: AuctionSearchParams) {
+    const { limit, offset } = paginationQuery;
+    return this.auctionsRepository.find({
+      where: toSearchQuery(params),
+      skip: offset,
+      take: limit || MAX_LIMIT,
+    });
   }
 
   async update(id: string, updateAuctionDto: UpdateAuctionDto) {
