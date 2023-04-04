@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
+import { categoriesList } from './categoriesMock';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
@@ -14,7 +15,8 @@ export class CategoriesController {
 
   @Get()
   findAll() {
-    return this.categoriesService.findAll();
+    // TODO switch for return this.categoriesService.findAll();
+    return categoriesList;
   }
 
   @Get(':id')
