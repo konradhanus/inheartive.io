@@ -1,5 +1,6 @@
 {
   "name": "inheartive",
+  "version": "2.0.2",
   "private": true,
   "dependencies": {
     "@react-native-async-storage/async-storage": "*",
@@ -22,6 +23,5 @@
     "react-router-native": "*",
     "styled-components": "*",
     "react-native-device-info": "*"
-  },
-  "version": "2.0.2"
+  }
 }
