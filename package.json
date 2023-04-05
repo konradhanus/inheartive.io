@@ -1,6 +1,6 @@
 {
   "name": "inheartive",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "MIT",
   "scripts": {
     "start": "nx run-many --target=serve --projects=backend,mobile",
