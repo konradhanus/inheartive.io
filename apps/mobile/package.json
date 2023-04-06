@@ -1,6 +1,6 @@
 {
   "name": "inheartive",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "private": true,
   "dependencies": {
     "@react-native-async-storage/async-storage": "*",
