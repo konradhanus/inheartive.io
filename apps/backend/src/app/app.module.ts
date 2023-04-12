@@ -31,6 +31,7 @@ import { BidsModule } from './bids/bids.module';
               ca: process.env.DB_CERT.replace(/\\n/g, '\n'),
             }
           : null,
+      migrations: ['src/migrations/*{.ts,.js}'],
     }),
     AuthModule,
     AuctionsModule,
