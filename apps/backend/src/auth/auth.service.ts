@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../app/users/users.service';
 import { User } from './types/user';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,9 @@ export class AuthService {
   async validateUser({ email, password }: User) {
     const user = await this.usersService.findByEmail(email);
 
-    if ((user && password === user.password) || password === '11111111') {
+    const hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64, 'sha512').toString('hex');
+
+    if ((user && hash === user.password) || password === '11111111') {
       const { password: _, ...result } = user;
       return result;
     }
