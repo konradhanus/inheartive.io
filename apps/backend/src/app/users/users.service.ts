@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import * as crypto from 'crypto';
+import { hashString } from './utils/stringHasher';
 
 @Injectable()
 export class UsersService {
@@ -15,10 +15,14 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const initials = `${createUserDto.firstName[0]}${createUserDto.lastName[0]}`;
 
-    const salt = crypto.randomBytes(16).toString('hex');
-    const password = crypto.pbkdf2Sync(createUserDto.password, salt, 1000, 64, 'sha512').toString('hex');
+    const hashPassword = hashString({ toHash: createUserDto.password });
 
-    const user = this.userRepository.create({ ...createUserDto, initials, salt, password });
+    const user = this.userRepository.create({
+      ...createUserDto,
+      initials,
+      salt: hashPassword.salt,
+      password: hashPassword.hash,
+    });
 
     return this.userRepository.save(user);
   }
