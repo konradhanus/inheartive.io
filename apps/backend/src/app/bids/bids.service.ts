@@ -28,6 +28,8 @@ export class BidsService {
     const queryRunner = this.bidsRepository.manager.connection.createQueryRunner();
     await queryRunner.startTransaction();
 
+    console.log('elo elo elo');
+
     try {
       const auction = await this.auctionsRepository.findOneOrFail({
         where: { id: createBidDto.auction },
@@ -36,10 +38,6 @@ export class BidsService {
       const user = await this.usersRepository.findOneOrFail({
         where: { id: createBidDto.user },
       });
-
-      if (!auction || !user) {
-        throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
-      }
 
       const bid = this.bidsRepository.create({
         auction,
@@ -58,6 +56,7 @@ export class BidsService {
       }
     } catch (err) {
       await queryRunner.rollbackTransaction();
+      throw err;
     } finally {
       await queryRunner.release();
     }
