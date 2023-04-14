@@ -16,7 +16,7 @@ export class AuthService {
   async validateUser({ email, password }: User) {
     const user = await this.usersService.findByEmail(email);
 
-    const hashPassword = hashString({ toHash: password, predefinedSalt: user.salt });
+    const hashPassword = hashString({ data: password, customSalt: user.salt });
 
     if (user && hashPassword.hash === user.password) {
       const { password: _, ...result } = user;

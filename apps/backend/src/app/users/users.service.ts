@@ -15,7 +15,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const initials = `${createUserDto.firstName[0]}${createUserDto.lastName[0]}`;
 
-    const hashPassword = hashString({ toHash: createUserDto.password });
+    const hashPassword = hashString({ data: createUserDto.password });
 
     const user = this.userRepository.create({
       ...createUserDto,
