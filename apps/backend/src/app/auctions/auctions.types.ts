@@ -4,6 +4,14 @@ export type AuctionSorkKey = 'title' | 'price' | 'createdAt' | 'expiresAt';
 
 export type SearchTopic = 'bids' | 'category' | 'author';
 
+export enum AuctionStatus {
+  DRAFT = 'draft',
+  ACTIVE = 'active',
+  REJECTED = 'rejected',
+  FINISHED = 'finished',
+  NOWINNERS = 'noWinners',
+}
+
 interface AuctionBaseParams {
   authorId: string;
   categoryId: string;
