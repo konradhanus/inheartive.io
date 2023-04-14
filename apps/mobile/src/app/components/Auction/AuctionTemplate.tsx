@@ -1,16 +1,15 @@
+import { Auction, apiRoutes } from '@inheartive/data';
+import { AuctionImage, Button, Loader, ScrollView, Text, View, imageTypes } from '@inheartive/ui/atoms';
 import React, { useRef } from 'react';
-import { AuctionImage, ScrollView, imageTypes, Loader } from '@inheartive/ui/atoms';
-import { Button, Text, View } from '@inheartive/ui/atoms';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { apiRoutes, Auction, Bid } from '@inheartive/data';
 
+import { AuctionAuthor, AuctionBid, AuctionLeftHearts, AuctionTime } from '@inheartive/ui/molecules';
 import { AuctionHeader } from '@inheartive/ui/organisms';
+import { theme } from '@inheartive/ui/theme';
 import { useMutation } from '@tanstack/react-query';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AuctionAuthor, AuctionLeftHearts, AuctionTime, AuctionBid } from '@inheartive/ui/molecules';
-import { theme } from '@inheartive/ui/theme';
-import { useUser } from '../Providers/UserProvider';
 import { BottomSheet, ModalBottom } from '../ModalBottom/ModalBottom';
+import { useUser } from '../Providers/UserProvider';
 
 interface Props {
   auction: Auction;
@@ -54,11 +53,11 @@ export function AuctionTemplate(props: Props) {
     },
   });
 
-  const confirmModal = () => {
+  const confirmModal = (bid: number) => {
     if (auction?.id && user?.id) {
       const { id: auctionId } = auction;
       const { id: userId } = user;
-      mutation.mutate({ value: bid + 1, auction: auctionId, user: userId });
+      mutation.mutate({ value: bid, auction: auctionId, user: userId });
     }
   };
 
