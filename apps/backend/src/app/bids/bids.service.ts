@@ -28,8 +28,6 @@ export class BidsService {
     const queryRunner = this.bidsRepository.manager.connection.createQueryRunner();
     await queryRunner.startTransaction();
 
-    console.log('elo elo elo');
-
     try {
       const auction = await this.auctionsRepository.findOneOrFail({
         where: { id: createBidDto.auction },
