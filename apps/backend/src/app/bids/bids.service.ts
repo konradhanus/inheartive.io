@@ -18,44 +18,49 @@ export class BidsService {
     private auctionsRepository: Repository<Auction>
   ) {}
 
-  maxBid(auctionId: string) {
+  maxBid(auctionId: string): Promise<Bid> {
     const byAuctionId = findByAuctionId(auctionId);
 
     return this.bidsRepository.findOne(byAuctionId);
   }
 
   async create(createBidDto: CreateBidDto) {
-    const auction = await this.auctionsRepository.findOne({
-      where: {
-        id: createBidDto.auction,
-      },
-    });
+    const queryRunner = this.bidsRepository.manager.connection.createQueryRunner();
+    await queryRunner.startTransaction();
 
-    const user = await this.usersRepository.findOne({
-      where: {
-        id: createBidDto.user,
-      },
-    });
+    try {
+      const auction = await this.auctionsRepository.findOneOrFail({
+        where: { id: createBidDto.auction },
+      });
 
-    if (!auction || !user) {
-      throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
+      const user = await this.usersRepository.findOneOrFail({
+        where: { id: createBidDto.user },
+      });
+
+      if (!auction || !user) {
+        throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
+      }
+
+      const bid = this.bidsRepository.create({
+        auction,
+        user,
+      });
+
+      const { value } = createBidDto;
+      const maxBid = (await this.maxBid(createBidDto.auction)) || { value: 0 };
+
+      if (value > maxBid.value) {
+        bid.value = value;
+
+        await queryRunner.manager.update(Auction, auction.id, { price: value });
+        await queryRunner.manager.save(bid);
+        await queryRunner.commitTransaction();
+      }
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
     }
-
-    const bid = this.bidsRepository.create({
-      auction,
-      user,
-    });
-
-    const { value } = createBidDto;
-
-    const maxBid = (await this.maxBid(createBidDto.auction)) || { value: 0 };
-
-    if (value > maxBid.value) {
-      bid.value = value;
-      return await this.bidsRepository.save(bid);
-    }
-
-    return null;
   }
 
   findAll() {
