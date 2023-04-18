@@ -8,6 +8,7 @@ import {
   Length,
   Max,
   MaxLength,
+  MinLength,
   Validate,
 } from 'class-validator';
 import { Category } from '../../categories/entities/category.entity';
@@ -40,4 +41,9 @@ export class CreateAuctionDto {
   @IsUUID()
   @Validate(UserExistsRule)
   readonly author: User;
+
+  @IsString()
+  @IsOptional()
+  @MinLength(3)
+  readonly location: string;
 }
