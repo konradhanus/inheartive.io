@@ -1,7 +1,6 @@
 import { IsInt, IsPositive, IsUUID, Max, Validate } from 'class-validator';
-import { Auction } from '../../auctions/entities/auction.entity';
-import { User } from '../../users/entities/user.entity';
 import { UserExistsRule } from '../../users/validators/user-exists';
+import { AuctionExistsRule } from '../../auctions/validators/auction-exists';
 
 export class CreateBidDto {
   @IsPositive()
@@ -10,9 +9,10 @@ export class CreateBidDto {
   readonly value: number;
 
   @IsUUID()
-  readonly auction: Auction;
+  @Validate(AuctionExistsRule)
+  readonly auction: string;
 
   @IsUUID()
   @Validate(UserExistsRule)
-  readonly user: User;
+  readonly user: string;
 }

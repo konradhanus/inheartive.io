@@ -11,6 +11,7 @@ import {
 import { Bid } from '../../bids/entities/bid.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { User } from '../../users/entities/user.entity';
+import { AuctionStatus } from '../auctions.types';
 
 @Entity('auction')
 export class Auction {
@@ -31,6 +32,9 @@ export class Auction {
 
   @ManyToOne((type) => User, (user) => user.auctions)
   author: User;
+
+  @Column({ enum: AuctionStatus, type: 'enum', default: AuctionStatus.ACTIVE })
+  status: AuctionStatus;
 
   @Column()
   expiresAt: Date;
