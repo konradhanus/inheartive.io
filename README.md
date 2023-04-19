@@ -41,9 +41,12 @@ on iOS simulator press `command + control + z`, select on context menu
 
 https://reactnative.dev/docs/environment-setup
 
-In development environment create file: local.properties with path for sdk:
+1. In development environment create file: `local.properties` with path for sdk:
 
 ![image](https://user-images.githubusercontent.com/101329582/196930246-106e6a46-4eb3-46e1-8ff4-13e06ec9fbf0.png)
+
+2. In the local environment find file `.env.local`, duplicate it and rename it
+   to `.env`
 
 ### Additional steps for Android on Mac
 
