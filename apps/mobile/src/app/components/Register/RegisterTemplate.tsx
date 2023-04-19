@@ -6,7 +6,6 @@ import { RoutingPath } from '../../routing';
 import { useNavigate } from 'react-router-native';
 import { EmailInput, PasswordInput } from '@inheartive/ui/organisms';
 import { BackHandler, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
-
 interface Props<T extends FieldValues> {
   onSubmit: (data: T) => void;
 }
@@ -42,7 +41,7 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
     return () => backHandler.remove();
   }, []);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.conatainer}>
       <ScrollView>
         <Column px={5} space={3} justifyContent='center' marginTop={10}>
           <FormControl isRequired isInvalid={'email' in errors}>
@@ -107,7 +106,7 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
 export default RegisterTemplate;
 
 const styles = StyleSheet.create({
-  container: {
+  conatainer: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
   },
