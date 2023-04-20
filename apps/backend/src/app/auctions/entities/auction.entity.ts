@@ -48,4 +48,7 @@ export class Auction {
   @OneToMany((type) => Bid, (bid) => bid.auction)
   @JoinColumn()
   bids: Bid[];
+
+  @Column({ nullable: true })
+  location: string;
 }
