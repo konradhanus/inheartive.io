@@ -144,6 +144,19 @@ export function AuctionCreateTemplate(props: Props) {
           </FormControl>
         )}
 
+        <FormControl isInvalid={'location' in errors}>
+          <FormControl.Label>Location</FormControl.Label>
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input placeholder='Wroclaw, Poland, online' onChangeText={(val) => onChange(val)} value={value} />
+            )}
+            name='location'
+            rules={{ minLength: { value: 3, message: 'Minimum length is 3' } }}
+          />
+          <FormControl.ErrorMessage>{errors.location?.message}</FormControl.ErrorMessage>
+        </FormControl>
+
         <FormControl isRequired isInvalid={'price' in errors}>
           <FormControl.Label>Price</FormControl.Label>
           <Controller

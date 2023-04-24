@@ -82,6 +82,7 @@ enum IconType {
   plusCircle = 'plus-circle',
   calendarOutline = 'calendar-outline',
   timeOutline = 'time-outline',
+  location = 'location',
   user = 'user',
 }
 
@@ -223,6 +224,9 @@ function Icon(props: Props) {
 
     case 'time-outline':
       return <Ionicons name='time-outline' {...iconProperties} />;
+
+    case 'location':
+      return <Ionicons name='location' {...iconProperties} />;
 
     default:
       // eslint-disable-next-line no-throw-literal

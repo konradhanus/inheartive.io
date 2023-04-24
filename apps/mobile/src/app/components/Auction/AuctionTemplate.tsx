@@ -3,7 +3,7 @@ import { AuctionImage, Button, Loader, ScrollView, Text, View, imageTypes } from
 import React, { useRef } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { AuctionAuthor, AuctionBid, AuctionLeftHearts, AuctionTime } from '@inheartive/ui/molecules';
+import { AuctionAuthor, AuctionBid, AuctionLeftHearts, AuctionTime, AuctionLocation } from '@inheartive/ui/molecules';
 import { AuctionHeader } from '@inheartive/ui/organisms';
 import { theme } from '@inheartive/ui/theme';
 import { useMutation } from '@tanstack/react-query';
@@ -92,6 +92,7 @@ export function AuctionTemplate(props: Props) {
           />
           <AuctionLeftHearts quantity={bid} authorName={auction.author.firstName} />
           <AuctionTime expirationDate={auction.expiresAt} />
+          {auction.location && <AuctionLocation location={auction.location} />}
           <AuctionBid currentBid={42} />
         </View>
         {!isMyAuction && (

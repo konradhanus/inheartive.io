@@ -12,6 +12,7 @@ export interface Auction {
   description: string | null;
   category: Category;
   author: User;
+  location?: string;
   price: number;
   imageSrc?: string;
   expiresAt: string;
