@@ -9,14 +9,10 @@ jobs:
   build-ios:
     runs-on: macOS-latest
     steps:
-      - uses: shaunco/ssh-agent@git-repo-mapping
-        with:
-          ssh-private-key: |
-            ${{ secrets.SSH}}
-          repo-mappings: |
-            github.com:konradhanus/private-certificates
-
       - uses: actions/checkout@v3
+
+      - name: token
+        run: git remote set-url origin https://konrad.hanus:${{ secrets.TOKEN_GITHUB }}@github.com/konradhanus/private-certificates.git
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
