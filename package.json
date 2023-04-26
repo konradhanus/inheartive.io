@@ -11,7 +11,8 @@
     "prepare": "husky install",
     "graph": "nx graph -dep",
     "set-version": "concurrently 'cd ./apps/mobile && set-version $VERSION' 'set-version $VERSION'",
-    "fastlane": "cd ./apps/mobile/ios && bundle update && bundle exec fastlane release",
+    "fastlane": "yarn install && cd ./apps/mobile/ios && bundle update && pod install --verbose && bundle exec fastlane release",
+    "fastlane:beta": "yarn install && cd ./apps/mobile/ios && bundle update && pod install --verbose && bundle exec fastlane beta",
     "clean": "cd ./apps/mobile/android && gradlew clean"
   },
   "private": true,
