@@ -45,7 +45,7 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Install Pods
-        run: cd ios && pod install --repo-update && cd ..
+        run: cd apps && cd mobile && cd ios && pod install --repo-update && cd ../../../
 
       - name: Build & upload iOS binary
         run: yarn fastlane:beta
