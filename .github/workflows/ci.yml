@@ -14,7 +14,7 @@ jobs:
           ssh-private-key: |
             ${{ secrets.SSH}}
           repo-mappings: |
-            git@github.com:konradhanus/private-certificates.git
+            github.com:konradhanus/private-certificates
 
       - uses: actions/checkout@v3
 
