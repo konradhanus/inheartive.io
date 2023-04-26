@@ -1,5 +1,5 @@
 git_url("git@github.com:konradhanus/private-certificates.git")
-match(git_basic_authorization: Base64.strict_encode64("konradhanus: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"))
+git_basic_authorization: Base64.strict_encode64("konradhanus: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")
 storage_mode("git")
 
 
