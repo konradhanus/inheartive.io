@@ -11,8 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: token
-        run: git remote set-url origin https://konrad.hanus:${{ secrets.TOKEN_GITHUB }}@github.com/konradhanus/private-certificates.git
+      - name: Checkout private tools
+        uses: actions/checkout@v3
+        with:
+          repository: konradhanus/private-certificates
+          token: ${{ secrets.TOKEN_GITHUB }} # `GH_PAT` is a secret that contains your PAT
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
