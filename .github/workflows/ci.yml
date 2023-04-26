@@ -11,12 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Checkout private tools
-        uses: actions/checkout@v3
-        with:
-          repository: konradhanus/private-certificates
-          token: ${{ secrets.TOKEN_GITHUB }} # `GH_PAT` is a secret that contains your PAT
-
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
