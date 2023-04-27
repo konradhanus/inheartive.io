@@ -49,6 +49,8 @@ jobs:
 
       - name: Build & upload iOS binary
         run: yarn fastlane:beta
+        env:
+          MATCH_GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Upload app-store ipa and dsyms to artifacts
         uses: actions/upload-artifact@v2
