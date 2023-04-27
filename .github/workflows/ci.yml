@@ -17,10 +17,10 @@ jobs:
 
       - name: Set up Git credentials
         run: |
-        git config --global user.email "konrad.hanus@gmail.com"
-        git config --global user.name "Konrad Hanus"
-        git config --global credential.helper 'store --file=.git-credentials'
-        echo "https://x-access-token:${{ secrets.MATCH_GIT_TOKEN }}@github.com" > .git-credentials
+          git config --global user.email "konrad.hanus@gmail.com"
+          git config --global user.name "Konrad Hanus"
+          git config --global credential.helper 'store --file=.git-credentials'
+          echo "https://x-access-token:${{ secrets.MATCH_GIT_TOKEN }}@github.com" > .git-credentials
 
       - name: Restore node_modules from cache
         uses: actions/cache@v2
