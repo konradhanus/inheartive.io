@@ -60,6 +60,7 @@ jobs:
           MATCH_GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD_SECRET }}
           FASTLANE_PASSWORD: ${{ secrets.APPLE_STORE_CONNECT_PASSWORD }}
+          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
 
       - name: Upload app-store ipa and dsyms to artifacts
         uses: actions/upload-artifact@v2
