@@ -75,6 +75,12 @@ jobs:
             ${{ github.workspace }}/example-iOS.ipa
             ${{ github.workspace }}/*.app.dSYM.zip
 
+      - name: Display logs
+        run: |
+          echo "Displaying logs..."
+          cat /Users/runner/Library/Logs/gym/inHEARTive-inHEARTive.log
+        if: always()
+
   # build-android:
   #   runs-on: ubuntu-latest
   #   steps:
@@ -131,7 +137,6 @@ jobs:
   #         status: completed
   #         inAppUpdatePriority: 2
   #     - run: echo "🎉 ${{ job.status }}. 🎉"
-
 #name: build-ios
 #on:
 #  push:
