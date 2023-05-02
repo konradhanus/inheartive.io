@@ -54,7 +54,7 @@ jobs:
       - name: Install Xcode latest
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '14.3'
+          xcode-version: '14.1'
 
       - name: Install Pods
         run: cd apps && cd mobile && cd ios && pod install --repo-update && cd ../../../
