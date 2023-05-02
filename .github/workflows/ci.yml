@@ -60,7 +60,7 @@ jobs:
         run: cd apps && cd mobile && cd ios && pod install --repo-update && cd ../../../
 
       - name: Build & upload iOS binary
-        run: yarn fastlane:beta
+        run: yarn fastlane:release
         env:
           MATCH_GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD_SECRET }}
