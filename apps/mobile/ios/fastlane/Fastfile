@@ -21,7 +21,6 @@ platform :ios do
     sh 'bundle install'
   end
 
-platform :ios do
   desc "Push a new release build to the App Store"
   lane :release do
     xcversion(version: "14.3")
