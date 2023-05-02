@@ -19,9 +19,9 @@ platform :ios do
   desc "Push a new release build to the App Store"
   lane :release do
     api_key = app_store_connect_api_key(
-      key_id: "LGLC465F7N",
+      key_id: "U7A627A4JW",
       issuer_id: "86ecb654-eedc-479b-8a43-9b808278be50",
-      key_content: ENV["APP_STORE_CONNECT_API_KEY"],
+      key_content: "Base64_encode_of_-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgo0uoJDyjduaI2pZN\nCqXxO47k+yQWnt7L2mVIDqtgsMigCgYIKoZIzj0DAQehRANCAARGc6VtbEB38/r2\nxpqP4DUdDq9y6JHyOj8gjUldfCnSGCOpLsw1OQ9pl+SYlQBLUlTgSvkNicTRcHF0\npqd4fVnA\n-----END PRIVATE KEY-----",
       is_key_content_base64: true,
     )
     increment_build_number(xcodeproj: "inHEARTive.xcodeproj")
@@ -34,9 +34,9 @@ platform :ios do
   desc "Push a new release build to TestFlight"
   lane :beta do
     api_key = app_store_connect_api_key(
-      key_id: "LGLC465F7N",
+      key_id: "U7A627A4JW",
       issuer_id: "86ecb654-eedc-479b-8a43-9b808278be50",
-      key_content: ENV["APP_STORE_CONNECT_API_KEY"],
+      key_content: "Base64_encode_of_-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgo0uoJDyjduaI2pZN\nCqXxO47k+yQWnt7L2mVIDqtgsMigCgYIKoZIzj0DAQehRANCAARGc6VtbEB38/r2\nxpqP4DUdDq9y6JHyOj8gjUldfCnSGCOpLsw1OQ9pl+SYlQBLUlTgSvkNicTRcHF0\npqd4fVnA\n-----END PRIVATE KEY-----",
       is_key_content_base64: true,
     )
     increment_build_number(xcodeproj: "inHEARTive.xcodeproj")
