@@ -5,6 +5,9 @@ on:
     branches:
       - CICD_iOS
 
+env:
+  MATCH_GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+
 jobs:
   build-ios:
     runs-on: macOS-latest

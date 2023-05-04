@@ -1,4 +1,5 @@
 git_url("https://x-access-token:#{ENV['MATCH_GITHUB_TOKEN']}@github.com/konradhanus/private-certificates.git")
+git_basic_authorization(ENV["MATCH_GITHUB_TOKEN"])
 storage_mode("git")
 
 
