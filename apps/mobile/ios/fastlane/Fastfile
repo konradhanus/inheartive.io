@@ -14,7 +14,10 @@
 # update_fastlane
 
 default_platform(:ios)
-xcversion(version: "14.0.1")
+xcodes(
+  version: '14',
+  select_for_current_build_only: true,
+)
 
 platform :ios do
   desc "Push a new release build to the App Store"
