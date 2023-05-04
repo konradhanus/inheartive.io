@@ -23,6 +23,7 @@ platform :ios do
   desc "Push a new release build to the App Store"
   lane :release do
     xcversion(version: "14.1")
+    xcode_select "/Applications/Xcode14.1.app"
     api_key = app_store_connect_api_key(
       key_id: "U7A627A4JW",
       issuer_id: "86ecb654-eedc-479b-8a43-9b808278be50",
@@ -39,6 +40,7 @@ platform :ios do
   desc "Push a new release build to TestFlight"
   lane :beta do
     xcversion(version: "14.1")
+    xcode_select "/Applications/Xcode14.1.app"
     api_key = app_store_connect_api_key(
       key_id: "U7A627A4JW",
       issuer_id: "86ecb654-eedc-479b-8a43-9b808278be50",
