@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Xcode latest
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '14.0.1'
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -50,11 +55,6 @@ jobs:
           key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
-
-      - name: Install Xcode latest
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '14.1'
 
       - name: Install Pods
         run: cd apps && cd mobile && cd ios && pod install --repo-update && cd ../../../
