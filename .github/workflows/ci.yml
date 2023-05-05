@@ -18,6 +18,9 @@ jobs:
       - name: Show node version
         run: node -v
 
+      - name: Show node path
+        run: which node
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
