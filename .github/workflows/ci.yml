@@ -11,8 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Show node path
-        run: which node
+      - name: Show node version
+        run: node -v
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
