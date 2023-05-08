@@ -26,6 +26,11 @@ jobs:
       - name: Show node path
         run: which node
 
+      - name: 'Read file contents'
+        uses: andstor/file-reader-action@v1
+        with:
+          path: 'apps/mobile/ios/.xcode.env'
+
       - name: Install xcodes
         run: brew install xcodesorg/made/xcodes
 
