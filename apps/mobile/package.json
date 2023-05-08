@@ -22,6 +22,8 @@
     "react-native-vector-icons": "*",
     "react-router-native": "*",
     "styled-components": "*",
-    "react-native-device-info": "*"
+    "react-native-device-info": "*",
+    "metro-config": "*",
+    "react-router": "*"
   }
 }
