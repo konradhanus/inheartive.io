@@ -5,7 +5,7 @@
   "projectType": "application",
   "targets": {
     "build-ios": {
-      "executor": "@nrwl/detox:build",
+      "executor": "@nx/detox:build",
       "options": {
         "detoxConfiguration": "ios.sim.debug"
       },
@@ -16,7 +16,7 @@
       }
     },
     "test-ios": {
-      "executor": "@nrwl/detox:test",
+      "executor": "@nx/detox:test",
       "options": {
         "detoxConfiguration": "ios.sim.debug",
         "buildTarget": "mobile-e2e:build-ios"
@@ -29,7 +29,7 @@
       }
     },
     "build-android": {
-      "executor": "@nrwl/detox:build",
+      "executor": "@nx/detox:build",
       "options": {
         "detoxConfiguration": "android.emu.debug"
       },
@@ -40,7 +40,7 @@
       }
     },
     "test-android": {
-      "executor": "@nrwl/detox:test",
+      "executor": "@nx/detox:test",
       "options": {
         "detoxConfiguration": "android.emu.debug",
         "buildTarget": "mobile-e2e:build-ios"
@@ -53,7 +53,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/mobile-e2e/**/*.{ts,tsx,js,jsx}"]

@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Image } from '@inheartive/ui/atoms';
 import { textLogo } from '@inheartive/assets';
 import { textLogoInverted } from '@inheartive/assets';

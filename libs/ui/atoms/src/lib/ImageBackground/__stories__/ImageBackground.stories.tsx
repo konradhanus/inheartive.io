@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import { ImageBackground } from '../ImageBackground';

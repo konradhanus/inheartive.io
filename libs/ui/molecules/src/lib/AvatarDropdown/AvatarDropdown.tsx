@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import React, { useCallback } from 'react';
 import { Select, Box, Avatar } from '@inheartive/ui/atoms';
 import { useNavigate } from 'react-router';

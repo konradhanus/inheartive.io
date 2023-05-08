@@ -300,12 +300,12 @@ There are at least 2 options:
 1. Generate library in development environment:
 
 Go to main menu: GENERATE & RU TARGET -> generate -> <b>
-@nrwl/react-native:library </b> Write name and directory
+@nx/react-native:library </b> Write name and directory
 
 2. Run in terminal a command:
 
 ```shell
- $ nx generate @nrwl/react-native:library exampleLibrary --directory=ui/example
+ $ nx generate @nx/react-native:library exampleLibrary --directory=ui/example
 ```
 
 All library files will be generated in <b>libs</b> directory
@@ -313,12 +313,12 @@ All library files will be generated in <b>libs</b> directory
 #### Generate Component
 
 1. Go to main menu: GENERATE & RU TARGET -> generate -> <b>
-   @nrwl/react-native:component </b> Fill in the selected options
+   @nx/react-native:component </b> Fill in the selected options
 
 2. In terminal run a command:
 
 ```shell
-$ nx generate @nrwl/react-native:component ExampleComponent --project=mobile --directory=app --pascalCaseFiles
+$ nx generate @nx/react-native:component ExampleComponent --project=mobile --directory=app --pascalCaseFiles
 ```
 
 Two files will be generated: ExampleComponent.tsx file for component and

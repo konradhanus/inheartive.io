@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import React from 'react';
 import { Auction, Category, SortDirection, SortKey } from '@inheartive/data';
 import { ISelectItemProps, Text, View } from '@inheartive/ui/atoms';

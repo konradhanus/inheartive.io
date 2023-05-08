@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import React from 'react';
 import { render } from '@inheartive/ui/testing';
 import { Image } from '../Image';

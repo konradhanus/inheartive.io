@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import React from 'react';
 import { Icon, IconType } from '@inheartive/ui/atoms';
 import { Row } from '@inheartive/ui/atoms';

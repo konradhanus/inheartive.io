@@ -5,7 +5,7 @@
     "es2021": true
   },
   "extends": ["eslint:recommended", "prettier"],
-  "plugins": ["@nrwl/nx", "prettier"],
+  "plugins": ["@nx", "prettier"],
   "rules": {
     "eqeqeq": ["error", "always"],
     "prettier/prettier": [
@@ -28,7 +28,7 @@
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         //disable until we find a way to fix the problem
-        //        "@nrwl/nx/enforce-module-boundaries": [
+        //        "@nx/enforce-module-boundaries": [
         //          "error",
         //          {
         //            "enforceBuildableLibDependency": true,
@@ -45,12 +45,12 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
+      "extends": ["plugin:@nx/typescript"],
       "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "extends": ["plugin:@nx/javascript"],
       "rules": {}
     }
   ]

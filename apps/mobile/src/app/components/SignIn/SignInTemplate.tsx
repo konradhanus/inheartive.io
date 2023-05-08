@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import React from 'react';
 import { getVersion } from 'react-native-device-info';
 import { PixelRatio, StyleSheet } from 'react-native';

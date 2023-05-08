@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 
 import React, { useState } from 'react';
 import { Icon, IconType, Pressable } from '@inheartive/ui/atoms';

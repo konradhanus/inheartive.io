@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { storiesOf } from '@storybook/react-native';
 import { NativeBaseProvider } from 'native-base';
 import { AvatarDropdown } from '../AvatarDropdown';
