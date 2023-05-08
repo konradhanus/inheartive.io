@@ -26,9 +26,6 @@ jobs:
       - name: Show node path
         run: which node
 
-      - name: Create Node symlink
-        run: ln -s $(which node) /usr/local/bin/node
-
       - name: 'Read file contents'
         uses: andstor/file-reader-action@v1
         with:
