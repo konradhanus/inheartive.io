@@ -58,7 +58,10 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --network-timeout 300000
+        run: |
+          yarn install --frozen-lockfile --network-timeout 300000
+          cd apps/mobile && yarn install --frozen-lockfile --network-timeout 300000
+          cd ../../
 
       - name: Setup Ruby (bundle)
         uses: ruby/setup-ruby@v1
