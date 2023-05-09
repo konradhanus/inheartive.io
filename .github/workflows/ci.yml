@@ -3,7 +3,7 @@ name: build-ios
 on:
   push:
     branches:
-      - CI_CD_iOS2
+      - CI_CD_iOS3
 
 jobs:
   build-ios:
