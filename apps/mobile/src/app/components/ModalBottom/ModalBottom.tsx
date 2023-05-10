@@ -18,8 +18,11 @@ interface ModalBottomProps {
 const ModalBottom = (props: ModalBottomProps) => {
   const { bottomSheet, auction, confirmModal, bid } = props;
   const [enteredValue, setEnteredValue] = useState(`${props.bid + 1}`);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   function bidInputHandler(enteredText: string) {
+    const enteredTextToNumber = parseInt(enteredText);
+    enteredTextToNumber > props.bid ? setIsDisabled(false) : setIsDisabled(true);
     setEnteredValue(enteredText);
   }
 
@@ -54,7 +57,15 @@ const ModalBottom = (props: ModalBottomProps) => {
             />
           </Row>
           <Row justifyContent='center' alignItems='center'>
-            <Button width='90%' marginTop='20px' fontSize='30px' height='50px' onPress={changeBidValue}>
+            <Button
+              width='90%'
+              marginTop='20px'
+              fontSize='30px'
+              height='50px'
+              onPress={changeBidValue}
+              isDisabled={isDisabled}
+              disabled={isDisabled}
+            >
               BID
             </Button>
           </Row>
