@@ -66,7 +66,7 @@ jobs:
       - name: Setup Ruby (bundle)
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.7
+          ruby-version: 2.7.5
           bundler-cache: true
 
       - name: Restore Pods cache
