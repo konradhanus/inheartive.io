@@ -80,8 +80,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-
 
-      - name: Bundle install
-        run: bundle install
+      # - name: Bundle install
+      #   run: bundle install
 
       - name: Install Pods
         run: cd apps/mobile/ios && pod install --repo-update && cd ../../../
