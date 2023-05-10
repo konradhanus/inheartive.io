@@ -41,7 +41,7 @@
     "react-hook-form": "^7.41.0",
     "react-is": "18.1.0",
     "react-native": "^0.71.0",
-    "react-native-date-picker": "^4.2.6",
+    "react-native-date-picker": "^4.2.13",
     "react-native-device-info": "^10.4.0",
     "react-native-dotenv": "^3.4.8",
     "react-native-gesture-bottom-sheet": "^1.1.0",
