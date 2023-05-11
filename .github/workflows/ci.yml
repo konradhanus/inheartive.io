@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 18.10
 
       - name: Show node version
         run: node -v
@@ -58,7 +58,9 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --network-timeout 300000
+        run: |
+          yarn install --frozen-lockfile --network-timeout 300000
+          cd apps/mobile && yarn install --frozen-lockfile --network-timeout 300000
 
       - name: Setup Ruby (bundle)
         uses: ruby/setup-ruby@v1
