@@ -15,10 +15,8 @@ function Sort(props: Props) {
   const { onSortByChange, onSortDirChange, sortBy, sortDir } = props;
   const { isOpen, onOpen, onClose } = useDisclose();
 
-  const SortButton = (props: { onOpen: () => void }) => {
-    const onOpen: () => void = props.onOpen;
-
-    const sortChange = () => {
+  const sortChange = (sortKey: SortKey) => {
+    if (sortBy === sortKey) {
       if (sortDir === SortDirection.ASC) {
         onSortDirChange && onSortDirChange(SortDirection.DESC);
         onOpen();
@@ -26,7 +24,29 @@ function Sort(props: Props) {
         onSortDirChange && onSortDirChange(SortDirection.ASC);
         onOpen();
       }
-    };
+    } else {
+      onSortByChange && onSortByChange(sortKey);
+      switch (sortKey) {
+        case SortKey.Title:
+          onSortDirChange && onSortDirChange(SortDirection.ASC);
+          break;
+        case SortKey.Price:
+          onSortDirChange && onSortDirChange(SortDirection.DESC);
+          break;
+        case SortKey.CreatedAt:
+          onSortDirChange && onSortDirChange(SortDirection.ASC);
+          break;
+        case SortKey.ExpiresAt:
+          onSortDirChange && onSortDirChange(SortDirection.DESC);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  const SortButton = (props: { onOpen: () => void }) => {
+    const onOpen: () => void = props.onOpen;
 
     const ButtonText = () => {
       return (
@@ -37,7 +57,7 @@ function Sort(props: Props) {
     };
 
     return (
-      <Pressable onPress={sortChange}>
+      <Pressable onPress={onOpen}>
         <Row space={3} alignItems='center'>
           <ButtonText />
           <Icon name={IconType.chevronDown} size={25} color={theme.colors.trueGray['500']} />
@@ -58,7 +78,7 @@ function Sort(props: Props) {
                 <Actionsheet.Item
                   key={option.key}
                   onPressIn={() => {
-                    onSortByChange && onSortByChange(option.key as SortKey);
+                    onSortByChange && sortChange(option.key as SortKey);
                     onClose();
                   }}
                 >
