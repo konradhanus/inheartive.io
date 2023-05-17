@@ -1,9 +1,11 @@
 import { Button, Icon, IconType, Input, Row, View } from '@inheartive/ui/atoms';
 import { AuctionLeftHearts } from '@inheartive/ui/molecules';
-import React, { MutableRefObject, useState } from 'react';
+import React, { MutableRefObject, useEffect, useState } from 'react';
 
 import { Auction } from '@inheartive/data';
 import BottomSheet from 'react-native-gesture-bottom-sheet';
+import { MAX_BID_VALUE } from '@env';
+
 export interface BottomSheet {
   show: () => void;
   close: () => void;
@@ -16,21 +18,29 @@ interface ModalBottomProps {
 }
 
 const ModalBottom = (props: ModalBottomProps) => {
-  const { bottomSheet, auction, confirmModal, bid } = props;
-  const [enteredValue, setEnteredValue] = useState(`${props.bid + 1}`);
+  const { bottomSheet, auction, confirmModal } = props;
+
+  let bid = props.bid;
+
+  const [enteredValue, setEnteredValue] = useState(`${bid + 1}`);
   const [isDisabled, setIsDisabled] = useState(false);
 
   function bidInputHandler(enteredText: string) {
     const enteredTextToNumber = parseInt(enteredText);
-    enteredTextToNumber > props.bid ? setIsDisabled(false) : setIsDisabled(true);
+    enteredTextToNumber > bid && enteredTextToNumber < MAX_BID_VALUE ? setIsDisabled(false) : setIsDisabled(true);
+
     setEnteredValue(enteredText);
   }
 
   function changeBidValue() {
     const chosenNumber = parseInt(enteredValue);
-    props.bid = chosenNumber;
-    confirmModal(props.bid);
+    bid = chosenNumber;
+    confirmModal(bid);
   }
+
+  useEffect(() => {
+    setEnteredValue(`${bid + 1}`);
+  }, [bid]);
 
   return (
     <BottomSheet draggable={false} hasDraggableIcon ref={bottomSheet} height={200}>
