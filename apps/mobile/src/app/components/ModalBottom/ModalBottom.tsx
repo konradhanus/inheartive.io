@@ -4,6 +4,8 @@ import React, { MutableRefObject, useEffect, useState } from 'react';
 
 import { Auction } from '@inheartive/data';
 import BottomSheet from 'react-native-gesture-bottom-sheet';
+import { MAX_BID_VALUE } from '@env';
+
 export interface BottomSheet {
   show: () => void;
   close: () => void;
@@ -19,14 +21,13 @@ const ModalBottom = (props: ModalBottomProps) => {
   const { bottomSheet, auction, confirmModal } = props;
 
   let bid = props.bid;
-  const maxPrice = 99999;
 
   const [enteredValue, setEnteredValue] = useState(`${bid + 1}`);
   const [isDisabled, setIsDisabled] = useState(false);
 
   function bidInputHandler(enteredText: string) {
     const enteredTextToNumber = parseInt(enteredText);
-    enteredTextToNumber > bid && enteredTextToNumber < maxPrice ? setIsDisabled(false) : setIsDisabled(true);
+    enteredTextToNumber > bid && enteredTextToNumber < MAX_BID_VALUE ? setIsDisabled(false) : setIsDisabled(true);
 
     setEnteredValue(enteredText);
   }
