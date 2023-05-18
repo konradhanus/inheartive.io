@@ -2,14 +2,9 @@ import { SortDirection } from './sort-direction';
 import { SortKey } from './sort-key';
 
 export interface SortOption {
-  key: SortKey | SortKeyExtended;
+  key: SortKey;
   label: string;
   direction: SortDirection;
-}
-
-export enum SortKeyExtended {
-  CreatedAtAsc = 'createdAtAsc',
-  PriceDesc = 'priceDesc',
 }
 
 export const sortOptions: SortOption[] = [
