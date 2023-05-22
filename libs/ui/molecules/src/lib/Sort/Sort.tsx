@@ -15,10 +15,8 @@ function Sort(props: Props) {
   const { onSortByChange, onSortDirChange, sortBy, sortDir } = props;
   const { isOpen, onOpen, onClose } = useDisclose();
 
-  const SortButton = (props: { onOpen: () => void }) => {
-    const onOpen: () => void = props.onOpen;
-
-    const sortChange = () => {
+  const sortChange = (sortKey: SortKey, sortDirection: SortDirection) => {
+    if (sortBy === sortKey) {
       if (sortDir === SortDirection.ASC) {
         onSortDirChange && onSortDirChange(SortDirection.DESC);
         onOpen();
@@ -26,7 +24,14 @@ function Sort(props: Props) {
         onSortDirChange && onSortDirChange(SortDirection.ASC);
         onOpen();
       }
-    };
+    } else {
+      onSortByChange && onSortByChange(sortKey);
+      onSortDirChange && onSortDirChange(sortDirection);
+    }
+  };
+
+  const SortButton = (props: { onOpen: () => void }) => {
+    const onOpen: () => void = props.onOpen;
 
     const ButtonText = () => {
       return (
@@ -37,7 +42,7 @@ function Sort(props: Props) {
     };
 
     return (
-      <Pressable onPress={sortChange}>
+      <Pressable onPress={onOpen}>
         <Row space={3} alignItems='center'>
           <ButtonText />
           <Icon name={IconType.chevronDown} size={25} color={theme.colors.trueGray['500']} />
@@ -54,15 +59,19 @@ function Sort(props: Props) {
           <Actionsheet isOpen={isOpen} onClose={onClose}>
             <Actionsheet.Content>
               <Actionsheet.Item isDisabled>Sort by</Actionsheet.Item>
-              {sortOptions.map((option) => (
+              {sortOptions.map((option, index) => (
                 <Actionsheet.Item
-                  key={option.key}
+                  key={index}
                   onPressIn={() => {
-                    onSortByChange && onSortByChange(option.key as SortKey);
+                    onSortByChange && sortChange(option.key as SortKey, option.direction as SortDirection);
                     onClose();
                   }}
                 >
-                  {option.key === sortBy ? <Text underline>{option.label}</Text> : <Text>{option.label}</Text>}
+                  {option.key === sortBy && option.direction === sortDir ? (
+                    <Text underline>{option.label}</Text>
+                  ) : (
+                    <Text>{option.label}</Text>
+                  )}
                 </Actionsheet.Item>
               ))}
             </Actionsheet.Content>
