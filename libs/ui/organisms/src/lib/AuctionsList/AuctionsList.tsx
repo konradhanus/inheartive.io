@@ -12,6 +12,7 @@ interface Props {
 
 function AuctionsList(props: Props) {
   const { auctions, linkPatternWithId, favoriteAuctionsIds, onFavoriteChange } = props;
+  const currentDate = new Date();
 
   return (
     <View>
@@ -20,16 +21,19 @@ function AuctionsList(props: Props) {
           There are no autions matching given filters
         </Text>
       )}
-      {auctions.map((auction) => (
-        <View key={auction.id} mt={5}>
-          <AuctionCard
-            auction={auction}
-            linkPatternWithId={linkPatternWithId}
-            isFavorite={favoriteAuctionsIds.includes(auction.id)}
-            onFavoriteChange={onFavoriteChange}
-          />
-        </View>
-      ))}
+      {auctions.map((auction) => {
+        if (new Date(auction.expiresAt) > currentDate)
+          return (
+            <View key={auction.id} mt={5}>
+              <AuctionCard
+                auction={auction}
+                linkPatternWithId={linkPatternWithId}
+                isFavorite={favoriteAuctionsIds.includes(auction.id)}
+                onFavoriteChange={onFavoriteChange}
+              />
+            </View>
+          );
+      })}
     </View>
   );
 }
