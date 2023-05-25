@@ -21,6 +21,39 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+                <!-- android:pathPrefix="/android/callback" -->
+            <data
+                android:host="com.intive.inheartive"
+                android:scheme="msauth" 
+                android:path="/tUw2F8+ETK5kjylFABKlr5QLrBk=" />
+        </intent-filter>
       </activity>
+      
+        <!-- <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data
+                android:pathPrefix="/com.intive.incare/android/callback"
+                android:scheme="com.intive.incare" />
+        </intent-filter> -->
+
+      <!-- <activity
+        android:name="com.microsoft.identity.client.BrowserTabActivity"
+        android:exported="true">
+        <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data
+        android:scheme="msauth"
+        android:host="com.intive.incare"
+        android:path="/xxx=" />
+        </intent-filter>
+        </activity> -->
     </application>
 </manifest>
