@@ -10,50 +10,44 @@ import SignInPage from './src/components/SignIn/SignInPage';
 import { UserProvider, useUser } from './src/components/Providers/UserProvider';
 
 export const App = () => {
-    const queryClient = new QueryClient();
-    const { user } = useUser();
+  const queryClient = new QueryClient();
+  const { user } = useUser();
 
-    return (
-        <QueryClientProvider client={queryClient}>
-            <NativeBaseProvider theme={theme}>
-                <NativeRouter>
-                    <Routes>
-                        {routesConfig.map(
-                            ({ path, needsAuth, page, footerIcon }) => (
-                                <Route
-                                    key={path}
-                                    path={path}
-                                    element={
-                                        needsAuth ? (
-                                            user ? (
-                                                <AuthenticatedPageWrapper
-                                                    footerActiveIcon={
-                                                        footerIcon
-                                                    }
-                                                >
-                                                    {page}
-                                                </AuthenticatedPageWrapper>
-                                            ) : (
-                                                <SignInPage />
-                                            )
-                                        ) : (
-                                            page
-                                        )
-                                    }
-                                />
-                            )
-                        )}
-                    </Routes>
-                </NativeRouter>
-            </NativeBaseProvider>
-        </QueryClientProvider>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <NativeBaseProvider theme={theme}>
+        <NativeRouter>
+          <Routes>
+            {routesConfig.map(({ path, needsAuth, page, footerIcon }) => (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  needsAuth ? (
+                    user ? (
+                      <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>
+                        {page}
+                      </AuthenticatedPageWrapper>
+                    ) : (
+                      <SignInPage />
+                    )
+                  ) : (
+                    page
+                  )
+                }
+              />
+            ))}
+          </Routes>
+        </NativeRouter>
+      </NativeBaseProvider>
+    </QueryClientProvider>
+  );
 };
 
 export default () => {
-    return (
-        <UserProvider>
-            <App />
-        </UserProvider>
-    );
+  return (
+    <UserProvider>
+      <App />
+    </UserProvider>
+  );
 };
