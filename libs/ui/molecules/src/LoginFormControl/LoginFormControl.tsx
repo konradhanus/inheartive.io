@@ -6,8 +6,8 @@ import { Button, FormControl, View, Text } from '@inheartive-atoms';
 import { apiRoutes } from '@inheartive-data';
 import { useNavigate } from 'react-router-native';
 import { EmailInput, PasswordInput } from '@inheartive-organisms';
-import { useUser } from 'apps/mobile/src/app/components/Providers/UserProvider';
-import { RoutingPath } from 'apps/mobile/src/app/routing/routing-path';
+import { useUser } from '../../../../../components/Providers/UserProvider';
+import { RoutingPath } from '../../../../../routing/routing-path';
 import { setValue } from '@inheartive-shared-utils';
 
 interface LoginForm {

@@ -4,7 +4,7 @@ import React, { MutableRefObject, useEffect, useState } from 'react';
 
 import { Auction } from '@inheartive-data';
 import BottomSheet from 'react-native-gesture-bottom-sheet';
-import { MAX_BID_VALUE } from '@env';
+const MAX_BID_VALUE = process.env.MAX_BID_VALUE;
 
 export interface BottomSheet {
     show: () => void;

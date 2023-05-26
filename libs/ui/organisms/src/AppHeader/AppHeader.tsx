@@ -5,7 +5,7 @@ import { View, Select } from '@inheartive-atoms';
 
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { setValue } from '@inheartive-shared-utils';
-import { useUser } from '/components/Providers/UserProvider';
+import { useUser } from '../../../../../components/Providers/UserProvider';
 
 function AppHeader() {
     const [menuItem, setMenuItem] = useState('');
