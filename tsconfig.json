@@ -14,14 +14,14 @@
     "resolveJsonModule": true,
     "strict": true,
     "paths": {
-      "@inheartive-assets": ["./assets/index.ts"],
-      "@inheartive-data": ["./libs/data/index.ts"],
-      "@inheartive-atoms": ["./libs/ui/atoms/index.ts"],
-      "@inheartive-molecules": ["./libs/ui/molecules/index.ts"],
-      "@inheartive-organisms": ["./libs/ui/organisms/index.ts"],
-      "@inheartive-testing": ["./libs/ui/testing/index.ts"],
-      "@inheartive-theme": ["./libs/ui/theme/index.ts"],
-      "@inheartive-shared-utils": ["./libs/ui/shared/utils.ts"],
+      "@inheartive-assets": ["src/assets/index.ts"],
+      "@inheartive-data": ["src/libs/data/index.ts"],
+      "@inheartive-atoms": ["src/libs/ui/atoms/index.ts"],
+      "@inheartive-molecules": ["src/libs/ui/molecules/index.ts"],
+      "@inheartive-organisms": ["src/libs/ui/organisms/index.ts"],
+      "@inheartive-testing": ["src/libs/ui/testing/index.ts"],
+      "@inheartive-theme": ["src/libs/ui/theme/index.ts"],
+      "@inheartive-shared-utils": ["src/libs/ui/shared/utils.ts"],
     }
   }
 }

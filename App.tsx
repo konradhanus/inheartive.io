@@ -2,12 +2,12 @@ import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { theme } from '@inheartive-theme';
-import { routesConfig } from './routing';
-import AuthenticatedPageWrapper from './components/AuthenticatedPageWrapper/AuthenticatedPageWrapper';
+import { theme } from './src/libs/ui/theme';
+import { routesConfig } from './src/routing';
+import AuthenticatedPageWrapper from './src/components/AuthenticatedPageWrapper/AuthenticatedPageWrapper';
 
-import SignInPage from './components/SignIn/SignInPage';
-import { UserProvider, useUser } from './components/Providers/UserProvider';
+import SignInPage from './src/components/SignIn/SignInPage';
+import { UserProvider, useUser } from './src/components/Providers/UserProvider';
 
 export const App = () => {
     const queryClient = new QueryClient();
