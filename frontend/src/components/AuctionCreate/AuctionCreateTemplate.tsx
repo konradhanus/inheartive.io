@@ -19,7 +19,7 @@ import { Controller, UseFormReturn } from 'react-hook-form';
 import { AuctionFormValues } from './auction-create-form-values';
 import { Link } from 'react-router-native';
 import { Category, User } from '../../libs/data';
-import DatePicker from 'react-native-date-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { RoutingPath } from '../../routing';
 import addMonths from 'date-fns/addMonths';
 import addDays from 'date-fns/addDays';
@@ -249,22 +249,22 @@ export function AuctionCreateTemplate(props: Props) {
                                             </Pressable>
 
                                             <View>
-                                                <DatePicker
+                                                {open && (<DateTimePicker
+                                                    value={expiresAtDate}
                                                     minimumDate={minimumDate}
                                                     maximumDate={addMonths(
                                                         new Date(),
                                                         1
                                                     )}
                                                     mode='date'
-                                                    modal
-                                                    open={open}
-                                                    date={expiresAtDate}
-                                                    onConfirm={(date) => {
+                                                    onChange={(_, selectedDate) => {
                                                         closeDatepicker();
-                                                        setExpiresAtDate(date);
+                                                        if (typeof selectedDate !== 'undefined') {
+                                                            setExpiresAtDate(selectedDate);
+                                                        }
                                                     }}
-                                                    onCancel={closeDatepicker}
-                                                />
+
+                                                />)}
                                             </View>
                                         </Row>
                                     )}
