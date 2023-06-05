@@ -21,7 +21,7 @@
     "react": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-native": "0.71.8",
-    "@react-native-community/datetimepicker": "7.1.0",
+    "@react-native-community/datetimepicker": "6.7.3",
     "react-native-device-info": "^10.6.0",
     "react-native-dotenv": "^3.4.8",
     "react-native-gesture-bottom-sheet": "^1.1.0",
