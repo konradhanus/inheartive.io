@@ -6,6 +6,7 @@ import { View, Select } from '../../../atoms';
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { setValue } from '../../../shared/utils';
 import { useUser } from '../../../../../components/Providers/UserProvider';
+import { Item } from '../../../atoms/src/Select/SelectItem';
 
 function AppHeader() {
     const [menuItem, setMenuItem] = useState('');
@@ -38,17 +39,17 @@ function AppHeader() {
                     display='flex'
                     flexGrow={1}
                 >
-                    <Select.Item
+                    <Item
                         label='Log out'
                         value='Logout'
                         onPress={logOut}
                     />
-                    <Select.Item
+                    <Item
                         label='My auctions'
                         value='MyAuctions'
                         onPress={toMyAuctions}
                     />
-                    <Select.Item
+                    <Item
                         label='My bids'
                         value='MyBids'
                         onPress={toMyBids}
