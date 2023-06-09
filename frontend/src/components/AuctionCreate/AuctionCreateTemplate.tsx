@@ -24,6 +24,7 @@ import { RoutingPath } from '../../routing';
 import addMonths from 'date-fns/addMonths';
 import addDays from 'date-fns/addDays';
 import CategoriesPage from '../Categories/CategoriesPage';
+import { Item } from '../../libs/ui/atoms/src/Select/SelectItem';
 
 interface Props {
     onSubmit: (data: AuctionFormValues) => void;
@@ -164,7 +165,7 @@ export function AuctionCreateTemplate(props: Props) {
                                     }
                                 >
                                     {categories.map((c) => (
-                                        <Select.Item
+                                        <Item
                                             key={c.id}
                                             label={c.name}
                                             value={c.id}
