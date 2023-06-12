@@ -30,6 +30,7 @@ export function EmailInput({ placeholder }: EmailInputProps) {
                     onBlur={onBlur}
                     placeholder={placeholder}
                     onChangeText={onChange}
+                    autoCapitalize='none'
                     value={value}
                 />
             )}
