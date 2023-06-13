@@ -6,6 +6,7 @@ import { View, Select } from '../../../atoms';
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { setValue } from '../../../shared/utils';
 import { useUser } from '../../../../../components/Providers/UserProvider';
+import { Platform } from 'react-native'
 
 function AppHeader() {
     const [menuItem, setMenuItem] = useState('');
@@ -23,7 +24,8 @@ function AppHeader() {
     return (
         <Row
             px={8}
-            py={2}
+            pt={Platform.OS === "ios" ? 10 : 8}
+            pb={2}
             justifyContent={'space-between'}
             bg='primary.500'
             alignItems='center'
