@@ -39,8 +39,5 @@ jobs:
       - name: Build Android
         run: cd ./frontend && eas build --platform android
 
-      - name: Build Web
-        run: cd ./frontend && eas build --platform web
-
       - name: Build iOS
         run: cd ./frontend && eas build --platform ios
