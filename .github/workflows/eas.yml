@@ -6,9 +6,6 @@ jobs:
     name: EAS Update
     runs-on: ubuntu-latest
     steps:
-      - name: Go to frontend directory
-        run: cd frontend
-
       - name: Check for EXPO_TOKEN
         run: |
           if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
@@ -18,6 +15,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Go to frontend directory
+        run: cd frontend
 
       - name: Setup Node
         uses: actions/setup-node@v3
