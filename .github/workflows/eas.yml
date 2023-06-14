@@ -16,9 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Go to frontend directory
-        run: cd frontend
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -29,6 +26,9 @@ jobs:
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Go to frontend directory
+        run: cd ./frontend
 
       - name: Install dependencies
         run: npm install
