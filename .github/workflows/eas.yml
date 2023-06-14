@@ -31,7 +31,7 @@ jobs:
         run: ls -al
 
       - name: Install dependencies
-        run: ./start.sh
+        run: cd ./frontend && npm install
 
       - name: Publish update
         run: eas update --auto
