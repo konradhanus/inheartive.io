@@ -115,3 +115,7 @@ buck-out/
 # /apps/mobile/ios/Gemfile.lock
 
 # apps/mobile/ios/inHEARTive.app.dSYM.zip
+
+.expo
+.firebase
+web-build
