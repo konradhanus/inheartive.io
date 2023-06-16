@@ -28,10 +28,16 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Go to frontend directory
-        run: cd ./frontend && ls -al
+        run: ls -al
 
       - name: Install dependencies
-        run: npm install
+        run: cd ./frontend && npm install
 
       - name: Publish update
-        run: eas update --auto
+        run: cd ./frontend && eas update --auto
+
+      - name: Build Android
+        run: cd ./frontend && eas build --platform android
+
+      - name: Build iOS
+        run: cd ./frontend && eas build --platform ios
