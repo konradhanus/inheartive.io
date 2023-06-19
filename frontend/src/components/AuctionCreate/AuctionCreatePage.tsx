@@ -7,6 +7,8 @@ import { apiRoutes } from '../../libs/data';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../routing';
 import { useUser } from '../Providers/UserProvider';
+import { theme } from '../../libs/ui/theme/src/theme';
+import { Toast } from '../../libs/ui/atoms/src/Toast';
 
 interface PayloadWithAuthor extends AuctionFormValues {
     author: string;
@@ -34,7 +36,17 @@ export function AuctionCreatePage() {
                 body: JSON.stringify(data),
             });
         },
-        onSuccess: () => navigate(RoutingPath.auctions),
+        onSuccess: () => {
+            <Toast bg={theme.colors.primary[500]}
+                title='Auction added successfully!'
+            />
+            navigate(RoutingPath.auctions);
+        },
+        onError: () => {
+            <Toast bg={theme.colors.errors.bgToast}
+                title='An error occured!'
+            />
+        },
     });
 
     const form = useForm<AuctionFormValues>({ mode: 'onChange' });
