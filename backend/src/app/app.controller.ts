@@ -1,13 +1,13 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { JwtGuard } from '../auth/jwt.guard';
 import { AppService } from './app.service';
+import { AzureADGuard } from 'src/auth/azure.strategy';
 
-@UseGuards(JwtGuard)
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
+  @UseGuards(AzureADGuard)
   getData() {
     return this.appService.getData();
   }

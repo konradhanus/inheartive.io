@@ -19,7 +19,9 @@ import { imageFileFilter } from '../../common/pipes/filters/imageFile.filter';
       useFactory: async (configService: ConfigService) => ({
         dest: configService.get<string>('ASSET_UPLOAD_PATH'),
         limits: {
-          fileSize: parseInt(configService.get<string>('ASSET_MAX_UPLOAD_SIZE')),
+          fileSize: parseInt(
+            configService.get<string>('ASSET_MAX_UPLOAD_SIZE'),
+          ),
         },
         fileFilter: imageFileFilter,
       }),

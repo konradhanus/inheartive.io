@@ -2,13 +2,15 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from '../auth/auth.module';
 import { AuctionsModule } from './auctions/auctions.module';
 import { ConfigModule } from '@nestjs/config';
 import { CategoriesModule } from './categories/categories.module';
 import { AssetsModule } from './assets/assets.module';
 import { UsersModule } from './users/users.module';
 import { BidsModule } from './bids/bids.module';
+import { AzureADGuard } from 'src/auth/azure.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -32,6 +34,7 @@ import { BidsModule } from './bids/bids.module';
             }
           : null,
     }),
+    PassportModule,
     AuthModule,
     AuctionsModule,
     CategoriesModule,
@@ -40,6 +43,6 @@ import { BidsModule } from './bids/bids.module';
     BidsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AzureADGuard],
 })
 export class AppModule {}
