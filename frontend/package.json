@@ -6,6 +6,7 @@
     "start": "expo start --offline",
     "android": "expo start --android --offline",
     "ios": "expo start --ios --offline",
+    "ci": "npm install",
     "web": "expo start --web --offline",
     "build": "npx expo export:web && eas update",
     "deploy": "firebase deploy",
