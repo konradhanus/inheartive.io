@@ -33,6 +33,9 @@ jobs:
       - name: Install dependencies
         run: cd ./frontend && npm install
 
+      - name: build web
+        run: npm run build && npm run deploy
+
       - name: Publish update
         run: cd ./frontend && eas update --auto
 
@@ -42,5 +45,4 @@ jobs:
       - name: Build iOS
         run: cd ./frontend && eas build --platform ios --non-interactive
 
-        #npm run build && npm run deploy
         #configuration github action with firebase
