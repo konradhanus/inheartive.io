@@ -33,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: cd ./frontend && npm install
 
-      - name: build web
-        run: npm run build && npm run deploy
-
       - name: Publish update
         run: cd ./frontend && eas update --auto
 
