@@ -40,4 +40,7 @@ jobs:
         run: cd ./frontend && eas build --platform android
 
       - name: Build iOS
-        run: cd ./frontend && eas build --platform ios
+        run: cd ./frontend && eas build --platform ios --non-interactive
+
+        #npm run build && npm run deploy
+        #configuration github action with firebase
