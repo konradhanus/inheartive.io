@@ -9,7 +9,9 @@
     "web": "expo start --web --offline",
     "build": "npx expo export:web && eas update",
     "deploy": "firebase deploy",
-    "build-deploy": "npm run build && npm run deploy"
+    "build-deploy": "npm run build && npm run deploy",
+    "publish:ios": "eas submit --platform ios",
+    "publish:android": "eas submit --platform android"
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
