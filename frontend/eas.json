@@ -1,0 +1,29 @@
+{
+    "cli": {
+        "version": ">= 2.4.1"
+    },
+    "build": {
+        "development": {
+            "developmentClient": true,
+            "distribution": "internal"
+        },
+        "preview": {
+            "distribution": "internal"
+        },
+        "production": {}
+    },
+    "submit": {
+        "production": {
+            "android": {
+                "track": "production",
+                "applicationId": "com.intive.inheartive"
+            },
+            "ios": {
+                "appleId": "konrad.hanus@gmail.com",
+                "ascAppId": "1672569572",
+                "sku": "pl.reactblog.intive",
+                "bundleIdentifier": "pl.reactblog.intive"
+            }
+        }
+    }
+}

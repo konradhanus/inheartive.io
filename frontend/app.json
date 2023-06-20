@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "inHEARTive",
+    "slug": "inHEARTive",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "splash": {
+      "image": "./src/assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/23fb2ad4-8af6-4ce8-9f68-e1d26ce58aba"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "pl.reactblog.intive",
+      "buildNumber": "1000"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.intive.inheartive",
+      "versionCode": 1000
+    },
+    "web": {
+      "favicon": "./src/assets/logo.png"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "owner": "konrad.hanus",
+    "extra": {
+      "eas": {
+        "projectId": "23fb2ad4-8af6-4ce8-9f68-e1d26ce58aba"
+      }
+    }
+  }
+}

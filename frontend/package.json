@@ -1,0 +1,56 @@
+{
+  "name": "inheartive",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start --offline",
+    "android": "expo start --android --offline",
+    "ios": "expo start --ios --offline",
+    "ci": "npm install",
+    "web": "expo start --web --offline",
+    "build:web": "npx expo export:web",
+    "build": "build:web && eas update",
+    "deploy": "firebase deploy",
+    "build-deploy": "npm run build && npm run deploy",
+    "publish:ios": "eas submit --platform ios",
+    "publish:android": "eas submit --platform android"
+  },
+  "dependencies": {
+    "@expo/webpack-config": "^18.0.1",
+    "@react-native-async-storage/async-storage": "1.17.11",
+    "@tanstack/react-query": "^4.29.7",
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "date-fns": "^2.30.0",
+    "expo": "~48.0.15",
+    "expo-status-bar": "~1.4.4",
+    "native-base": "^3.4.28",
+    "react": "18.2.0",
+    "react-hook-form": "^7.43.9",
+    "react-native": "0.71.8",
+    "@react-native-community/datetimepicker": "6.7.3",
+    "react-native-device-info": "^10.6.0",
+    "react-native-dotenv": "^3.4.8",
+    "react-native-gesture-bottom-sheet": "^1.1.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-web": "~0.18.10",
+    "react-router-native": "^6.11.2",
+    "styled-component": "^2.8.0",
+    "styled-components": "^5.3.10",
+    "react-native-svg": "13.4.0",
+    "expo-updates": "~0.16.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.0.14",
+    "typescript": "^4.9.4"
+  },
+  "private": true,
+  "overrides": {
+    "expo": {
+      "babel-preset-expo": {
+        "babel-plugin-module-resolver": "^5.0.0"
+      }
+    }
+  }
+}
