@@ -107,7 +107,7 @@ buck-out/
 # /Gemfile.lock
 # /apps/mobile/yarn.lock
 
-# /apps/mobile/ios/bin/
+# /apps/mobile/ios/bin/ 
 # /apps/mobile/ios/cache/
 # /apps/mobile/ios/extensions/
 # /apps/mobile/ios/gems/
@@ -115,3 +115,8 @@ buck-out/
 # /apps/mobile/ios/Gemfile.lock
 
 # apps/mobile/ios/inHEARTive.app.dSYM.zip
+
+.expo
+.firebase
+web-build
+package-lock.json

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Avatar, Row, TextLogo, textLogoColor } from '../../../atoms';
 import { useNavigate } from 'react-router-native';
-import { View, Select } from '../../../atoms';
+import { Avatar, Row, Select, TextLogo, View, textLogoColor } from '../../../atoms';
 
+import { Platform } from 'react-native';
+import { useUser } from '../../../../../components/Providers/UserProvider';
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { setValue } from '../../../shared/utils';
-import { useUser } from '../../../../../components/Providers/UserProvider';
-import { Platform } from 'react-native'
 
 function AppHeader() {
     const [menuItem, setMenuItem] = useState('');

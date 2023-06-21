@@ -1,13 +1,12 @@
-import React from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, Text, Loader } from '../../libs/ui/atoms';
-import { AppFooter, FooterIcon, AppHeader } from '../../libs/ui/organisms';
-import { footerIconRouteMap, RoutingPath } from '../../routing';
 import { useQuery } from '@tanstack/react-query';
-import { Navigate } from 'react-router-native';
-import { apiRoutes } from '../../libs/data';
+import React from 'react';
 import { BackHandler } from 'react-native';
-import { useNavigate } from 'react-router-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Navigate, useNavigate } from 'react-router-native';
+import { apiRoutes } from '../../libs/data';
+import { Loader, Text, View } from '../../libs/ui/atoms';
+import { AppFooter, AppHeader, FooterIcon } from '../../libs/ui/organisms';
+import { RoutingPath, footerIconRouteMap } from '../../routing';
 
 interface Props {
     children: JSX.Element;
