@@ -58,7 +58,6 @@ export function AuthenticatedPageWrapper(props: Props) {
     return (
         <View
             style={{ flex: 1 }}
-            paddingTop={insets.top}
             paddingBottom={insets.bottom}
         >
             {usersLoading && <Loader />}
