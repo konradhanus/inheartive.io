@@ -7,11 +7,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  AfterLoad,
 } from 'typeorm';
 import { Bid } from '../../bids/entities/bid.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { User } from '../../users/entities/user.entity';
 import { AuctionStatus } from '../auctions.types';
+import { IsOptional } from 'class-validator';
 
 @Entity('auction')
 export class Auction {
@@ -51,4 +53,12 @@ export class Auction {
 
   @Column({ nullable: true })
   location: string;
+
+  @IsOptional()
+  isFinished: boolean;
+
+  @AfterLoad()
+  applyFinished() {
+    this.isFinished = this.expiresAt.getTime() < new Date().getTime();
+  }
 }

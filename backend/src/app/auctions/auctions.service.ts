@@ -41,7 +41,7 @@ export class AuctionsService {
   }
 
   findOne(id: string) {
-    return this.auctionsRepository.findOneOrFail({ where: { id }, relations: ['category', 'author', 'bids'] });
+    return this.auctionsRepository.findOneOrFail({where: { id }, relations: ['category', 'author', 'bids'] });
   }
 
   findBy(paginationQuery: PaginationQueryDto, params: AuctionSearchParams) {
