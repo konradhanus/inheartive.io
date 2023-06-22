@@ -1,6 +1,6 @@
 import { render } from '../../../../testing';
 
-import { Select } from '../Select';
+import { Select } from '../Select.android';
 
 describe('Select', () => {
     it('should render successfully', () => {
