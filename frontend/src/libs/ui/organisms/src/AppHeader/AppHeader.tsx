@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Avatar, Row, TextLogo, textLogoColor } from '../../../atoms';
+import { Avatar, Row, TextLogo, textLogoColor, View, Select } from '../../../atoms';
 import { useNavigate } from 'react-router-native';
-import { View, Select } from '../../../atoms';
-
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { setValue } from '../../../shared/utils';
 import { useUser } from '../../../../../components/Providers/UserProvider';
@@ -23,7 +21,8 @@ function AppHeader() {
     return (
         <Row
             px={8}
-            py={2}
+            pt={Platform.OS === "ios" ? 10 : 8}
+            pb={2}
             justifyContent={'space-between'}
             bg='primary.500'
             alignItems='center'
