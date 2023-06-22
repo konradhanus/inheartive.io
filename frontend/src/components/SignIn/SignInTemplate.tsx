@@ -8,6 +8,7 @@ import { logo } from '../../assets/index';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../routing';
 import VersionText from '../../assets/styles';
+import packages from '../../../package.json'
 
 export function SignInTemplate() {
     const navigate = useNavigate();
@@ -27,8 +28,7 @@ export function SignInTemplate() {
                     Register
                 </Button>
             </Box>
-            {/* TODO Get App version */}
-            <VersionText>Version:</VersionText>
+            <VersionText>Version: {packages.version}</VersionText>
         </KeyboardAwareScrollView>
     );
 }
