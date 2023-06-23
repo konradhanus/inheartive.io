@@ -24,4 +24,7 @@ export const colors = {
     800: '#76017c',
     900: '#5a006e',
   },
+  errors: {
+    bgToast: '#F44336'
+  }
 };

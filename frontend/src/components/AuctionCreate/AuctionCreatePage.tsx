@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { AuctionCreateTemplate } from './AuctionCreateTemplate';
 import { useForm } from 'react-hook-form';
 import { AuctionFormValues } from './auction-create-form-values';
@@ -7,6 +7,10 @@ import { apiRoutes } from '../../libs/data';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../routing';
 import { useUser } from '../Providers/UserProvider';
+import { theme } from '../../libs/ui/theme/src/theme';
+import { Box, useToast } from 'native-base';
+import { ColorType, ResponsiveValue } from 'native-base/lib/typescript/components/types';
+import { ILinearGradientProps } from 'native-base/lib/typescript/components/primitives/Box/types';
 
 interface PayloadWithAuthor extends AuctionFormValues {
     author: string;
@@ -24,6 +28,17 @@ export function AuctionCreatePage() {
         queryFn: () => fetch(apiRoutes.categories).then((res) => res.json()),
     });
 
+    const toast = useToast();
+    const showToast = (title?: ReactNode, bg?: ResponsiveValue<ColorType | (string & {}) | ILinearGradientProps>) => {
+        toast.show({
+            render: () => {
+                return <Box bg={bg} px={5} py={2} rounded="sm" mb={5}>
+                    {title}
+                </Box>;
+            }
+        });
+    }
+
     const mutation = useMutation({
         mutationFn: (data: PayloadWithAuthor) => {
             return fetch(apiRoutes.auctions, {
@@ -34,7 +49,13 @@ export function AuctionCreatePage() {
                 body: JSON.stringify(data),
             });
         },
-        onSuccess: () => navigate(RoutingPath.auctions),
+        onSuccess: () => {
+            showToast('Auction added successfully!', theme.colors.primary[500]);
+            navigate(RoutingPath.auctions);
+        },
+        onError: () => {
+            showToast('An error occured!', theme.colors.errors.bgToast);
+        },
     });
 
     const form = useForm<AuctionFormValues>({ mode: 'onChange' });
