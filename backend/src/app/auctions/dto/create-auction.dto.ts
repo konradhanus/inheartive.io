@@ -28,7 +28,7 @@ export class CreateAuctionDto {
 
   @IsNumber()
   @IsPositive()
-  @Max(10000)
+  @Max(99999)
   readonly price: number;
 
   @IsDateString()
