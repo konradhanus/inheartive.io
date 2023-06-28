@@ -3,13 +3,14 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as passport from 'passport';
 import { useContainer } from 'class-validator';
 
 import { AppModule } from './app/app.module';
 import { NotFoundInterceptor } from './app/common/interceptors/not-found.interceptor';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -34,9 +35,21 @@ async function bootstrap() {
   const port = process.env.BACKEND_PORT || 3333;
 
   app.useGlobalInterceptors(new NotFoundInterceptor());
+
+  configSwagger(app);
+
   await app.listen(port);
 
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
 
 bootstrap();
+
+function configSwagger(app: INestApplication) {
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('Inheartive API')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('swagger', app, document);
+}
