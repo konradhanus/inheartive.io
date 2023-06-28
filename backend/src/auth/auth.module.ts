@@ -7,10 +7,11 @@ import { Oauth2Strategy } from './oauth2.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthService } from './auth.service';
 import { UsersModule } from '../app/users/users.module';
+import { AzureADStrategy } from './azure-ad.strategy';
 
 @Module({
   controllers: [AuthController],
-  providers: [Oauth2Strategy, JwtStrategy, AuthService],
+  providers: [Oauth2Strategy, JwtStrategy, AuthService, AzureADStrategy],
   imports: [
     ConfigModule,
     PassportModule,
