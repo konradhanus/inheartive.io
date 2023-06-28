@@ -5,6 +5,8 @@ import { RoutingPath } from '../../../../../routing/routing-path';
 import { setValue } from '../../../shared/utils';
 import { useUser } from '../../../../../components/Providers/UserProvider';
 import { Item } from '../../../atoms/src/Select/SelectItem';
+import { Platform } from 'react-native';
+
 
 function AppHeader() {
     const [menuItem, setMenuItem] = useState('');

@@ -13,6 +13,7 @@ import { NotFoundInterceptor } from './app/common/interceptors/not-found.interce
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   app.useGlobalPipes(
@@ -23,7 +24,7 @@ async function bootstrap() {
       transformOptions: {
         enableImplicitConversion: false,
       },
-    })
+    }),
   );
 
   const globalPrefix = 'api';
@@ -36,7 +37,9 @@ async function bootstrap() {
   app.useGlobalInterceptors(new NotFoundInterceptor());
   await app.listen(port);
 
-  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
+  Logger.log(
+    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
+  );
 }
 
 bootstrap();

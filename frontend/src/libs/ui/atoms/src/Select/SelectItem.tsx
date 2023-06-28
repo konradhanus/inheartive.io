@@ -13,7 +13,7 @@ export const Item = (
     selectedValue,
     _selectedItem,
     _item,
-  } = React.useContext(SelectContext);  
+  } = React.useContext(SelectContext);
   if (Platform.OS !== 'web') {
     const isSelected = selectedValue === value;
 
@@ -35,7 +35,7 @@ export const Item = (
     );
   } else {
     return (
-      <option ref={ref} value={value} disabled={isDisabled}>
+      <option value={value} disabled={isDisabled} >
         {label}
       </option>
     );
