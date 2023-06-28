@@ -21,7 +21,7 @@ export function SignInTemplate() {
                 contentContainerStyle={styles.scrollContentContainer}
                 scrollEnabled={false}
             >
-                <Image source={logo} alt='Logo' />
+                <Image style={{ width: 260, height: 280 }} source={logo} alt='Logo' />
 
                 <Box w='100%' mt={10}>
                     <LoginFormControl />
