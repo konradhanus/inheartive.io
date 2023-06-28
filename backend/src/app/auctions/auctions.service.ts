@@ -1,19 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EntityNotFoundError, Repository } from 'typeorm';
+import { EntityNotFoundError, LessThan, MoreThan, Repository } from 'typeorm';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
-import { AuctionParams, AuctionSearchParams } from './auctions.types';
 import { toOrderQuery, toWhereQuery, toSearchQuery } from './auctions.utils';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 import { Auction } from './entities/auction.entity';
+import { AuctionDto } from './dto/auction.dto';
+import { CategoriesService } from '../categories/categories.service';
+import { UsersService } from '../users/users.service';
+import { BidsService } from '../bids/bids.service';
+import { AuctionsListParamsDto } from './dto/auctions-list-params.dto';
+import { isUUID } from '../../common/utils/uuid';
 
 const MAX_LIMIT = 50;
 @Injectable()
 export class AuctionsService {
   constructor(
     @InjectRepository(Auction)
-    private readonly auctionsRepository: Repository<Auction>
+    private readonly auctionsRepository: Repository<Auction>,
   ) {}
 
   create(createAuctionDto: CreateAuctionDto) {
@@ -22,9 +27,8 @@ export class AuctionsService {
     return this.auctionsRepository.save(auction);
   }
 
-  findAll(paginationQuery: PaginationQueryDto, params: AuctionParams) {
+  findBy(paginationQuery: PaginationQueryDto, params: AuctionsListParamsDto) {
     const { limit, offset } = paginationQuery;
-
     return this.auctionsRepository.find({
       relations: {
         category: true,
@@ -36,20 +40,32 @@ export class AuctionsService {
       skip: offset,
       take: limit || MAX_LIMIT,
       order: toOrderQuery(params),
-      where: toWhereQuery(params),
+      where: {
+        ...(params.authorId && isUUID(params.authorId)
+          ? { author: { id: params.authorId } }
+          : {}),
+        ...(params.categoryId && isUUID(params.categoryId)
+          ? { category: { id: params.categoryId } }
+          : {}),
+        ...(['true', 'false'].includes(params.isFinished)
+          ? {
+              expiresAt:
+                params.isFinished === 'true'
+                  ? LessThan(new Date())
+                  : MoreThan(new Date()),
+            }
+          : {}),
+        ...(params.bidAuthorId && isUUID(params.bidAuthorId)
+          ? { bids: { user: { id: params.bidAuthorId } } }
+          : {}),
+      },
     });
   }
 
   findOne(id: string) {
-    return this.auctionsRepository.findOneOrFail({where: { id }, relations: ['category', 'author', 'bids'] });
-  }
-
-  findBy(paginationQuery: PaginationQueryDto, params: AuctionSearchParams) {
-    const { limit, offset } = paginationQuery;
-    return this.auctionsRepository.find({
-      where: toSearchQuery(params),
-      skip: offset,
-      take: limit || MAX_LIMIT,
+    return this.auctionsRepository.findOneOrFail({
+      where: { id },
+      relations: ['category', 'author', 'bids'],
     });
   }
 
@@ -70,5 +86,25 @@ export class AuctionsService {
     const auction = await this.auctionsRepository.findOneByOrFail({ id });
 
     return this.auctionsRepository.remove(auction);
+  }
+
+  static parse(auction: Auction): AuctionDto {
+    return {
+      id: auction.id,
+      title: auction.title,
+      description: auction.description,
+      price: auction.price,
+      category: CategoriesService.parse(auction.category),
+      author: UsersService.parse(auction.author),
+      status: auction.status,
+      expiresAt: auction.expiresAt,
+      createdAt: auction.createdAt,
+      updatedAt: auction.createdAt,
+      location: auction.location,
+      isFinished: auction.isFinished,
+      bids: Array.isArray(auction.bids)
+        ? auction.bids.map((bid) => BidsService.parse(bid))
+        : [],
+    };
   }
 }

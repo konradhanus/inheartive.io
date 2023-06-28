@@ -6,6 +6,11 @@ import { User } from '../users/entities/user.entity';
 import { Auction } from '../auctions/entities/auction.entity';
 import { CreateBidDto } from './dto/create-bid.dto';
 import { findByAuctionId } from './bids.utils';
+import { Category } from '../categories/entities/category.entity';
+import { CategoryDto } from '../categories/dto/category.dto';
+import { BidDto } from './dto/bid.dto';
+import { AuctionsService } from '../auctions/auctions.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class BidsService {
@@ -62,5 +67,15 @@ export class BidsService {
 
   findAll() {
     return this.bidsRepository.find({ relations: ['auction', 'user'] });
+  }
+
+  static parse(bid: Bid): BidDto {
+    return {
+      id: bid.id,
+      auction: bid.auction ? AuctionsService.parse(bid.auction) : undefined,
+      user: bid.user ? UsersService.parse(bid.user) : undefined,
+      value: bid.value,
+      createdAt: bid.createdAt,
+    };
   }
 }

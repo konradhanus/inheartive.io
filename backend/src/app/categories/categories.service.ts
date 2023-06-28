@@ -4,6 +4,9 @@ import { EntityNotFoundError, Repository } from 'typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
+import { Auction } from '../auctions/entities/auction.entity';
+import { AuctionDto } from '../auctions/dto/auction.dto';
+import { CategoryDto } from './dto/category.dto';
 
 @Injectable()
 export class CategoriesService {
@@ -45,5 +48,14 @@ export class CategoriesService {
 
   remove(id: string) {
     return this.categoriesRepository.findOneOrFail({ where: { id } });
+  }
+
+  static parse(category: Category): CategoryDto {
+    return {
+      id: category.id,
+      name: category.name,
+      createdAt: category.createdAt,
+      updatedAt: category.updatedAt,
+    };
   }
 }

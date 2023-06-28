@@ -1,9 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { FindOptionsOrderValue } from 'typeorm';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { AuctionsService } from './auctions.service';
-import { AuctionSorkKey, SearchTopic } from './auctions.types';
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
+import { AuctionDto } from './dto/auction.dto';
+import { AuctionsListParamsDto } from './dto/auctions-list-params.dto';
 
 @Controller('auctions')
 export class AuctionsController {
@@ -15,39 +24,18 @@ export class AuctionsController {
   }
 
   @Get()
-  findAll(
-    @Query('authorId') authorId: string,
-    @Query('categoryId') categoryId: string,
-    @Query('isExpired') isExpired: boolean,
-    @Query('sortBy') sortBy: AuctionSorkKey,
-    @Query('order') order: FindOptionsOrderValue,
-    @Query('bidAuthorId') bidAuthorId: string
-  ) {
-    const queryParams = {
-      authorId,
-      categoryId,
-      isExpired,
-      sortBy,
-      order,
-      bidAuthorId,
-    };
-    return this.auctionsService.findAll({ limit: 100, offset: undefined }, queryParams);
-  }
-
-  // TODO: This endpoint is extendable. You can add other options to search
-  // for example: search by title, description, author, category, etc.
-  // query parameter can be: title, description, author, category, etc. All in all query is most often field name in Auction entity
-  @Get('search')
-  findBy(@Query('query') query?: SearchTopic, @Query('author') author?: string) {
-    const queryParams = { query, author };
-    return this.auctionsService.findBy({ limit: 100, offset: undefined }, queryParams);
+  async findAll(@Query() params: AuctionsListParamsDto): Promise<AuctionDto[]> {
+    const results = await this.auctionsService.findBy(
+      { limit: 100, offset: 0 },
+      params,
+    );
+    return results.map((item) => AuctionsService.parse(item));
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    const auction = this.auctionsService.findOne(id);
-
-    return auction;
+  async findOne(@Param('id') id: string): Promise<AuctionDto> {
+    const auction = await this.auctionsService.findOne(id);
+    return AuctionsService.parse(auction);
   }
 
   @Patch(':id')

@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { hashString } from '../../common/utils/stringHasher';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -41,5 +42,17 @@ export class UsersService {
   }
   findByEmail(email: string) {
     return this.userRepository.findOneOrFail({ where: { email }, relations: ['auctions'] });
+  }
+
+  static parse(user: User): UserDto {
+    return {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      initials: user.initials,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
   }
 }
