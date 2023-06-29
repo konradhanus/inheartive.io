@@ -27,6 +27,7 @@ import {
 } from 'react-native-safe-area-context';
 import { BottomSheet, ModalBottom } from '../ModalBottom/ModalBottom';
 import { useUser } from '../Providers/UserProvider';
+import { fetchData } from '../../libs/ui/shared';
 
 interface Props {
     auction: Auction;
@@ -56,14 +57,9 @@ export function AuctionTemplate(props: Props) {
     const isMyAuction = user?.id && user.id === auction.author.id;
 
     const mutation = useMutation({
-        mutationFn: (data: AutionBidPayload) =>
-            fetch(apiRoutes.bids, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }),
+        mutationFn: (data: AutionBidPayload) => {
+            return fetchData(apiRoutes.bids, 'POST', data);
+        },
         onSuccess: () => {
             closeModal();
             refetch();
