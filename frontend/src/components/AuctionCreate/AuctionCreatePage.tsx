@@ -11,7 +11,7 @@ import { theme } from '../../libs/ui/theme/src/theme';
 import { Box, useToast } from 'native-base';
 import { ColorType, ResponsiveValue } from 'native-base/lib/typescript/components/types';
 import { ILinearGradientProps } from 'native-base/lib/typescript/components/primitives/Box/types';
-import { fetchData } from '../../libs/ui/shared';
+import { HttpMethods, fetchData } from '../../libs/ui/shared';
 
 interface PayloadWithAuthor extends AuctionFormValues {
     author: string;
@@ -42,7 +42,7 @@ export function AuctionCreatePage() {
 
     const mutation = useMutation({
         mutationFn: (data: PayloadWithAuthor) => {
-            return fetchData(apiRoutes.auctions, 'POST', data);
+            return fetchData(apiRoutes.auctions, HttpMethods.POST, data);
         },
         onSuccess: () => {
             showToast('Auction added successfully!', theme.colors.primary[500]);

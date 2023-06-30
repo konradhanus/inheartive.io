@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-native';
 import { EmailInput, PasswordInput } from '../../../organisms';
 import { useUser } from '../../../../../components/Providers/UserProvider';
 import { RoutingPath } from '../../../../../routing/routing-path';
-import { fetchData, setValue } from '../../../shared/utils';
+import { HttpMethods, fetchData, setValue } from '../../../shared/utils';
 
 interface LoginForm {
     email: string;
@@ -33,7 +33,7 @@ function LoginFormControl() {
 
     const { mutateAsync } = useMutation({
         mutationFn: async (data: LoginForm) => {
-            return fetchData(apiRoutes.login, 'POST', data);
+            return fetchData(apiRoutes.login, HttpMethods.POST, data);
         },
         onSuccess: (value) => {
             value

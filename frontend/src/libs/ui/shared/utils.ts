@@ -39,9 +39,16 @@ export const safeIntParse = (value: string) => {
   return Number.isNaN(parsed) ? 0 : parsed;
 };
 
+export enum HttpMethods {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+}
+
 export const fetchData = async (
   route: string,
-  method: string,
+  method: HttpMethods,
   data: any
 ): Promise<Response> => {
   return fetch(route, {

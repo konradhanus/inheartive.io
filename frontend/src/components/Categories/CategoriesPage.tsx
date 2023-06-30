@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { CategoryCreateFormValues } from './category-create-form-values';
 import CategoryCreateTemplate from './CategoriesTemplate';
 import { apiRoutes } from '../../libs/data';
-import { fetchData } from '../../libs/ui/shared';
+import { HttpMethods, fetchData } from '../../libs/ui/shared';
 
 export function CategoriesPage() {
     const {
@@ -31,7 +31,7 @@ export function CategoriesPage() {
 
     const mutation = useMutation({
         mutationFn: (data) => {
-            return fetchData(apiRoutes.categories, 'POST', data);
+            return fetchData(apiRoutes.categories, HttpMethods.POST, data);
         },
         onSuccess: () => {
             refetch();

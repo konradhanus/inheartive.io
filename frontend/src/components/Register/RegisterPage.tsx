@@ -7,14 +7,14 @@ import { RegisterFormValues } from './register-form-values';
 import { apiRoutes } from '../../libs/data';
 import RegisterTemplate from './RegisterTemplate';
 import { RoutingPath } from '../../routing';
-import { fetchData } from '../../libs/ui/shared';
+import { HttpMethods, fetchData } from '../../libs/ui/shared';
 
 export function RegisterPage() {
     const formMethods = useForm<RegisterFormValues>({ mode: 'onChange' });
     const navigate = useNavigate();
     const mutation = useMutation({
         mutationFn: (data: RegisterFormValues) => {
-            return fetchData(apiRoutes.users, 'POST', data);
+            return fetchData(apiRoutes.users, HttpMethods.POST, data);
         },
         onSuccess: (response) => {
             if (response.ok) {
