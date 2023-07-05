@@ -11,6 +11,7 @@ import { useContainer } from 'class-validator';
 import { AppModule } from './app/app.module';
 import { NotFoundInterceptor } from './app/common/interceptors/not-found.interceptor';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ExceptionsFilter } from './common/filters/exceptions.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -27,6 +28,7 @@ async function bootstrap() {
       },
     }),
   );
+  app.useGlobalFilters(new ExceptionsFilter());
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
