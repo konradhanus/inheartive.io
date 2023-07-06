@@ -11,19 +11,22 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { AuctionsService } from './auctions.service';
-import { CreateAuctionDto } from './dto/create-auction.dto';
-import { UpdateAuctionDto } from './dto/update-auction.dto';
+import { CreateAuctionBody, CreateAuctionDto } from './dto/create-auction.dto';
+import { UpdateAuctionBody, UpdateAuctionDto } from './dto/update-auction.dto';
 import { AuctionDto } from './dto/auction.dto';
 import { AuctionsListParamsDto } from './dto/auctions-list-params.dto';
 import { parseStringError } from '../../common/utils/errors';
+import { DeleteAuctionDto } from './dto/delete-auction.dto';
 
 @Controller('auctions')
 export class AuctionsController {
-  constructor(private readonly auctionsService: AuctionsService) {}
+  constructor(private readonly auctionsService: AuctionsService) { }
 
   @Post()
-  create(@Body() createAuctionDto: CreateAuctionDto) {
-    return this.auctionsService.create(createAuctionDto);
+  async create(@Body() createAuctionBody: CreateAuctionBody): Promise<CreateAuctionDto> {
+    const createdAuction = await this.auctionsService.create(createAuctionBody);
+
+    return AuctionsService.toCreateAuctionDto(createdAuction);
   }
 
   @Get()
@@ -48,7 +51,7 @@ export class AuctionsController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateAuctionDto: UpdateAuctionDto) {
+  async update(@Param('id') id: string, @Body() updateAuctionBody: UpdateAuctionBody): Promise<UpdateAuctionDto> {
     const auction = await this.auctionsService.findOne(id).catch(() => null);
     if (!auction) {
       throw new HttpException(
@@ -56,11 +59,12 @@ export class AuctionsController {
         HttpStatus.NOT_FOUND,
       );
     }
-    return this.auctionsService.update(id, updateAuctionDto);
+    const updatedAuction = await this.auctionsService.update(id, updateAuctionBody);
+    return AuctionsService.toUpdateAuctionDto(updatedAuction);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string): Promise<DeleteAuctionDto> {
     const auction = await this.auctionsService.findOne(id).catch(() => null);
     if (!auction) {
       throw new HttpException(
@@ -68,6 +72,7 @@ export class AuctionsController {
         HttpStatus.NOT_FOUND,
       );
     }
-    return await this.auctionsService.remove(id);
+    const deletedAuction = await this.auctionsService.remove(id);
+    return AuctionsService.toDeleteAuctionDto(deletedAuction);
   }
 }

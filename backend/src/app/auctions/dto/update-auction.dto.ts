@@ -1,4 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateAuctionDto } from './create-auction.dto';
+import { CreateAuctionBody, CreateAuctionDto } from './create-auction.dto';
+import { DeleteAuctionDto } from './delete-auction.dto';
 
-export class UpdateAuctionDto extends PartialType(CreateAuctionDto) {}
+export class UpdateAuctionDto extends DeleteAuctionDto { }
+
+export class UpdateAuctionBody extends PartialType(CreateAuctionBody) { }

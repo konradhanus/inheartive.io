@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EntityNotFoundError, LessThan, MoreThan, Repository } from 'typeorm';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { toOrderQuery, toWhereQuery, toSearchQuery } from './auctions.utils';
-import { CreateAuctionDto } from './dto/create-auction.dto';
-import { UpdateAuctionDto } from './dto/update-auction.dto';
+import { CreateAuctionBody, CreateAuctionDto } from './dto/create-auction.dto';
+import { UpdateAuctionBody, UpdateAuctionDto } from './dto/update-auction.dto';
 import { Auction } from './entities/auction.entity';
 import { AuctionDto } from './dto/auction.dto';
 import { CategoriesService } from '../categories/categories.service';
@@ -12,6 +12,7 @@ import { UsersService } from '../users/users.service';
 import { BidsService } from '../bids/bids.service';
 import { AuctionsListParamsDto } from './dto/auctions-list-params.dto';
 import { isUUID } from '../../common/utils/uuid';
+import { DeleteAuctionDto } from './dto/delete-auction.dto';
 
 const MAX_LIMIT = 50;
 @Injectable()
@@ -19,10 +20,10 @@ export class AuctionsService {
   constructor(
     @InjectRepository(Auction)
     private readonly auctionsRepository: Repository<Auction>,
-  ) {}
+  ) { }
 
-  create(createAuctionDto: CreateAuctionDto) {
-    const auction = this.auctionsRepository.create(createAuctionDto);
+  create(createAuctionData: CreateAuctionBody): Promise<Auction> {
+    const auction = this.auctionsRepository.create(createAuctionData);
 
     return this.auctionsRepository.save(auction);
   }
@@ -49,11 +50,11 @@ export class AuctionsService {
           : {}),
         ...(['true', 'false'].includes(params.isFinished)
           ? {
-              expiresAt:
-                params.isFinished === 'true'
-                  ? LessThan(new Date())
-                  : MoreThan(new Date()),
-            }
+            expiresAt:
+              params.isFinished === 'true'
+                ? LessThan(new Date())
+                : MoreThan(new Date()),
+          }
           : {}),
         ...(params.bidAuthorId && isUUID(params.bidAuthorId)
           ? { bids: { user: { id: params.bidAuthorId } } }
@@ -69,10 +70,10 @@ export class AuctionsService {
     });
   }
 
-  async update(id: string, updateAuctionDto: UpdateAuctionDto) {
+  async update(id: string, updateAuctionData: UpdateAuctionBody): Promise<Auction> {
     const auction = await this.auctionsRepository.preload({
       id,
-      ...updateAuctionDto,
+      ...updateAuctionData,
     });
 
     if (!auction) {
@@ -82,7 +83,7 @@ export class AuctionsService {
     return this.auctionsRepository.save(auction);
   }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<Auction> {
     const auction = await this.auctionsRepository.findOneByOrFail({ id });
 
     return this.auctionsRepository.remove(auction);
@@ -106,5 +107,49 @@ export class AuctionsService {
         ? auction.bids.map((bid) => BidsService.parse(bid))
         : [],
     };
+  }
+
+  static toCreateAuctionDto(auction: Auction): CreateAuctionDto {
+    return {
+      id: auction.id,
+      title: auction.title,
+      description: auction.description,
+      price: auction.price,
+      status: auction.status,
+      category: auction.category,
+      author: auction.author,
+      expiresAt: auction.expiresAt,
+      createdAt: auction.createdAt,
+      updatedAt: auction.createdAt,
+      location: auction.location,
+    }
+  }
+
+  static toUpdateAuctionDto(auction: Auction): UpdateAuctionDto {
+    return {
+      title: auction.title,
+      description: auction.description,
+      price: auction.price,
+      status: auction.status,
+      expiresAt: auction.expiresAt,
+      createdAt: auction.createdAt,
+      updatedAt: auction.createdAt,
+      location: auction.location,
+      isFinished: auction.isFinished,
+    }
+  }
+
+  static toDeleteAuctionDto(auction: Auction): DeleteAuctionDto {
+    return {
+      title: auction.title,
+      description: auction.description,
+      price: auction.price,
+      status: auction.status,
+      expiresAt: auction.expiresAt,
+      createdAt: auction.createdAt,
+      updatedAt: auction.createdAt,
+      location: auction.location,
+      isFinished: auction.isFinished,
+    }
   }
 }
