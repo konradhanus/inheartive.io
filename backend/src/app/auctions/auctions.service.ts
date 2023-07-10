@@ -95,7 +95,7 @@ export class AuctionsService {
       title: auction.title,
       description: auction.description,
       price: auction.price,
-      category: CategoriesService.parse(auction.category),
+      category: CategoriesService.toCategoryDto(auction.category),
       author: UsersService.parse(auction.author),
       status: auction.status,
       expiresAt: auction.expiresAt,

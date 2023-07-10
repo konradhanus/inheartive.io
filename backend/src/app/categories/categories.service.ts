@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityNotFoundError, Repository } from 'typeorm';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CreateCategoryBody, CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryBody } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
-import { Auction } from '../auctions/entities/auction.entity';
-import { AuctionDto } from '../auctions/dto/auction.dto';
 import { CategoryDto } from './dto/category.dto';
 
 @Injectable()
@@ -15,13 +13,13 @@ export class CategoriesService {
     private readonly categoriesRepository: Repository<Category>
   ) {}
 
-  create(createCategoryDto: CreateCategoryDto) {
+  create(createCategoryDto: CreateCategoryBody): Promise<Category> {
     const category = this.categoriesRepository.create(createCategoryDto);
 
     return this.categoriesRepository.save(category);
   }
 
-  findAll() {
+  findAll(): Promise<Category[]> {
     return this.categoriesRepository.find({
       order: {
         name: 'ASC',
@@ -29,11 +27,11 @@ export class CategoriesService {
     });
   }
 
-  findOne(id: string) {
+  findOne(id: string): Promise<Category> {
     return this.categoriesRepository.findOneOrFail({ where: { id } });
   }
 
-  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+  async update(id: string, updateCategoryDto: UpdateCategoryBody): Promise<Category> {
     const category = await this.categoriesRepository.preload({
       id,
       ...updateCategoryDto,
@@ -46,16 +44,25 @@ export class CategoriesService {
     return this.categoriesRepository.save(category);
   }
 
-  remove(id: string) {
+  remove(id: string): Promise<Category> {
     return this.categoriesRepository.findOneOrFail({ where: { id } });
   }
 
-  static parse(category: Category): CategoryDto {
+  static toCategoryDto(category: Category): CategoryDto {
     return {
       id: category.id,
       name: category.name,
       createdAt: category.createdAt,
       updatedAt: category.updatedAt,
     };
+  }
+
+  static toCreateCategoryDto(category: Category): CreateCategoryDto {
+    return {
+      id: category.id,
+      name: category.name,
+      createdAt: category.createdAt,
+      updatedAt: category.updatedAt,
+    }
   }
 }
