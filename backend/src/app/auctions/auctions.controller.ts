@@ -17,12 +17,16 @@ import { AuctionDto } from './dto/auction.dto';
 import { AuctionsListParamsDto } from './dto/auctions-list-params.dto';
 import { parseStringError } from '../../common/utils/errors';
 import { DeleteAuctionDto } from './dto/delete-auction.dto';
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auctions')
 @Controller('auctions')
 export class AuctionsController {
   constructor(private readonly auctionsService: AuctionsService) { }
 
   @Post()
+  @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateAuctionDto })
+  @ApiBadRequestResponse()
   async create(@Body() createAuctionBody: CreateAuctionBody): Promise<CreateAuctionDto> {
     const createdAuction = await this.auctionsService.create(createAuctionBody);
 
@@ -30,6 +34,7 @@ export class AuctionsController {
   }
 
   @Get()
+  @ApiResponse({ type: [AuctionDto] })
   async findAll(@Query() params: AuctionsListParamsDto): Promise<AuctionDto[]> {
     const results = await this.auctionsService.findBy(
       { limit: 100, offset: 0 },
@@ -39,6 +44,13 @@ export class AuctionsController {
   }
 
   @Get(':id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'should be an id of auction that exists in the database',
+    type: String
+  })
+  @ApiResponse({ type: AuctionDto })
   async findOne(@Param('id') id: string): Promise<AuctionDto> {
     const auction = await this.auctionsService.findOne(id).catch(() => null);
     if (!auction) {
@@ -51,6 +63,13 @@ export class AuctionsController {
   }
 
   @Patch(':id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'should be an id of auction that exists in the database',
+    type: String
+  })
+  @ApiResponse({ type: UpdateAuctionDto })
   async update(@Param('id') id: string, @Body() updateAuctionBody: UpdateAuctionBody): Promise<UpdateAuctionDto> {
     const auction = await this.auctionsService.findOne(id).catch(() => null);
     if (!auction) {
@@ -64,6 +83,13 @@ export class AuctionsController {
   }
 
   @Delete(':id')
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'should be an id of auction that exists in the database',
+    type: String
+  })
+  @ApiResponse({ type: DeleteAuctionDto })
   async remove(@Param('id') id: string): Promise<DeleteAuctionDto> {
     const auction = await this.auctionsService.findOne(id).catch(() => null);
     if (!auction) {
