@@ -1,0 +1,27 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "noEmit": true,
+    "target": "es6",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "paths": {
+      "@inheartive-assets": ["src/assets/index.ts"],
+      "@inheartive-data": ["src/libs/data/index.ts"],
+      "@inheartive-atoms": ["src/libs/ui/atoms/index.ts"],
+      "@inheartive-molecules": ["src/libs/ui/molecules/index.ts"],
+      "@inheartive-organisms": ["src/libs/ui/organisms/index.ts"],
+      "@inheartive-testing": ["src/libs/ui/testing/index.ts"],
+      "@inheartive-theme": ["src/libs/ui/theme/index.ts"],
+      "@inheartive-shared-utils": ["src/libs/ui/shared/utils.ts"],
+    }
+  }
+}
