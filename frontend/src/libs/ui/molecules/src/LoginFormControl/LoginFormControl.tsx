@@ -9,7 +9,10 @@ import { EmailInput, PasswordInput } from '../../../organisms';
 import { useUser } from '../../../../../components/Providers/UserProvider';
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { HttpMethods, fetchData, setValue } from '../../../shared/utils';
+import { useAuthRequest, useAutoDiscovery } from 'expo-auth-session';
+import * as WebBrowser from 'expo-web-browser';
 
+WebBrowser.maybeCompleteAuthSession();
 interface LoginForm {
     email: string;
     password: string;
@@ -60,6 +63,17 @@ function LoginFormControl() {
         }
     };
 
+    const discovery = useAutoDiscovery(`https://login.microsoftonline.com/${process.env.AAD_TENANT_ID}/v2.0`);
+    // Request
+    const [request, response, promptAsync] = useAuthRequest(
+        {
+            clientId: process.env.AAD_CLIENT_ID,
+            scopes: ['openid', 'profile', 'email', 'offline_access'],
+            redirectUri: 'msauth://com.intive.inheartive/dLQ6EFhW717n5Td1%2BQvNXUW7Rm8%3D'
+        },
+        discovery
+    );
+
     const isDisabled = !isValid;
 
     return (
@@ -91,6 +105,9 @@ function LoginFormControl() {
             >
                 Sign in
             </Button>
+            <Button onPress={() => {
+                promptAsync();
+            }}>Sing in using SSO</Button>
         </FormProvider>
     );
 }
