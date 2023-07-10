@@ -8,9 +8,14 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Auction } from '../../auctions/entities/auction.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('user')
 export class User {
+  constructor(partial: Partial<User>) {
+    Object.assign(this, partial);
+  }
+
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -27,6 +32,7 @@ export class User {
   initials: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @JoinTable()
@@ -40,5 +46,6 @@ export class User {
   updatedAt: Date;
 
   @Column({ nullable: false })
+  @Exclude()
   salt: string;
 }
