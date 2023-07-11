@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^7.0.10",
     "@nestjs/typeorm": "^9.0.1",
+    "adal-node": "^0.2.4",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "passport": "^0.6.0",
