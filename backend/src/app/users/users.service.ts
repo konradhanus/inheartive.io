@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserBody } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -13,13 +13,13 @@ export class UsersService {
     private readonly userRepository: Repository<User>
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
-    const initials = `${createUserDto.firstName[0]}${createUserDto.lastName[0]}`;
+  async create(createUserData: CreateUserBody): Promise<User> {
+    const initials = `${createUserData.firstName[0]}${createUserData.lastName[0]}`;
 
-    const hashPassword = hashString({ data: createUserDto.password });
+    const hashPassword = hashString({ data: createUserData.password });
 
     const user = this.userRepository.create({
-      ...createUserDto,
+      ...createUserData,
       initials,
       salt: hashPassword.salt,
       password: hashPassword.hash,
@@ -28,7 +28,7 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  findAll() {
+  findAll(): Promise<User[]> {
     return this.userRepository.find({
       take: 50,
       order: {
@@ -37,14 +37,14 @@ export class UsersService {
     });
   }
 
-  findOne(id: string) {
+  findOne(id: string): Promise<User> {
     return this.userRepository.findOneOrFail({ where: { id }, relations: ['auctions'] });
   }
-  findByEmail(email: string) {
+  findByEmail(email: string): Promise<User> {
     return this.userRepository.findOneOrFail({ where: { email }, relations: ['auctions'] });
   }
 
-  static parse(user: User): UserDto {
+  static toUserDto(user: User): UserDto {
     return {
       id: user.id,
       email: user.email,
