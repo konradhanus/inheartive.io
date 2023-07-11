@@ -15,6 +15,7 @@ import {
   ResponseType,
 } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
+import { callMsGraph } from '../../../../../../graph';
 
 WebBrowser.maybeCompleteAuthSession();
 interface LoginForm {
@@ -23,6 +24,7 @@ interface LoginForm {
 }
 function LoginFormControl() {
   const { setUser } = useUser();
+  const [graphData, setGraphData] = useState(null);
   const [loginError, setLoginError] = useState(false);
 
   const formMethods = useForm<LoginForm>({ mode: 'onChange' });
@@ -99,20 +101,24 @@ function LoginFormControl() {
       })
         .then((response) => {
           if (response.ok) {
-            setAccessToken(response.body.access_token);
-            setUser({
-              id: '1',
-              firstName: 'Will',
-              lastName: 'Smith',
-              initials: 'WS',
-            });
-            navigate(RoutingPath.auctions);
+            console.log('RESPONSE DYCIOWY: ', response);
+            // setAccessToken(response.body.access_token);
+            // setUser({
+            //   id: '1',
+            //   firstName: 'Will',
+            //   lastName: 'Smith',
+            //   initials: 'WS',
+            // });
+            // navigate(RoutingPath.auctions);
             return response.text();
           }
           throw new Error('Wystąpił błąd sieciowy');
         })
         .then((data) => {
           console.log('Odpowiedź z serwera:', data);
+          console.log(JSON.parse(data).access_token)
+          setAccessToken(JSON.parse(data).access_token);
+          callMsGraph(JSON.parse(data).access_token).then((response) => setGraphData(response));
         })
         .catch((error) => {
           console.error('Błąd:', error);

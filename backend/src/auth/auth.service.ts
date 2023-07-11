@@ -52,9 +52,7 @@ export class AuthService {
         resource, // A URI that identifies the resource for which the token is valid.
         clientId,
         clientSecret,
-        () => {
-          console.log('test');
-        },
+        null,
       );
 
       console.log('jest ok');
