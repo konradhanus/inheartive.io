@@ -73,7 +73,7 @@ export class BidsService {
     return {
       id: bid.id,
       auction: bid.auction ? AuctionsService.parse(bid.auction) : undefined,
-      user: bid.user ? UsersService.parse(bid.user) : undefined,
+      user: bid.user ? UsersService.toUserDto(bid.user) : undefined,
       value: bid.value,
       createdAt: bid.createdAt,
     };
