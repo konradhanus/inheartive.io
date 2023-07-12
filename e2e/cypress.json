@@ -1,1 +1,8 @@
-{}
+{
+  "baseUrl": "http://localhost:19006/",
+  "includeShadowDom": true,
+  "chromeWebSecurity": true,
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "projectId": "h7mhv1"
+}
