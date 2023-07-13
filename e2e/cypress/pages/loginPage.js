@@ -3,7 +3,12 @@ class HomeLoginPage {
     elements = {
         userEmailInput: () => cy.get('#field-3-input'),
         userPasswordInput: () => cy.get('input[placeholder="Password"]'),
-        signInButton: () => cy.contains('div[role="button"]', 'Sign in')
+        signInButton: () => cy.contains('div[role="button"]', 'Sign in'),
+        logo: () => cy.get('alt="Logo"')
+    }
+
+    checkIfLogoIsDisplayed() {
+        this.elements.logo().contains('Logo', {timeout: 5})
     }
 
     loginUserWithEmailAndPassword(email, password) {
