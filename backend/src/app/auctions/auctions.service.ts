@@ -89,7 +89,7 @@ export class AuctionsService {
     return this.auctionsRepository.remove(auction);
   }
 
-  static parse(auction: Auction): AuctionDto {
+  static toAuctionDto(auction: Auction): AuctionDto {
     return {
       id: auction.id,
       title: auction.title,
@@ -104,7 +104,7 @@ export class AuctionsService {
       location: auction.location,
       isFinished: auction.isFinished,
       bids: Array.isArray(auction.bids)
-        ? auction.bids.map((bid) => BidsService.parse(bid))
+        ? auction.bids.map((bid) => BidsService.toBidDto(bid))
         : [],
     };
   }

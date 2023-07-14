@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Bid } from './entities/bid.entity';
 import { User } from '../users/entities/user.entity';
 import { Auction } from '../auctions/entities/auction.entity';
-import { CreateBidDto } from './dto/create-bid.dto';
+import { CreateBidBody } from './dto/create-bid.dto';
 import { findByAuctionId } from './bids.utils';
 import { Category } from '../categories/entities/category.entity';
 import { CategoryDto } from '../categories/dto/category.dto';
@@ -29,17 +29,17 @@ export class BidsService {
     return this.bidsRepository.findOne(byAuctionId);
   }
 
-  async create(createBidDto: CreateBidDto) {
+  async create(createBidData: CreateBidBody): Promise<void> {
     const queryRunner = this.bidsRepository.manager.connection.createQueryRunner();
     await queryRunner.startTransaction();
 
     try {
       const auction = await this.auctionsRepository.findOneOrFail({
-        where: { id: createBidDto.auction },
+        where: { id: createBidData.auction },
       });
 
       const user = await this.usersRepository.findOneOrFail({
-        where: { id: createBidDto.user },
+        where: { id: createBidData.user },
       });
 
       const bid = this.bidsRepository.create({
@@ -47,8 +47,8 @@ export class BidsService {
         user,
       });
 
-      const { value } = createBidDto;
-      const maxBid = (await this.maxBid(createBidDto.auction)) || { value: 0 };
+      const { value } = createBidData;
+      const maxBid = (await this.maxBid(createBidData.auction)) || { value: 0 };
 
       if (value > maxBid.value) {
         bid.value = value;
@@ -65,14 +65,14 @@ export class BidsService {
     }
   }
 
-  findAll() {
+  findAll(): Promise<Bid[]> {
     return this.bidsRepository.find({ relations: ['auction', 'user'] });
   }
 
-  static parse(bid: Bid): BidDto {
+  static toBidDto(bid: Bid): BidDto {
     return {
       id: bid.id,
-      auction: bid.auction ? AuctionsService.parse(bid.auction) : undefined,
+      auctionId: bid.auction ? bid.auction.id : undefined,
       user: bid.user ? UsersService.toUserDto(bid.user) : undefined,
       value: bid.value,
       createdAt: bid.createdAt,

@@ -6,7 +6,7 @@ export class BidDto {
   @ApiProperty()
   id: string;
   
-  auction?: AuctionDto;
+  auctionId?: string;
 
   user?: UserDto;
   
