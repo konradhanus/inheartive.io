@@ -11,55 +11,83 @@ import { UserProvider, useUser } from './src/components/Providers/UserProvider';
 
 import { MsalProvider } from '@azure/msal-react';
 import { Configuration, PublicClientApplication } from '@azure/msal-browser';
-
-const configuration: Configuration = {
-  auth: {
-    clientId: process.env.AAD_CLIENT_ID as string,
-    authority: `https://login.microsoftonline.com/${process.env.AAD_TENANT_ID}`,
-    redirectUri: 'http://localhost:19006/sso',
-  },
-  cache: {
-    cacheLocation: 'sessionStorage',
-    storeAuthStateInCookie: false,
-  },
-};
+import { User } from './src/libs/data/src';
+import { Platform } from 'react-native';
 
 export const App = () => {
   const queryClient = new QueryClient();
   const { user } = useUser();
 
-  const pca = new PublicClientApplication(configuration);
-
   return (
     <QueryClientProvider client={queryClient}>
       <NativeBaseProvider theme={theme}>
-        <MsalProvider instance={pca}>
-          <NativeRouter>
-            <Routes>
-              {routesConfig.map(({ path, needsAuth, page, footerIcon }) => (
-                <Route
-                  key={path}
-                  path={path}
-                  element={
-                    needsAuth ? (
-                      user ? (
-                        <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>{page}</AuthenticatedPageWrapper>
-                      ) : (
-                        <SignInPage />
-                      )
-                    ) : (
-                      page
-                    )
-                  }
-                />
-              ))}
-            </Routes>
-          </NativeRouter>
-        </MsalProvider>
+        <Application user={user} />
       </NativeBaseProvider>
     </QueryClientProvider>
   );
 };
+
+interface AppProps {
+  user: User | null
+}
+
+function Application(props: AppProps): JSX.Element {
+  if (Platform.OS === 'web') {
+    return (
+      <WebApp user={props.user} />
+    );
+  } else {
+    return (
+      <RootApp user={props.user} />
+    );
+  }
+}
+
+function WebApp(props: AppProps): JSX.Element {
+  const configuration: Configuration = {
+    auth: {
+      clientId: process.env.AAD_CLIENT_ID as string,
+      authority: `https://login.microsoftonline.com/${process.env.AAD_TENANT_ID}`,
+      redirectUri: 'http://localhost:19006/sso',
+    },
+    cache: {
+      cacheLocation: 'sessionStorage',
+      storeAuthStateInCookie: false,
+    },
+  };
+
+  const pca = new PublicClientApplication(configuration);
+
+  return (
+    <MsalProvider instance={pca}>
+      <RootApp user={props.user} />
+    </MsalProvider>
+  )
+}
+
+function RootApp(props: AppProps): JSX.Element {
+  return <NativeRouter>
+    <Routes>
+      {routesConfig.map(({ path, needsAuth, page, footerIcon }) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            needsAuth ? (
+              props.user ? (
+                <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>{page}</AuthenticatedPageWrapper>
+              ) : (
+                <SignInPage />
+              )
+            ) : (
+              page
+            )
+          }
+        />
+      ))}
+    </Routes>
+  </NativeRouter>
+}
 
 export default () => {
   return (
