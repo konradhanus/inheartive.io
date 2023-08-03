@@ -2,8 +2,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Asset } from './entities/asset.entity';
 import { Repository } from 'typeorm';
-import { CreateAssetDto } from './dto/create-asset.dto';
+import { CreateAssetBody } from './dto/create-asset.dto';
 import { unlink } from 'fs';
+import { AssetDto } from './dto/asset.dto';
 
 @Injectable()
 export class AssetsService {
@@ -22,7 +23,7 @@ export class AssetsService {
     return await this.assetRepository.findOneByOrFail({ id });
   }
 
-  create(createAssetDto: CreateAssetDto) {
+  create(createAssetDto: CreateAssetBody) {
     const asset = this.assetRepository.create(createAssetDto);
 
     return this.assetRepository.save(asset);
@@ -36,5 +37,16 @@ export class AssetsService {
     });
 
     return this.assetRepository.remove(asset);
+  }
+
+  static toAssetDto(asset: Asset): AssetDto {
+    return {
+      id: asset.id,
+      originalName: asset.originalName,
+      fullPath: asset.fullPath,
+      mimeType: asset.mimeType,
+      createdAt: asset.createdAt,
+      updatedAt: asset.updatedAt,
+    }
   }
 }
