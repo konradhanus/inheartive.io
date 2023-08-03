@@ -2,7 +2,7 @@ import { IsInt, IsPositive, IsUUID, Max, Validate } from 'class-validator';
 import { UserExistsRule } from '../../users/validators/user-exists';
 import { AuctionExistsRule } from '../../auctions/validators/auction-exists';
 
-export class CreateBidDto {
+export class CreateBidBody {
   @IsPositive()
   @Max(parseInt(process.env.MAX_BID_VALUE))
   @IsInt()

@@ -40,7 +40,7 @@ export class AuctionsController {
       { limit: 100, offset: 0 },
       params,
     );
-    return results.map((item) => AuctionsService.parse(item));
+    return results.map((item) => AuctionsService.toAuctionDto(item));
   }
 
   @Get(':id')
@@ -59,7 +59,7 @@ export class AuctionsController {
         HttpStatus.NOT_FOUND,
       );
     }
-    return AuctionsService.parse(auction);
+    return AuctionsService.toAuctionDto(auction);
   }
 
   @Patch(':id')
