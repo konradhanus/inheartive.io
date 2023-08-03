@@ -46,15 +46,7 @@ const computeMaxBid = ({ bids }: Auction) => {
     if(!bids.length) {
         return null;
     } else {
-        const sortedBids = bids.sort((bid1, bid2) => {
-            if(bid1.value > bid2.value) {
-                return -1;
-            } 
-            if(bid1.value < bid2.value) {
-                return 1;
-            }
-            return 0;
-        });
+        const sortedBids = bids.sort((bid1, bid2) => bid2.value - bid1.value);
         return sortedBids[0];
     }
 }
