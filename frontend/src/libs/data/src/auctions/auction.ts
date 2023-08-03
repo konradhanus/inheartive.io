@@ -5,6 +5,7 @@ export interface Bid {
   id: string;
   createdAt: string;
   value: number;
+  user: User;
 }
 export interface Auction {
   id: string;

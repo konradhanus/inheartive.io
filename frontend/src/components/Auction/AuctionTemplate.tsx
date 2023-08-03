@@ -42,12 +42,20 @@ interface AutionBidPayload {
     user: string;
 }
 
-const computeMaxBid = ({ bids, price }: Auction) =>
-    bids.reduce((acc, bid) => (bid.value > price ? bid.value : acc), price);
+const computeMaxBid = ({ bids }: Auction) => {
+    if(!bids.length) {
+        return null;
+    } else {
+        const sortedBids = bids.sort((bid1, bid2) => bid2.value - bid1.value);
+        return sortedBids[0];
+    }
+}
 
 export function AuctionTemplate(props: Props) {
     const { auction, isLoading, isError, refetch } = props;
-    const bid = computeMaxBid(auction);
+    const maxBid = computeMaxBid(auction);
+    const price = maxBid ? maxBid.value : auction.price;
+    const bidAuthor = maxBid ? maxBid.user.firstName : auction.author.firstName;
     const insets = useSafeAreaInsets();
     const bottomSheet = useRef<BottomSheet>();
     const { user } = useUser();
@@ -64,6 +72,9 @@ export function AuctionTemplate(props: Props) {
             closeModal();
             refetch();
         },
+        onError: (error) => {
+            console.error(error);
+        } 
     });
 
     const confirmModal = (bid: number) => {
@@ -81,7 +92,7 @@ export function AuctionTemplate(props: Props) {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <ModalBottom
-                    bid={bid}
+                    bid={price}
                     auction={auction}
                     bottomSheet={bottomSheet}
                     confirmModal={confirmModal}
@@ -117,8 +128,8 @@ export function AuctionTemplate(props: Props) {
                         avatarBgColor={theme.colors.primary[500]}
                     />
                     <AuctionLeftHearts
-                        quantity={bid}
-                        authorName={auction.author.firstName}
+                        quantity={price}
+                        authorName={bidAuthor}
                     />
                     <AuctionTime expirationDate={auction.expiresAt} />
                     {auction.location && (
