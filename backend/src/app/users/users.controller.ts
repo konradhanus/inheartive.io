@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserBody } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDto } from './dto/user.dto';
 

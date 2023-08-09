@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../app/users/users.service';
 import { User } from './types/user';
-import * as crypto from 'crypto';
+import { User as UserEntity } from 'src/app/users/entities/user.entity';
 import { hashString } from '../common/utils/stringHasher';
+import { UserDto } from 'src/app/users/dto/user.dto';
+import { EntityNotFoundError } from 'typeorm';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService, private readonly jwtService: JwtService) {}
+  constructor(private readonly usersService: UsersService, private readonly jwtService: JwtService) { }
 
   generateJwt(user: User) {
     return this.jwtService.sign({ ...user, typ: 'Bearer' });
@@ -36,5 +38,25 @@ export class AuthService {
         initials: user.initials,
       },
     };
+  }
+
+  async getUserOrCreateIfNotExisted(email: string, nameSurname: string): Promise<UserEntity> {
+    var user: UserEntity = await this.usersService.findByEmail(email).catch((error) => {
+      if (error instanceof EntityNotFoundError) {
+        return null;
+      } else {
+        throw error;
+      }
+    });
+
+    if(!user) {
+      user = await this.usersService.createWithoutPassword(email, nameSurname);
+    }
+
+    return user;
+  }
+
+  static toUserDto(user: UserEntity): UserDto {
+    return UsersService.toUserDto(user);
   }
 }

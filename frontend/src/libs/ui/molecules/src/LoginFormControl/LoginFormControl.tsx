@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { Button, FormControl, View, Text } from '../../../atoms';
+import { Button, FormControl, View, Text, Box } from '../../../atoms';
 import { apiRoutes } from '../../../../data';
 import { useNavigate } from 'react-router-native';
 import { EmailInput, PasswordInput } from '../../../organisms';
 import { useUser } from '../../../../../components/Providers/UserProvider';
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { HttpMethods, fetchData, setValue } from '../../../shared/utils';
-import { useMsal, useAccount } from '@azure/msal-react';
+import { useMsal } from '@azure/msal-react';
+import { theme } from '../../../theme/src/theme';
+import { useToast } from 'native-base';
+import { ILinearGradientProps } from 'native-base/src/components/primitives/Box/types';
+import { ResponsiveValue, ColorType } from 'native-base/src/components/types';
+import { EventType } from "@azure/msal-browser";
+
+const setAccessToken = async (access_token: string) => {
+    await setValue('access_token', access_token);
+};
 
 interface LoginFormData {
     email: string;
@@ -18,6 +27,7 @@ interface LoginFormData {
 
 function LoginFormControl() {
     const { setUser } = useUser();
+    const navigate = useNavigate();
     const [loginError, setLoginError] = useState(false);
 
     const formMethods = useForm<LoginFormData>({ mode: 'onChange' });
@@ -26,12 +36,6 @@ function LoginFormControl() {
         formState: { errors, isValid },
         handleSubmit,
     } = formMethods;
-
-    const navigate = useNavigate();
-
-    const setAccessToken = async (access_token: string) => {
-        await setValue('access_token', access_token);
-    };
 
     const { mutateAsync } = useMutation({
         mutationFn: async (data: LoginFormData) => {
@@ -97,32 +101,92 @@ function LoginFormControl() {
     );
 }
 
-function SsoLoginFormControl() {
-    const { instance, accounts } = useMsal();
-    const account = useAccount(accounts[0] || {});
-    console.log({ account });
+interface SsoLoginPayload {
+    username: string,
+    name: string,
+}
+
+function SsoLoginBtnControl() {
+    const { setUser } = useUser();
+    const navigate = useNavigate();
+    const { instance } = useMsal();
+    const [loginError, setLoginError] = useState(false);
+
+    const ssoLoginCallMutation = useMutation({
+        mutationFn: async (payload: SsoLoginPayload) => {
+            return fetchData(apiRoutes.loginSso, HttpMethods.POST, payload);
+        },
+        onSuccess: (response) => {
+            response
+                .json()
+                .then((user) => {
+                    if (user) {
+                        setUser(user);
+                        navigate(RoutingPath.auctions);
+                    } else {
+                        showToast(`Error when getting data. Try again!`, theme.colors.errors.bgToast)
+                    }
+                })
+                .catch(() => {
+                    setLoginError(true);
+                    showToast(`Error when getting data. Try again!`, theme.colors.errors.bgToast)
+                });
+        },
+    });
+
+    const toast = useToast();
+    const showToast = (title?: ReactNode, bg?: ResponsiveValue<ColorType | (string & {}) | ILinearGradientProps>) => {
+        toast.show({
+            render: () => {
+                return <Box bg={bg} px={5} py={2} rounded="sm" mb={5}>
+                    {title}
+                </Box>;
+            }
+        });
+    }
 
     useEffect(() => {
-        if (account) {
-            instance
-                .acquireTokenSilent({
-                    scopes: ['User.Read'],
-                    account: account,
-                })
-                .then((response) => {
-                    if (response) {
-                        // TODO? probably no need
-                        // callMsGraph(response.accessToken).then((result) => setApiData(result));
+        const callbackId = instance.addEventCallback((message: { eventType: EventType; payload: any; }) => {
+            const eventType = message.eventType;
+            if (eventType === EventType.LOGIN_SUCCESS || eventType === EventType.ACQUIRE_TOKEN_SUCCESS) {
+                const payload = message.payload;
+                const account = payload.account;
+                if (account) {
+                    if (!account.name) {
+                        setLoginError(true);
+                        showToast(`Name and surname shouldn't be empty, fill it in MS account`, theme.colors.errors.bgToast);
                     }
-                });
+
+                    const accessToken = payload.accessToken;
+                    setAccessToken(accessToken);
+                    ssoLoginCallMutation.mutate({
+                        username: account.username,
+                        name: account.name!!
+                    });
+                } else {
+                    showToast(`Account data is empty. Try again!`, theme.colors.errors.bgToast);
+                }
+            }
+        });
+
+        return () => {
+            if (callbackId) {
+                instance.removeEventCallback(callbackId);
+            }
         }
-    }, [account, instance]);
+    }, []);
 
     return (
-        <Button onPress={() => instance.loginPopup()} mt='4'>
-            SSO Login
-        </Button>
+        <>
+            <Button onPress={() => {
+                setLoginError(false);
+                instance.loginPopup();
+            }} mt='4'>
+                SSO Login
+            </Button>
+            {loginError && <Text style={{ textAlign: 'center' }}>SSO login error</Text>}
+        </>
     );
 }
 
-export { SsoLoginFormControl, LoginFormControl };
+export { SsoLoginBtnControl, LoginFormControl };

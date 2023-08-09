@@ -3,7 +3,7 @@ import React from 'react';
 import { PixelRatio, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Box, Button, Image, View } from '../../libs/ui/atoms';
-import { LoginFormControl, SsoLoginFormControl } from '../../libs/ui/molecules';
+import { LoginFormControl, SsoLoginBtnControl } from '../../libs/ui/molecules';
 import { logo } from '../../assets/index';
 import { useNavigate } from 'react-router-native';
 import { RoutingPath } from '../../routing';
@@ -42,7 +42,7 @@ function LoginForm(): JSX.Element {
         return (
             <>
                 <LoginFormControl />
-                <SsoLoginFormControl />
+                <SsoLoginBtnControl />
             </>
         );
     } else {
