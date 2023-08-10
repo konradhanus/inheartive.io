@@ -47,8 +47,8 @@ function WebApp(props: AppProps): JSX.Element {
   const configuration: Configuration = {
     auth: {
       clientId: process.env.AAD_CLIENT_ID as string,
-      authority: `https://login.microsoftonline.com/${process.env.AAD_TENANT_ID}`,
-      redirectUri: 'http://localhost:19006/sso',
+      authority: process.env.SSO_AUTH_AUTHORITY as string,
+      redirectUri: process.env.SSO_AUTH_REDIRECT_URI as string,
     },
     cache: {
       cacheLocation: 'sessionStorage',
