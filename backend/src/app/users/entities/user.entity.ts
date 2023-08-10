@@ -26,8 +26,8 @@ export class User {
   @Column()
   initials: string;
 
-  @Column()
-  password: string;
+  @Column({ nullable: true })
+  password: string | null;
 
   @JoinTable()
   @OneToMany((type) => Auction, (auction) => auction.author)
@@ -39,6 +39,6 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({ nullable: false })
-  salt: string;
+  @Column({ nullable: true })
+  salt: string | null;
 }

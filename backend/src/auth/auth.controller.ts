@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { Oauth2Guard } from './oauth2.guard';
 import { AuthService } from './auth.service';
 import { User } from './types/user';
 import { ApiBody, ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UserDto } from 'src/app/users/dto/user.dto';
+import { SsoLoginBody } from './dto/sso-login-body.dto';
 
 @ApiTags('Login')
 @Controller('login')
@@ -70,5 +72,14 @@ export class AuthController {
     }
 
     return null;
+  }
+
+  @ApiResponse({ type: UserDto })
+  @ApiCreatedResponse()
+  @Post('sso')
+  async ssoLogin(@Body() body: SsoLoginBody): Promise<UserDto> {
+    const user = await this.authService.getUserOrCreateIfNotExisted(body.username, body.name);
+
+    return AuthService.toUserDto(user);
   }
 }

@@ -28,6 +28,23 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
+  async createWithoutPassword(email: string, nameSurname: string): Promise<User> {
+    const nameSurnameArray = nameSurname.split(' ')
+    const firstName = nameSurnameArray[0];
+    const lastName = nameSurnameArray[1];
+    const initials = `${firstName[0]}${lastName[0]}`
+    const user = this.userRepository.create({
+      firstName,
+      lastName,
+      email,
+      initials,
+      password: null,
+      salt: null,
+    })
+
+    return this.userRepository.save(user);
+  }
+
   findAll(): Promise<User[]> {
     return this.userRepository.find({
       take: 50,

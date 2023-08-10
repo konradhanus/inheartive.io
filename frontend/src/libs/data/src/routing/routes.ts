@@ -16,6 +16,7 @@ export const apiRoutes = {
     categories: `${apiUrlPrefix}/categories`,
     users: `${apiUrlPrefix}/users`,
     login: `${apiUrlPrefix}/login`,
+    loginSso: `${apiUrlPrefix}/login/sso`,
 } as const;
 
 export const routeWithId = (route: string, id: string) =>
