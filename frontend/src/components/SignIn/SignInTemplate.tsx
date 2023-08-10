@@ -13,7 +13,10 @@ import { Platform } from 'react-native';
 
 export function SignInTemplate() {
     const navigate = useNavigate();
-    const onPress = () => navigate(RoutingPath.register);
+    const onPress = () => {
+      navigate(RoutingPath.register);
+    }
+
     return (
         <View style={styles.rootContainer}>
             <View style={styles.helperView} />
