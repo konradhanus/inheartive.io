@@ -55,7 +55,9 @@ export function AuthenticatedPageWrapper(props: Props) {
         queryFn: () => fetch(apiRoutes.users).then((res) => res.json()),
     });
 
-    const containerWeb = Platform.OS === 'web' ? style.containerWeb : '';
+    const isWeb = Platform.OS === 'web';
+    const containerWeb = isWeb && style.containerWeb;
+    const contentWeb = isWeb && style.contentWeb;
 
     return (
         <View
@@ -77,7 +79,7 @@ export function AuthenticatedPageWrapper(props: Props) {
             {users && users.length > 0 && (
                 <>
                     <AppHeader />
-                    <View style={{ flex: 1 }}>{children}</View>
+                    <View style={{...style.content, ...contentWeb}}>{children}</View>
                     <AppFooter
                         iconRoutingMap={footerIconRouteMap}
                         activeIcon={footerActiveIcon}
@@ -92,6 +94,7 @@ const style = StyleSheet.create({
     container: { flex: 1 },
     containerWeb: { maxHeight: Dimensions.get('window').height },
     content: { flex: 1 },
+    contentWeb: { overflow: 'scroll' }
 });
 
 export default AuthenticatedPageWrapper;
