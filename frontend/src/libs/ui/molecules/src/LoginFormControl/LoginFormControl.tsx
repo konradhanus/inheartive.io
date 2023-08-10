@@ -10,11 +10,8 @@ import { useUser } from '../../../../../components/Providers/UserProvider';
 import { RoutingPath } from '../../../../../routing/routing-path';
 import { HttpMethods, fetchData, setValue } from '../../../shared/utils';
 import { useMsal } from '@azure/msal-react';
-import { theme } from '../../../theme/src/theme';
-import { useToast } from 'native-base';
-import { ILinearGradientProps } from 'native-base/src/components/primitives/Box/types';
-import { ResponsiveValue, ColorType } from 'native-base/src/components/types';
 import { EventType } from "@azure/msal-browser";
+import Toast from 'react-native-toast-message';
 
 const setAccessToken = async (access_token: string) => {
     await setValue('access_token', access_token);
@@ -124,26 +121,23 @@ function SsoLoginBtnControl() {
                         setUser(user);
                         navigate(RoutingPath.auctions);
                     } else {
-                        showToast(`Error when getting data. Try again!`, theme.colors.errors.bgToast)
+                      Toast.show({
+                        type: 'error',
+                        text1: 'Login Error',
+                        text2: 'Error while logging in'
+                      });
                     }
                 })
                 .catch(() => {
-                    setLoginError(true);
-                    showToast(`Error when getting data. Try again!`, theme.colors.errors.bgToast)
+                  setLoginError(true);
+                  Toast.show({
+                    type: 'error',
+                    text1: 'Login Error',
+                    text2: 'Error when getting data. Try again!'
+                  });
                 });
         },
     });
-
-    const toast = useToast();
-    const showToast = (title?: ReactNode, bg?: ResponsiveValue<ColorType | (string & {}) | ILinearGradientProps>) => {
-        toast.show({
-            render: () => {
-                return <Box bg={bg} px={5} py={2} rounded="sm" mb={5}>
-                    {title}
-                </Box>;
-            }
-        });
-    }
 
     useEffect(() => {
         const callbackId = instance.addEventCallback((message: { eventType: EventType; payload: any; }) => {
@@ -151,10 +145,15 @@ function SsoLoginBtnControl() {
             if (eventType === EventType.LOGIN_SUCCESS || eventType === EventType.ACQUIRE_TOKEN_SUCCESS) {
                 const payload = message.payload;
                 const account = payload.account;
+
                 if (account) {
                     if (!account.name) {
-                        setLoginError(true);
-                        showToast(`Name and surname shouldn't be empty, fill it in MS account`, theme.colors.errors.bgToast);
+                      setLoginError(true);
+                      Toast.show({
+                        type: 'error',
+                        text1: 'Login Error',
+                        text2: 'Name and surname shouldn\'t be empty, fill it in MS account'
+                      });
                     }
 
                     const accessToken = payload.accessToken;
@@ -164,7 +163,11 @@ function SsoLoginBtnControl() {
                         name: account.name!!
                     });
                 } else {
-                    showToast(`Account data is empty. Try again!`, theme.colors.errors.bgToast);
+                  Toast.show({
+                    type: 'error',
+                    text1: 'Login Error',
+                    text2: 'There is no account associated with provided email'
+                  });
                 }
             }
         });

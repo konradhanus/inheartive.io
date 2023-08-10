@@ -13,6 +13,7 @@ import { MsalProvider } from '@azure/msal-react';
 import { Configuration, PublicClientApplication } from '@azure/msal-browser';
 import { User } from './src/libs/data/src';
 import { Platform } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 export const App = () => {
   const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ export const App = () => {
       <NativeBaseProvider theme={theme}>
         <Application user={user} />
       </NativeBaseProvider>
+      <Toast />
     </QueryClientProvider>
   );
 };
