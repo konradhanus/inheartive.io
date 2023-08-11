@@ -54,15 +54,15 @@ const computeMaxBid = ({ bids }: Auction) => {
 export function AuctionTemplate(props: Props) {
     const { auction, isLoading, isError, refetch } = props;
     const maxBid = computeMaxBid(auction);
-    const price = maxBid ? maxBid.value : auction.price;
-    const bidAuthor = maxBid ? maxBid.user.firstName : auction.author.firstName;
+    const price = maxBid?.value ?? auction.price;
+    const bidAuthor = maxBid?.user?.firstName ?? auction?.author?.firstName;
     const insets = useSafeAreaInsets();
     const bottomSheet = useRef<BottomSheet>();
     const { user } = useUser();
     const showModal = () => bottomSheet.current?.show();
     const closeModal = () => bottomSheet.current?.close();
 
-    const isMyAuction = user?.id && user.id === auction.author.id;
+    const isMyAuction = user?.id === auction?.author?.id;
 
     const mutation = useMutation({
         mutationFn: (data: AutionBidPayload) => {
