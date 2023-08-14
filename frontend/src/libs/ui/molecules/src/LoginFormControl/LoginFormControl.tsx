@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 
@@ -12,6 +12,7 @@ import { HttpMethods, fetchData, setValue } from '../../../shared/utils';
 import { useMsal } from '@azure/msal-react';
 import { EventType } from "@azure/msal-browser";
 import Toast from 'react-native-toast-message';
+import { openAuthSession } from 'azure-ad-graph-expo';
 
 const setAccessToken = async (access_token: string) => {
     await setValue('access_token', access_token);
@@ -121,20 +122,20 @@ function SsoLoginBtnControl() {
                         setUser(user);
                         navigate(RoutingPath.auctions);
                     } else {
-                      Toast.show({
-                        type: 'error',
-                        text1: 'Login Error',
-                        text2: 'Error while logging in'
-                      });
+                        Toast.show({
+                            type: 'error',
+                            text1: 'Login Error',
+                            text2: 'Error while logging in'
+                        });
                     }
                 })
                 .catch(() => {
-                  setLoginError(true);
-                  Toast.show({
-                    type: 'error',
-                    text1: 'Login Error',
-                    text2: 'Error when getting data. Try again!'
-                  });
+                    setLoginError(true);
+                    Toast.show({
+                        type: 'error',
+                        text1: 'Login Error',
+                        text2: 'Error when getting data. Try again!'
+                    });
                 });
         },
     });
@@ -148,12 +149,12 @@ function SsoLoginBtnControl() {
 
                 if (account) {
                     if (!account.name) {
-                      setLoginError(true);
-                      Toast.show({
-                        type: 'error',
-                        text1: 'Login Error',
-                        text2: 'Name and surname shouldn\'t be empty, fill it in MS account'
-                      });
+                        setLoginError(true);
+                        Toast.show({
+                            type: 'error',
+                            text1: 'Login Error',
+                            text2: 'Name and surname shouldn\'t be empty, fill it in MS account'
+                        });
                     }
 
                     const accessToken = payload.accessToken;
@@ -163,11 +164,11 @@ function SsoLoginBtnControl() {
                         name: account.name!!
                     });
                 } else {
-                  Toast.show({
-                    type: 'error',
-                    text1: 'Login Error',
-                    text2: 'There is no account associated with provided email'
-                  });
+                    Toast.show({
+                        type: 'error',
+                        text1: 'Login Error',
+                        text2: 'There is no account associated with provided email'
+                    });
                 }
             }
         });
@@ -192,4 +193,35 @@ function SsoLoginBtnControl() {
     );
 }
 
-export { SsoLoginBtnControl, LoginFormControl };
+function MObileSsoLoginButtonControl() { 
+    const [resultData, setResultData] = useState({});
+
+  const _handlePressAsync = async () => {
+    let result = await openAuthSession(azureAdAppProps);
+    setResultData({ result });
+  }
+
+    const azureAdAppProps = {
+        clientId        :   AZURE_CLIENT_ID,
+        tenantId        :   AZURE_TENANT_ID,
+        scope           :   'user.read',
+        redirectUrl     :   AuthSession.makeRedirectUri(),
+        returnUrl       :   null, // If left as 'null', redirectUrl will be used instead
+        clientSecret    :   AZURE_CLIENT_SECRET,
+        domainHint      :   AZURE_DOMAIN_HINT,
+        prompt          :   'login'
+};
+
+    <Button onPress={() => {
+        
+        _handlePressAsync();
+    }} mt='4'>
+        SSO Login
+    </Button>
+    {resultData ? (
+        <Text>{JSON.stringify(resultData)}</Text>
+      ) : 
+        <Text>Nothing to see here.</Text>}
+}
+
+export { LoginFormControl, SsoLoginBtnControl, MObileSsoLoginButtonControl };
