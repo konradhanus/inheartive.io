@@ -39,6 +39,7 @@ function AppHeader() {
                     dropdownIcon={<Avatar size={'lg'} />}
                     display='flex'
                     flexGrow={1}
+                    maxW="140"
                 >
                     <Item
                         label='Log out'
