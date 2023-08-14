@@ -6,7 +6,7 @@ import { footerIconRouteMap, RoutingPath } from '../../routing';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate } from 'react-router-native';
 import { apiRoutes } from '../../libs/data';
-import { BackHandler } from 'react-native';
+import { BackHandler, Dimensions, StyleSheet, Platform } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
 interface Props {
@@ -55,9 +55,17 @@ export function AuthenticatedPageWrapper(props: Props) {
         queryFn: () => fetch(apiRoutes.users).then((res) => res.json()),
     });
 
+    const isWeb = Platform.OS === 'web';
+    const containerWeb = isWeb && style.containerWeb;
+    const contentWeb = isWeb && style.contentWeb;
+
     return (
         <View
-            style={{ flex: 1 }}
+            style={{
+                ...style.container,
+                ...containerWeb,
+                paddingBottom: insets.bottom,
+            }}
             paddingBottom={insets.bottom}
         >
             {usersLoading && <Loader />}
@@ -71,7 +79,7 @@ export function AuthenticatedPageWrapper(props: Props) {
             {users && users.length > 0 && (
                 <>
                     <AppHeader />
-                    <View style={{ flex: 1 }}>{children}</View>
+                    <View style={{...style.content, ...contentWeb}}>{children}</View>
                     <AppFooter
                         iconRoutingMap={footerIconRouteMap}
                         activeIcon={footerActiveIcon}
@@ -81,5 +89,12 @@ export function AuthenticatedPageWrapper(props: Props) {
         </View>
     );
 }
+
+const style = StyleSheet.create({
+    container: { flex: 1 },
+    containerWeb: { maxHeight: Dimensions.get('window').height },
+    content: { flex: 1 },
+    contentWeb: { overflow: 'scroll' }
+});
 
 export default AuthenticatedPageWrapper;
