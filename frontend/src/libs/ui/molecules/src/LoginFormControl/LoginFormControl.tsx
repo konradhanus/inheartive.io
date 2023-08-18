@@ -12,9 +12,10 @@ import { HttpMethods, fetchData, setValue } from '../../../shared/utils';
 import { useMsal } from '@azure/msal-react';
 import { EventType } from "@azure/msal-browser";
 import Toast from 'react-native-toast-message';
+import { StorageKeys } from '../../../shared/utils.types';
 
 const setAccessToken = async (access_token: string) => {
-    await setValue('access_token', access_token);
+    await setValue(StorageKeys.ACCESS_TOKEN, access_token);
 };
 
 interface LoginFormData {

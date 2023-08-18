@@ -1,7 +1,9 @@
 import { User } from '../../libs/data';
-import { useState, ReactNode, useContext } from 'react';
+import { useState, ReactNode, useContext, useEffect } from 'react';
 
 import { createContext } from 'react';
+import { getValue, setValue } from '../../libs/ui/shared';
+import { StorageKeys } from '../../libs/ui/shared/utils.types';
 
 interface UserContext {
     setUser: (user: User | null) => void;
@@ -14,7 +16,22 @@ export const UserContext = createContext<UserContext>({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+
     const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+      if (user === null) return;
+      setValue(StorageKeys.USER, user);
+    }, [user]);
+
+    useEffect(() => {
+      const getUserData = async () => {
+        const data = await getValue(StorageKeys.USER);
+        setUser((data as unknown) as User)
+      }
+      getUserData();
+    }, []);
+
     return (
         <UserContext.Provider
             value={{
