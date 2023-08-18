@@ -2,6 +2,7 @@
   "expo": {
     "name": "inHEARTive",
     "slug": "inHEARTive",
+    "scheme": "com.intive.inheartive",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",

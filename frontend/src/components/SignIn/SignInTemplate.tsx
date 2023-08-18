@@ -2,7 +2,7 @@
 import React from 'react';
 import { PixelRatio, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Box, Button, Image, View } from '../../libs/ui/atoms';
+import { Box, Button, Image, View, Text } from '../../libs/ui/atoms';
 import { LoginFormControl, SsoLoginBtnControl } from '../../libs/ui/molecules';
 import { logo } from '../../assets/index';
 import { useNavigate } from 'react-router-native';
@@ -10,6 +10,24 @@ import { RoutingPath } from '../../routing';
 import VersionText from '../../assets/styles';
 import packages from '../../../package.json'
 import { Platform } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
+import {
+  exchangeCodeAsync,
+  makeRedirectUri,
+  useAuthRequest,
+  useAutoDiscovery,
+} from 'expo-auth-session';
+
+WebBrowser.maybeCompleteAuthSession();
+
+const config = {
+  auth: {
+    clientId: process.env.AAD_CLIENT_ID as string,
+    authority: process.env.SSO_AUTH_AUTHORITY as string,
+    redirectUri: process.env.SSO_AUTH_REDIRECT_URI as string,
+  },
+};
+const EXPOSED_SCOPES = ['Files.Read'];
 
 export function SignInTemplate() {
     const navigate = useNavigate();
@@ -49,8 +67,51 @@ function LoginForm(): JSX.Element {
             </>
         );
     } else {
+      // Endpoint
+      const discovery = useAutoDiscovery(config.auth.authority);
+      const redirectUri = makeRedirectUri({
+          path: 'sso',
+      });
+      const clientId = process.env.AAD_CLIENT_ID as string;
+
+      // We store the JWT in here
+      const [token, setToken] = React.useState<string | null>(null);
+
+      // Request
+      const [request, , promptAsync] = useAuthRequest(
+          {
+          clientId,
+          scopes: EXPOSED_SCOPES,
+          redirectUri,
+          },
+          discovery,
+      );
         return (
             <>
+            <Button
+                      mt={3}
+                      disabled={!request}
+                      onPress={() => {
+                        promptAsync().then((codeResponse) => {
+                          if (request && codeResponse?.type === 'success' && discovery) {
+                            exchangeCodeAsync(
+                              {
+                                clientId,
+                                code: codeResponse.params.code,
+                                extraParams: request.codeVerifier
+                                  ? { code_verifier: request.codeVerifier }
+                                  : undefined,
+                                redirectUri,
+                              },
+                              discovery,
+                            ).then((res) => {
+                              setToken(res.accessToken);
+                            });
+                          }
+                        });
+                      }}
+                    >SSO Login</Button>
+                    <Text>{token} URI: {redirectUri}</Text>
                 <LoginFormControl />
             </>
         );
