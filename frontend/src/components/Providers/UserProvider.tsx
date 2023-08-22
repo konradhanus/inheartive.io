@@ -27,7 +27,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
       const getUserData = async () => {
         const data = await getValue(StorageKeys.USER);
-        setUser((data as unknown) as User)
+        if(!data) return;
+        setUser(JSON.parse(data))
       }
       getUserData();
     }, []);
