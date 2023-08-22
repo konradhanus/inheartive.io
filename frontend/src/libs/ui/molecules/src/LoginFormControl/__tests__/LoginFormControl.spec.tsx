@@ -9,7 +9,7 @@ describe('LoginFormControl', () => {
     const { container } = render(
       <NativeBaseProvider>
         <LoginFormControl />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

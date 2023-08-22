@@ -10,29 +10,29 @@ import { RoutingPath } from '../../routing';
 import { HttpMethods, fetchData } from '../../libs/ui/shared';
 
 export function RegisterPage() {
-    const formMethods = useForm<RegisterFormValues>({ mode: 'onChange' });
-    const navigate = useNavigate();
-    const mutation = useMutation({
-        mutationFn: (data: RegisterFormValues) => {
-            return fetchData(apiRoutes.users, HttpMethods.POST, data);
-        },
-        onSuccess: (response) => {
-            if (response.ok) {
-                navigate(RoutingPath.signIn);
-            } else {
-                // TODO handle error, for example when email is not unique
-                console.log(response);
-            }
-        },
-    });
+  const formMethods = useForm<RegisterFormValues>({ mode: 'onChange' });
+  const navigate = useNavigate();
+  const mutation = useMutation({
+    mutationFn: (data: RegisterFormValues) => {
+      return fetchData(apiRoutes.users, HttpMethods.POST, data);
+    },
+    onSuccess: (response) => {
+      if (response.ok) {
+        navigate(RoutingPath.signIn);
+      } else {
+        // TODO handle error, for example when email is not unique
+        console.log(response);
+      }
+    },
+  });
 
-    const onSubmit = (data: RegisterFormValues) => mutation.mutate(data);
+  const onSubmit = (data: RegisterFormValues) => mutation.mutate(data);
 
-    return (
-        <FormProvider {...formMethods}>
-            <RegisterTemplate onSubmit={onSubmit} />
-        </FormProvider>
-    );
+  return (
+    <FormProvider {...formMethods}>
+      <RegisterTemplate onSubmit={onSubmit} />
+    </FormProvider>
+  );
 }
 
 export default RegisterPage;

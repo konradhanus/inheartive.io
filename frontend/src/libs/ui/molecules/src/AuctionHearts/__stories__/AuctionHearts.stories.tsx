@@ -6,7 +6,7 @@ import { AuctionHearts } from '../AuctionHearts';
 storiesOf('AuctionHearts', module)
   .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
   .add('Basic', () => (
-    <Column space={4} mt={4} mx='auto'>
+    <Column space={4} mt={4} mx="auto">
       <AuctionHearts quantity={10000} />
       <AuctionHearts quantity={5454} />
       <AuctionHearts quantity={1000} />

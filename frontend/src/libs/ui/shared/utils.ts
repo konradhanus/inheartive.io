@@ -15,7 +15,7 @@ export const setValue = async (key: string, value: string) =>
       await AsyncStorage.setItem(key, value);
       return true;
     },
-    () => false
+    () => false,
   );
 
 export const getValue = async (key: string) =>
@@ -24,7 +24,7 @@ export const getValue = async (key: string) =>
       const result = await AsyncStorage.getItem(key);
       return result;
     },
-    () => null
+    () => null,
   );
 
 const isString = (value: unknown): value is string => typeof value === 'string';
@@ -49,7 +49,7 @@ export enum HttpMethods {
 export const fetchData = async (
   route: string,
   method: HttpMethods,
-  data: any
+  data: any,
 ): Promise<Response> => {
   return fetch(route, {
     method: method,

@@ -6,9 +6,9 @@ import { NativeRouter } from 'react-router-native';
 import { dropdownItemsMock } from '../../../../../data';
 
 storiesOf('Dropdown', module)
-    .addDecorator((story) => (
-        <NativeBaseProvider>
-            <NativeRouter>{story()}</NativeRouter>
-        </NativeBaseProvider>
-    ))
-    .add('Basic', () => <AvatarDropdown dropdownList={dropdownItemsMock} />);
+  .addDecorator((story) => (
+    <NativeBaseProvider>
+      <NativeRouter>{story()}</NativeRouter>
+    </NativeBaseProvider>
+  ))
+  .add('Basic', () => <AvatarDropdown dropdownList={dropdownItemsMock} />);

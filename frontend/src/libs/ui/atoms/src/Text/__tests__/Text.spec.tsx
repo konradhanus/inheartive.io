@@ -8,7 +8,7 @@ describe('Text', () => {
     const { container } = render(
       <NativeBaseProvider>
         <Text />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

@@ -9,5 +9,5 @@ storiesOf('FooterMenu', module)
   .add('Basic', () => {
     const activeIcon = IconNameType.homepage;
 
-    return <FooterMenu testID='storiesOfFooterMenu' activeIcon={activeIcon} />;
+    return <FooterMenu testID="storiesOfFooterMenu" activeIcon={activeIcon} />;
   });

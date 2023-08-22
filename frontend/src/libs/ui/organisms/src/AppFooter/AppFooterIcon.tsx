@@ -3,21 +3,21 @@ import { Icon } from '../../../atoms';
 import { FooterIcon } from './footer-icon';
 
 interface Props {
-    name: FooterIcon;
-    isActive: boolean;
-    size?: number;
+  name: FooterIcon;
+  isActive: boolean;
+  size?: number;
 }
 
 function AppFooterIcon(props: Props) {
-    const { isActive, name, size } = props;
+  const { isActive, name, size } = props;
 
-    return (
-        <Icon
-            name={name}
-            size={size ?? 50}
-            color={isActive ? 'black' : 'gray.600'}
-        />
-    );
+  return (
+    <Icon
+      name={name}
+      size={size ?? 50}
+      color={isActive ? 'black' : 'gray.600'}
+    />
+  );
 }
 
 export { AppFooterIcon };
