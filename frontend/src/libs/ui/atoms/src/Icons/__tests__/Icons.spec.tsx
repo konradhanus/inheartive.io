@@ -9,7 +9,7 @@ describe('Icons', () => {
     const { container } = render(
       <NativeBaseProvider>
         <WarningOutlineIcon />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

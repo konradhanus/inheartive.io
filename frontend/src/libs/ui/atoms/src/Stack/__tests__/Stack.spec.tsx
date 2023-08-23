@@ -9,7 +9,7 @@ describe('Stack', () => {
     const { container } = render(
       <NativeBaseProvider>
         <Stack />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

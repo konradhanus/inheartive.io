@@ -5,30 +5,28 @@ import { textLogoInverted } from '../../../../../assets';
 import { ThemeComponentSizeType } from 'native-base/lib/typescript/components/types';
 
 export enum textLogoColor {
-    primary = 'primary',
-    inverted = 'inverted',
+  primary = 'primary',
+  inverted = 'inverted',
 }
 
 export interface TextLogoProps {
-    color?: textLogoColor;
-    width?: number;
-    height?: number;
+  color?: textLogoColor;
+  width?: number;
+  height?: number;
 }
 
 export const TextLogo = (props: TextLogoProps) => {
-    return (
-        <Image
-            source={
-                props.color === textLogoColor.inverted
-                    ? textLogoInverted
-                    : textLogo
-            }
-            width={props.width}
-            height={props.height}
-            resizeMode='contain'
-            alt='Text logo'
-        />
-    );
+  return (
+    <Image
+      source={
+        props.color === textLogoColor.inverted ? textLogoInverted : textLogo
+      }
+      width={props.width}
+      height={props.height}
+      resizeMode="contain"
+      alt="Text logo"
+    />
+  );
 };
 
 export default TextLogo;

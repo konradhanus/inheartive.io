@@ -8,7 +8,7 @@ describe('Row', () => {
     const { container } = render(
       <NativeBaseProvider>
         <Row />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

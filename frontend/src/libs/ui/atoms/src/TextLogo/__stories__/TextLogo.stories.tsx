@@ -6,28 +6,28 @@ import { theme } from '../../../../theme';
 import { Row } from '../../..';
 
 storiesOf('TextLogo', module)
-    .addDecorator((story) => (
-        <NativeBaseProvider theme={theme}>
-            {
-                <VStack
-                    mt={4}
-                    space={{
-                        base: 4,
-                        sm: 4,
-                    }}
-                    mx={{
-                        base: 'auto',
-                        md: 0,
-                    }}
-                >
-                    {story()}
-                </VStack>
-            }
-        </NativeBaseProvider>
-    ))
-    .add('Basic', () => <TextLogo />)
-    .add('Inverted', () => (
-        <Row bg='secondary.600'>
-            <TextLogo color={textLogoColor.inverted} />
-        </Row>
-    ));
+  .addDecorator((story) => (
+    <NativeBaseProvider theme={theme}>
+      {
+        <VStack
+          mt={4}
+          space={{
+            base: 4,
+            sm: 4,
+          }}
+          mx={{
+            base: 'auto',
+            md: 0,
+          }}
+        >
+          {story()}
+        </VStack>
+      }
+    </NativeBaseProvider>
+  ))
+  .add('Basic', () => <TextLogo />)
+  .add('Inverted', () => (
+    <Row bg="secondary.600">
+      <TextLogo color={textLogoColor.inverted} />
+    </Row>
+  ));

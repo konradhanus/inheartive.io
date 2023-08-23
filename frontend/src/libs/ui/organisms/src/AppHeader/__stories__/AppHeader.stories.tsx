@@ -6,7 +6,7 @@ import { AppHeader } from '../AppHeader';
 import { theme } from '../../../../theme';
 
 storiesOf('AppHeader', module)
-    .addDecorator((story) => (
-        <NativeBaseProvider theme={theme}>{story()}</NativeBaseProvider>
-    ))
-    .add('Basic', () => <AppHeader />);
+  .addDecorator((story) => (
+    <NativeBaseProvider theme={theme}>{story()}</NativeBaseProvider>
+  ))
+  .add('Basic', () => <AppHeader />);

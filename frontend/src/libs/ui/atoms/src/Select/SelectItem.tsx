@@ -6,14 +6,10 @@ import { SelectContext } from './Select.android';
 
 export const Item = (
   { isDisabled, label, value, ...props }: ISelectItemProps,
-  ref?: any
+  ref?: any,
 ) => {
-  const {
-    onValueChange,
-    selectedValue,
-    _selectedItem,
-    _item,
-  } = React.useContext(SelectContext);
+  const { onValueChange, selectedValue, _selectedItem, _item } =
+    React.useContext(SelectContext);
   if (Platform.OS !== 'web') {
     const isSelected = selectedValue === value;
 
@@ -35,7 +31,7 @@ export const Item = (
     );
   } else {
     return (
-      <option value={value} disabled={isDisabled} >
+      <option value={value} disabled={isDisabled}>
         {label}
       </option>
     );

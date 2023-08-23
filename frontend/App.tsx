@@ -30,18 +30,14 @@ export const App = () => {
 };
 
 interface AppProps {
-  user: User | null
+  user: User | null;
 }
 
 function Application(props: AppProps): JSX.Element {
   if (Platform.OS === 'web') {
-    return (
-      <WebApp user={props.user} />
-    );
+    return <WebApp user={props.user} />;
   } else {
-    return (
-      <RootApp user={props.user} />
-    );
+    return <RootApp user={props.user} />;
   }
 }
 
@@ -64,31 +60,35 @@ function WebApp(props: AppProps): JSX.Element {
     <MsalProvider instance={pca}>
       <RootApp user={props.user} />
     </MsalProvider>
-  )
+  );
 }
 
 function RootApp(props: AppProps): JSX.Element {
-  return <NativeRouter>
-    <Routes>
-      {routesConfig.map(({ path, needsAuth, page, footerIcon }) => (
-        <Route
-          key={path}
-          path={path}
-          element={
-            needsAuth ? (
-              props.user ? (
-                <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>{page}</AuthenticatedPageWrapper>
+  return (
+    <NativeRouter>
+      <Routes>
+        {routesConfig.map(({ path, needsAuth, page, footerIcon }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              needsAuth ? (
+                props.user ? (
+                  <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>
+                    {page}
+                  </AuthenticatedPageWrapper>
+                ) : (
+                  <SignInPage />
+                )
               ) : (
-                <SignInPage />
+                page
               )
-            ) : (
-              page
-            )
-          }
-        />
-      ))}
-    </Routes>
-  </NativeRouter>
+            }
+          />
+        ))}
+      </Routes>
+    </NativeRouter>
+  );
 }
 
 export default () => {

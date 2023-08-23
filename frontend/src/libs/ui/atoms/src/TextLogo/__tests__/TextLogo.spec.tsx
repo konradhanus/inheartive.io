@@ -9,7 +9,7 @@ describe('TextLogo', () => {
     const { container } = render(
       <NativeBaseProvider>
         <TextLogo />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

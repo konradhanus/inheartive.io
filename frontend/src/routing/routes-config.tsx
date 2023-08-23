@@ -11,53 +11,53 @@ import MyAuctions from '../components/MyAuctions';
 import { apiRoutes } from '../libs/data';
 
 interface RouteConfig {
-    path: RoutingPath;
-    needsAuth: boolean;
-    page: JSX.Element;
-    footerIcon?: FooterIcon;
+  path: RoutingPath;
+  needsAuth: boolean;
+  page: JSX.Element;
+  footerIcon?: FooterIcon;
 }
 
 export const routesConfig: RouteConfig[] = [
-    {
-        path: RoutingPath.signIn,
-        needsAuth: false,
-        page: <SignInPage />,
-    },
-    {
-        path: RoutingPath.register,
-        needsAuth: false,
-        page: <RegisterPage />,
-    },
-    {
-        path: RoutingPath.auctions,
-        needsAuth: true,
-        page: <AuctionsPage />,
-        footerIcon: FooterIcon.auctions,
-    },
-    {
-        path: RoutingPath.auctionCreate,
-        needsAuth: true,
-        page: <AuctionCreatePage />,
-        footerIcon: FooterIcon.addAuction,
-    },
-    {
-        path: RoutingPath.auction,
-        needsAuth: true,
-        page: <AuctionPage />,
-    },
-    {
-        path: RoutingPath.myAuctions,
-        needsAuth: true,
-        page: <MyAuctions url={apiRoutes.myAuctions} label={'My auctions'} />,
-    },
-    {
-        path: RoutingPath.myBids,
-        needsAuth: true,
-        page: <MyAuctions url={apiRoutes.myBids} label='My bids' />,
-    },
-    {
-        path: RoutingPath.categories,
-        needsAuth: true,
-        page: <CategoriesPage />,
-    },
+  {
+    path: RoutingPath.signIn,
+    needsAuth: false,
+    page: <SignInPage />,
+  },
+  {
+    path: RoutingPath.register,
+    needsAuth: false,
+    page: <RegisterPage />,
+  },
+  {
+    path: RoutingPath.auctions,
+    needsAuth: true,
+    page: <AuctionsPage />,
+    footerIcon: FooterIcon.auctions,
+  },
+  {
+    path: RoutingPath.auctionCreate,
+    needsAuth: true,
+    page: <AuctionCreatePage />,
+    footerIcon: FooterIcon.addAuction,
+  },
+  {
+    path: RoutingPath.auction,
+    needsAuth: true,
+    page: <AuctionPage />,
+  },
+  {
+    path: RoutingPath.myAuctions,
+    needsAuth: true,
+    page: <MyAuctions url={apiRoutes.myAuctions} label={'My auctions'} />,
+  },
+  {
+    path: RoutingPath.myBids,
+    needsAuth: true,
+    page: <MyAuctions url={apiRoutes.myBids} label="My bids" />,
+  },
+  {
+    path: RoutingPath.categories,
+    needsAuth: true,
+    page: <CategoriesPage />,
+  },
 ];

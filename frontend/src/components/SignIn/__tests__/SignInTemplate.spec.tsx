@@ -8,7 +8,7 @@ describe('SignInTemplate', () => {
     const container = render(
       <NativeRouter>
         <SignInTemplate />
-      </NativeRouter>
+      </NativeRouter>,
     );
 
     expect(container).toBeTruthy();
