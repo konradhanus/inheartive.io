@@ -6,14 +6,14 @@ import { setValue } from '../../../shared/utils';
 import { useUser } from '../../../../../components/Providers/UserProvider';
 import { Item } from '../../../atoms/src/Select/SelectItem';
 import { Platform } from 'react-native';
-
+import { StorageKeys } from '../../../shared/utils.types';
 
 function AppHeader() {
     const [menuItem, setMenuItem] = useState('');
     const navigate = useNavigate();
     const { setUser } = useUser();
     const logOut = () => {
-        setValue('access_token', '');
+        setValue(StorageKeys.ACCESS_TOKEN, '');
         setUser(null);
         navigate(RoutingPath.signIn);
     };

@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { apiRoutes } from '../../data/src';
+import { User, apiRoutes } from '../../data/src';
+import { StorageKeys } from './utils.types';
 
 const tryCatch = <S, F>(success: () => S, failure: () => F) => {
   try {
@@ -9,16 +10,17 @@ const tryCatch = <S, F>(success: () => S, failure: () => F) => {
   }
 };
 
-export const setValue = async (key: string, value: string) =>
+export const setValue = async (key: StorageKeys, value: string | User | null) =>
   tryCatch(
     async () => {
-      await AsyncStorage.setItem(key, value);
+      const data = typeof value === 'object' ? JSON.stringify(value) : value;
+      await AsyncStorage.setItem(key, data);
       return true;
     },
     () => false
   );
 
-export const getValue = async (key: string) =>
+export const getValue = async (key: StorageKeys) =>
   tryCatch(
     async () => {
       const result = await AsyncStorage.getItem(key);
@@ -30,7 +32,7 @@ export const getValue = async (key: string) =>
 const isString = (value: unknown): value is string => typeof value === 'string';
 
 export const isAuthorized = async () => {
-  const result = await getValue('access_token');
+  const result = await getValue(StorageKeys.ACCESS_TOKEN);
   return isString(result) && result.length > 0;
 };
 
