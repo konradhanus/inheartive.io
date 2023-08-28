@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { Button, FormControl, View, Text, Box } from '../../../atoms';
+import { Button, FormControl, View, Text } from '../../../atoms';
 import { apiRoutes } from '../../../../data';
 import { useNavigate } from 'react-router-native';
 import { EmailInput, PasswordInput } from '../../../organisms';
@@ -12,9 +12,10 @@ import { HttpMethods, fetchData, setValue } from '../../../shared/utils';
 import { useMsal } from '@azure/msal-react';
 import { EventType } from '@azure/msal-browser';
 import Toast from 'react-native-toast-message';
+import { StorageKeys } from '../../../shared/utils.types';
 
 const setAccessToken = async (access_token: string) => {
-  await setValue('access_token', access_token);
+  await setValue(StorageKeys.ACCESS_TOKEN, access_token);
 };
 
 interface LoginFormData {
@@ -69,29 +70,20 @@ function LoginFormControl() {
     <FormProvider {...formMethods}>
       <FormControl isInvalid={'email' in errors}>
         <View>
-          <EmailInput placeholder="E-mail" />
-          <View height={6} position="relative" marginBottom={2}>
-            <FormControl.ErrorMessage>
-              {errors.email?.message}
-            </FormControl.ErrorMessage>
+          <EmailInput placeholder='E-mail' />
+          <View height={6} position='relative' marginBottom={2}>
+            <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
           </View>
         </View>
       </FormControl>
       <FormControl isInvalid={'password' in errors}>
-        <PasswordInput placeholder="Password" />
-        <View height={6} position="relative" marginBottom={2}>
-          <FormControl.ErrorMessage>
-            {errors.password?.message}
-          </FormControl.ErrorMessage>
+        <PasswordInput placeholder='Password' />
+        <View height={6} position='relative' marginBottom={2}>
+          <FormControl.ErrorMessage>{errors.password?.message}</FormControl.ErrorMessage>
         </View>
       </FormControl>
       {loginError && <Text>User name or password are wrong</Text>}
-      <Button
-        mt="4"
-        onPress={(e) => handleSubmit(signIn)(e)}
-        disabled={isDisabled}
-        isDisabled={isDisabled}
-      >
+      <Button mt='4' onPress={(e) => handleSubmit(signIn)(e)} disabled={isDisabled} isDisabled={isDisabled}>
         Sign in
       </Button>
     </FormProvider>
@@ -140,43 +132,37 @@ function SsoLoginBtnControl() {
   });
 
   useEffect(() => {
-    const callbackId = instance.addEventCallback(
-      (message: { eventType: EventType; payload: any }) => {
-        const eventType = message.eventType;
-        if (
-          eventType === EventType.LOGIN_SUCCESS ||
-          eventType === EventType.ACQUIRE_TOKEN_SUCCESS
-        ) {
-          const payload = message.payload;
-          const account = payload.account;
+    const callbackId = instance.addEventCallback((message: { eventType: EventType; payload: any }) => {
+      const eventType = message.eventType;
+      if (eventType === EventType.LOGIN_SUCCESS || eventType === EventType.ACQUIRE_TOKEN_SUCCESS) {
+        const payload = message.payload;
+        const account = payload.account;
 
-          if (account) {
-            if (!account.name) {
-              setLoginError(true);
-              Toast.show({
-                type: 'error',
-                text1: 'Login Error',
-                text2:
-                  "Name and surname shouldn't be empty, fill it in MS account",
-              });
-            }
-
-            const accessToken = payload.accessToken;
-            setAccessToken(accessToken);
-            ssoLoginCallMutation.mutate({
-              username: account.username,
-              name: account.name!!,
-            });
-          } else {
+        if (account) {
+          if (!account.name) {
+            setLoginError(true);
             Toast.show({
               type: 'error',
               text1: 'Login Error',
-              text2: 'There is no account associated with provided email',
+              text2: "Name and surname shouldn't be empty, fill it in MS account",
             });
           }
+
+          const accessToken = payload.accessToken;
+          setAccessToken(accessToken);
+          ssoLoginCallMutation.mutate({
+            username: account.username,
+            name: account.name!!,
+          });
+        } else {
+          Toast.show({
+            type: 'error',
+            text1: 'Login Error',
+            text2: 'There is no account associated with provided email',
+          });
         }
-      },
-    );
+      }
+    });
 
     return () => {
       if (callbackId) {
@@ -192,13 +178,11 @@ function SsoLoginBtnControl() {
           setLoginError(false);
           instance.loginPopup();
         }}
-        mt="4"
+        mt='4'
       >
         SSO Login
       </Button>
-      {loginError && (
-        <Text style={{ textAlign: 'center' }}>SSO login error</Text>
-      )}
+      {loginError && <Text style={{ textAlign: 'center' }}>SSO login error</Text>}
     </>
   );
 }
