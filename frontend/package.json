@@ -13,7 +13,9 @@
     "deploy": "firebase deploy",
     "build-deploy": "npm run build && npm run deploy",
     "publish:ios": "eas submit --platform ios",
-    "publish:android": "eas submit --platform android"
+    "publish:android": "eas submit --platform android",
+    "lint": "npx eslint App.tsx ./src",
+    "lint:fix": "npx eslint App.tsx ./src --fix"
   },
   "dependencies": {
     "@azure/msal-react": "^1.5.9",
