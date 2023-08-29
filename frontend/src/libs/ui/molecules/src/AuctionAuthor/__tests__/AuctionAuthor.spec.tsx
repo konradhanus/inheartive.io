@@ -5,12 +5,12 @@ import { NativeBaseProvider } from 'native-base';
 import { usersMock } from '../../../../../data';
 
 describe('AuctionAuthor', () => {
-    it('should render successfully', () => {
-        const { container } = render(
-            <NativeBaseProvider>
-                <AuctionAuthor author={usersMock[0]} />
-            </NativeBaseProvider>
-        );
-        expect(container).toBeTruthy();
-    });
+  it('should render successfully', () => {
+    const { container } = render(
+      <NativeBaseProvider>
+        <AuctionAuthor author={usersMock[0]} />
+      </NativeBaseProvider>,
+    );
+    expect(container).toBeTruthy();
+  });
 });

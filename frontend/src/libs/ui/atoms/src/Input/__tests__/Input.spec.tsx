@@ -9,7 +9,7 @@ describe('Input', () => {
     const { container } = render(
       <NativeBaseProvider>
         <Input />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

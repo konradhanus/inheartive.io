@@ -9,7 +9,7 @@ describe('Button', () => {
     const { container } = render(
       <NativeBaseProvider>
         <Button />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

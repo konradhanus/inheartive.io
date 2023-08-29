@@ -5,10 +5,10 @@ import { AuctionAuthor } from '../AuctionAuthor';
 import { usersMock } from '../../../../../data';
 
 storiesOf('AuctionAuthor', module).add('Basic', () => (
-    <NativeBaseProvider>
-        <Column space={4} mt={4} mx='auto'>
-            <AuctionAuthor author={usersMock[0]} />
-            <AuctionAuthor author={usersMock[1]} />
-        </Column>
-    </NativeBaseProvider>
+  <NativeBaseProvider>
+    <Column space={4} mt={4} mx="auto">
+      <AuctionAuthor author={usersMock[0]} />
+      <AuctionAuthor author={usersMock[1]} />
+    </Column>
+  </NativeBaseProvider>
 ));

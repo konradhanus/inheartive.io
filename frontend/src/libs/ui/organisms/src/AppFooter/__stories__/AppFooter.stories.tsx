@@ -17,5 +17,7 @@ storiesOf('AppFooter', module)
   .add('Basic', () => {
     const activeIcon = FooterIcon.addAuction;
 
-    return <AppFooter iconRoutingMap={iconRoutingMap} activeIcon={activeIcon} />;
+    return (
+      <AppFooter iconRoutingMap={iconRoutingMap} activeIcon={activeIcon} />
+    );
   });

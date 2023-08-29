@@ -8,7 +8,7 @@ describe('Avatar', () => {
     const { container } = render(
       <NativeBaseProvider>
         <Avatar />
-      </NativeBaseProvider>
+      </NativeBaseProvider>,
     );
     expect(container).toBeTruthy();
   });

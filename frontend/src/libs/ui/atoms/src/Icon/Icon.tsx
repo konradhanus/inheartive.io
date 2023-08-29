@@ -97,7 +97,9 @@ function Icon(props: Props) {
     // Its Native-Base bug so added not perfect workaround for this
     // TODO When it will be fixed delete this workaround
     size: typeof props.size === 'number' ? props.size + 0.01 : 17,
-    color: props.color ? getColor(props.color, theme.colors, theme) : theme.colors.primary['500'],
+    color: props.color
+      ? getColor(props.color, theme.colors, theme)
+      : theme.colors.primary['500'],
     testID: props.testID,
   };
 
@@ -196,37 +198,37 @@ function Icon(props: Props) {
       return <DeleteIcon {...iconProperties} />;
 
     case 'star':
-      return <MaterialIcon name='star' {...iconProperties} />;
+      return <MaterialIcon name="star" {...iconProperties} />;
 
     case 'user':
-      return <AntIcon name='user' {...iconProperties} />;
+      return <AntIcon name="user" {...iconProperties} />;
 
     case 'star-outline':
-      return <MaterialIcon name='star-outline' {...iconProperties} />;
+      return <MaterialIcon name="star-outline" {...iconProperties} />;
 
     case 'home':
-      return <Ionicons name='home' {...iconProperties} />;
+      return <Ionicons name="home" {...iconProperties} />;
 
     case 'home-outline':
-      return <Ionicons name='home-outline' {...iconProperties} />;
+      return <Ionicons name="home-outline" {...iconProperties} />;
 
     case 'favorite-outline':
-      return <Ionicons name='ios-heart-outline' {...iconProperties} />;
+      return <Ionicons name="ios-heart-outline" {...iconProperties} />;
 
     case 'favorite':
-      return <Ionicons name='ios-heart-sharp' {...iconProperties} />;
+      return <Ionicons name="ios-heart-sharp" {...iconProperties} />;
 
     case 'plus-circle':
-      return <Feather name='plus-circle' {...iconProperties} />;
+      return <Feather name="plus-circle" {...iconProperties} />;
 
     case 'calendar-outline':
-      return <Ionicons name='calendar-outline' {...iconProperties} />;
+      return <Ionicons name="calendar-outline" {...iconProperties} />;
 
     case 'time-outline':
-      return <Ionicons name='time-outline' {...iconProperties} />;
+      return <Ionicons name="time-outline" {...iconProperties} />;
 
     case 'location':
-      return <Ionicons name='location' {...iconProperties} />;
+      return <Ionicons name="location" {...iconProperties} />;
 
     default:
       // eslint-disable-next-line no-throw-literal

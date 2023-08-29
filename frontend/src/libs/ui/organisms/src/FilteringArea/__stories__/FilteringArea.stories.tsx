@@ -6,17 +6,17 @@ import { FilteringArea } from '../FilteringArea';
 import { categoriesMock, SortDirection, SortKey } from '../../../../../data';
 
 storiesOf('FilteringArea', module)
-    .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
-    .add('Basic', () => (
-        <Column mt={4} mx='auto'>
-            <FilteringArea
-                sortBy={SortKey.Price}
-                sortDir={SortDirection.ASC}
-                categories={categoriesMock}
-                selectedCategoryID={categoriesMock[0].id}
-                onCategoryChange={() => 0}
-                onSortByChange={() => 0}
-                onSortDirChange={() => 0}
-            />
-        </Column>
-    ));
+  .addDecorator((story) => <NativeBaseProvider>{story()}</NativeBaseProvider>)
+  .add('Basic', () => (
+    <Column mt={4} mx="auto">
+      <FilteringArea
+        sortBy={SortKey.Price}
+        sortDir={SortDirection.ASC}
+        categories={categoriesMock}
+        selectedCategoryID={categoriesMock[0].id}
+        onCategoryChange={() => 0}
+        onSortByChange={() => 0}
+        onSortDirChange={() => 0}
+      />
+    </Column>
+  ));

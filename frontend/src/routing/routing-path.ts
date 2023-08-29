@@ -9,4 +9,4 @@ export const RoutingPath = {
   categories: '/categories',
 } as const;
 
-export type RoutingPath = typeof RoutingPath[keyof typeof RoutingPath];
+export type RoutingPath = (typeof RoutingPath)[keyof typeof RoutingPath];
