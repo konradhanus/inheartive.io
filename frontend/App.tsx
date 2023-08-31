@@ -15,7 +15,7 @@ import { User } from './src/libs/data/src';
 import { Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-export const App = () => {
+export const AppContainer = () => {
   const queryClient = new QueryClient();
   const { user } = useUser();
 
@@ -74,9 +74,7 @@ function RootApp(props: AppProps): JSX.Element {
             element={
               needsAuth ? (
                 props.user ? (
-                  <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>
-                    {page}
-                  </AuthenticatedPageWrapper>
+                  <AuthenticatedPageWrapper footerActiveIcon={footerIcon}>{page}</AuthenticatedPageWrapper>
                 ) : (
                   <SignInPage />
                 )
@@ -91,10 +89,12 @@ function RootApp(props: AppProps): JSX.Element {
   );
 }
 
-export default () => {
+const App = () => {
   return (
     <UserProvider>
-      <App />
+      <AppContainer />
     </UserProvider>
   );
 };
+
+export default App;

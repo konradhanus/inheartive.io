@@ -1,4 +1,4 @@
-import { Input, IInputProps } from 'native-base';
+import { Input } from 'native-base';
 import React from 'react';
 import { safeIntParse } from '../../../shared/utils';
 
@@ -13,7 +13,7 @@ const NumberInput = (props: Props) => {
 
   return (
     <Input
-      keyboardType="numeric"
+      keyboardType='numeric'
       value={`${value}`}
       placeholder={placeholder}
       onChangeText={(value) => onChange(safeIntParse(value))}

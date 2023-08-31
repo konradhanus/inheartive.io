@@ -10,7 +10,7 @@ interface UserContext {
   user: User | null;
 }
 export const UserContext = createContext<UserContext>({
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   setUser: (user: User | null) => {},
   user: null,
 });

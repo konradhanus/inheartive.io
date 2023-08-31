@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { AuctionCreateTemplate } from './AuctionCreateTemplate';
 import { useForm } from 'react-hook-form';
 import { AuctionFormValues } from './auction-create-form-values';

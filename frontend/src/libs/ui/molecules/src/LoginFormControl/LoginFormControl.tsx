@@ -132,6 +132,7 @@ function SsoLoginBtnControl() {
   });
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const callbackId = instance.addEventCallback((message: { eventType: EventType; payload: any }) => {
       const eventType = message.eventType;
       if (eventType === EventType.LOGIN_SUCCESS || eventType === EventType.ACQUIRE_TOKEN_SUCCESS) {
@@ -152,7 +153,7 @@ function SsoLoginBtnControl() {
           setAccessToken(accessToken);
           ssoLoginCallMutation.mutate({
             username: account.username,
-            name: account.name!!,
+            name: account.name!,
           });
         } else {
           Toast.show({

@@ -1,17 +1,6 @@
 import React from 'react';
-import {
-  FormControl,
-  Input,
-  Button,
-  ScrollView,
-  Column,
-} from '../../libs/ui/atoms';
-import {
-  Controller,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from 'react-hook-form';
+import { FormControl, Input, Button, ScrollView, Column } from '../../libs/ui/atoms';
+import { Controller, FieldValues, useFormContext } from 'react-hook-form';
 import { RegisterFormValues } from './register-form-values';
 import { RoutingPath } from '../../routing';
 import { useNavigate } from 'react-router-native';
@@ -20,9 +9,6 @@ import { BackHandler, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 interface Props<T extends FieldValues> {
   onSubmit: (data: T) => void;
 }
-type FormRulesStrategy = {
-  [Prop in keyof RegisterFormValues]: UseControllerProps['rules'];
-};
 
 const FORM_RULES_STRATEGY = {
   firstName: { required: 'First name is required', minLength: 2 },
@@ -47,23 +33,18 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
       return true;
     };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
 
     return () => backHandler.remove();
   }, []);
   return (
     <SafeAreaView style={styles.conatainer}>
       <ScrollView>
-        <Column px={5} space={3} justifyContent="center" marginTop={10}>
+        <Column px={5} space={3} justifyContent='center' marginTop={10}>
           <FormControl isRequired isInvalid={'email' in errors}>
             <FormControl.Label>Email</FormControl.Label>
             <EmailInput placeholder={'john.doe@example.com'} />
-            <FormControl.ErrorMessage>
-              {errors.email?.message}
-            </FormControl.ErrorMessage>
+            <FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
           </FormControl>
 
           <FormControl isRequired isInvalid={'firstName' in errors}>
@@ -71,20 +52,13 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  onBlur={onBlur}
-                  placeholder="John"
-                  onChangeText={(val) => onChange(val)}
-                  value={value}
-                />
+                <Input onBlur={onBlur} placeholder='John' onChangeText={(val) => onChange(val)} value={value} />
               )}
-              name="firstName"
+              name='firstName'
               rules={FORM_RULES_STRATEGY.firstName}
-              defaultValue=""
+              defaultValue=''
             />
-            <FormControl.ErrorMessage>
-              {errors.firstName?.message}
-            </FormControl.ErrorMessage>
+            <FormControl.ErrorMessage>{errors.firstName?.message}</FormControl.ErrorMessage>
           </FormControl>
 
           <FormControl isRequired isInvalid={'lastName' in errors}>
@@ -92,28 +66,19 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  onBlur={onBlur}
-                  placeholder="Doe"
-                  onChangeText={(val) => onChange(val)}
-                  value={value}
-                />
+                <Input onBlur={onBlur} placeholder='Doe' onChangeText={(val) => onChange(val)} value={value} />
               )}
-              name="lastName"
+              name='lastName'
               rules={FORM_RULES_STRATEGY.lastName}
-              defaultValue=""
+              defaultValue=''
             />
-            <FormControl.ErrorMessage>
-              {errors.lastName?.message}
-            </FormControl.ErrorMessage>
+            <FormControl.ErrorMessage>{errors.lastName?.message}</FormControl.ErrorMessage>
           </FormControl>
 
           <FormControl isRequired isInvalid={'password' in errors}>
             <FormControl.Label>Password</FormControl.Label>
-            <PasswordInput placeholder="password" />
-            <FormControl.ErrorMessage>
-              {errors.password?.message}
-            </FormControl.ErrorMessage>
+            <PasswordInput placeholder='password' />
+            <FormControl.ErrorMessage>{errors.password?.message}</FormControl.ErrorMessage>
           </FormControl>
 
           <Button
@@ -126,10 +91,7 @@ export function RegisterTemplate(props: Props<RegisterFormValues>) {
             Register
           </Button>
 
-          <Button
-            variant="outline"
-            onPress={() => navigate(RoutingPath.signIn)}
-          >
+          <Button variant='outline' onPress={() => navigate(RoutingPath.signIn)}>
             Sign in
           </Button>
         </Column>

@@ -1,4 +1,3 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { Icon, IconType } from '../../../atoms';
 import { Row } from '../../../atoms';
@@ -19,15 +18,9 @@ function HeartsCredits(props: Props) {
   };
 
   return (
-    <Row space={2} alignItems="center" style={style}>
-      <Icon name={IconType.favorite} size={size} color="secondary.600" />
-      <TextStyled
-        fontSize="lg"
-        testID={testID}
-        fontFamily="body"
-        fontStyle="normal"
-        fontWeight="400"
-      >
+    <Row space={2} alignItems='center' style={style}>
+      <Icon name={IconType.favorite} size={size} color='secondary.600' />
+      <TextStyled fontSize='lg' testID={testID} fontFamily='body' fontStyle='normal' fontWeight='400'>
         {credit}
       </TextStyled>
     </Row>
