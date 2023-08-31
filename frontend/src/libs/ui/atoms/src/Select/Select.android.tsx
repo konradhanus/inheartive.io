@@ -1,4 +1,4 @@
-/* 
+/*
 It's simply copy `Select` from `native-base` sources with only one change:
     onPressIn={
                 Platform.OS !== 'web'
@@ -9,7 +9,7 @@ It's simply copy `Select` from `native-base` sources with only one change:
                     }
                   : undefined
               }
-    
+
 This is a workaround to show selector on Android platform when click inside Edit field (IOS works properly)
 */
 
@@ -34,8 +34,8 @@ import { Pressable } from '../Pressable';
 import { useFormControl } from 'native-base/src/components/composites/FormControl';
 
 export const SelectContext = React.createContext({
-  onValueChange: (() => {}) as any,
-  selectedValue: null as any,
+  onValueChange: (() => {}) as (value: unknown) => void,
+  selectedValue: null as unknown,
   _selectedItem: {} as IButtonProps,
   _item: {} as IButtonProps,
 });
@@ -48,7 +48,7 @@ const Select = (
     variant,
     ...props
   }: ISelectProps,
-  ref: any,
+  ref: any
 ) => {
   const selectProps = useFormControl({
     isDisabled: props.isDisabled,
@@ -96,7 +96,7 @@ const Select = (
       isFocused: isFocusedProp || isFocused,
       isFocusVisible: isFocusVisibleProp || isFocusVisible,
     },
-    undefined,
+    undefined
   );
 
   const [value, setValue] = useControllableState({
@@ -108,22 +108,21 @@ const Select = (
     },
   });
 
-  const itemsList: Array<{
+  interface IItemList {
     label: string;
     value: string;
-  }> = React.Children.toArray(children).map((child: any) => {
+  }
+
+  const itemsList: IItemList[] = React.Children.toArray(children).map((child: any) => {
     return {
       label: child?.props?.label,
       value: child?.props?.value,
     };
   });
 
-  const selectedItemArray = itemsList.filter(
-    (item: any) => item?.value === value,
-  );
+  const selectedItemArray = itemsList.filter((item: IItemList) => item?.value === value);
 
-  const selectedItem =
-    selectedItemArray && selectedItemArray.length ? selectedItemArray[0] : null;
+  const selectedItem = selectedItemArray && selectedItemArray.length ? selectedItemArray[0] : null;
 
   const contextValue = React.useMemo(() => {
     return {
@@ -174,12 +173,12 @@ const Select = (
       isFocused={isFocused}
       isHovered={isHovered}
       aria-hidden={true}
-      importantForAccessibility="no"
+      importantForAccessibility='no'
       value={selectedItem ? selectedItem.label : ''}
       editable={false}
       focusable={false}
       isDisabled={isDisabled}
-      pointerEvents="none"
+      pointerEvents='none'
       variant={variant}
       onPressIn={
         Platform.OS !== 'web'
@@ -203,7 +202,7 @@ const Select = (
         }}
         disabled={isDisabled}
         accessibilityLabel={accessibilityLabel}
-        accessibilityRole="button"
+        accessibilityRole='button'
         ref={mergeRefs([ref, _ref])}
         {...layoutProps}
       >
@@ -238,9 +237,7 @@ const Select = (
             />
           ) : (
             <ScrollView {..._actionSheetBody}>
-              <SelectContext.Provider value={contextValue}>
-                {children}
-              </SelectContext.Provider>
+              <SelectContext.Provider value={contextValue}>{children}</SelectContext.Provider>
             </ScrollView>
           )}
         </Actionsheet.Content>

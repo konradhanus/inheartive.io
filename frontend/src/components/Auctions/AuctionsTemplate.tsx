@@ -1,4 +1,3 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { Auction, Category, SortDirection, SortKey } from '../../libs/data';
 import { ISelectItemProps, Text, View } from '../../libs/ui/atoms';

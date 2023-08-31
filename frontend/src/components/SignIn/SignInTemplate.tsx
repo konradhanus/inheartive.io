@@ -1,4 +1,3 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import React from 'react';
 import { PixelRatio, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -25,11 +24,11 @@ export function SignInTemplate() {
         contentContainerStyle={styles.scrollContentContainer}
         scrollEnabled={false}
       >
-        <Image style={{ width: 260, height: 280 }} source={logo} alt="Logo" />
+        <Image style={{ width: 260, height: 280 }} source={logo} alt='Logo' />
 
-        <Box w="100%" mt={10}>
+        <Box w='100%' mt={10}>
           <LoginForm />
-          <Button mt={3} variant="outline" onPress={onPress}>
+          <Button mt={3} variant='outline' onPress={onPress}>
             Register
           </Button>
         </Box>
